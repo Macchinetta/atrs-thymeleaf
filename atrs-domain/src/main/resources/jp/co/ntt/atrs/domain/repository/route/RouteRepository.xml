@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.route.RouteRepository">
+
+  <resultMap id="route-map" type="Route">
+    <id property="routeNo" column="route_no"/>
+    <result property="basicFare" column="basic_fare"/>
+    <result property="departureAirport.code" column="dep_airport_cd"/>
+    <result property="departureAirport.name" column="dep_airport_name"/>
+    <result property="arrivalAirport.code" column="aar_airport_cd"/>
+    <result property="arrivalAirport.name" column="aar_airport_name"/>
+  </resultMap>
+
+  <!-- 区間情報の全件取得 -->
+  <select id="findAll" resultMap="route-map">
+    SELECT
+        r.route_no,
+        r.basic_fare,
+        a_dep.airport_cd AS dep_airport_cd,
+        a_dep.airport_name AS dep_airport_name,
+        a_arr.airport_cd AS aar_airport_cd,
+        a_arr.airport_name AS aar_airport_name
+    FROM
+        route r,
+        airport a_dep,
+        airport a_arr
+    WHERE
+        r.dep_airport_cd = a_dep.airport_cd
+    AND
+        r.arr_airport_cd = a_arr.airport_cd
+  </select>
+
+</mapper>

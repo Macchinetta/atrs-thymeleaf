@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ログイン | Airline Ticket Reservation System</title>
+
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+
+  </head>
+  <body>
+
+    <header th:replace="~{A0/header :: header}"></header>
+
+    <div id="container" class="container">
+
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+
+          <ul th:if="${#request.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')} != null" class="alert list-unstyled alert-danger">
+            <li th:text="${#request.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">会員番号またはパスワードが確認できませんでした。入力情報をご確認ください。</li>
+          </ul>
+
+          <div class="panel panel-default">
+
+            <div class="panel-heading">
+              ログイン
+            </div>
+
+            <div class="panel-body">
+              <form id="login-form" action="../A0/top.html" th:action="@{/auth/dologin}" method="post">
+                <div class="form-group">
+                  <label class="control-label" for="membershipNumber">会員番号</label>
+                  <input type="text" class="form-control" maxlength="10" id="membershipNumber" name="membershipNumber"
+                         data-parsley-required="true"
+                         data-parsley-type="integer"
+                         data-parsley-length="[10, 10]" data-parsley-length-message="%s 文字で入力してください。">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="password">パスワード</label>
+                  <input type="password" class="form-control" id="password" name="password"
+                         data-parsley-required="true">
+                </div>
+                <input type="submit" id="login-btn" class="btn btn-default" value="ログイン">
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <footer th:replace="~{A0/footer :: footer}"></footer>
+
+    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
+
+    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+    <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
+    <script src="../../../resources/js/login-form.js" th:src="@{/resources/js/login-form.js}"></script>
+  </body>
+</html>

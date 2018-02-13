@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.member.MemberRepository">
+
+  <resultMap id="findOneForLogin-member-map" type="Member">
+    <id property="membershipNumber"  column="customer_no"/>
+    <result property="kanjiFamilyName" column="kanji_family_name"/>
+    <result property="kanjiGivenName" column="kanji_given_name"/>
+    <association property="memberLogin" resultMap="memberLogin-map"/>
+  </resultMap>
+
+  <resultMap id="member-map" type="Member">
+    <id property="membershipNumber"  column="customer_no"/>
+    <result property="kanjiFamilyName" column="kanji_family_name"/>
+    <result property="kanjiGivenName" column="kanji_given_name"/>
+    <result property="kanaFamilyName" column="kana_family_name"/>
+    <result property="kanaGivenName" column="kana_given_name"/>
+    <result property="birthday" column="birthday"/>
+    <result property="gender" column="gender"/>
+    <result property="tel" column="tel"/>
+    <result property="zipCode" column="zip_code"/>
+    <result property="address" column="address"/>
+    <result property="mail" column="mail"/>
+    <result property="creditNo" column="credit_no"/>
+    <result property="creditTerm" column="credit_term"/>
+    <association property="creditType" resultMap="creditType-map" />
+    <association property="memberLogin" resultMap="memberLogin-map"/>
+  </resultMap>
+
+  <resultMap id="creditType-map" type="CreditType">
+    <id property="creditTypeCd" column="credit_type_cd"/>
+    <result property="creditFirm" column="credit_firm"/>
+  </resultMap>
+
+  <resultMap id="memberLogin-map" type="MemberLogin">
+    <result property="password" column="password"/>
+    <result property="lastPassword" column="last_password"/>
+    <result property="loginDateTime" column="login_date_time"/>
+    <result property="loginFlg" column="login_flg"/>
+  </resultMap>
+
+  <!-- ログイン時の会員情報取得 -->
+  <select id="findOneForLogin" parameterType="String" resultMap="findOneForLogin-member-map">
+    SELECT
+        m.customer_no,
+        m.kanji_family_name,
+        m.kanji_given_name,
+        m_l.password,
+        m_l.last_password,
+        m_l.login_date_time,
+        m_l.login_flg
+    FROM
+        member m,
+        member_login m_l
+    WHERE
+        m.customer_no = #{customerNo}
+    AND
+        m.customer_no = m_l.customer_no
+  </select>
+
+  <!-- ログイン時の会員ログイン情報更新 -->
+  <update id="updateToLoginStatus" parameterType="Member">
+    UPDATE
+        member_login
+    SET
+        login_date_time = #{memberLogin.loginDateTime},
+        login_flg = #{memberLogin.loginFlg}
+    WHERE
+        customer_no = #{membershipNumber}
+  </update>
+
+  <!-- ログアウト時の会員ログイン情報更新 -->
+  <update id="updateToLogoutStatus" parameterType="Member">
+    UPDATE
+        member_login
+    SET
+        login_flg = #{memberLogin.loginFlg}
+    WHERE
+        customer_no = #{membershipNumber}
+  </update>
+
+  <!-- 会員情報を取得 -->
+  <select id="findOne" parameterType="String" resultMap="member-map">
+    SELECT
+        m.customer_no,
+        m.kanji_family_name,
+        m.kanji_given_name,
+        m.kana_family_name,
+        m.kana_given_name,
+        m.birthday,
+        m.gender,
+        m.tel,
+        m.zip_code,
+        m.address,
+        m.mail,
+        m.credit_no,
+        m.credit_term,
+        m_l.password,
+        m_l.last_password,
+        m_l.login_date_time,
+        m_l.login_flg,
+        c_t.credit_type_cd,
+        c_t.credit_firm
+    FROM
+        member m,
+        member_login m_l,
+        credit_type c_t
+    WHERE
+        m.customer_no = #{customerNo}
+    AND
+        m.customer_no = m_l.customer_no
+    AND
+        m.credit_type_cd = c_t.credit_type_cd
+  </select>
+
+  <!-- 会員情報を登録 -->
+  <insert id="insert" parameterType="Member">
+    <selectKey keyProperty="membershipNumber" resultType="String" order="BEFORE">
+      SELECT TO_CHAR(NEXTVAL('sq_member_1'), 'FM0999999999')
+    </selectKey>
+    INSERT INTO member (
+        customer_no,
+        kanji_family_name,
+        kanji_given_name,
+        kana_family_name,
+        kana_given_name,
+        birthday,
+        gender,
+        tel,
+        zip_code,
+        address,
+        mail,
+        credit_no,
+        credit_type_cd,
+        credit_term
+    )
+    VALUES
+    (
+        #{membershipNumber},
+        #{kanjiFamilyName},
+        #{kanjiGivenName},
+        #{kanaFamilyName},
+        #{kanaGivenName},
+        #{birthday},
+        #{gender},
+        #{tel},
+        #{zipCode},
+        #{address},
+        #{mail},
+        #{creditNo},
+        #{creditType.creditTypeCd},
+        #{creditTerm}
+    )
+  </insert>
+
+  <!-- 会員ログイン情報を登録 -->
+  <insert id="insertMemberLogin" parameterType="Member">
+    INSERT INTO member_login
+    (
+        customer_no,
+        password,
+        last_password,
+        login_flg
+    )
+    VALUES
+    (
+        #{membershipNumber},
+        #{memberLogin.password},
+        #{memberLogin.lastPassword},
+        #{memberLogin.loginFlg}
+    )
+  </insert>
+
+  <!-- 会員情報を更新 -->
+  <update id="update" parameterType="Member">
+    UPDATE member SET
+        kanji_family_name = #{kanjiFamilyName},
+        kanji_given_name = #{kanjiGivenName},
+        kana_family_name = #{kanaFamilyName},
+        kana_given_name = #{kanaGivenName},
+        birthday = #{birthday},
+        gender = #{gender},
+        tel = #{tel},
+        zip_code = #{zipCode},
+        address = #{address},
+        mail = #{mail},
+        credit_no = #{creditNo},
+        credit_type_cd = #{creditType.creditTypeCd},
+        credit_term = #{creditTerm}
+    WHERE
+        customer_no = #{membershipNumber}
+  </update>
+
+  <!-- 会員ログイン情報を更新 -->
+  <update id="updateMemberLogin" parameterType="Member">
+    UPDATE member_login SET
+        last_password = password,
+        password = #{memberLogin.password}
+    WHERE
+        customer_no = #{membershipNumber}
+  </update>
+
+</mapper>

@@ -1,0 +1,73 @@
+<!DOCTYPE logback>
+<configuration DEBUG="false">
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern><![CDATA[date:%d{yyyy-MM-dd HH:mm:ss}\tthread:%thread\tuser:%X{USER}\tX-Track:%X{X-Track}\tlevel:%-5level\tlogger:%-48logger{48}\tmessage:%msg%n]]></pattern>
+    </layout>
+  </appender>
+
+  <appender name="APPLICATION_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/atrs-application.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/atrs-application-%d{yyyyMMdd}.log</fileNamePattern>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern><![CDATA[date:%d{yyyy-MM-dd HH:mm:ss}\tthread:%thread\tuser:%X{USER}\tX-Track:%X{X-Track}\tlevel:%-5level\tlogger:%-48logger{48}\tmessage:%msg%n]]></pattern>
+    </encoder>
+  </appender>
+
+  <appender name="MONITORING_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/atrs-monitoring.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/atrs-monitoring-%d{yyyyMMdd}.log</fileNamePattern>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern><![CDATA[date:%d{yyyy-MM-dd HH:mm:ss}\tthread:%thread\tuser:%X{USER}\tX-Track:%X{X-Track}\tlevel:%-5level\tlogger:%-48logger{48}\tmessage:%msg%n]]></pattern>
+    </encoder>
+  </appender>
+
+  <!-- Application Loggers -->
+  <logger name="jp.co.ntt.atrs">
+    <level value="info" />
+  </logger>
+
+  <!-- アクセスログ(infoで出力) -->
+  <logger name="jp.co.ntt.atrs.app.common.logging.AccessLogFilter">
+    <level value="info" />
+  </logger>
+
+  <!-- Framework -->
+  <logger name="org.terasoluna.gfw">
+    <level value="warn" />
+  </logger>
+
+  <logger name="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor">
+    <level value="warn" />
+  </logger>
+
+  <logger name="org.terasoluna.gfw.common.exception.ExceptionLogger.Monitoring" additivity="false">
+    <level value="error" />
+    <appender-ref ref="MONITORING_LOG_FILE" />
+  </logger>
+
+  <!-- 3rdparty Loggers -->
+  <logger name="org.springframework">
+    <level value="warn" />
+  </logger>
+
+  <logger name="org.springframework.web.servlet">
+    <level value="warn" />
+  </logger>
+
+  <root>
+    <level value="info" />
+    <appender-ref ref="APPLICATION_LOG_FILE" />
+  </root>
+
+</configuration>

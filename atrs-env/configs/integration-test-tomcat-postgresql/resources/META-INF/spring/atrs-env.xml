@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- for integration test environment on Tomcat server -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+  <jee:jndi-lookup id="dataSource" jndi-name="jdbc/AtrsDS" />
+
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <!-- 結合試験用に日付を固定 -->
+  <bean id="dateFactory" class="jp.co.ntt.atrs.domain.common.util.FixedDateFactory">
+    <property name="year" value="2015" />
+    <property name="month" value="1" />
+    <property name="dayOfMonth" value="1" />
+    <property name="hour" value="10" />
+    <property name="minute" value="0" />
+  </bean>
+
+</beans>

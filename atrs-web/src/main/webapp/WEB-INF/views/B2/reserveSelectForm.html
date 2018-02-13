@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.bootstrap.css">
+<link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.default.css">
+<link rel="stylesheet" href="../../../resources/css/style.css"> 
+</head>
+<body>
+<section th:fragment="reserveSelectForm" id="login-modal" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>
+          ATRSカード会員なら、Eメールアドレスやクレジットカード番号が登録できるので簡単にご予約いただけます。
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                ATRSカード会員の方
+              </div>
+              <div class="panel-body">
+                <p>
+                  会員の方はログインしてご予約ください。
+                </p>
+                <form id="login-form" action="../A0/top.html" th:action="@{/auth/dologin}" method="post">
+                  <ul id="login-messages" class="alert alert-danger hidden list-unstyled">
+                  </ul>
+                  <div class="form-group">
+                    <label for="membershipNumber">会員番号</label>
+                    <input type="text" class="form-control" name="membershipNumber" maxlength="10">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" class="form-control" name="password">
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-primary" value="ログインして予約">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                ATRSカード会員でない方
+              </div>
+              <div class="panel-body">
+                <p>
+                  会員登録をしなくてもご予約いただけます。
+                </p>
+                <div class="text-center">
+                  <button id="reserve-without-login-button" type="button" class="btn btn-primary">ログインせず予約</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- /col -->
+        </div><!-- /row -->
+      </div><!-- /container -->
+    </div><!-- /modal-content -->
+  </div><!-- /modal-dialog -->
+</section>
+<script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+<script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js"></script>
+<script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js"></script>
+<script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js"></script>
+<script src="../../../resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js"></script>
+<script src="../../../resources/vendor/lodash/lodash.compat.min.js"></script>
+<script src="../../../resources/vendor/moment/min/moment.min.js"></script>
+<script src="../../../resources/vendor/parsleyjs/parsley.min.js"></script>
+
+<script src="../../../resources/js/atrs.js"></script>
+<script src="../../../resources/js/parsley-config.js"></script>
+<script src="../../../resources/js/parsley-validator-date.js"></script>
+<script src="../../../resources/js/parsley-validator-dateafterto.js"></script>
+<script src="../../../resources/js/parsley-validator-notequalto.js"></script>
+<script src="../../../resources/js/flight-search.js"></script>
+</body>
+</html>

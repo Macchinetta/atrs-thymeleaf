@@ -1,0 +1,471 @@
+@charset "utf-8";
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  height: auto;
+  min-height: 100%;
+}
+
+body > .container {
+  padding-bottom: 100px;
+  background-color: #fff;
+  border-radius: 4px 4px 0 0;
+}
+
+header {
+  padding: 30px 0;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+header h1 {
+  width: 300px;
+  height: 80px;
+  padding: 0;
+  background-color: #fff;
+  background-image: url("../img/logo.png");
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 991px) {
+  header h1 {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 992px) {
+  header h1 {
+    float: left;
+    margin: 0;
+  }
+}
+
+header h1 > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+header nav {
+  float: left;
+  padding-left: 30px;
+  font-size: 20px;
+}
+
+header nav > ul {
+  padding: 0;
+  list-style: none;
+}
+
+header nav > ul > li {
+  float: left;
+  padding: 0 12px;
+  border-right: 1px solid #ccc;
+}
+
+header nav > ul > li:last-child {
+  border-color: transparent;
+}
+
+header .header-right-menu {
+  float: right;
+}
+
+@media (max-width: 991px) {
+  header .vertical-middle-box {
+    height: 80px;
+  }
+}
+
+@media (min-width: 992px) {
+  header .vertical-middle-box {
+    height: 80px;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  padding: 30px 0;
+  color: #ddd;
+  text-align: center;
+  background-color: #333;
+  border-top: 1px solid #999;
+}
+
+.grid {
+  border: 1px solid #ccc;
+}
+
+.vertical-middle-box {
+  display: table-cell;
+  width: inherit;
+  height: inherit;
+  vertical-align: middle;
+}
+
+.table th,
+.table td {
+  vertical-align: middle!important;
+}
+
+.btns-block {
+  position: relative;
+  left: 50%;
+  display: inline-block;
+}
+
+.btns-block .btn {
+  position: relative;
+  left: -50%;
+  float: left;
+  width: 96px;
+}
+
+.btns-block .btn.btn-lg {
+  width: 160px;
+}
+
+.btns-block .btn.btns-block-rightest-btn {
+  float: right;
+  margin-left: 10px;
+}
+
+.btn + .btn {
+  margin-left: 10px;
+}
+
+.btn-size-default {
+  width: 96px;
+}
+
+.table.flights-table {
+  margin-bottom: 10px;
+  table-layout: fixed;
+}
+
+.table.flights-table thead tr th,
+.table.flights-table tbody tr th,
+.table.flights-table thead tr td,
+.table.flights-table tbody tr td {
+  padding: 4px;
+  text-align: center;
+}
+
+.table.flights-table thead tr th.selected,
+.table.flights-table tbody tr th.selected,
+.table.flights-table thead tr td.selected,
+.table.flights-table tbody tr td.selected {
+  background-color: #eee;
+}
+
+.table.flights-table thead tr th label,
+.table.flights-table tbody tr th label,
+.table.flights-table thead tr td label,
+.table.flights-table tbody tr td label {
+  display: block;
+  font-weight: normal;
+}
+
+.pager li {
+  display: inline-block;
+  line-height: 32px;
+  vertical-align: middle;
+}
+
+.pager.pager-top {
+  margin: 0 0 10px 0;
+}
+
+.pager.pager-bottom {
+  margin: 0 0 20px 0;
+}
+
+.pager.text-left {
+  text-align: left;
+}
+
+.pager.text-right {
+  text-align: right;
+}
+
+.pager .pagedisplay {
+  border: none;
+}
+
+.pager .pager-current-date {
+  font-size: 24px;
+  border: none;
+}
+
+.invalid {
+  display: block;
+  margin-top: 6px;
+  font-weight: bold;
+  color: #a94442;
+}
+
+.form-inline .form-control.form-control-separated {
+  display: inline-block;
+}
+
+.inline-half {
+  float: left;
+  width: 50%;
+  padding-right: 8px;
+}
+
+.inline-half:nth-child(2) {
+  padding-right: 0;
+}
+
+.passengers h4 {
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tablesorter-bootstrap thead th,
+.tablesorter-bootstrap thead td {
+  color: #fff;
+  background-color: #555;
+}
+
+.tablesorter-bootstrap tfoot th,
+.tablesorter-bootstrap tfoot td {
+  color: #fff;
+  background-color: #333;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/icomoon.eot');
+  src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('../fonts/icomoon.woff') format('woff'), url('../fonts/icomoon.ttf') format('truetype'), url('../fonts/icomoon.svg#icomoon') format('svg');
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'icomoon';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: none;
+  speak: none;
+  font-variant: normal;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tags:before {
+  content: "\e603";
+}
+
+.icon-ok:before {
+  content: "\e604";
+}
+
+.icon-remove:before {
+  content: "\e605";
+}
+
+.icon-ban-circle:before {
+  content: "\e606";
+}
+
+.icon-plus:before {
+  content: "\e607";
+}
+
+.icon-minus:before {
+  content: "\e608";
+}
+
+.icon-circle-arrow-left:before {
+  content: "\e609";
+}
+
+.icon-circle-arrow-right:before {
+  content: "\e60a";
+}
+
+.icon-circle-arrow-up:before {
+  content: "\e60b";
+}
+
+.icon-circle-arrow-down:before {
+  content: "\e60c";
+}
+
+.icon-search:before {
+  content: "\e600";
+}
+
+.icon-star:before {
+  content: "\e60d";
+}
+
+.icon-user:before {
+  content: "\e60e";
+}
+
+.icon-th-list:before {
+  content: "\e60f";
+}
+
+.icon-cog:before {
+  content: "\e610";
+}
+
+.icon-trash:before {
+  content: "\e611";
+}
+
+.icon-home:before {
+  content: "\e601";
+}
+
+.icon-file:before {
+  content: "\e602";
+}
+
+.icon-download:before {
+  content: "\e612";
+}
+
+.icon-upload:before {
+  content: "\e613";
+}
+
+.icon-refresh:before {
+  content: "\e614";
+}
+
+.icon-tag:before {
+  content: "\e615";
+}
+
+.icon-pencil:before {
+  content: "\e616";
+}
+
+.icon-warning-sign:before {
+  content: "\e617";
+}
+
+.icon-minus-sign:before {
+  content: "\e618";
+}
+
+.icon-plus-sign:before {
+  content: "\e619";
+}
+
+.icon-remove-sign:before {
+  content: "\e61a";
+}
+
+.icon-ok-sign:before {
+  content: "\e61b";
+}
+
+.icon-question-sign:before {
+  content: "\e61c";
+}
+
+.icon-info-sign:before {
+  content: "\e61d";
+}
+
+.icon-remove-circle:before {
+  content: "\e61e";
+}
+
+.icon-ok-circle:before {
+  content: "\e61f";
+}
+
+.icon-arrow-left:before {
+  content: "\e620";
+}
+
+.icon-arrow-right:before {
+  content: "\e621";
+}
+
+.icon-arrow-up:before {
+  content: "\e622";
+}
+
+.icon-arrow-down:before {
+  content: "\e623";
+}
+
+.icon-chevron-down:before {
+  content: "\e624";
+}
+
+.icon-chevron-up:before {
+  content: "\e625";
+}
+
+.icon-copy:before {
+  content: "\e626";
+}
+
+.icon-list-ul:before {
+  content: "\e627";
+}
+
+.icon-list:before {
+  content: "\e628";
+}
+
+.icon-list-ol:before {
+  content: "\e629";
+}
+
+.icon-table:before {
+  content: "\e62a";
+}
+
+.icon-file-alt:before {
+  content: "\e62b";
+}
+
+.icon-group:before {
+  content: "\e62c";
+}
+
+.icon-filter:before {
+  content: "\e62d";
+}
+
+.icon-chevron-left:before {
+  content: "\e62e";
+}
+
+.icon-chevron-right:before {
+  content: "\e62f";
+}
+
+.icon-exclamation-sign:before {
+  content: "\e630";
+}
+
+.icon-edit:before {
+  content: "\e631";
+}
+
+.icon-lightbulb:before {
+  content: "\e632";
+}

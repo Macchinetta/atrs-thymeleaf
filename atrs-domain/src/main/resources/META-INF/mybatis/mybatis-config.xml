@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <settings>
+    <!-- キャメルケースのJavaBeanのプロパティに自動マッピング -->
+    <setting name="mapUnderscoreToCamelCase" value="true" />
+    <!-- true: “Lazy Load”/false: “Eager Load” (デフォルト) -->
+    <setting name="lazyLoadingEnabled" value="true" />
+    <!-- ”Lazy Load”を実行するタイミングを制御 -->
+    <setting name="aggressiveLazyLoading" value="false" />
+    <!-- アプリケーション全体のFetchSizeのデフォルト値 -->
+    <setting name="defaultFetchSize" value="100" />
+  </settings>
+  <typeAliases>
+    <package name="jp.co.ntt.atrs.domain.model" />
+    <package name="jp.co.ntt.atrs.domain.repository" />
+  </typeAliases>
+
+</configuration>

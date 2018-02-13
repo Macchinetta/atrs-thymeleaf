@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" href="../../../resources/css/style.css">
+</head>
+<body>
+<div th:fragment="flightSearchForm" class="panel panel-default">
+  <div class="panel-heading">
+    ご希望の内容を入力してください。
+  </div>
+
+  <div class="panel-body">
+
+    <form id="flights-search-form" class="form-horizontal" action="flightSearch.html" th:action="@{/ticket/search}" method="get"
+      th:object="${ticketSearchForm}">
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">フライト種別</label>
+        <div class="col-md-8">
+          <label class="radio-inline" th:each="item : ${CL_FLIGHTTYPE}">
+            <input name="flightType" type="radio" th:field="*{flightType}" th:value="${item.key}"
+              data-parsley-required="true" value="RT" checked="checked"/>
+            <span th:text="${CL_FLIGHTTYPE[item.key]}">往復</span>
+          </label>
+          <!--/*-->
+          <label class="radio-inline">
+            <input name="flightType" type="radio" data-parsley-required="true" value="OW"/>
+            <span >片道  </span>
+          </label>
+          <!--*/-->
+          <div class="clearfix"></div>
+          <span id="flightType.errors" th:errors="*{flightType}" class="invalid"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="depAirportCd" class="col-md-4 control-label">区間</label>
+        <div class="col-md-8">
+          <select th:field="*{depAirportCd}" class="form-control"
+            data-parsley-required="true">
+            <!--/*-->
+            <option value="01" label="東京（羽田）" />
+            <!--*/-->
+            <option th:each="var : ${CL_AIRPORT}" th:value="${var.key}" th:text="${var.value}"></option>
+          </select>
+          <span class="glyphicon glyphicon-arrow-down" style="width: 100%; line-height: 34px; text-align: center"></span>
+          <select th:field="*{arrAirportCd}" class="form-control"
+            data-parsley-required="true"
+            data-parsley-notequalto="#depAirportCd" data-parsley-notequalto-message="出発空港と到着空港に同じ空港は指定できません。">
+            <!--/*-->
+            <option value="02" label="大阪（伊丹）" />
+            <!--*/-->
+            <option th:each="var : ${CL_AIRPORT}" th:value="${var.key}" th:text="${var.value}"></option>
+          </select>
+          <div class="clearfix"></div>
+          <span id="depAirportCd.errors" th:errors="*{depAirportCd}" class="invalid"></span>
+          <span id="arrAirportCd.errors" th:errors="*{arrAirportCd}" class="invalid"></span>
+        </div>
+      </div>
+
+      <div th:with="flightSearchStartDate=${#dates.format(flightSearchOutputDto.beginningPeriod, 'yyyy/MM/dd')},
+          flightSearchEndDate=${#dates.format(flightSearchOutputDto.endingPeriod, 'yyyy/MM/dd')}">
+          <div id="date-for-outward" class="form-group">
+            <label for="outwardDate" class="col-md-4 control-label">往路搭乗日</label>
+            <div class="col-md-8">
+              <input type="text" th:field="*{outwardDate}" class="form-control"
+                th:attr="data-date-start-date=${flightSearchStartDate}, data-date-end-date=${flightSearchEndDate}"
+                data-provide="datepicker"
+                data-date-format="yyyy/mm/dd"
+                data-date-autoclose="true"
+                data-date-language="ja"
+                data-date-start-date="yyyy/mm/dd"
+                data-date-end-date="yyyy/mm/dd"
+                data-parsley-trigger="change changeDate"
+                data-parsley-required="true"
+                data-parsley-date="true"
+                value="2017/11/05"/>
+              <div class="clearfix"></div>
+              <span id="outwardDate.errors" th:errors="*{outwardDate}" class="invalid"></span>
+            </div>
+          </div>
+          <div id="date-for-homeward" class="form-group">
+            <label for="homewardDate" class="col-md-4 control-label">復路搭乗日</label>
+            <div class="col-md-8">
+              <input type="text" th:field="*{homewardDate}" class="form-control"
+                th:attr="data-date-start-date=${flightSearchStartDate}, data-date-end-date=${flightSearchEndDate}"
+                maxlength="10"
+                data-provide="datepicker"
+                data-date-format="yyyy/mm/dd"
+                data-date-autoclose="true"
+                data-date-language="ja"
+                data-date-start-date="yyyy/mm/dd"
+                data-date-end-date="yyyy/mm/dd"
+                data-parsley-trigger="change changeDate"
+                data-parsley-required="true"
+                data-parsley-date="true"
+                data-parsley-dateafterto="#outwardDate" data-parsley-dateafterto-message="往路搭乗日以降である必要があります。"
+                value="2017/11/07"/>
+              <div class="clearfix"></div>
+              <span id="homewardDate.errors" th:errors="*{homewardDate}" class="invalid"></span>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">搭乗クラス</label>
+        <div class="col-md-8">
+          <label class="radio-inline" th:each="item : ${CL_BOARDINGCLASS}">
+            <input name="boardingClassCd" type="radio" th:field="*{boardingClassCd}" th:value="${item.key}"
+              data-parsley-required="true" value="N" checked="checked"/>
+            <span th:text="${CL_BOARDINGCLASS[item.key]}">一般席</span>
+          </label>
+          <!--/*-->
+          <label class="radio-inline">
+            <input name="boardingClassCd" type="radio" data-parsley-required="true" value="S"/>
+            <span >特別席 </span>
+          </label>
+          <!--*/-->
+          <div class="clearfix"></div>
+          <span id="boardingClassCd.errors" th:errors="*{boardingClassCd}" class="invalid"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+          <input type="submit" id="flights-search-button" class="btn btn-primary" name="flightForm" value="照会">
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+<script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+<script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js"></script>
+<script src="../../../resources/vendor/moment/min/moment.min.js"></script>
+<script src="../../../resources/vendor/parsleyjs/parsley.min.js"></script>
+
+<script src="../../../resources/js/atrs.js"></script>
+<script src="../../../resources/js/parsley-config.js"></script>
+<script src="../../../resources/js/parsley-validator-date.js"></script>
+<script src="../../../resources/js/parsley-validator-dateafterto.js"></script>
+<script src="../../../resources/js/parsley-validator-notequalto.js"></script>
+<script src="../../../resources/js/top.js"></script>
+</body>
+</html>

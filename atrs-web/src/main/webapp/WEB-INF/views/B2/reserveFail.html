@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>予約エラー | Airline Ticket Reservation System</title>
+
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+
+  </head>
+  <body>
+
+    <header th:replace="~{A0/header :: header}"></header>
+
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col-md-12">
+          <!--/*/
+          <ul th:if="${resultMessages} != null" class="alert list-unstyled" th:classappend="|alert-${resultMessages.type}|">
+            <li th:each="message : ${resultMessages}" th:utext="${#messages.msgWithParams(message.code, message.args)}"></li>
+          </ul>
+          /*/-->
+          <!--/*-->
+          <div class="alert alert-danger">
+                        <h2>ご迷惑をおかけして申し訳ありません。</h2>
+            <p>
+              以下のフライトの座席が確保できませんでした。<br>
+              お手数ですが、再度フライトの選択を行ってください。
+            </p>
+          </div>
+          <!--*/-->
+
+          <section>
+            <h3>選択フライト</h3>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>搭乗日</th>
+                  <th>便名</th>
+                  <th>出発時刻</th>
+                  <th>到着時刻</th>
+                  <th>区間</th>
+                  <th>搭乗クラス</th>
+                  <th>運賃種別</th>
+                  <th>運賃</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="flight : ${selectFlightDtoList}">
+                  <td th:text="${flight.lineType.name}">往路</td>
+                  <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
+                  <td th:text="${flight.flightName}">NTT001</td>
+                  <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
+                  <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
+                  <td><span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class='glyphicon glyphicon-arrow-right'></span><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span></td>
+                  <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
+                  <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
+                  <td th:text="|&yen;${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
+                </tr>
+                <!--/*-->
+                <tr>
+                  <td>復路</td>
+                  <td>07月02日(水)</td>
+                  <td>NTT136</td>
+                  <td>18：00</td>
+                  <td>19：00</td>
+                  <td>沖縄&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;東京（羽田）</td>
+                  <td>一般席</td>
+                  <td>往復運賃</td>
+                  <td>￥19,600</td>
+                </tr>
+                <!--*/-->
+              </tbody>
+            </table>
+          </section>
+
+          <div class="text-center">
+            <a href="../A0/top.html" th:href="@{/}" class="btn btn-default">トップに戻る</a>
+          </div>
+        </section>
+
+      </div><!-- /row -->
+
+    </div><!-- /container -->
+
+    <footer th:replace="~{A0/footer :: footer}"></footer>
+
+    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+  </body>
+</html>

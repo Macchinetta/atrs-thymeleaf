@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+  xmlns="http://dozer.sourceforge.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+  <mapping type="one-way">
+    <class-a>jp.co.ntt.atrs.app.c2.MemberUpdateForm</class-a>
+    <class-b>jp.co.ntt.atrs.domain.model.Member</class-b>
+    <field>
+      <a>dateOfBirth</a>
+      <b>birthday</b>
+    </field>
+    <field>
+      <a>creditTypeCd</a>
+      <b>creditType.creditTypeCd</b>
+    </field>
+    <field>
+      <a>password</a>
+      <b>memberLogin.password</b>
+    </field>
+  </mapping>
+
+  <mapping type="one-way">
+    <class-a>jp.co.ntt.atrs.domain.model.Member</class-a>
+    <class-b>jp.co.ntt.atrs.app.c2.MemberUpdateForm</class-b>
+    <field>
+      <a>birthday</a>
+      <b>dateOfBirth</b>
+    </field>
+    <field>
+      <a>creditType.creditTypeCd</a>
+      <b>creditTypeCd</b>
+    </field>
+  </mapping>
+
+</mappings>

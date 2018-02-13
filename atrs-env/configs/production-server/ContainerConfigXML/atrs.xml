@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- web application context file for tomcat. -->
+<!-- this file should be place at CATALINA_HOME/conf/Catalina/localhost/atrs.xml -->
+<Context>
+
+  <Resource
+    name="jdbc/AtrsDS"
+    type="javax.sql.DataSource"
+    driverClassName="org.postgresql.Driver"
+    username="postgres"
+    password="postgres"
+    url="jdbc:postgresql://xxx.xxx.xxx.xxx:5432/atrs"
+    maxWait="5000"
+    initialSize="10"
+    minIdle="10"
+    maxIdle="10"
+    maxActive="100"
+    />
+
+  <Loader className="org.apache.catalina.loader.VirtualWebappLoader" virtualClasspath="/tmp/atrs-env/*.jar" />
+  <JarScanner scanAllDirectories="true" />
+
+</Context>

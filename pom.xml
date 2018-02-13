@@ -1,0 +1,253 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jp.co.ntt.atrs</groupId>
+    <artifactId>atrs</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>atrs-env</module>
+        <module>atrs-domain</module>
+        <module>atrs-web</module>
+        <module>atrs-initdb</module>
+    </modules>
+    <parent>
+        <groupId>org.terasoluna.gfw</groupId>
+        <artifactId>terasoluna-gfw-parent</artifactId>
+        <version>5.4.0.RELEASE</version>
+        <relativePath />
+    </parent>
+    <version>1.5.0.RELEASE</version>
+    <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
+    <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.maven-checkstyle-plugin.version}</version>
+                    <configuration>
+                        <enableRulesSummary>false</enableRulesSummary>
+                        <configLocation>${checkstyle.rule.xml}</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.version}</version>
+                    <configuration>
+                        <source>${java-version}</source>
+                        <target>${java-version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>install</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>sources</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.maven-resources-plugin.version}</version>
+                    <configuration>
+                        <encoding>${encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>source-jar</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.maven-war-plugin.version}</version>
+                    <configuration>
+                        <warName>${project.parent.artifactId}</warName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${org.codehaus.mojo.version}</version>
+                    <configuration>
+                        <inputEncoding>${encoding}</inputEncoding>
+                        <outputEncoding>${encoding}</outputEncoding>
+                        <includeFilterFile>${findbugs.includefilter.xml}</includeFilterFile>
+                        <excludeFilterFile>${findbugs.excludefilter.xml}</excludeFilterFile>
+                        <xmlOutput>true</xmlOutput>
+                        <threshold>${findbugs.threshold}</threshold>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.revelc.code</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>${formatter-maven-plugin.version}</version>
+                    <configuration>
+                        <configFile>${project.basedir}/../eclipse/formatter.xml
+                        </configFile>
+                        <lineEnding>CRLF</lineEnding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.code.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>${com.google.code.maven-license-plugin.version}</version>
+                    <configuration>
+                        <header>${project.root.basedir}/license/header.txt</header>
+                        <includes>
+                            <include>src/**/*.java</include>
+                        </includes>
+                        <encoding>${encoding}</encoding>
+                        <headerDefinitions>
+                            <headerDefinition>${project.root.basedir}/license/header-definition.xml</headerDefinition>
+                        </headerDefinitions>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sql-maven-plugin</artifactId>
+                    <version>${org.codehaus.mojo.sql-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>build-helper-maven-plugin</artifactId>
+                  <version>${org.codehaus.mojo.build-helper-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                  <groupId>org.codehaus.cargo</groupId>
+                  <artifactId>cargo-maven2-plugin</artifactId>
+                  <configuration>
+                    <deployables>
+                      <deployable>
+                        <location>${target.dir}/target/atrs.war</location>
+                        <type>war</type>
+                        <properties>
+                          <context>atrs</context>
+                        </properties>
+                      </deployable>
+                    </deployables>
+                  </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins />
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- == Begin ATRS == -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>atrs-env</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>atrs-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>atrs-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- == End ATRS == -->
+
+            <!-- == Begin Database == -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <!-- == End Database == -->
+
+            <!-- == Begin Thymeleaf == -->
+            <dependency>
+              <groupId>org.thymeleaf</groupId>
+              <artifactId>thymeleaf</artifactId>
+              <version>${thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.thymeleaf</groupId>
+              <artifactId>thymeleaf-spring4</artifactId>
+              <version>${thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.thymeleaf.extras</groupId>
+              <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+              <version>${thymeleaf-extras-springsecurity4.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.thymeleaf.extras</groupId>
+              <artifactId>thymeleaf-extras-java8time</artifactId>
+              <version>${thymeleaf-extras-java8time.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>nz.net.ultraq.thymeleaf</groupId>
+              <artifactId>thymeleaf-joda-dialect</artifactId>
+              <version>${thymeleaf-joda-dialect.version}</version>
+            </dependency>
+            <!-- == End Thymeleaf == -->
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <!-- == Maven Plugin Versions == -->
+        <org.apache.maven.plugins.maven-checkstyle-plugin.version>2.9.1</org.apache.maven.plugins.maven-checkstyle-plugin.version>
+        <org.apache.maven.plugins.maven-resources-plugin.version>2.6</org.apache.maven.plugins.maven-resources-plugin.version>
+        <org.apache.maven.plugins.maven-source-plugin.version>2.2</org.apache.maven.plugins.maven-source-plugin.version>
+        <org.apache.maven.plugins.maven-war-plugin.version>2.2</org.apache.maven.plugins.maven-war-plugin.version>
+        <org.apache.maven.plugins.version>2.5</org.apache.maven.plugins.version>
+        <org.codehaus.mojo.build-helper-maven-plugin.version>1.9.1</org.codehaus.mojo.build-helper-maven-plugin.version>
+        <org.codehaus.mojo.sql-maven-plugin.version>1.5</org.codehaus.mojo.sql-maven-plugin.version>
+        <formatter-maven-plugin.version>0.5.2</formatter-maven-plugin.version>
+        <com.google.code.maven-license-plugin.version>1.4.0</com.google.code.maven-license-plugin.version>
+        <org.codehaus.mojo.version>2.5</org.codehaus.mojo.version>
+        <!-- == Dependency Versions == -->
+        <postgresql.version>9.4.1212.jre7</postgresql.version>
+        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+        <thymeleaf-extras-java8time.version>3.0.0.RELEASE</thymeleaf-extras-java8time.version>
+        <thymeleaf-joda-dialect.version>2.0.0</thymeleaf-joda-dialect.version>
+        <!-- == Project Properties == -->
+        <project.root.basedir>${project.basedir}</project.root.basedir>
+        <encoding>UTF-8</encoding>
+        <java-version>1.7</java-version>
+    </properties>
+
+</project>

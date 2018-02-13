@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>予約完了 | Airline Ticket Reservation System</title>
+
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+
+  </head>
+  <body>
+
+    <header th:replace="~{A0/header :: header}"></header>
+
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col-md-12">
+
+          <div class="alert alert-success">
+            <h2>ご予約を受け付けました。</h2>
+            <p>
+              ご予約ありがとうございました。<br>
+              期限までにご購入いただけない場合、すべてのフライトが自動的にキャンセルされます。
+            </p>
+          </div>
+
+          <h3>予約情報</h3>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th class="col-md-4">予約番号</th>
+                <td class="col-md-8" th:text="${reserveCompleteOutputDto.reserveNo}">0000000001</td>
+              </tr>
+              <tr>
+                <th>合計金額</th>
+                <td th:text="${#numbers.formatDecimal(reserveCompleteOutputDto.totalFare,1,'COMMA',0,'POINT')} + '円'">35,600円</td>
+              </tr>
+              <tr>
+                <th>お支払期限</th>
+                <td th:text="${#dates.format(reserveCompleteOutputDto.paymentDate,'MM月dd日(E)')}">09月03日（水）</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <div class="text-center">
+          <a href="../A0/top.html" th:href="@{/}" class="btn btn-default">トップに戻る</a>
+        </div>
+
+      </div><!-- /row -->
+
+    </div><!--/container  -->
+
+    <footer th:replace="~{A0/footer :: footer}"></footer>
+
+    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+  </body>
+</html>

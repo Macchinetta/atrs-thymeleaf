@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.faretype.FareTypeRepository">
+
+  <resultMap id="fareType-map" type="FareType">
+    <id property="fareTypeCd" column="fare_type_cd"/>
+    <result property="fareTypeName" column="fare_type_name"/>
+    <result property="discountRate" column="discount_rate"/>
+    <result property="rsrvAvailableStartDayNum" column="rsrv_available_start_day_num"/>
+    <result property="rsrvAvailableEndDayNum" column="rsrv_available_end_day_num"/>
+    <result property="passengerMinNum" column="passenger_min_num"/>
+  </resultMap>
+
+  <!-- 運賃種別情報を全件取得 -->
+  <select id="findAll" resultMap="fareType-map">
+    SELECT
+        fare_type_cd,
+        fare_type_name,
+        discount_rate,
+        rsrv_available_start_day_num,
+        rsrv_available_end_day_num,
+        passenger_min_num
+    FROM
+        fare_type
+  </select>
+
+</mapper>

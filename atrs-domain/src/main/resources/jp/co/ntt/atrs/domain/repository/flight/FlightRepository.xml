@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.flight.FlightRepository">
+
+  <resultMap id="flight-map" type="Flight">
+    <id property="departureDate" column="departure_date"/>
+    <id property="flightMaster.flightName" column="flight_name" />
+    <id property="boardingClass.boardingClassCd" column="boarding_class_cd"/>
+    <id property="fareType.fareTypeCd" column="fare_type_cd" />
+    <result property="vacantNum" column="vacant_num" />
+  </resultMap>
+
+  <resultMap id="flightMaster-map" type="FlightMaster">
+    <id property="flightName" column="flight_name"/>
+    <result property="departureTime" column="departure_time"/>
+    <result property="arrivalTime" column="arrival_time"/>
+    <result property="plane.craftType" column="craft_type"/>
+    <association property="route" resultMap="route-map"/>
+  </resultMap>
+
+  <resultMap id="route-map" type="Route">
+    <id property="routeNo" column="route_no"/>
+    <result property="basicFare" column="basic_fare"/>
+    <result property="departureAirport.code" column="dep_airport_cd"/>
+    <result property="departureAirport.name" column="dep_airport_name"/>
+    <result property="arrivalAirport.code" column="aar_airport_cd"/>
+    <result property="arrivalAirport.name" column="aar_airport_name"/>
+  </resultMap>
+
+  <!-- 空席照会 -->
+  <select id="findByVacantSeatSearchCriteria" resultMap="flight-map">
+    SELECT
+        f.departure_date,
+        f.flight_name,
+        f.fare_type_cd,
+        f.vacant_num,
+        f.boarding_class_cd
+    FROM
+        flight f,
+        fare_type ft,
+        flight_master fm,
+        route r
+    WHERE
+         f.fare_type_cd = ft.fare_type_cd
+    AND
+         f.fare_type_cd IN
+         <foreach item="fareType" collection="criteria.fareTypeList" open="(" separator="," close=")">
+             #{fareType}
+         </foreach>
+    AND
+         f.flight_name = fm.flight_name
+    AND
+         fm.route_no = r.route_no
+    AND
+         r.dep_airport_cd = #{criteria.route.departureAirport.code}
+    AND
+         r.arr_airport_cd = #{criteria.route.arrivalAirport.code}
+    AND
+         f.departure_date = #{criteria.depDate}
+    AND
+         f.boarding_class_cd = #{criteria.boardingClass}
+    AND
+         #{criteria.beforeDayNum} BETWEEN ft.rsrv_available_end_day_num AND ft.rsrv_available_start_day_num
+    ORDER BY
+        ft.display_order ASC,
+        fm.departure_time ASC
+  </select>
+
+  <!-- フライト情報を取得(排他ロック) -->
+  <select id="findOneForUpdate" resultMap="flight-map">
+    SELECT
+        f.departure_date,
+        f.flight_name,
+        f.fare_type_cd,
+        f.vacant_num,
+        f.boarding_class_cd
+    FROM
+        flight f
+    WHERE
+        departure_date = #{departureDate}
+    AND
+        flight_name = #{flightName}
+    AND
+        boarding_class_cd = #{boardingClass.boardingClassCd}
+    AND
+        fare_type_cd = #{fareType.fareTypeCd}
+    FOR UPDATE
+  </select>
+
+  <!-- 空席数の更新 -->
+  <update id="update" parameterType="Flight">
+    UPDATE
+        flight
+    SET
+        vacant_num = #{vacantNum}
+    WHERE
+        departure_date = #{departureDate}
+    AND
+        flight_name = #{flightMaster.flightName}
+    AND
+        boarding_class_cd = #{boardingClass.boardingClassCd}
+    AND
+        fare_type_cd = #{fareType.fareTypeCd}
+  </update>
+
+  <!-- フライト情報の存在チェック -->
+  <select id="exists" resultType="java.lang.Boolean">
+  SELECT EXISTS (
+      SELECT
+          *
+      FROM
+          flight
+      WHERE
+          departure_date = #{departureDate}
+      AND
+          flight_name = #{flightName}
+      AND
+          boarding_class_cd = #{boardingClass.boardingClassCd}
+      AND
+          fare_type_cd = #{fareType.fareTypeCd}
+      )
+  </select>
+
+  <!-- フライト基本情報の全件取得 -->
+  <select id="findAllFlightMaster" resultMap="flightMaster-map">
+    SELECT
+        fm.flight_name,
+        fm.departure_time,
+        fm.arrival_time,
+        fm.craft_type,
+        r.route_no,
+        r.basic_fare,
+        a_dep.airport_cd AS dep_airport_cd,
+        a_dep.airport_name AS dep_airport_name,
+        a_arr.airport_cd AS aar_airport_cd,
+        a_arr.airport_name AS aar_airport_name
+    FROM
+        flight_master fm,
+        route r,
+        airport a_dep,
+        airport a_arr
+    WHERE 
+        fm.route_no = r.route_no
+    AND
+        r.dep_airport_cd = a_dep.airport_cd
+    AND
+        r.arr_airport_cd = a_arr.airport_cd
+  </select>
+
+</mapper>

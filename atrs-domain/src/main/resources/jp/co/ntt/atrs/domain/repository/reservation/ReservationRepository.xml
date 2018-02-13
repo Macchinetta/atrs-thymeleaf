@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.reservation.ReservationRepository">
+
+  <!-- 予約情報を登録-->
+  <insert id="insert" parameterType="Reservation">
+    <selectKey keyProperty="reserveNo" resultType="String" order="BEFORE">
+      SELECT TO_CHAR(NEXTVAL('sq_reservation_1'), 'FM0999999999')
+    </selectKey>
+    INSERT INTO reservation
+    (
+        reserve_no,
+        reserve_date,
+        total_fare,
+        rep_family_name,
+        rep_given_name,
+        rep_age,
+        rep_gender,
+        rep_tel,
+        rep_mail,
+        rep_customer_no
+    )
+    VALUES
+    (
+        #{reserveNo},
+        #{reserveDate},
+        #{totalFare},
+        #{repFamilyName},
+        #{repGivenName},
+        #{repAge},
+        #{repGender.code},
+        #{repTel},
+        #{repMail},
+        NULLIF(#{repMember.membershipNumber}, '')
+    )
+  </insert>
+
+  <!-- 予約フライト情報を登録 -->
+  <insert id="insertReserveFlight" parameterType="ReserveFlight">
+    <selectKey keyProperty="reserveFlightNo" resultType="Integer" order="BEFORE">
+      SELECT NEXTVAL('sq_reserve_flight_1')
+    </selectKey>
+    INSERT INTO reserve_flight
+    (
+        reserve_flight_no,
+        reserve_no,
+        departure_date,
+        flight_name,
+        boarding_class_cd,
+        fare_type_cd
+    )
+    VALUES
+    (
+        #{reserveFlightNo},
+        #{reserveNo},
+        #{flight.departureDate},
+        #{flight.flightMaster.flightName},
+        #{flight.boardingClass.boardingClassCd},
+        #{flight.fareType.fareTypeCd}
+    )
+  </insert>
+
+  <!-- 搭乗者情報を登録 -->
+  <insert id="insertPassenger" parameterType="Passenger">
+    <selectKey keyProperty="passengerNo" resultType="Integer" order="BEFORE">
+      SELECT NEXTVAL('sq_passenger_1')
+    </selectKey>
+    INSERT INTO passenger
+    (
+        passenger_no,
+        reserve_flight_no,
+        family_name,
+        given_name,
+        age,
+        gender,
+        customer_no
+    )
+    VALUES
+    (
+        #{passengerNo},
+        #{reserveFlightNo},
+        #{familyName},
+        #{givenName},
+        #{age},
+        #{gender.code},
+        NULLIF(#{member.membershipNumber}, '')
+    )
+  </insert>
+
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ntt.atrs.domain.repository.peaktime.PeakTimeRepository">
+
+  <resultMap id="peakTime-map" type="PeakTime">
+    <id property="peakTimeCd" column="peak_time_cd"/>
+    <id property="peakStartDate" column="peak_start_date"/>
+    <id property="peakEndDate" column="peak_end_date"/>
+    <result property="multiplicationRatio" column="multiplication_ratio"/>
+  </resultMap>
+
+  <!-- ピーク時期の全件取得 -->
+  <select id="findAll" resultMap="peakTime-map">
+    SELECT
+        peak_time_cd,
+        peak_start_date,
+        peak_end_date,
+        multiplication_ratio
+    FROM
+        peak_time
+  </select>
+
+</mapper>

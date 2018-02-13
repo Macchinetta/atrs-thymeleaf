@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+  xmlns="http://dozer.sourceforge.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+  <mapping type="one-way">
+    <class-a>jp.co.ntt.atrs.app.b1.FlightSearchCriteriaForm</class-a>
+    <class-b>jp.co.ntt.atrs.domain.service.b1.TicketSearchCriteriaDto</class-b>
+    <field>
+      <a>depAirportCd</a>
+      <b>departureAirportCd</b>
+    </field>
+    <field>
+      <a>arrAirportCd</a>
+      <b>arrivalAirportCd</b>
+    </field>
+  </mapping>
+
+</mappings>
