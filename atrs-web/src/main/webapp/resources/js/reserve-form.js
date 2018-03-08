@@ -1,7 +1,7 @@
 /*!
  * お客様情報入力画面(B202)スクリプト。
  *
- * Copyright(c) 2014-2017 NTT Corporation.
+ * Copyright(c) 2014-2018 NTT Corporation.
  */
 
 'use strict';

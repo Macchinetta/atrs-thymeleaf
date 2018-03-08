@@ -1,7 +1,7 @@
 /*!
  * ログイン画面(A101)スクリプト。
  *
- * Copyright(c) 2014-2017 NTT Corporation.
+ * Copyright(c) 2014-2018 NTT Corporation.
  */
 
 'use strict';
