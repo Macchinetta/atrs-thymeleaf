@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.common.logging;
 
@@ -58,7 +57,42 @@ public enum LogMessages {
     /**
      * ログアウトが成功した事を通知するログメッセージ。
      */
-    I_AR_A2_L0001("i.ar.a2.L0001", "会員番号[{0}] ログアウト成功");
+    I_AR_A2_L0001("i.ar.a2.L0001", "会員番号[{0}] ログアウト成功"),
+
+    /**
+     * レポート情報の取得失敗を通知するログメッセージ。
+     */
+    E_AR_D1_L0001("e.ar.d1.L0001", "お客様番号[{0}]のレポート情報取得失敗"),
+
+    /**
+     * レポートの作成失敗を通知するログメッセージ。
+     */
+    E_AR_D1_L0002("e.ar.d1.L0002", "お客様番号[{0}]のレポート作成失敗"),
+
+    /**
+     * ディレクトリ作成の失敗を通知するログメッセージ。
+     */
+    E_AR_D1_L0003("e.ar.d1.L0003", "ディレクトリ[{0}]の作成失敗"),
+
+    /**
+     * レポート作成条件抽出の失敗を通知するログメッセージ。
+     */
+    E_AR_D1_L0004("e.ar.d1.L0004", "レポート作成条件抽出失敗"),
+
+    /**
+     * 不明なファイル名を警告するログメッセージ。
+     */
+    W_AR_D1_L0001("w.ar.d1.L0001", "ファイル[{0}]は存在しません"),
+
+    /**
+     * レポート情報の取得失敗を通知するログメッセージ。
+     */
+    W_AR_D1_L0002("w.ar.d1.L0002", "受信したJMSメッセージ型[{0}]と想定メッセージ型の不一致"),
+
+    /**
+     * レポート情報の取得失敗を通知するログメッセージ。
+     */
+    W_AR_D1_L0003("w.ar.d1.L0003", "受信したJMSメッセージのお客様番号[{0}]が不正");
 
     /**
      * メッセージコード。

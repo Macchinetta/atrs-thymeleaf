@@ -1,7 +1,7 @@
 /*!
  * 空席照会画面(B102)スクリプト。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  */
 
 'use strict';
@@ -36,21 +36,13 @@
     // 入力値チェックの設定
     setValidator();
 
-    // Tablesorterの設定
-    $.extend($.tablesorter.themes.bootstrap, {
-      table: 'table table-bordered',
-      icons: 'icon-white',
-      sortNone: 'bootstrap-icon-unsorted',
-      sortAsc: 'icon-chevron-up glyphicon glyphicon-chevron-up',
-      sortDesc: 'icon-chevron-down glyphicon glyphicon-chevron-down'
-    });
-
     // 空席照会テーブルの初期化
     outwardFlightsTable = new FlightsTable('#outward-flights'); // 往路
     homewardFlightsTable = new FlightsTable('#homeward-flights'); // 復路
 
     // イベントハンドラの設定
     $('#outwardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
+    $('#homewardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
     $('#login-modal').on('show.bs.modal', handlers.onShowLoginModal);
     $(document).on('change', '#flights-search-form input[name=flightType]', handlers.onChangeFlightType);
     $(document).on('submit', '#flights-search-form', handlers.onSubmitFlightsSearchForm);
@@ -117,7 +109,7 @@
 
       $.ajax({
         type: 'GET',
-        url: contextPath + 'api/auth/status',
+        url: contextPath + '/api/auth/status',
         cache: false,
         timeout: 15000
       }).done(function () {
@@ -389,14 +381,14 @@
 
       $.ajax({
         type: 'GET',
-        url: contextPath + 'api/flights',
+        url: contextPath + '/api/flights',
         data: param,
         dataType: 'json',
         cache: false,
         timeout: 15000
       }).done(function (data) {
 
-        var html = _.template($('#flights-table-template').html(), {
+        var html = _.template($('#flights-table-template').html())({
           data: data,
           $table: $table,
           direction: direction
@@ -468,6 +460,9 @@
       // Tablesorter化
       $table.tablesorter({
         theme: 'bootstrap',
+        cssIcon: 'icon-white',
+        cssIconAsc: 'icon-chevron-up',
+        cssIconDesc: 'icon-chevron-down',
         headerTemplate: '{content} {icon}',
         textExtraction: {
           '.fare-header': function (node) {
@@ -530,11 +525,11 @@
       errorsContainer: '#flights-select-form-messages',
       errorsWrapper: '<li></li>',
       errorTemplate: '<span></span>'
-    }).subscribe('parsley:form:validate', function () {
+    }).on('parsley:form:validate', function () {
 
       // Parsley外設定メッセージを削除
       $('#flights-select-form-messages').find('li:not([id*=parsley])').remove();
-    }).subscribe('parsley:form:validated', function (formInstance) {
+    }).on('parsley:form:validated', function (formInstance) {
 
       // 復路出発時刻チェック
       if (!validateSelectedTime()) {
@@ -543,7 +538,7 @@
         formInstance.submitEvent.stopImmediatePropagation();
         formInstance.submitEvent.preventDefault();
       }
-    }).subscribe('parsley:field:validated', function () {
+    }).on('parsley:field:validated', function () {
       var $flightsSelectFormMessages = $('#flights-select-form-messages');
       var messagesText = $flightsSelectFormMessages.text();
       $flightsSelectFormMessages.toggleClass('hidden', messagesText === '');

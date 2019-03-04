@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.6.0.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -19,7 +19,7 @@
             </activation>
             <properties>
                 <db.encoding>UTF8</db.encoding>
-                <db.basedir>src/sqls/integration-test-postgres</db.basedir>
+                <db.basedir>${project.basedir}/src/sqls/integration-test-postgres</db.basedir>
                 <db.url>jdbc:postgresql://127.0.0.1:5432/atrs</db.url>
                 <db.username>postgres</db.username>
                 <db.password>postgres</db.password>

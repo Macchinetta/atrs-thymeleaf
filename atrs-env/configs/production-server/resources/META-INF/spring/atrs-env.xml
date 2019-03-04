@@ -13,4 +13,12 @@
 
   <bean id="dateFactory" class="org.terasoluna.gfw.common.date.DefaultDateFactory" />
 
+  <!-- == JMS送受信用の設定　ここから == -->
+  <jee:jndi-lookup id="atrsJmsConnectionFactory" jndi-name="jms/ConnectionFactory" />
+
+  <bean id="destinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
+    <property name="resourceRef" value="true" />
+  </bean>
+  <!-- == JMS送受信用の設定　ここまで == -->
+
 </beans>

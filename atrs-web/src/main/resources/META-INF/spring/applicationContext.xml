@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jms="http://www.springframework.org/schema/jms"
   xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
 
   <import resource="classpath:/META-INF/spring/atrs-domain.xml" />
 
@@ -37,8 +39,18 @@
     <property name="exceptionLogger" ref="exceptionLogger" />
   </bean>
 
-  <bean id="beanMapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+  <bean id="beanMapper" class="com.github.dozermapper.spring.DozerBeanMapperFactoryBean">
     <property name="mappingFiles" value="classpath*:/META-INF/dozer/**/*-mapping.xml" />
   </bean>
+
+  <!-- == Configuration For JMS. -->
+  <context:component-scan base-package="jp.co.ntt.atrs.listener" />
+
+  <jms:annotation-driven/>
+
+  <jms:listener-container factory-id="jmsListenerContainerFactory"
+    connection-factory="atrsJmsConnectionFactory" destination-resolver="destinationResolver"
+    concurrency="1" error-handler="atrsJmsErrorHandler" cache="consumer"
+    acknowledge="transacted" />
 
 </beans>

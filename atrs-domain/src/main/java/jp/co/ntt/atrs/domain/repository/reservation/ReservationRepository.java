@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,12 +9,13 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.repository.reservation;
+
+import java.util.List;
 
 import jp.co.ntt.atrs.domain.model.Passenger;
 import jp.co.ntt.atrs.domain.model.Reservation;
@@ -51,5 +52,12 @@ public interface ReservationRepository {
      * @return 登録件数
      */
     int insertPassenger(Passenger passenger);
+
+    /**
+     * 会員番号から予約履歴を取得する。
+     * @param membershipNumber 会員番号
+     * @return 予約リスト
+     */
+    List<ReservationHistoryDto> findAllByMembershipNumberForReport(String membershipNumber);
 
 }

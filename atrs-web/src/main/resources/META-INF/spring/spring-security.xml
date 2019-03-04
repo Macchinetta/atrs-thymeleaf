@@ -17,6 +17,7 @@
       delete-cookies="JSESSIONID"
       success-handler-ref="logoutSuccessHandler" />
     <sec:intercept-url pattern="/member/update" access="hasRole('MEMBER')" />
+    <sec:intercept-url pattern="/HistoryReport/**" access="hasRole('MEMBER')" />
     <sec:session-management />
     <sec:access-denied-handler ref="accessDeniedHandler"/>
   </sec:http>

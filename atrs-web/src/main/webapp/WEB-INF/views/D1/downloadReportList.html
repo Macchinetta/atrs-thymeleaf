@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>履歴レポートDL | Airline Ticket Reservation System</title>
+
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+
+  </head>
+  <body>
+
+    <header th:replace="~{A0/header :: header}"></header>
+
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col-md-12">
+          <h2>予約履歴レポートダウンロード</h2>
+          <div th:switch="${#lists.size(reportNameList)}">
+            <div th:case="0">
+              <div class="alert alert-danger">
+                <ul>
+                  <li>予約履歴レポートが存在しません。</li>
+                </ul>
+              </div>
+            </div>
+            <div th:case="*">
+              <div class="alert alert-info">
+                <ul>
+                  <li>ダウンロードするレポートを選択して下さい。</li>
+                </ul>
+              </div>
+
+              <form method="get" th:action="@{/HistoryReport/download}">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>予約履歴レポート</th><th><!-- DLボタン配置カラム --></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  th:each="reportName : ${reportNameList}">
+                      <td th:text="${reportName}">レポート名</td>
+                      <td><button class="btn btn-default" name="reportName" th:value="${reportName}">ダウンロード</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="../A0/top.html" th:href="@{/}" class="btn btn-default">トップに戻る</a>
+          </div>
+
+        </section>
+
+      </div><!-- /row -->
+
+    </div><!-- /container -->
+
+    <footer th:replace="~{A0/footer :: footer}"></footer>
+
+    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+  </body>
+</html>

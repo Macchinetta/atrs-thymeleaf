@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.6.0.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>atrs-web</artifactId>
@@ -102,6 +102,19 @@
                     <artifactId>postgresql</artifactId>
                     <scope>runtime</scope>
                 </dependency>
+                <dependency>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-client</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-broker</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>javax.jms-api</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
             </dependencies>
         </profile>
         <profile>
@@ -139,7 +152,7 @@
         </dependency>
         <dependency>
           <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
+          <artifactId>thymeleaf-spring5</artifactId>
         </dependency>
         <dependency>
           <groupId>org.thymeleaf.extras</groupId>
@@ -159,6 +172,14 @@
           <scope>provided</scope>
         </dependency>
         <!-- == End Thymeleaf == -->
+
+        <!-- == Begin ActiveMQ == -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- == End ActiveMQ == -->
 
         <!-- == Begin Unit Test == -->
         <dependency>

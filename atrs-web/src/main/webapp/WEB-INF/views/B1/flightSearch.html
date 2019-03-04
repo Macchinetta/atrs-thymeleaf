@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="contextPath" th:content="@{/}" />
+    <meta name="contextPath" th:content="${#request.getContextPath()}" />
     <meta name="reserveIntervalTime" th:content="${flightSearchOutputDto.reserveIntervalTime}" />
     <meta name="isInitialSearchUnnecessary" th:content="${isInitialSearchUnnecessary}" />
     <meta name="_csrf_parameter" th:content="${_csrf.parameterName}" />
@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/datepicker3.css}">
+    <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}">
     <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.bootstrap.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.bootstrap.css}">
     <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.default.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.default.css}">
     <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
@@ -458,7 +458,7 @@
     <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js}"></script>
     <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js}"></script>
     <script src="../../../resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js" th:src="@{/resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js}"></script>
-    <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.compat.min.js}"></script>
+    <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
     <script src="../../../resources/vendor/moment/min/moment.min.js" th:src="@{/resources/vendor/moment/min/moment.min.js}"></script>
     <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
 

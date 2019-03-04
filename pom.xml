@@ -13,13 +13,19 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.4.1.RELEASE</version>
+        <version>5.5.0.RC7</version>
         <relativePath />
     </parent>
-    <version>1.5.1.RELEASE</version>
+    <version>1.6.0.RELEASE</version>
     <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
     <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
-
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>manual</distribution>
+      </license>
+    </licenses>
     <repositories>
         <repository>
             <id>sonatype-nexus-snapshots</id>
@@ -117,9 +123,19 @@
                     <artifactId>formatter-maven-plugin</artifactId>
                     <version>${formatter-maven-plugin.version}</version>
                     <configuration>
-                        <configFile>${project.basedir}/../eclipse/formatter.xml
+                        <configFile>${project.root.basedir}/eclipse/formatter.xml
                         </configFile>
-                        <lineEnding>CRLF</lineEnding>
+                        <configJsFile>${project.root.basedir}/eclipse/formatter_js.xml
+                        </configJsFile>
+                        <lineEnding>LF</lineEnding>
+                        <directories>
+                            <directory>${project.basedir}</directory>
+                        </directories>
+                        <includes>
+                            <include>**/src/main/java/**/*.java</include>
+                            <include>**/src/test/java/**/*.java</include>
+                            <include>**/src/main/webapp/resources/js/*.js</include>
+                        </includes>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -160,6 +176,42 @@
                         </properties>
                       </deployable>
                     </deployables>
+                    <container>
+                      <dependencies>
+                        <dependency>
+                          <groupId>org.apache.activemq</groupId>
+                          <artifactId>activemq-client</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.apache.geronimo.specs</groupId>
+                          <artifactId>geronimo-jms_1.1_spec</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.apache.geronimo.specs</groupId>
+                          <artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.fusesource.hawtbuf</groupId>
+                          <artifactId>hawtbuf</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.slf4j</groupId>
+                          <artifactId>slf4j-api</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.apache.activemq</groupId>
+                          <artifactId>activemq-broker</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>org.apache.activemq</groupId>
+                          <artifactId>activemq-openwire-legacy</artifactId>
+                        </dependency>
+                        <dependency>
+                          <groupId>javax.jms</groupId>
+                          <artifactId>javax.jms-api</artifactId>
+                        </dependency>
+                      </dependencies>
+                    </container>
                   </configuration>
                 </plugin>
             </plugins>
@@ -198,26 +250,6 @@
 
             <!-- == Begin Thymeleaf == -->
             <dependency>
-              <groupId>org.thymeleaf</groupId>
-              <artifactId>thymeleaf</artifactId>
-              <version>${thymeleaf.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.thymeleaf</groupId>
-              <artifactId>thymeleaf-spring4</artifactId>
-              <version>${thymeleaf.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.thymeleaf.extras</groupId>
-              <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-              <version>${thymeleaf-extras-springsecurity4.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.thymeleaf.extras</groupId>
-              <artifactId>thymeleaf-extras-java8time</artifactId>
-              <version>${thymeleaf-extras-java8time.version}</version>
-            </dependency>
-            <dependency>
               <groupId>nz.net.ultraq.thymeleaf</groupId>
               <artifactId>thymeleaf-joda-dialect</artifactId>
               <version>${thymeleaf-joda-dialect.version}</version>
@@ -239,15 +271,11 @@
         <com.google.code.maven-license-plugin.version>1.4.0</com.google.code.maven-license-plugin.version>
         <org.codehaus.mojo.version>2.5</org.codehaus.mojo.version>
         <!-- == Dependency Versions == -->
-        <postgresql.version>9.4.1212.jre7</postgresql.version>
-        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-        <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
-        <thymeleaf-extras-java8time.version>3.0.0.RELEASE</thymeleaf-extras-java8time.version>
+        <postgresql.version>42.2.4</postgresql.version>
         <thymeleaf-joda-dialect.version>2.0.0</thymeleaf-joda-dialect.version>
         <!-- == Project Properties == -->
         <project.root.basedir>${project.basedir}</project.root.basedir>
         <encoding>UTF-8</encoding>
-        <java-version>1.7</java-version>
+        <java-version>1.8</java-version>
     </properties>
-
 </project>

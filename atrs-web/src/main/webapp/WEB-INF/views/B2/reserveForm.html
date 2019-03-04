@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="contextPath" th:content="@{/}" />
+<meta name="contextPath" th:content="${#request.getContextPath()}" />
 <title>予約 | Airline Ticket Reservation System</title>
 
 <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
@@ -265,13 +265,13 @@
                     maxlength="5" data-parsley-required="true"
                     data-parsley-required-message="番号1は入力必須項目です。" data-parsley-length="[2, 5]"
                     data-parsley-length-message="番号1は %s 文字以上 %s 文字以下で入力してください。"
-                    data-parsley-type="integer" data-parsley-type-message="番号1は数値で入力してください。" /> - 
+                    data-parsley-type="integer" data-parsley-type-message="番号1は数値で入力してください。" /> -
                  <input
                     type="text" th:field="*{repTel2}" class="form-control form-control-separated"
                     style="width: 4.5em" maxlength="4" data-parsley-required="true"
                     data-parsley-required-message="番号2は入力必須項目です。" data-parsley-length="[1, 4]"
                     data-parsley-length-message="番号2は %s 文字以上 %s 文字以下で入力してください。"
-                    data-parsley-type="integer" data-parsley-type-message="番号2は数値で入力してください。" /> - 
+                    data-parsley-type="integer" data-parsley-type-message="番号2は数値で入力してください。" /> -
                  <input
                     type="text" th:field="*{repTel3}" class="form-control form-control-separated"
                     style="width: 4.5em" maxlength="4" data-parsley-required="true"
@@ -367,7 +367,7 @@
 
   <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
   <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-  <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.compat.min.js}"></script>
+  <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
   <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
 
   <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>

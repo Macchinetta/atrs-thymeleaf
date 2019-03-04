@@ -88,4 +88,34 @@
     )
   </insert>
 
+  <resultMap id="reservationHistory-map" type="ReservationHistoryDto">
+    <id property="reserveNo" column="reserve_no" />
+    <id property="reserveFlightNo" column="reserve_flight_no" />
+    <result property="departureDate" column="departure_date" />
+    <result property="flightName" column="flight_name" />
+    <result property="reserveDate" column="reserve_date" />
+    <result property="totalFare" column="total_fare" />
+  </resultMap>
+
+  <!-- 予約履歴を取得 -->
+  <select id="findAllByMembershipNumberForReport" resultMap="reservationHistory-map">
+    SELECT
+    r.reserve_no,
+    r.reserve_date,
+    r.total_fare,
+    rf.reserve_flight_no,
+    rf.departure_date,
+    rf.flight_name
+    FROM
+    reservation r
+    JOIN
+    reserve_flight rf
+    ON rf.reserve_no = r.reserve_no
+    WHERE
+    r.rep_customer_no = #{membershipNumber}
+    ORDER BY
+    r.reserve_no,
+    rf.reserve_flight_no
+  </select>
+
 </mapper>

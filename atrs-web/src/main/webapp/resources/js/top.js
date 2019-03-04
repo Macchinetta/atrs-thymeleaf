@@ -1,7 +1,7 @@
 /*!
  * TOP画面(A001)スクリプト。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  */
 
 'use strict';
@@ -17,6 +17,7 @@
 
     // イベントハンドラの設定
     $('#outwardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
+    $('#homewardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
     $(document).on('change', '#flights-search-form input[name=flightType]', handlers.onChangeFlightType);
 
     // 初期化用イベント発火

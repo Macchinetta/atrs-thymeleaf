@@ -54,7 +54,7 @@
         member m,
         member_login m_l
     WHERE
-        m.customer_no = #{customerNo}
+        m.customer_no = #{membershipNumber}
     AND
         m.customer_no = m_l.customer_no
   </select>
@@ -107,7 +107,7 @@
         member_login m_l,
         credit_type c_t
     WHERE
-        m.customer_no = #{customerNo}
+        m.customer_no = #{membershipNumber}
     AND
         m.customer_no = m_l.customer_no
     AND

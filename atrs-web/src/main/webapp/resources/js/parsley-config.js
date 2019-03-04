@@ -1,7 +1,7 @@
 /*!
  * Parsleyの初期設定を提供するモジュール。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  */
 
 'use strict';
@@ -22,5 +22,5 @@ window.ParsleyConfig.i18n.ja = $.extend(window.ParsleyConfig.i18n.ja || {}, {
 });
 
 // メッセージ設定
-if ('undefined' !== typeof window.ParsleyValidator)
-  window.ParsleyValidator.addCatalog('ja', window.ParsleyConfig.i18n.ja, true);
+if ('undefined' !== typeof window.Parsley)
+  window.Parsley.addCatalog('ja', window.ParsleyConfig.i18n.ja, true);

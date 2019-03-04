@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
   <import resource="classpath:/META-INF/spring/atrs-env.xml" />
 
@@ -14,6 +16,21 @@
   <!-- MyBatisがマッパーを自動スキャンするパッケージを設定 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     <property name="basePackage" value="jp.co.ntt.atrs.domain.repository" />
+  </bean>
+
+  <!-- JMS送受信用の設定 -->
+  <bean id="jmsSendTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+    <property name="connectionFactory" ref="atrsJmsConnectionFactory" />
+  </bean>
+
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="cachingConnectionFactory" />
+    <property name="receiveTimeout" value="20000" />
+    <property name="destinationResolver" ref="destinationResolver" />
+  </bean>
+
+  <bean id="jmsMessagingTemplate" class="org.springframework.jms.core.JmsMessagingTemplate">
+    <property name="jmsTemplate" ref="jmsTemplate" />
   </bean>
 
 </beans>

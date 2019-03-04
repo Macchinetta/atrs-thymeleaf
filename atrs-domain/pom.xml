@@ -5,7 +5,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.6.0.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>atrs-domain</artifactId>
@@ -54,6 +54,26 @@
             <type>pom</type>
         </dependency>
         <!-- == End TERASOLUNA == -->
+
+        <!-- == Begin Spring JMS == -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <!-- == End Spring JMS == -->
+
+        <!-- == Begin ActiveMQ == -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- == End ActiveMQ == -->
 
         <!-- == Begin Unit Test == -->
         <dependency>

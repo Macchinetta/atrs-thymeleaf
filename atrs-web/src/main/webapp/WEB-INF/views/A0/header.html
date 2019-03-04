@@ -36,6 +36,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           </span>
           <ul class="dropdown-menu">
             <li><a tabindex="-1" href="../C2/memberUpdateForm.html" th:href="@{/member/update?form}">会員情報変更</a></li>
+            <li><a tabindex="-1" href="../D1/HistoryReport/create?form" th:href="@{/HistoryReport/create?form}">履歴レポート作成</a></li>
+            <li><a tabindex="-1" href="../D1/HistoryReport/download?reportList" th:href="@{/HistoryReport/download?reportList}">履歴レポートDL</a></li>
             <li><a tabindex="-1" href="javascript:void(0)"
               onclick="document.logoutForm.submit(); return false;">ログアウト</a></li>
           </ul>

@@ -1,7 +1,7 @@
 /*!
  * 会員情報登録画面(C101)スクリプト。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2014 NTT Corporation.
  */
 
 'use strict';
