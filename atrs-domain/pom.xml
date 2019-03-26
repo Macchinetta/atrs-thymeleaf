@@ -5,7 +5,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.6.0.RELEASE</version>
+        <version>1.6.1.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>atrs-domain</artifactId>
@@ -87,5 +87,18 @@
     <properties>
         <project.root.basedir>${project.parent.basedir}</project.root.basedir>
     </properties>
-
+    <profiles>
+      <profile>
+        <id>jdk11</id>
+        <activation>
+          <jdk>11</jdk>
+        </activation>
+        <dependencies>
+          <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+          </dependency>
+        </dependencies>
+      </profile>
+    </profiles>
 </project>

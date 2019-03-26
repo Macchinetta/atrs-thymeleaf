@@ -57,16 +57,11 @@
 
   <!-- 認証マネージャ -->
   <sec:authentication-manager alias="authenticationManager">
-    <sec:authentication-provider user-service-ref="atrsUserService">
-      <sec:password-encoder ref="passwordEncoder" />
-    </sec:authentication-provider>
+    <sec:authentication-provider user-service-ref="atrsUserService" />
   </sec:authentication-manager>
 
   <!-- ユーザー情報管理サービス -->
   <bean id="atrsUserService" class="jp.co.ntt.atrs.domain.service.a1.AtrsUserDetailsService" />
-
-  <!-- パスワードエンコーダ -->
-  <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
   <!-- ログアウト成功Handler -->
   <bean id="logoutSuccessHandler" class="jp.co.ntt.atrs.app.common.security.AtrsLogoutSuccessHandler">

@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2014-2017 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  */
 /**
  * 共通エラー処理用パッケージ。

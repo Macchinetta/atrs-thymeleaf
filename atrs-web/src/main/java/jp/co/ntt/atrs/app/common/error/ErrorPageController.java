@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2014-2017 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  */
 package jp.co.ntt.atrs.app.common.error; 
   

@@ -1,7 +1,7 @@
 /*!
  * Parsleyの初期設定を提供するモジュール。
  *
- * Copyright(c) 2014 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  */
 
 'use strict';
