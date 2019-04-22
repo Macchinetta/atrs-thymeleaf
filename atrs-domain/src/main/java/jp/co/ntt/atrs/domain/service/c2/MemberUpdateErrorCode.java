@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.c2;
 
@@ -20,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsErrorCode;
 
 /**
  * 会員情報変更サービスでのエラーコードを表す列挙型。
- * 
  * @author NTT 電電花子
  */
 public enum MemberUpdateErrorCode implements AtrsErrorCode {
@@ -47,7 +45,6 @@ public enum MemberUpdateErrorCode implements AtrsErrorCode {
 
     /**
      * コンストラクタ。
-     *
      * @param code エラーコード。
      */
     private MemberUpdateErrorCode(String code) {

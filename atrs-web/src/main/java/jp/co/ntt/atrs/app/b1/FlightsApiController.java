@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b1;
 
@@ -48,7 +47,6 @@ import javax.inject.Inject;
 
 /**
  * 空席状況取得WebAPIコントローラ。
- * 
  * @author NTT 電電次郎
  */
 @Controller
@@ -81,7 +79,6 @@ public class FlightsApiController {
 
     /**
      * 空席照会条件フォームのバリデータをバインダに追加する。
-     * 
      * @param binder バインダ
      */
     @InitBinder("flightSearchCriteriaForm")
@@ -102,28 +99,28 @@ public class FlightsApiController {
      * <li>該当するフライトが存在しない:404</li>
      * <li>システムエラー:500</li>
      * </ul>
-     * 
      * @param flightSearchCriteriaForm 空席照会条件フォーム
      * @return 空席状況一覧リスト
      */
     @RequestMapping(value = "flights", method = RequestMethod.GET)
     @ResponseBody
     public List<FlightVacantInfoDto> getFlights(
-        @Validated FlightSearchCriteriaForm flightSearchCriteriaForm) {
+            @Validated FlightSearchCriteriaForm flightSearchCriteriaForm) {
 
         // 空席照会
-        TicketSearchCriteriaDto searchCriteriaDto =
-            beanMapper.map(flightSearchCriteriaForm, TicketSearchCriteriaDto.class);
-        List<FlightVacantInfoDto> flights =
-            ticketSearchService.searchFlight(searchCriteriaDto);
+        TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
+                flightSearchCriteriaForm, TicketSearchCriteriaDto.class);
+        List<FlightVacantInfoDto> flights = ticketSearchService
+                .searchFlight(searchCriteriaDto);
 
         return flights;
     }
 
     /**
      * 入力値に不正な値が指定された場合の例外ハンドリングを行う。
-     * <p>エラー情報にエラーメッセージを設定して返却する。</p>
-     *
+     * <p>
+     * エラー情報にエラーメッセージを設定して返却する。
+     * </p>
      * @param e バインド例外
      * @param locale ロケールオブジェクト
      * @return エラー情報
@@ -148,8 +145,9 @@ public class FlightsApiController {
 
     /**
      * 空席照会条件が不正な場合の例外ハンドリングを行う。
-     * <p>エラー情報にエラーメッセージを設定して返却する。</p>
-     *
+     * <p>
+     * エラー情報にエラーメッセージを設定して返却する。
+     * </p>
      * @param e 業務例外
      * @param locale ロケールオブジェクト
      * @return エラー情報
@@ -157,14 +155,17 @@ public class FlightsApiController {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResultDto handleBusinessException(BusinessException e, Locale locale) {
+    public ErrorResultDto handleBusinessException(BusinessException e,
+            Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
-            result.add(messageSource.getMessage(new DefaultMessageSourceResolvable(
-                resultMessage.getCode()), locale));
+            result.add(messageSource
+                    .getMessage(
+                            new DefaultMessageSourceResolvable(resultMessage
+                                    .getCode()), locale));
         }
 
         return result;
@@ -172,8 +173,9 @@ public class FlightsApiController {
 
     /**
      * 空席照会条件に合致するフライト情報が存在しない場合の例外ハンドリングを行う。
-     * <p>エラー情報にエラーメッセージを設定して返却する。</p>
-     *
+     * <p>
+     * エラー情報にエラーメッセージを設定して返却する。
+     * </p>
      * @param e フライト情報非存在業務例外
      * @param locale ロケールオブジェクト
      * @return エラー情報
@@ -181,15 +183,17 @@ public class FlightsApiController {
     @ExceptionHandler(FlightNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResultDto handleFlightNotFoundException(FlightNotFoundException e,
-        Locale locale) {
+    public ErrorResultDto handleFlightNotFoundException(
+            FlightNotFoundException e, Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
-            result.add(messageSource.getMessage(new DefaultMessageSourceResolvable(
-                resultMessage.getCode()), locale));
+            result.add(messageSource
+                    .getMessage(
+                            new DefaultMessageSourceResolvable(resultMessage
+                                    .getCode()), locale));
         }
 
         return result;

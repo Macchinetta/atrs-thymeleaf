@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b1;
 
@@ -24,11 +23,12 @@ import org.springframework.validation.Validator;
 
 /**
  * 空席照会条件フォームのバリデータ。
- * <p>下記の場合をエラーとする。</p>
+ * <p>
+ * 下記の場合をエラーとする。
+ * </p>
  * <ul>
  * <li>出発空港と到着空港が同じ場合。</li>
  * </ul>
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -52,7 +52,7 @@ public class FlightSearchCriteriaValidator implements Validator {
 
         // 出発空港と到着空港が同じでないかチェック
         if (!errors.hasFieldErrors("depAirportCd")
-            && !errors.hasFieldErrors("arrAirportCd")) {
+                && !errors.hasFieldErrors("arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {

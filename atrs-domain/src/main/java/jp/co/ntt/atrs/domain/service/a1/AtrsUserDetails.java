@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.a1;
 
@@ -28,7 +27,6 @@ import java.util.List;
 
 /**
  * ログインユーザ情報クラス。
- * 
  * @author NTT 電電太郎
  */
 public class AtrsUserDetails implements UserDetails {
@@ -41,8 +39,8 @@ public class AtrsUserDetails implements UserDetails {
     /**
      * デフォルト権限設定。
      */
-    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES =
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES = Collections
+            .singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     /**
      * カード会員情報。
@@ -51,7 +49,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * コンストラクタ。
-     * 
      * @param member カード会員情報
      */
     public AtrsUserDetails(Member member) {
@@ -116,7 +113,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * カード会員情報を取得する。
-     * 
      * @return カード会員情報
      */
     public Member getMember() {
@@ -125,7 +121,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * カード会員情報を設定する。
-     * 
      * @param member カード会員情報
      */
     public void setMember(Member member) {

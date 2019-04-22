@@ -3,7 +3,7 @@
  * YYYY/MM/DD フォーマットであること、および
  * moment.isValid() に則した有効日付であることを検証する。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  */
 
 'use strict';

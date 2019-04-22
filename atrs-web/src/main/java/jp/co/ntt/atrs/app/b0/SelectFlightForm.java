@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b0;
 
@@ -33,7 +32,6 @@ import javax.validation.constraints.NotNull;
  * <p>
  * 空席照会結果から選択されたフライトの情報を受け取る。
  * </p>
- * 
  * @author NTT 電電次郎
  */
 public class SelectFlightForm implements Serializable {
@@ -70,7 +68,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public Date getDepDate() {
@@ -79,7 +76,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param depDate 搭乗日
      */
     public void setDepDate(Date depDate) {
@@ -88,7 +84,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 便名を取得する。
-     * 
      * @return 便名
      */
     public String getFlightName() {
@@ -97,7 +92,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 便名を設定する。
-     * 
      * @param flightName 便名
      */
     public void setFlightName(String flightName) {
@@ -106,7 +100,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     * 
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -115,7 +108,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -124,7 +116,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 運賃種別コードを取得する。
-     * 
      * @return 運賃種別コード
      */
     public FareTypeCd getFareTypeCd() {
@@ -133,7 +124,6 @@ public class SelectFlightForm implements Serializable {
 
     /**
      * 運賃種別コードを設定する。
-     * 
      * @param fareTypeCd 運賃種別コード
      */
     public void setFareTypeCd(FareTypeCd fareTypeCd) {
@@ -145,6 +135,7 @@ public class SelectFlightForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

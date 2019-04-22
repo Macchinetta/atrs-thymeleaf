@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.common.security;
 
@@ -34,17 +33,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * ユーザーログイン入力チェックフィルタ。
- * 
  * @author NTT 電電太郎
  */
 public class AtrsUsernamePasswordAuthenticationFilter extends
-    UsernamePasswordAuthenticationFilter {
+                                                     UsernamePasswordAuthenticationFilter {
 
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-        LoggerFactory.getLogger(AtrsUsernamePasswordAuthenticationFilter.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AtrsUsernamePasswordAuthenticationFilter.class);
 
     /**
      * 会員番号文字数。
@@ -66,7 +64,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは10。
      * </p>
-     * 
      * @param membershipNumberLength 会員番号文字数
      */
     public void setMembershipNumberLength(int membershipNumberLength) {
@@ -78,7 +75,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは8。
      * </p>
-     * 
      * @param passwordMinLength パスワードの最小桁数
      */
     public void setPasswordMinLength(int passwordMinLength) {
@@ -90,7 +86,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは20。
      * </p>
-     * 
      * @param passwordMaxLength パスワードの最大桁数
      */
     public void setPasswordMaxLength(int passwordMaxLength) {
@@ -102,24 +97,25 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-        HttpServletResponse response) throws AuthenticationException {
+            HttpServletResponse response) throws AuthenticationException {
 
         String username = obtainUsername(request);
         String password = obtainPassword(request);
 
         if (username == null || username.length() != membershipNumberLength) {
             LOGGER.info(LogMessages.I_AR_A1_L2001.getMessage(username));
-            String errorMessage = messages.getMessage(
-                AuthLoginErrorCode.E_AR_A1_2001.code(), Locale.getDefault());
+            String errorMessage = messages
+                    .getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
+                            .getDefault());
             throw new UsernameNotFoundException(errorMessage);
         }
 
-        if (password == null
-            || password.length() < passwordMinLength
-            || password.length() > passwordMaxLength) {
+        if (password == null || password.length() < passwordMinLength
+                || password.length() > passwordMaxLength) {
             LOGGER.info(LogMessages.I_AR_A1_L2002.getMessage(username));
-            String errorMessage = messages.getMessage(
-                AuthLoginErrorCode.E_AR_A1_2001.code(), Locale.getDefault());
+            String errorMessage = messages
+                    .getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
+                            .getDefault());
             throw new BadCredentialsException(errorMessage);
         }
 

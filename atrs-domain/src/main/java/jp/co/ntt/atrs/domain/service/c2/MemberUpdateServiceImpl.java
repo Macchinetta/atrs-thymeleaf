@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.c2;
 
@@ -33,7 +32,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報変更を行うService実装クラス。
- * 
  * @author NTT 電電花子
  */
 @Service
@@ -53,7 +51,6 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     PasswordEncoder passwordEncoder;
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -65,7 +62,6 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     }
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -78,28 +74,28 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
         // 会員情報更新
         int updateMemberCount = memberRepository.update(member);
         if (updateMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(updateMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(updateMemberCount, 1));
         }
 
         // パスワードの変更がある場合のみ会員ログイン情報を更新
         if (StringUtils.hasLength(memberLogin.getPassword())) {
 
             // パスワードのハッシュ化
-            memberLogin.setPassword(
-                    passwordEncoder.encode(member.getMemberLogin().getPassword()));
+            memberLogin.setPassword(passwordEncoder.encode(member
+                    .getMemberLogin().getPassword()));
 
             // 会員ログイン情報更新
-            int updateMemberLoginCount = memberRepository.updateMemberLogin(member);
+            int updateMemberLoginCount = memberRepository
+                    .updateMemberLogin(member);
             if (updateMemberLoginCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                        LogMessages.E_AR_A0_L9002.getMessage(updateMemberLoginCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                        .getMessage(updateMemberLoginCount, 1));
             }
         }
     }
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override

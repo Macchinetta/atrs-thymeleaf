@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.common.logging;
 
@@ -30,7 +29,6 @@ import javax.servlet.http.HttpSession;
 
 /**
  * アクセスログを出力するフィルタ。
- * 
  * @author NTT 電電太郎
  */
 public class AccessLogFilter extends OncePerRequestFilter {
@@ -38,16 +36,15 @@ public class AccessLogFilter extends OncePerRequestFilter {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-        LoggerFactory.getLogger(AccessLogFilter.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AccessLogFilter.class);
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-        HttpServletResponse response, FilterChain filterChain)
-        throws ServletException, IOException {
+            HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String logMessage = getLogMessage(request);
         LOGGER.info("ACCESS START {}", logMessage);
@@ -57,7 +54,6 @@ public class AccessLogFilter extends OncePerRequestFilter {
 
     /**
      * ログメッセージを取得する。
-     * 
      * @param request リクエスト
      * @return ログメッセージ
      */
@@ -77,7 +73,8 @@ public class AccessLogFilter extends OncePerRequestFilter {
             sb.append("[SessionID:").append(session.getId()).append("], ");
         }
 
-        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append("], ");
+        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append(
+                "], ");
         sb.append("[RemoteHost:").append(request.getRemoteHost()).append("] ");
 
         return sb.toString();

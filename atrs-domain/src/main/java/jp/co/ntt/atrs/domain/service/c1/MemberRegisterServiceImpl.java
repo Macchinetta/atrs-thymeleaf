@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.c1;
 
@@ -31,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報登録を行うService実装クラス。
- * 
  * @author NTT 電電花子
  */
 @Service
@@ -51,7 +49,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     PasswordEncoder passwordEncoder;
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -63,8 +60,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         Assert.notNull(memberLogin);
 
         // パスワードをエンコード
-        String hashedPassword =
-                passwordEncoder.encode(member.getMemberLogin().getPassword());
+        String hashedPassword = passwordEncoder.encode(member.getMemberLogin()
+                .getPassword());
 
         memberLogin.setPassword(hashedPassword);
         memberLogin.setLastPassword(hashedPassword);
@@ -74,15 +71,15 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         // (MyBatis3の機能(SelectKey)によりパラメータの会員情報に会員番号が格納される)
         int insertMemberCount = memberRepository.insert(member);
         if (insertMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(insertMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(insertMemberCount, 1));
         }
 
         // 会員ログイン情報登録
         int insertMemberLoginCount = memberRepository.insertMemberLogin(member);
         if (insertMemberLoginCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(insertMemberLoginCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(insertMemberLoginCount, 1));
         }
 
         return member;

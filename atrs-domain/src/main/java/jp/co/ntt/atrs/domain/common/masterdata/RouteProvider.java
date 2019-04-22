@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
@@ -31,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 区間情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -55,21 +53,20 @@ public class RouteProvider {
     public void load() {
         List<Route> routeList = routeRepository.findAll();
         for (Route route : routeList) {
-            String cacheKey = makeCacheKey(
-                    route.getDepartureAirport().getCode(),
-                    route.getArrivalAirport().getCode());
+            String cacheKey = makeCacheKey(route.getDepartureAirport()
+                    .getCode(), route.getArrivalAirport().getCode());
             routeMap.put(cacheKey, route);
         }
     }
 
     /**
      * 出発空港コード、到着空港コードに該当する区間情報を取得する。
-     * 
      * @param departureAirportCd 出発空港コード
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報。該当する区間情報が見つからない場合はnull。
      */
-    public Route getRouteByAirportCd(String departureAirportCd, String arrivalAirportCd) {
+    public Route getRouteByAirportCd(String departureAirportCd,
+            String arrivalAirportCd) {
 
         Assert.hasText(departureAirportCd);
         Assert.hasText(arrivalAirportCd);
@@ -83,12 +80,12 @@ public class RouteProvider {
      * <p>
      * キー値は、"[出発空港コード]-[到着空港コード]"形式の文字列となる。
      * </p>
-     * 
      * @param departureAirportCd 出発空港コード
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報マップにキャッシュするためのキー値
      */
-    private String makeCacheKey(String departureAirportCd, String arrivalAirportCd) {
+    private String makeCacheKey(String departureAirportCd,
+            String arrivalAirportCd) {
         return departureAirportCd + "-" + arrivalAirportCd;
     }
 

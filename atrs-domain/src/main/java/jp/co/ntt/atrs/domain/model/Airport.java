@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -23,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 空港情報。
- * 
  * @author NTT 電電太郎
  */
 public class Airport implements Serializable {
@@ -49,8 +47,7 @@ public class Airport implements Serializable {
     private Integer displayOrder;
 
     /**
-     *  空港コードを取得する。
-     *  
+     * 空港コードを取得する。
      * @return 空港コード
      */
     public String getCode() {
@@ -59,7 +56,6 @@ public class Airport implements Serializable {
 
     /**
      * 空港コードを設定する。
-     * 
      * @param code 空港コード
      */
     public void setCode(String code) {
@@ -68,7 +64,6 @@ public class Airport implements Serializable {
 
     /**
      * 空港名を取得する。
-     * 
      * @return 空港名
      */
     public String getName() {
@@ -77,7 +72,6 @@ public class Airport implements Serializable {
 
     /**
      * 空港名を設定する。
-     * 
      * @param name 空港名
      */
     public void setName(String name) {
@@ -86,7 +80,6 @@ public class Airport implements Serializable {
 
     /**
      * 表示順を取得する。
-     * 
      * @return 空港名
      */
     public Integer getDisplayOrder() {
@@ -95,7 +88,6 @@ public class Airport implements Serializable {
 
     /**
      * 表示順を設定する。
-     * 
      * @param displayOrder 表示順
      */
     public void setDisplayOrder(Integer displayOrder) {
@@ -107,8 +99,8 @@ public class Airport implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }
-

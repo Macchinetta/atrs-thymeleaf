@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b0;
 
@@ -30,10 +29,10 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 予約フライト選択フォーム。
- * 
  * @author NTT 電電次郎
  */
-public class ReservationFlightForm implements IReservationFlightForm, Serializable {
+public class ReservationFlightForm implements IReservationFlightForm,
+                                  Serializable {
 
     /**
      * serialVersionUID。
@@ -54,7 +53,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     @Override
@@ -64,7 +62,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -73,7 +70,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * 選択フライト情報フォームのリストを取得する。
-     * 
      * @return 選択フライト情報フォームのリスト
      */
     @Override
@@ -83,10 +79,10 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * 選択フライト情報フォームのリストを設定する。
-     * 
      * @param selectFlightFormList 選択フライト情報フォームのリスト
      */
-    public void setSelectFlightFormList(List<SelectFlightForm> selectFlightFormList) {
+    public void setSelectFlightFormList(
+            List<SelectFlightForm> selectFlightFormList) {
         this.selectFlightFormList = selectFlightFormList;
     }
 
@@ -95,7 +91,8 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

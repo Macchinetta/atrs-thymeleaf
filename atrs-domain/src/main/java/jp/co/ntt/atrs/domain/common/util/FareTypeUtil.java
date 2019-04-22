@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.common.util;
 
@@ -26,7 +25,6 @@ import java.util.Set;
 
 /**
  * 運賃種別に関するユーティリティクラス。
- * 
  * @author NTT 電電太郎
  */
 public class FareTypeUtil {
@@ -66,7 +64,6 @@ public class FareTypeUtil {
 
     /**
      * 運賃種別が往復の運賃種別かを判定する。
-     * 
      * @param fareTypeCd 運賃種別
      * @return 往復の運賃種別の場合true
      */
@@ -76,7 +73,6 @@ public class FareTypeUtil {
 
     /**
      * 運賃種別が片道の運賃種別かを判定する。
-     * 
      * @param fareTypeCd 運賃種別
      * @return 片道の運賃種別の場合true
      */
@@ -86,7 +82,6 @@ public class FareTypeUtil {
 
     /**
      * フライト種別に応じた運賃種別リストを取得する。
-     * 
      * @param flightType フライト種別
      * @return 運賃種別リスト
      */

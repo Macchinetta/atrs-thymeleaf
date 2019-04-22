@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b0;
 
@@ -27,7 +26,6 @@ import java.util.Date;
 
 /**
  * 選択フライト情報DTOクラス。
- * 
  * @author NTT 電電次郎
  */
 public class SelectFlightDto implements Serializable {
@@ -89,7 +87,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 路線種別を取得する。
-     * 
      * @return 路線種別
      */
     public LineType getLineType() {
@@ -98,7 +95,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 路線種別を設定する。
-     * 
      * @param lineType 路線種別
      */
     public void setLineType(LineType lineType) {
@@ -107,7 +103,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public Date getDepartureDate() {
@@ -116,7 +111,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param departureDate 搭乗日
      */
     public void setDepartureDate(Date departureDate) {
@@ -125,7 +119,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 便名を取得する。
-     * 
      * @return 便名
      */
     public String getFlightName() {
@@ -134,7 +127,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 便名を設定する。
-     * 
      * @param flightName 便名
      */
     public void setFlightName(String flightName) {
@@ -143,7 +135,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 出発時刻を取得する。
-     * 
      * @return 出発時刻
      */
     public String getDepartureTime() {
@@ -152,7 +143,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 出発時刻を設定する。
-     * 
      * @param departureTime 出発時刻
      */
     public void setDepartureTime(String departureTime) {
@@ -161,7 +151,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 到着時刻を取得する。
-     * 
      * @return 到着時刻
      */
     public String getArrivalTime() {
@@ -170,7 +159,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 到着時刻を設定する。
-     * 
      * @param arrivalTime 到着時刻
      */
     public void setArrivalTime(String arrivalTime) {
@@ -179,7 +167,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 出発空港コードを取得する。
-     * 
      * @return 出発空港コード
      */
     public String getDepAirportCd() {
@@ -188,7 +175,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 出発空港コードを設定する。
-     * 
      * @param depAirportCd 出発空港コード
      */
     public void setDepAirportCd(String depAirportCd) {
@@ -197,7 +183,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 到着空港コードを取得する。
-     * 
      * @return 到着空港コード
      */
     public String getArrAirportCd() {
@@ -206,7 +191,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 到着空港コードを設定する。
-     * 
      * @param arrAirportCd 到着空港コード
      */
     public void setArrAirportCd(String arrAirportCd) {
@@ -215,7 +199,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     * 
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -224,7 +207,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -233,7 +215,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 運賃種別コードを取得する。
-     * 
      * @return 運賃種別コード
      */
     public FareTypeCd getFareTypeCd() {
@@ -242,7 +223,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 運賃種別コードを設定する。
-     * 
      * @param fareTypeCd 運賃種別コード
      */
     public void setFareTypeCd(FareTypeCd fareTypeCd) {
@@ -251,7 +231,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 運賃を取得する。
-     * 
      * @return 運賃
      */
     public Integer getFare() {
@@ -260,7 +239,6 @@ public class SelectFlightDto implements Serializable {
 
     /**
      * 運賃を設定する。
-     * 
      * @param fare 運賃
      */
     public void setFare(Integer fare) {
@@ -272,6 +250,7 @@ public class SelectFlightDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

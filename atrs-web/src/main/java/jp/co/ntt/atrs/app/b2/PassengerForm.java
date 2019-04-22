@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b2;
 
@@ -33,7 +32,6 @@ import javax.validation.constraints.Size;
 
 /**
  * 搭乗者情報フォーム。
- * 
  * @author NTT 電電三郎
  */
 public class PassengerForm implements Serializable {
@@ -78,7 +76,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者姓を取得する。
-     * 
      * @return 搭乗者姓
      */
     public String getFamilyName() {
@@ -87,7 +84,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者姓を設定する。
-     * 
      * @param familyName 搭乗者姓
      */
     public void setFamilyName(String familyName) {
@@ -96,7 +92,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者名を取得する。
-     * 
      * @return 搭乗者名
      */
     public String getGivenName() {
@@ -105,7 +100,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者名を設定する。
-     * 
      * @param givenName 搭乗者名
      */
     public void setGivenName(String givenName) {
@@ -114,7 +108,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者年齢を取得する。
-     * 
      * @return 搭乗者年齢
      */
     public Integer getAge() {
@@ -123,7 +116,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者年齢を設定する。
-     * 
      * @param age 搭乗者年齢
      */
     public void setAge(Integer age) {
@@ -132,7 +124,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者性別を取得する。
-     * 
      * @return 搭乗者性別
      */
     public Gender getGender() {
@@ -141,7 +132,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者性別を設定する。
-     * 
      * @param gender 搭乗者性別
      */
     public void setGender(Gender gender) {
@@ -150,7 +140,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者の会員番号を取得する。
-     * 
      * @return 搭乗者の会員番号
      */
     public String getMembershipNumber() {
@@ -159,7 +148,6 @@ public class PassengerForm implements Serializable {
 
     /**
      * 搭乗者の会員番号を設定する。
-     * 
      * @param membershipNumber 搭乗者の会員番号
      */
     public void setMembershipNumber(String membershipNumber) {
@@ -168,15 +156,12 @@ public class PassengerForm implements Serializable {
 
     /**
      * 情報を保持しているか判定する。
-     *
      * @return 保持プロパティが全てnullまたは空文字列の場合true
      */
     public boolean isEmpty() {
         return (StringUtils.isEmpty(familyName)
-            && StringUtils.isEmpty(givenName)
-            && age == null
-            && gender == null
-            && StringUtils.isEmpty(membershipNumber));
+                && StringUtils.isEmpty(givenName) && age == null
+                && gender == null && StringUtils.isEmpty(membershipNumber));
     }
 
     /**
@@ -184,6 +169,7 @@ public class PassengerForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

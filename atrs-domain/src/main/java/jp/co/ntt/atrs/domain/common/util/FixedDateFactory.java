@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.common.util;
 
@@ -21,7 +20,6 @@ import org.terasoluna.gfw.common.date.jodatime.AbstractJodaTimeDateFactory;
 
 /**
  * 現在日付を固定するための日付生成クラス。
- * 
  * @author NTT 電電太郎
  */
 public class FixedDateFactory extends AbstractJodaTimeDateFactory {
@@ -61,7 +59,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 年を設定する。
-     * 
      * @param year 年
      */
     public void setYear(int year) {
@@ -70,7 +67,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 月を設定する。
-     * 
      * @param month 月
      */
     public void setMonth(int month) {
@@ -79,7 +75,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 日を設定する。
-     * 
      * @param dayOfMonth 日
      */
     public void setDayOfMonth(int dayOfMonth) {
@@ -88,7 +83,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 時を設定する。
-     * 
      * @param hour 時
      */
     public void setHour(int hour) {
@@ -97,7 +91,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 分を設定する。
-     * 
      * @param minute 分
      */
     public void setMinute(int minute) {

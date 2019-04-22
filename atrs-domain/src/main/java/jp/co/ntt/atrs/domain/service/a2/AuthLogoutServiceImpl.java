@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.a2;
 
@@ -32,7 +31,6 @@ import javax.inject.Inject;
 
 /**
  * 会員ログアウトサービス実装クラス。
- * 
  * @author NTT 電電太郎
  */
 @Service
@@ -42,8 +40,8 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(AuthLogoutServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AuthLogoutServiceImpl.class);
 
     /**
      * カード会員情報リポジトリ。
@@ -64,10 +62,11 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
         memberLogin.setLoginFlg(false);
         int updateCount = memberRepository.updateToLogoutStatus(member);
         if (updateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(updateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(updateCount, 1));
         }
 
-        LOGGER.info(LogMessages.I_AR_A2_L0001.getMessage(member.getMembershipNumber()));
+        LOGGER.info(LogMessages.I_AR_A2_L0001.getMessage(member
+                .getMembershipNumber()));
     }
 }

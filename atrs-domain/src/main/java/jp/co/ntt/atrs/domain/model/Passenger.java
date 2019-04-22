@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,13 +9,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
-
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -24,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 搭乗者情報。
- * 
  * @author NTT 電電太郎
  */
 public class Passenger implements Serializable {
@@ -71,7 +68,6 @@ public class Passenger implements Serializable {
 
     /**
      * 搭乗者番号を取得する。
-     * 
      * @return 搭乗者番号
      */
     public Integer getPassengerNo() {
@@ -80,7 +76,6 @@ public class Passenger implements Serializable {
 
     /**
      * 搭乗者番号を設定する。
-     * 
      * @param passengerNo 搭乗者番号
      */
     public void setPassengerNo(Integer passengerNo) {
@@ -89,7 +84,6 @@ public class Passenger implements Serializable {
 
     /**
      * 予約フライト番号を取得する。
-     * 
      * @return 予約フライト番号
      */
     public Integer getReserveFlightNo() {
@@ -98,7 +92,6 @@ public class Passenger implements Serializable {
 
     /**
      * 予約フライト番号を設定する。
-     * 
      * @param reserveFlightNo 予約フライト番号
      */
     public void setReserveFlightNo(Integer reserveFlightNo) {
@@ -107,7 +100,6 @@ public class Passenger implements Serializable {
 
     /**
      * 姓を取得する。
-     * 
      * @return 姓
      */
     public String getFamilyName() {
@@ -116,7 +108,6 @@ public class Passenger implements Serializable {
 
     /**
      * 姓を設定する。
-     * 
      * @param familyName 姓
      */
     public void setFamilyName(String familyName) {
@@ -125,7 +116,6 @@ public class Passenger implements Serializable {
 
     /**
      * 名を取得する。
-     * 
      * @return 名
      */
     public String getGivenName() {
@@ -134,7 +124,6 @@ public class Passenger implements Serializable {
 
     /**
      * 名を設定する。
-     * 
      * @param givenName 名
      */
     public void setGivenName(String givenName) {
@@ -143,7 +132,6 @@ public class Passenger implements Serializable {
 
     /**
      * 年齢を取得する。
-     * 
      * @return 年齢
      */
     public Integer getAge() {
@@ -152,7 +140,6 @@ public class Passenger implements Serializable {
 
     /**
      * 年齢を設定する。
-     * 
      * @param age 年齢
      */
     public void setAge(Integer age) {
@@ -161,7 +148,6 @@ public class Passenger implements Serializable {
 
     /**
      * 性別を取得する。
-     * 
      * @return 性別
      */
     public Gender getGender() {
@@ -170,7 +156,6 @@ public class Passenger implements Serializable {
 
     /**
      * 性別を設定する。
-     * 
      * @param gender 性別
      */
     public void setGender(Gender gender) {
@@ -179,7 +164,6 @@ public class Passenger implements Serializable {
 
     /**
      * カード会員情報を取得する。
-     * 
      * @return カード会員情報
      */
     public Member getMember() {
@@ -188,7 +172,6 @@ public class Passenger implements Serializable {
 
     /**
      * カード会員情報を設定する。
-     * 
      * @param member カード会員情報
      */
     public void setMember(Member member) {
@@ -200,6 +183,7 @@ public class Passenger implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

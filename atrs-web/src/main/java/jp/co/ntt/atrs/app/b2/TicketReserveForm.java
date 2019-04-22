@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b2;
 
@@ -42,13 +41,16 @@ import javax.validation.constraints.Size;
 
 /**
  * チケット予約フォーム。
- * <p>入力した搭乗者と予約代表者の情報を受け取る。</p>
- * <p>以下のフォームを内包する。</p>
+ * <p>
+ * 入力した搭乗者と予約代表者の情報を受け取る。
+ * </p>
+ * <p>
+ * 以下のフォームを内包する。
+ * </p>
  * <ul>
  * <li>搭乗者情報フォームのリスト</li>
  * <li>選択フライト情報フォームリスト</li>
  * </ul>
- * 
  * @author NTT 電電三郎
  */
 public class TicketReserveForm implements IReservationFlightForm, Serializable {
@@ -158,7 +160,9 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * コンストラクタ。
-     * <p>搭乗者情報フォームリストの要素数を最大搭乗者数に設定する。</p>
+     * <p>
+     * 搭乗者情報フォームリストの要素数を最大搭乗者数に設定する。
+     * </p>
      */
     public TicketReserveForm() {
         for (int i = 0; i < MAX_PASSENGERS_NUMBER; i++) {
@@ -168,7 +172,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者姓を取得する。
-     * 
      * @return 予約代表者姓
      */
     public String getRepFamilyName() {
@@ -177,7 +180,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者姓を設定する。
-     * 
      * @param repFamilyName 予約代表者姓
      */
     public void setRepFamilyName(String repFamilyName) {
@@ -186,7 +188,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者名を取得する。
-     * 
      * @return 予約代表者名
      */
     public String getRepGivenName() {
@@ -195,7 +196,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者名を設定する。
-     * 
      * @param repGivenName 予約代表者名
      */
     public void setRepGivenName(String repGivenName) {
@@ -204,7 +204,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者年齢を取得する。
-     * 
      * @return 予約代表者年齢
      */
     public Integer getRepAge() {
@@ -213,7 +212,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者年齢を設定する。
-     * 
      * @param repAge 予約代表者年齢
      */
     public void setRepAge(Integer repAge) {
@@ -222,7 +220,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者性別を取得する。
-     * 
      * @return 予約代表者性別
      */
     public Gender getRepGender() {
@@ -231,7 +228,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者性別を設定する。
-     * 
      * @param repGender 予約代表者性別
      */
     public void setRepGender(Gender repGender) {
@@ -240,7 +236,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者会員番号を取得する。
-     * 
      * @return 予約代表者会員番号
      */
     public String getRepMembershipNumber() {
@@ -249,7 +244,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者会員番号を設定する。
-     * 
      * @param repMembershipNumber 予約代表者会員番号
      */
     public void setRepMembershipNumber(String repMembershipNumber) {
@@ -258,7 +252,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号1を取得する。
-     * 
      * @return 予約代表者電話番号1
      */
     public String getRepTel1() {
@@ -267,7 +260,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号1を設定する。
-     * 
      * @param repTel1 予約代表者電話番号1
      */
     public void setRepTel1(String repTel1) {
@@ -276,7 +268,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号2を取得する。
-     * 
      * @return 予約代表者電話番号2
      */
     public String getRepTel2() {
@@ -285,7 +276,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号2を設定する。
-     * 
      * @param repTel2 予約代表者電話番号2
      */
     public void setRepTel2(String repTel2) {
@@ -294,7 +284,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号3を取得する。
-     * 
      * @return 予約代表者電話番号3
      */
     public String getRepTel3() {
@@ -303,7 +292,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者電話番号3を設定する。
-     * 
      * @param repTel3 予約代表者電話番号3
      */
     public void setRepTel3(String repTel3) {
@@ -312,7 +300,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者メールアドレスを取得する。
-     * 
      * @return 予約代表者メールアドレス
      */
     public String getRepMail() {
@@ -321,7 +308,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 予約代表者メールアドレスを設定する。
-     * 
      * @param repMail 予約代表者メールアドレス
      */
     public void setRepMail(String repMail) {
@@ -330,7 +316,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 搭乗者情報フォームリストを取得する。
-     * 
      * @return 搭乗者情報フォームリスト
      */
     public List<PassengerForm> getPassengerFormList() {
@@ -339,7 +324,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 搭乗者情報フォームリストを設定する。
-     * 
      * @param passengerFormList 搭乗者情報フォームリスト
      */
     public void setPassengerFormList(List<PassengerForm> passengerFormList) {
@@ -348,7 +332,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     @Override
@@ -358,7 +341,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -367,7 +349,6 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 選択フライト情報フォームリストを取得する。
-     * 
      * @return 選択フライト情報フォームリスト
      */
     @Override
@@ -377,16 +358,15 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 選択フライト情報フォームリストを設定する。
-     * 
      * @param selectFlightFormList 選択フライト情報フォームリスト
      */
-    public void setSelectFlightFormList(List<SelectFlightForm> selectFlightFormList) {
+    public void setSelectFlightFormList(
+            List<SelectFlightForm> selectFlightFormList) {
         this.selectFlightFormList = selectFlightFormList;
     }
 
     /**
      * 搭乗者情報フォームリストに搭乗者を設定する。
-     * 
      * @param index 設定位置
      * @param passengerForm 搭乗者情報フォーム
      */
@@ -395,8 +375,7 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
     }
 
     /**
-     * 値の存在する搭乗者がに先になるよう、搭乗者情報フォームリストのインデックス位置を
-     * 再設定する。
+     * 値の存在する搭乗者がに先になるよう、搭乗者情報フォームリストのインデックス位置を 再設定する。
      */
     public void resetPassengersIndex() {
 
@@ -414,13 +393,13 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
 
     /**
      * 追加搭乗者(4人目以降の搭乗者)が存在するか判定する。
-     * 
      * @return 存在する場合true
      */
     public boolean hasAdditionalPassenger() {
         if (passengerFormList != null
-            && INITIAL_PASSENGERS_NUMBER < passengerFormList.size()) {
-            for (int i = INITIAL_PASSENGERS_NUMBER; i < passengerFormList.size(); i++) {
+                && INITIAL_PASSENGERS_NUMBER < passengerFormList.size()) {
+            for (int i = INITIAL_PASSENGERS_NUMBER; i < passengerFormList
+                    .size(); i++) {
                 PassengerForm passenger = passengerFormList.get(i);
                 if (passenger != null && !passenger.isEmpty()) {
                     return true;
@@ -436,7 +415,8 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.b2;
 
@@ -48,7 +47,6 @@ import javax.inject.Inject;
 
 /**
  * チケット予約のサービス実装クラス。
- * 
  * @author NTT 電電三郎
  */
 @Service
@@ -101,7 +99,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * {@inheritDoc}
      */
     @Override
-    public int calculateTotalFare(List<Flight> flightList, List<Passenger> passengerList) {
+    public int calculateTotalFare(List<Flight> flightList,
+            List<Passenger> passengerList) {
 
         Assert.notEmpty(flightList);
         Assert.notEmpty(passengerList);
@@ -133,16 +132,15 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             Assert.notNull(flight);
 
             Route route = flight.getFlightMaster().getRoute();
-            int baseFare = ticketSharedService.calculateBasicFare(
-                    route.getBasicFare(),
-                    flight.getBoardingClass().getBoardingClassCd(),
-                    flight.getDepartureDate());
+            int baseFare = ticketSharedService.calculateBasicFare(route
+                    .getBasicFare(), flight.getBoardingClass()
+                    .getBoardingClassCd(), flight.getDepartureDate());
 
             int discountRate = flight.getFareType().getDiscountRate();
-            int boardingFare = ticketSharedService.calculateFare(baseFare, discountRate);
+            int boardingFare = ticketSharedService.calculateFare(baseFare,
+                    discountRate);
 
-            int fare = boardingFare * adultNum
-                    + baseFare
+            int fare = boardingFare * adultNum + baseFare
                     * (childFareRate - discountRate) / 100 * childNum;
 
             // 合計金額
@@ -168,7 +166,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         validateRepresentativeAge(reservation.getRepAge());
 
         // 予約フライト情報一覧を取得
-        List<ReserveFlight> reserveFlightList = reservation.getReserveFlightList();
+        List<ReserveFlight> reserveFlightList = reservation
+                .getReserveFlightList();
 
         // 運賃種別の適用可否を検証
         validateFareType(reserveFlightList);
@@ -182,12 +181,11 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
     /**
      * 搭乗者情報とカード会員情報の照合を行う。
-     * 
      * @param reserveFlightList 予約フライト情報一覧
      * @throws AtrsBusinessException 照合失敗例外
      */
-    private void validatePassengerMemberInfo(List<ReserveFlight> reserveFlightList)
-            throws AtrsBusinessException {
+    private void validatePassengerMemberInfo(
+            List<ReserveFlight> reserveFlightList) throws AtrsBusinessException {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
@@ -203,28 +201,28 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             for (Passenger passenger : passengerList) {
                 Assert.notNull(passenger);
 
-                String membershipNumber = passenger.getMember().getMembershipNumber();
+                String membershipNumber = passenger.getMember()
+                        .getMembershipNumber();
 
                 // 搭乗者会員番号が入力されている場合のみ照合
                 if (StringUtils.hasLength(membershipNumber)) {
 
                     // 搭乗者のカード会員情報取得
-                    Member passengerMember = memberRepository.findOne(membershipNumber);
+                    Member passengerMember = memberRepository
+                            .findOne(membershipNumber);
 
                     // 会員情報が存在することを確認
                     if (passengerMember == null) {
-                        throw new AtrsBusinessException(
-                                TicketReserveErrorCode.E_AR_B2_2005, position);
+                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2005, position);
                     }
 
                     // 取得した搭乗者のカード会員情報と搭乗者情報が同一であることを確認
                     if (!(passenger.getFamilyName().equals(
                             passengerMember.getKanaFamilyName())
                             && passenger.getGivenName().equals(
-                                    passengerMember.getKanaGivenName())
-                            && passenger.getGender().equals(passengerMember.getGender()))) {
-                        throw new AtrsBusinessException(
-                                TicketReserveErrorCode.E_AR_B2_2006, position);
+                                    passengerMember.getKanaGivenName()) && passenger
+                            .getGender().equals(passengerMember.getGender()))) {
+                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2006, position);
                     }
                 }
                 position++;
@@ -235,14 +233,13 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
     /**
      * 予約代表者の情報をチェックする。
-     * 
      * @param reservation 予約情報
      * @throws AtrsBusinessException チェック失敗例外
      */
-    private void validateRepresentativeMemberInfo(Reservation reservation)
-            throws AtrsBusinessException {
+    private void validateRepresentativeMemberInfo(Reservation reservation) throws AtrsBusinessException {
 
-        String repMembershipNumber = reservation.getRepMember().getMembershipNumber();
+        String repMembershipNumber = reservation.getRepMember()
+                .getMembershipNumber();
 
         // 予約代表者会員番号が入力されている場合のみチェック
         if (StringUtils.hasLength(repMembershipNumber)) {
@@ -256,9 +253,11 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             }
 
             // 取得した会員情報と予約代表者情報が同一であることを確認
-            if (!(reservation.getRepFamilyName().equals(repMember.getKanaFamilyName())
-                    && reservation.getRepGivenName().equals(repMember.getKanaGivenName())
-                    && reservation.getRepGender().equals(repMember.getGender()))) {
+            if (!(reservation.getRepFamilyName().equals(
+                    repMember.getKanaFamilyName())
+                    && reservation.getRepGivenName().equals(
+                            repMember.getKanaGivenName()) && reservation
+                    .getRepGender().equals(repMember.getGender()))) {
                 throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2003);
             }
         }
@@ -266,12 +265,10 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
     /**
      * 運賃種別の適用可否を確認する。
-     * 
      * @param reserveFlightList 予約フライト情報一覧
      * @throws AtrsBusinessException チェック失敗例外
      */
-    private void validateFareType(List<ReserveFlight> reserveFlightList)
-            throws AtrsBusinessException {
+    private void validateFareType(List<ReserveFlight> reserveFlightList) throws AtrsBusinessException {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
@@ -294,8 +291,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
                     Assert.notNull(passenger);
                     if (passenger.getGender() == Gender.M) {
                         // 男性の搭乗者がいる場合、業務例外をスロー
-                        throw new AtrsBusinessException(
-                                TicketReserveErrorCode.E_AR_B2_2007);
+                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2007);
                     }
                 }
             } else if (fareTypeCd == FareTypeCd.GD) {
@@ -304,8 +300,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
                 int passengerMinNum = fareType.getPassengerMinNum();
                 if (passengerList.size() < passengerMinNum) {
                     // 搭乗者数が利用可能最少人数未満の場合、業務例外をスロー
-                    throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2010,
-                            fareType.getFareTypeName(), passengerMinNum);
+                    throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2010, fareType
+                            .getFareTypeName(), passengerMinNum);
                 }
             }
         }
@@ -313,14 +309,12 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
     /**
      * 予約代表者の年齢が予約代表者最小年齢以上であることをチェックする。
-     * 
      * @param age 予約代表者の年齢
      */
     private void validateRepresentativeAge(int age) {
 
         if (age < representativeMinAge) {
-            throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2004,
-                    representativeMinAge);
+            throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2004, representativeMinAge);
         }
     }
 
@@ -328,13 +322,13 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * {@inheritDoc}
      */
     @Override
-    public TicketReserveDto registerReservation(Reservation reservation)
-            throws BusinessException {
+    public TicketReserveDto registerReservation(Reservation reservation) throws BusinessException {
 
         Assert.notNull(reservation);
 
         // 予約フライト情報一覧
-        List<ReserveFlight> reserveFlightList = reservation.getReserveFlightList();
+        List<ReserveFlight> reserveFlightList = reservation
+                .getReserveFlightList();
         Assert.notEmpty(reserveFlightList);
 
         // 予約フライト情報に対して空席数の確認および更新を実施
@@ -351,8 +345,9 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             }
 
             // 空席数を更新するために、フライト情報を取得する(排他)
-            flight = flightRepository.findOneForUpdate(flight.getDepartureDate(), flight
-                    .getFlightMaster().getFlightName(), flight.getBoardingClass(), flight
+            flight = flightRepository.findOneForUpdate(flight
+                    .getDepartureDate(), flight.getFlightMaster()
+                    .getFlightName(), flight.getBoardingClass(), flight
                     .getFareType());
             int vacantNum = flight.getVacantNum();
 
@@ -371,8 +366,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             // 空席数を更新
             int flightUpdateCount = flightRepository.update(flight);
             if (flightUpdateCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                        LogMessages.E_AR_A0_L9002.getMessage(flightUpdateCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                        .getMessage(flightUpdateCount, 1));
             }
         }
 
@@ -380,8 +375,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         // (パラメータの予約情報に予約番号が格納される)
         int reservationInsertCount = reservationRepository.insert(reservation);
         if (reservationInsertCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(reservationInsertCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(reservationInsertCount, 1));
         }
         // 予約番号を取得
         String reserveNo = reservation.getReserveNo();
@@ -396,24 +391,27 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             int reserveFlightInsertCount = reservationRepository
                     .insertReserveFlight(reserveFlight);
             if (reserveFlightInsertCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                        LogMessages.E_AR_A0_L9002.getMessage(reserveFlightInsertCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                        .getMessage(reserveFlightInsertCount, 1));
             }
 
             // 全搭乗者情報を登録
             for (Passenger passenger : reserveFlight.getPassengerList()) {
-                passenger.setReserveFlightNo(reserveFlight.getReserveFlightNo());
-                int passengerInsertCount =
-                        reservationRepository.insertPassenger(passenger);
+                passenger
+                        .setReserveFlightNo(reserveFlight.getReserveFlightNo());
+                int passengerInsertCount = reservationRepository
+                        .insertPassenger(passenger);
                 if (passengerInsertCount != 1) {
-                    throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                            LogMessages.E_AR_A0_L9002.getMessage(passengerInsertCount, 1));
+                    throw new SystemException(LogMessages.E_AR_A0_L9002
+                            .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                            passengerInsertCount, 1));
                 }
             }
         }
 
         // 往路搭乗日を支払期限とする
-        Date paymentDate = reserveFlightList.get(0).getFlight().getDepartureDate();
+        Date paymentDate = reserveFlightList.get(0).getFlight()
+                .getDepartureDate();
 
         return new TicketReserveDto(reserveNo, paymentDate);
 

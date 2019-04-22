@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -24,7 +23,6 @@ import java.util.Date;
 
 /**
  * フライト情報。
- * 
  * @author NTT 電電太郎
  */
 public class Flight implements Serializable {
@@ -61,7 +59,6 @@ public class Flight implements Serializable {
 
     /**
      * 運賃種別を取得する。
-     * 
      * @return 運賃種別
      */
     public FareType getFareType() {
@@ -70,7 +67,6 @@ public class Flight implements Serializable {
 
     /**
      * 運賃種別を設定する。
-     * 
      * @param fareType 運賃種別
      */
     public void setFareType(FareType fareType) {
@@ -79,7 +75,6 @@ public class Flight implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public Date getDepartureDate() {
@@ -88,7 +83,6 @@ public class Flight implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param departureDate 搭乗日
      */
     public void setDepartureDate(Date departureDate) {
@@ -97,7 +91,6 @@ public class Flight implements Serializable {
 
     /**
      * 空席数を取得する。
-     * 
      * @return 空席数
      */
     public Integer getVacantNum() {
@@ -106,7 +99,6 @@ public class Flight implements Serializable {
 
     /**
      * 空席数を設定する。
-     * 
      * @param vacantNum 空席数
      */
     public void setVacantNum(Integer vacantNum) {
@@ -115,7 +107,6 @@ public class Flight implements Serializable {
 
     /**
      * フライト基本情報を取得する。
-     * 
      * @return フライト基本情報
      */
     public FlightMaster getFlightMaster() {
@@ -124,7 +115,6 @@ public class Flight implements Serializable {
 
     /**
      * フライト基本情報を設定する。
-     * 
      * @param flightMaster フライト基本情報
      */
     public void setFlightMaster(FlightMaster flightMaster) {
@@ -133,7 +123,6 @@ public class Flight implements Serializable {
 
     /**
      * 搭乗クラスを取得する。</p>
-     * 
      * @return 搭乗クラス
      */
     public BoardingClass getBoardingClass() {
@@ -142,7 +131,6 @@ public class Flight implements Serializable {
 
     /**
      * 搭乗クラスを設定する。
-     * 
      * @param boardingClass 搭乗クラス
      */
     public void setBoardingClass(BoardingClass boardingClass) {
@@ -154,6 +142,7 @@ public class Flight implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

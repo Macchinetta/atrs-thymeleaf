@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.repository.flight;
 
@@ -29,7 +28,6 @@ import java.util.List;
 
 /**
  * 空席情報検索条件を保持するクラス。
- * 
  * @author NTT 電電太郎
  */
 public class VacantSeatSearchCriteriaDto implements Serializable {
@@ -66,7 +64,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param depDate 出発日
      * @param route 区間情報
      * @param boardingClass 搭乗クラス
@@ -74,7 +71,8 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      * @param fareTypeList 運賃種別コードリスト
      */
     public VacantSeatSearchCriteriaDto(Date depDate, Route route,
-            BoardingClassCd boardingClass, Integer beforeDayNum, List<FareTypeCd> fareTypeList) {
+            BoardingClassCd boardingClass, Integer beforeDayNum,
+            List<FareTypeCd> fareTypeList) {
 
         this.depDate = depDate;
         this.route = route;
@@ -85,7 +83,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗クラスを取得する。
-     * 
      * @return 搭乗クラス
      */
     public BoardingClassCd getBoardingClass() {
@@ -94,7 +91,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 出発日を取得する。
-     * 
      * @return 出発日
      */
     public Date getDepDate() {
@@ -103,7 +99,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 区間情報を取得する。
-     * 
      * @return 区間情報
      */
     public Route getRoute() {
@@ -112,7 +107,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗日前日数を取得する。
-     * 
      * @return 区間情報
      */
     public Integer getBeforeDayNum() {
@@ -121,7 +115,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 運賃種別コードリストを取得する。
-     * 
      * @return 運賃種別コードリスト
      */
     public List<FareTypeCd> getFareTypeList() {
@@ -133,6 +126,7 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

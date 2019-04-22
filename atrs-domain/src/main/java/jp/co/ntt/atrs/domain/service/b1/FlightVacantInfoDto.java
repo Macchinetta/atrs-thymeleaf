@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.b1;
 
@@ -28,7 +27,6 @@ import java.util.Map;
 
 /**
  * 便ごとの空席状況を格納するDTO。
- * 
  * @author NTT 電電次郎
  */
 public class FlightVacantInfoDto implements Serializable {
@@ -80,7 +78,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 便名を取得する。
-     * 
      * @return 搭乗日
      */
     public String getFlightName() {
@@ -89,7 +86,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 便名を設定する。
-     * 
      * @param flightName 便名
      */
     public void setFlightName(String flightName) {
@@ -98,7 +94,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 出発空港を取得する。
-     * 
      * @return 出発空港
      */
     public String getDepAirportName() {
@@ -107,7 +102,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 出発空港を設定する。
-     * 
      * @param depAirportName 出発空港
      */
     public void setDepAirportName(String depAirportName) {
@@ -116,7 +110,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 到着空港を取得する。
-     * 
      * @return 到着空港
      */
     public String getArrAirportName() {
@@ -125,7 +118,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 到着空港を設定する。
-     * 
      * @param arrAirportName 到着空港
      */
     public void setArrAirportName(String arrAirportName) {
@@ -134,7 +126,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 出発時刻を取得する。
-     * 
      * @return 出発時刻
      */
     public String getDepTime() {
@@ -143,7 +134,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 出発時刻を設定する。
-     * 
      * @param depTime 出発時刻
      */
     public void setDepTime(String depTime) {
@@ -152,7 +142,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 到着時刻を取得する。
-     * 
      * @return 到着時刻
      */
     public String getArrTime() {
@@ -161,7 +150,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 到着時刻を設定する。
-     * 
      * @param arrTime 到着時刻
      */
     public void setArrTime(String arrTime) {
@@ -170,7 +158,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public String getDepDate() {
@@ -179,7 +166,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param depDate 搭乗日
      */
     public void setDepDate(String depDate) {
@@ -188,7 +174,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     * 
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -197,7 +182,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -206,7 +190,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 運賃種別群を取得する。
-     * 
      * @return 運賃種別群
      */
     public Map<String, FareTypeVacantInfoDto> getFareTypes() {
@@ -215,7 +198,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 運賃種別群を設定する。
-     * 
      * @param fareTypes 運賃種別群
      */
     public void setFareTypes(Map<String, FareTypeVacantInfoDto> fareTypes) {
@@ -224,7 +206,6 @@ public class FlightVacantInfoDto implements Serializable {
 
     /**
      * 運賃種別群に運賃種別を追加する。
-     * 
      * @param fareTypeCd 運賃種別コード
      * @param fareTypeVacantInfo 運賃種別に対応する空席照会結果DTO
      */
@@ -239,7 +220,8 @@ public class FlightVacantInfoDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

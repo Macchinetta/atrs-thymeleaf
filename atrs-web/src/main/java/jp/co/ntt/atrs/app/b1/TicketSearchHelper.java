@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b1;
 
@@ -34,7 +33,6 @@ import javax.inject.Inject;
 
 /**
  * 空席照会Helper。
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -84,7 +82,6 @@ public class TicketSearchHelper {
 
     /**
      * デフォルト値を持つ空席照会フォームを作成する。
-     * 
      * @return 空席照会フォーム
      */
     public TicketSearchForm createDefaultTicketSearchForm() {
@@ -102,14 +99,14 @@ public class TicketSearchHelper {
 
     /**
      * 空席照会画面(TOP画面)の表示情報を作成する。
-     * 
      * @return 空席照会画面(TOP画面)の表示情報
      */
     public FlightSearchOutputDto createFlightSearchOutputDto() {
 
         FlightSearchOutputDto outputDto = new FlightSearchOutputDto();
         outputDto.setBeginningPeriod(dateFactory.newDate());
-        outputDto.setEndingPeriod(ticketSharedService.getSearchLimitDate().toDate());
+        outputDto.setEndingPeriod(ticketSharedService.getSearchLimitDate()
+                .toDate());
         outputDto.setReserveIntervalTime(reserveIntervalTime);
 
         return outputDto;
@@ -118,16 +115,13 @@ public class TicketSearchHelper {
     /**
      * フライト情報のリストをチェックする。
      * <p>
-     * 業務チェックエラーの場合、業務例外をスローする。
-     * 他のエラーの場合、不正リクエスト例外をスローする。
+     * 業務チェックエラーの場合、業務例外をスローする。 他のエラーの場合、不正リクエスト例外をスローする。
      * </p>
-     * 
      * @param flightList フライト情報のリスト
      * @throws BusinessException 業務例外
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(List<Flight> flightList)
-        throws BusinessException, BadRequestException {
+    public void validateFlightList(List<Flight> flightList) throws BusinessException, BadRequestException {
 
         // フライト情報チェック
         try {

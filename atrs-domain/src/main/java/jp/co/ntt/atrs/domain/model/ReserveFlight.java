@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -25,7 +24,6 @@ import java.util.List;
 
 /**
  * 予約フライト情報。
- * 
  * @author NTT 電電太郎
  */
 public class ReserveFlight implements Serializable {
@@ -57,7 +55,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約フライト番号を取得する。
-     * 
      * @return 予約フライト番号
      */
     public Integer getReserveFlightNo() {
@@ -66,7 +63,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約フライト番号を設定する。
-     * 
      * @param reserveFlightNo 予約フライト番号
      */
     public void setReserveFlightNo(Integer reserveFlightNo) {
@@ -75,7 +71,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約番号を取得する。
-     * 
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -84,7 +79,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -93,7 +87,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * フライト情報を取得する。
-     * 
      * @return フライト情報
      */
     public Flight getFlight() {
@@ -102,7 +95,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * フライト情報を設定する。
-     * 
      * @param flight フライト情報
      */
     public void setFlight(Flight flight) {
@@ -111,7 +103,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 搭乗者リストを取得する。
-     * 
      * @return 搭乗者リスト
      */
     public List<Passenger> getPassengerList() {
@@ -120,7 +111,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 搭乗者リストを設定する。
-     * 
      * @param passengerList 搭乗者リスト
      */
     public void setPassengerList(List<Passenger> passengerList) {
@@ -132,7 +122,8 @@ public class ReserveFlight implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

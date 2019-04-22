@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b1;
 
@@ -31,7 +30,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 空席照会条件フォーム。
- * 
  * @author NTT 電電次郎
  */
 public class FlightSearchCriteriaForm implements Serializable {
@@ -76,7 +74,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     public FlightType getFlightType() {
@@ -85,7 +82,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -94,7 +90,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 出発空港コードを取得する。
-     * 
      * @return 出発空港コード
      */
     public String getDepAirportCd() {
@@ -103,7 +98,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 出発空港コードを設定する。
-     * 
      * @param depAirportCd 出発空港コード
      */
     public void setDepAirportCd(String depAirportCd) {
@@ -112,7 +106,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 到着空港コードを取得する。
-     * 
      * @return arrAirport 到着空港コード
      */
     public String getArrAirportCd() {
@@ -121,7 +114,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 到着空港コードを設定する。
-     * 
      * @param arrAirportCd 到着空港コード
      */
     public void setArrAirportCd(String arrAirportCd) {
@@ -130,7 +122,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public Date getDepDate() {
@@ -139,7 +130,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param depDate 搭乗日
      */
     public void setDepDate(Date depDate) {
@@ -148,7 +138,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     * 
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -157,7 +146,6 @@ public class FlightSearchCriteriaForm implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -169,7 +157,8 @@ public class FlightSearchCriteriaForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

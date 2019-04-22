@@ -1,7 +1,7 @@
 /*!
  * 空席照会画面(B102)スクリプト。
  *
- * Copyright(c) 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  */
 
 'use strict';
@@ -117,7 +117,7 @@
 
       $.ajax({
         type: 'GET',
-        url: contextPath + 'api/auth/status',
+        url: contextPath + '/api/auth/status',
         cache: false,
         timeout: 15000
       }).done(function () {
@@ -389,7 +389,7 @@
 
       $.ajax({
         type: 'GET',
-        url: contextPath + 'api/flights',
+        url: contextPath + '/api/flights',
         data: param,
         dataType: 'json',
         cache: false,

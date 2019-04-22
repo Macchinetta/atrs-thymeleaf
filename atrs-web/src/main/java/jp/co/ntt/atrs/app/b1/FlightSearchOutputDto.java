@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.b1;
 
@@ -24,7 +23,6 @@ import java.util.Date;
 
 /**
  * 空席照会画面(TOP画面)出力用DTO。
- * 
  * @author NTT 電電次郎
  */
 public class FlightSearchOutputDto implements Serializable {
@@ -51,7 +49,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(始)を取得する。
-     * 
      * @return 空席照会可能時期(始)
      */
     public Date getBeginningPeriod() {
@@ -60,7 +57,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(始)を設定する。
-     * 
      * @param beginningPeriod 空席照会可能時期(始)
      */
     public void setBeginningPeriod(Date beginningPeriod) {
@@ -69,7 +65,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(終)を取得する。
-     * 
      * @return 空席照会可能時期(終)
      */
     public Date getEndingPeriod() {
@@ -78,7 +73,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(終)を設定する。
-     * 
      * @param endingPeriod 空席照会可能時期(終)
      */
     public void setEndingPeriod(Date endingPeriod) {
@@ -87,7 +81,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 復路予約可能時間間隔(分)。
-     *
      * @return 復路予約可能時間間隔(分)
      */
     public Integer getReserveIntervalTime() {
@@ -96,7 +89,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 復路予約可能時間間隔(分)。
-     * 
      * @param reserveIntervalTime 復路予約可能時間間隔(分)
      */
     public void setReserveIntervalTime(Integer reserveIntervalTime) {
@@ -108,7 +100,8 @@ public class FlightSearchOutputDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

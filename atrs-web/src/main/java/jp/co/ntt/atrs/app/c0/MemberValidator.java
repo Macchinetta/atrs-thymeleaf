@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.c0;
 
@@ -32,7 +31,6 @@ import jp.co.ntt.atrs.domain.service.c0.MemberErrorCode;
 
 /**
  * 会員情報フォームの入力チェックを行うバリデータ。
- * 
  * @author NTT 電電花子
  */
 @Component
@@ -67,7 +65,8 @@ public class MemberValidator implements Validator {
         IMemberForm form = (IMemberForm) target;
 
         // メールアドレスチェック
-        if (!errors.hasFieldErrors("mail") && !errors.hasFieldErrors("reEnterMail")) {
+        if (!errors.hasFieldErrors("mail")
+                && !errors.hasFieldErrors("reEnterMail")) {
             String mail = form.getMail();
             String reEnterMail = form.getReEnterMail();
             if (!mail.equals(reEnterMail)) {
@@ -88,7 +87,8 @@ public class MemberValidator implements Validator {
         // 生年月日チェック
         if (!errors.hasFieldErrors("dateOfBirth")) {
 
-            DateTime dateOfBirthMin = DateTimeUtil.toDateTime(dateOfBirthMinDate);
+            DateTime dateOfBirthMin = DateTimeUtil
+                    .toDateTime(dateOfBirthMinDate);
             DateTime dateOfBirthMax = dateFactory.newDateTime();
             DateTime dateOfBirth = new DateTime(form.getDateOfBirth());
 
@@ -96,9 +96,10 @@ public class MemberValidator implements Validator {
             if (!interval.contains(dateOfBirth)) {
                 // 生年月日の入力許容範囲(1900年1月1日から現在まで)でなければエラー
                 errors.reject(
-                    MemberErrorCode.E_AR_C0_5003.code(),
-                    new Object[] { dateOfBirthMinDate,
-                            DateTimeUtil.toFormatDateString(dateOfBirthMax) }, "");
+                        MemberErrorCode.E_AR_C0_5003.code(),
+                        new Object[] { dateOfBirthMinDate,
+                                DateTimeUtil.toFormatDateString(dateOfBirthMax) },
+                        "");
             }
         }
 

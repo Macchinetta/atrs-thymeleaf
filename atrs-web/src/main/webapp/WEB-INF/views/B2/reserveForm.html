@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="contextPath" th:content="@{/}" />
+<meta name="contextPath" th:content="${#request.getContextPath()}" />
 <title>予約 | Airline Ticket Reservation System</title>
 
 <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">

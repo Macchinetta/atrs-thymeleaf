@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -23,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 区間情報。
- * 
  * @author NTT 電電太郎
  */
 public class Route implements Serializable {
@@ -55,7 +53,6 @@ public class Route implements Serializable {
 
     /**
      * 区間番号を取得する。
-     * 
      * @return 区間番号
      */
     public Integer getRouteNo() {
@@ -64,7 +61,6 @@ public class Route implements Serializable {
 
     /**
      * 区間番号を設定する。
-     * 
      * @param routeNo 区間番号
      */
     public void setRouteNo(Integer routeNo) {
@@ -73,7 +69,6 @@ public class Route implements Serializable {
 
     /**
      * 基本料金を取得する。
-     * 
      * @return 基本料金
      */
     public Integer getBasicFare() {
@@ -82,7 +77,6 @@ public class Route implements Serializable {
 
     /**
      * 基本料金を設定する。
-     * 
      * @param basicFare 基本料金
      */
     public void setBasicFare(Integer basicFare) {
@@ -91,7 +85,6 @@ public class Route implements Serializable {
 
     /**
      * 到着空港を取得する。
-     * 
      * @return 到着空港
      */
     public Airport getArrivalAirport() {
@@ -100,7 +93,6 @@ public class Route implements Serializable {
 
     /**
      * 到着空港を設定する。
-     * 
      * @param arrivalAirport 到着空港
      */
     public void setArrivalAirport(Airport arrivalAirport) {
@@ -109,7 +101,6 @@ public class Route implements Serializable {
 
     /**
      * 出発空港を取得する。
-     * 
      * @return 出発空港
      */
     public Airport getDepartureAirport() {
@@ -118,7 +109,6 @@ public class Route implements Serializable {
 
     /**
      * 出発空港を設定する。
-     * 
      * @param departureAirport 出発空港
      */
     public void setDepartureAirport(Airport departureAirport) {
@@ -130,7 +120,8 @@ public class Route implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

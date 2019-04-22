@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -23,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 航空機情報。
- * 
  * @author NTT 電電太郎
  */
 public class Plane implements Serializable {
@@ -50,7 +48,6 @@ public class Plane implements Serializable {
 
     /**
      * 機種を取得する。
-     * 
      * @return 機種
      */
     public String getCraftType() {
@@ -59,7 +56,6 @@ public class Plane implements Serializable {
 
     /**
      * 機種を設定する。
-     * 
      * @param craftType 機種
      */
     public void setCraftType(String craftType) {
@@ -68,7 +64,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(一般席)を取得する。
-     * 
      * @return 席数(一般席)
      */
     public Integer getNSeatNum() {
@@ -77,7 +72,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(一般席)を設定する。
-     * 
      * @param seatNum 席数(一般席)
      */
     public void setNSeatNum(Integer seatNum) {
@@ -86,7 +80,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(特別席)を取得する。
-     * 
      * @return 席数(特別席)
      */
     public Integer getSSeatNum() {
@@ -95,7 +88,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(特別席)を設定する。
-     * 
      * @param seatNum 席数(特別席)
      */
     public void setSSeatNum(Integer seatNum) {
@@ -107,6 +99,7 @@ public class Plane implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

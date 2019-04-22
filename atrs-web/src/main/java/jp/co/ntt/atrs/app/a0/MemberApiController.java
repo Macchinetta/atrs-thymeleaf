@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.a0;
 
@@ -31,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 会員WebAPIコントローラ。
- * 
  * @author NTT 電電太郎
  */
 @Controller
@@ -46,7 +44,6 @@ public class MemberApiController {
 
     /**
      * 存在する会員番号かを判定する。
-     * 
      * @param membershipNumber 会員番号
      * @return OKステータス:存在する、NOT_FOUNDステータス:存在しない
      */
@@ -60,9 +57,8 @@ public class MemberApiController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        return membershipSharedService.isMember(membershipNumber) ?
-                new ResponseEntity<>(HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return membershipSharedService.isMember(membershipNumber) ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

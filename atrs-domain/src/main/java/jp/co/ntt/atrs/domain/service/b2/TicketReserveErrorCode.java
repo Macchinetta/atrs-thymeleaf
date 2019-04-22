@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.service.b2;
 
@@ -20,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsErrorCode;
 
 /**
  * チケット予約サービスでのエラーコードを表す列挙型。
- * 
  * @author NTT 電電三郎
  */
 public enum TicketReserveErrorCode implements AtrsErrorCode {
@@ -42,7 +40,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * 予約代表者としての許容年齢を超えていない事を通知するためのエラーコード。
-     * 
      * <p>
      * {0} : 予約代表者としての許容年齢
      * </p>
@@ -51,7 +48,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * 会員情報に指定された会員番号に一致する会員情報が存在しない事を通知するためのエラーコード。
-     * 
      * <p>
      * {0} : 会員情報の順番
      * </p>
@@ -60,7 +56,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * 会員情報に指定された会員番号に一致する会員情報と指定された会員情報が一致していない事を通知するためのエラーコード。
-     * 
      * <p>
      * {0} : 会員情報の順番
      * </p>
@@ -84,7 +79,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * 利用可能最少人数を満たしていいない事を通知するためのエラーコード。
-     * 
      * <p>
      * {0} : 運賃種別名<br>
      * {1} : 利用可能最少人数
@@ -104,7 +98,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * 2つの項目値の値が「最小合計桁数～最大合計桁数」でない事を通知するためのエラーコード。
-     * 
      * <p>
      * {0} : 項目名1<br>
      * {1} : 項目名2<br>
@@ -121,7 +114,6 @@ public enum TicketReserveErrorCode implements AtrsErrorCode {
 
     /**
      * コンストラクタ。
-     *
      * @param code エラーコード。
      */
     private TicketReserveErrorCode(String code) {

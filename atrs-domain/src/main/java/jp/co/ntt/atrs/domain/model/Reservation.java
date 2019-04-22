@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -26,7 +25,6 @@ import java.util.List;
 
 /**
  * 予約情報。
- * 
  * @author NTT 電電太郎
  */
 public class Reservation implements Serializable {
@@ -93,7 +91,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約番号を取得する。
-     * 
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -102,7 +99,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -111,7 +107,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約日付を取得する。
-     * 
      * @return 予約日付
      */
     public Date getReserveDate() {
@@ -120,7 +115,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約日付を設定する。
-     * 
      * @param reserveDate 予約日付
      */
     public void setReserveDate(Date reserveDate) {
@@ -129,7 +123,6 @@ public class Reservation implements Serializable {
 
     /**
      * 合計金額を取得する。
-     * 
      * @return 合計金額
      */
     public Integer getTotalFare() {
@@ -138,7 +131,6 @@ public class Reservation implements Serializable {
 
     /**
      * 合計金額を設定する。
-     * 
      * @param totalFare 合計金額
      */
     public void setTotalFare(Integer totalFare) {
@@ -147,7 +139,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者姓を取得する。
-     * 
      * @return 予約代表者姓
      */
     public String getRepFamilyName() {
@@ -156,7 +147,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者姓を設定する。
-     * 
      * @param repFamilyName 予約代表者姓
      */
     public void setRepFamilyName(String repFamilyName) {
@@ -165,7 +155,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者名を取得する。
-     * 
      * @return 予約代表者名
      */
     public String getRepGivenName() {
@@ -174,7 +163,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者名を設定する。
-     * 
      * @param repGivenName 予約代表者名
      */
     public void setRepGivenName(String repGivenName) {
@@ -183,7 +171,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者年齢を取得する。
-     * 
      * @return 予約代表者年齢
      */
     public Integer getRepAge() {
@@ -192,7 +179,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者年齢を設定する。
-     * 
      * @param repAge 予約代表者年齢
      */
     public void setRepAge(Integer repAge) {
@@ -201,7 +187,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者性別を取得する。
-     * 
      * @return 予約代表者性別
      */
     public Gender getRepGender() {
@@ -210,7 +195,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者性別を設定する。
-     * 
      * @param repGender 予約代表者性別
      */
     public void setRepGender(Gender repGender) {
@@ -219,7 +203,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者電話番号を取得する。
-     * 
      * @return 予約代表者電話番号
      */
     public String getRepTel() {
@@ -228,7 +211,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者電話番号を設定する。
-     * 
      * @param repTel 予約代表者電話番号
      */
     public void setRepTel(String repTel) {
@@ -237,7 +219,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者メールアドレスを取得する。
-     * 
      * @return 予約代表者メールアドレス
      */
     public String getRepMail() {
@@ -246,7 +227,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者メールアドレスを設定する。
-     * 
      * @param repMail 予約代表者メールアドレス
      */
     public void setRepMail(String repMail) {
@@ -255,7 +235,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者のカード会員情報を取得する。
-     * 
      * @return 予約代表者のカード会員情報
      */
     public Member getRepMember() {
@@ -264,7 +243,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約代表者のカード会員情報を設定する。
-     * 
      * @param repMember 予約代表者のカード会員情報
      */
     public void setRepMember(Member repMember) {
@@ -273,7 +251,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約フライト情報リストを取得する。
-     * 
      * @return 予約フライト情報リスト
      */
     public List<ReserveFlight> getReserveFlightList() {
@@ -282,7 +259,6 @@ public class Reservation implements Serializable {
 
     /**
      * 予約フライト情報リストを設定する。
-     * 
      * @param reserveFlightList 予約フライト情報リスト
      */
     public void setReserveFlightList(List<ReserveFlight> reserveFlightList) {
@@ -294,6 +270,7 @@ public class Reservation implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

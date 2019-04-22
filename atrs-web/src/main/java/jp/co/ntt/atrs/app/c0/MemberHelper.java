@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.c0;
 
@@ -30,7 +29,6 @@ import jp.co.ntt.atrs.domain.model.Member;
 
 /**
  * 会員情報Helper。
- * 
  * @author NTT 電電花子
  */
 @Component
@@ -56,7 +54,6 @@ public class MemberHelper {
 
     /**
      * 会員情報フォームをカード会員情報に変換する。
-     * 
      * @param memberForm 会員情報フォーム
      * @return カード会員情報
      */
@@ -66,8 +63,8 @@ public class MemberHelper {
         Member member = beanMapper.map(memberForm, Member.class);
 
         // 電話番号
-        String tel = String.format("%s-%s-%s", memberForm.getTel1(),
-            memberForm.getTel2(), memberForm.getTel3());
+        String tel = String.format("%s-%s-%s", memberForm.getTel1(), memberForm
+                .getTel2(), memberForm.getTel3());
         member.setTel(tel);
 
         // 郵便番号
@@ -76,7 +73,7 @@ public class MemberHelper {
 
         // クレジットカード期限
         String creditTerm = String.format("%s/%s", memberForm.getCreditMonth(),
-            memberForm.getCreditYear());
+                memberForm.getCreditYear());
         member.setCreditTerm(creditTerm);
 
         return member;
@@ -85,14 +82,13 @@ public class MemberHelper {
 
     /**
      * カード会員情報を会員情報フォームに変換する。
-     * 
      * @param member カード会員情報
      * @return 会員情報フォーム
      */
     public MemberUpdateForm toMemberUpdateForm(Member member) {
 
-        MemberUpdateForm memberUpdateForm =
-            beanMapper.map(member, MemberUpdateForm.class);
+        MemberUpdateForm memberUpdateForm = beanMapper.map(member,
+                MemberUpdateForm.class);
 
         // 電話番号
         String[] tel = member.getTel().split("-");
@@ -104,7 +100,7 @@ public class MemberHelper {
 
         // 郵便番号
         if (StringUtils.hasLength(member.getZipCode())
-            && member.getZipCode().length() >= 7) {
+                && member.getZipCode().length() >= 7) {
             memberUpdateForm.setZipCode1(member.getZipCode().substring(0, 3));
             memberUpdateForm.setZipCode2(member.getZipCode().substring(3, 7));
         }
@@ -121,7 +117,6 @@ public class MemberHelper {
 
     /**
      * 会員登録可能な最小生年月日を取得する。
-     * 
      * @return 会員登録可能な最小生年月日
      */
     public String getDateOfBirthMinDate() {
@@ -130,7 +125,6 @@ public class MemberHelper {
 
     /**
      * 会員登録可能な最大生年月日を取得する。
-     * 
      * @return 会員登録可能な最大生年月日
      */
     public String getDateOfBirthMaxDate() {

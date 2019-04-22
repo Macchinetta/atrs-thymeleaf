@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.app.c2;
 
@@ -42,7 +41,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報変更コントローラ。
- * 
  * @author NTT 電電花子
  */
 @Controller
@@ -69,7 +67,6 @@ public class MemberUpdateController {
 
     /**
      * 会員情報変更フォームのバリデータをバインダに追加する。
-     * 
      * @param binder バインダ
      */
     @InitBinder("memberUpdateForm")
@@ -79,7 +76,6 @@ public class MemberUpdateController {
 
     /**
      * 会員情報変更フォームを初期化する。
-     * 
      * @return 会員情報変更フォーム
      */
     @ModelAttribute("memberUpdateForm")
@@ -90,7 +86,6 @@ public class MemberUpdateController {
 
     /**
      * 会員情報変更画面を表示する。
-     * 
      * @param model 出力情報を保持するクラス
      * @param principal ログイン情報を持つオブジェクト
      * @return View論理名
@@ -103,12 +98,15 @@ public class MemberUpdateController {
 
         // 会員情報から会員情報変更フォームを生成し、設定
         Member member = memberUpdateService.findMember(membershipNumber);
-        MemberUpdateForm memberUpdateForm = memberHelper.toMemberUpdateForm(member);
+        MemberUpdateForm memberUpdateForm = memberHelper
+                .toMemberUpdateForm(member);
         model.addAttribute(memberUpdateForm);
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper
+                .getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper
+                .getDateOfBirthMaxDate());
 
         return "C2/memberUpdateForm";
     }
@@ -119,7 +117,6 @@ public class MemberUpdateController {
      * <li>チェックエラーがある場合、会員情報変更画面を再表示する。</li>
      * <li>更新成功の場合、更新完了メッセージを設定して会員情報変更画面を表示する。</li>
      * </ul>
-     * 
      * @param memberUpdateForm 会員情報変更フォーム
      * @param model 出力情報を保持するクラス
      * @param redirectAttributes フラッシュスコープ格納用オブジェクト
@@ -129,8 +126,8 @@ public class MemberUpdateController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String update(@Validated MemberUpdateForm memberUpdateForm,
-        BindingResult result, Model model,
-        RedirectAttributes redirectAttributes, Principal principal) {
+            BindingResult result, Model model,
+            RedirectAttributes redirectAttributes, Principal principal) {
 
         if (result.hasErrors()) {
             // 検証エラーがある場合は画面再表示
@@ -142,8 +139,8 @@ public class MemberUpdateController {
 
         // 入力パスワードが登録情報と一致しているかチェック(未入力の場合はチェックされない)
         try {
-            memberUpdateService.checkMemberPassword(
-                memberUpdateForm.getCurrentPassword(), membershipNumber);
+            memberUpdateService.checkMemberPassword(memberUpdateForm
+                    .getCurrentPassword(), membershipNumber);
         } catch (BusinessException e) {
 
             // パスワード不一致の場合、メッセージ設定後に画面再表示
@@ -159,13 +156,15 @@ public class MemberUpdateController {
 
         // 更新した会員情報をログインユーザ情報に設定
         Authentication authentication = (Authentication) principal;
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
-        Member loginMember = memberUpdateService.findMemberForLogin(membershipNumber);
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
+                .getPrincipal();
+        Member loginMember = memberUpdateService
+                .findMemberForLogin(membershipNumber);
         userDetails.setMember(loginMember);
 
         // 更新完了メッセージ設定
-        ResultMessages messages =
-            ResultMessages.success().add(MessageKeys.I_AR_C2_2001.key());
+        ResultMessages messages = ResultMessages.success().add(
+                MessageKeys.I_AR_C2_2001.key());
         redirectAttributes.addFlashAttribute(messages);
 
         // リダイレクトで会員情報変更画面を表示
@@ -174,7 +173,6 @@ public class MemberUpdateController {
 
     /**
      * 会員情報変更完了の会員情報変更画面を表示する。
-     * 
      * @param model 出力情報を保持するクラス
      * @param principal ログイン情報を持つオブジェクト
      * @return View論理名
@@ -188,7 +186,6 @@ public class MemberUpdateController {
 
     /**
      * 会員情報変更画面を再表示する。
-     * 
      * @param memberUpdateForm 会員情報変更フォーム
      * @param model 出力情報を保持するクラス
      * @return View論理名
@@ -197,8 +194,10 @@ public class MemberUpdateController {
     public String updateRedo(MemberUpdateForm memberUpdateForm, Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper
+                .getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper
+                .getDateOfBirthMaxDate());
 
         return "C2/memberUpdateForm";
     }

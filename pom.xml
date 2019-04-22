@@ -13,13 +13,19 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.4.1.RELEASE</version>
+        <version>5.4.2.RELEASE</version>
         <relativePath />
     </parent>
-    <version>1.5.1.RELEASE</version>
+    <version>1.5.2.RELEASE</version>
     <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
     <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
-
+	  <licenses>
+	    <license>
+	      <name>Apache License, Version 2.0</name>
+	      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+	      <distribution>manual</distribution>
+	    </license>
+	  </licenses>
     <repositories>
         <repository>
             <id>sonatype-nexus-snapshots</id>
@@ -117,9 +123,19 @@
                     <artifactId>formatter-maven-plugin</artifactId>
                     <version>${formatter-maven-plugin.version}</version>
                     <configuration>
-                        <configFile>${project.basedir}/../eclipse/formatter.xml
+                        <configFile>${project.root.basedir}/eclipse/formatter.xml
                         </configFile>
-                        <lineEnding>CRLF</lineEnding>
+                        <configJsFile>${project.root.basedir}/eclipse/formatter_js.xml
+                        </configJsFile>
+                        <lineEnding>LF</lineEnding>
+                        <directories>
+                            <directory>${project.basedir}</directory>
+                        </directories>
+                        <includes>
+                            <include>**/src/main/java/**/*.java</include>
+                            <include>**/src/test/java/**/*.java</include>
+                            <include>**/src/main/webapp/resources/js/*.js</include>
+                        </includes>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -239,7 +255,7 @@
         <com.google.code.maven-license-plugin.version>1.4.0</com.google.code.maven-license-plugin.version>
         <org.codehaus.mojo.version>2.5</org.codehaus.mojo.version>
         <!-- == Dependency Versions == -->
-        <postgresql.version>9.4.1212.jre7</postgresql.version>
+        <postgresql.version>42.2.5.jre7</postgresql.version>
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
         <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
         <thymeleaf-extras-java8time.version>3.0.0.RELEASE</thymeleaf-extras-java8time.version>

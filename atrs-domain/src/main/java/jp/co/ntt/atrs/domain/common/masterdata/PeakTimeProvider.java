@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
@@ -33,7 +32,6 @@ import javax.inject.Inject;
 
 /**
  * ピーク時期情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -60,7 +58,6 @@ public class PeakTimeProvider {
 
     /**
      * 指定搭乗日に該当するピーク時期情報を取得する。
-     * 
      * @param depDate 搭乗日
      * @return ピーク時期情報。該当するピーク時期情報が存在しない場合null。
      */
@@ -68,9 +65,9 @@ public class PeakTimeProvider {
         Assert.notNull(depDate);
 
         for (PeakTime peakTime : peakTimeList) {
-            Interval peakTimeInterval = new Interval(
-                    new DateTime(peakTime.getPeakStartDate()).withTimeAtStartOfDay(),
-                    new DateTime(peakTime.getPeakEndDate()).withTimeAtStartOfDay().plus(1));
+            Interval peakTimeInterval = new Interval(new DateTime(peakTime
+                    .getPeakStartDate()).withTimeAtStartOfDay(), new DateTime(peakTime
+                    .getPeakEndDate()).withTimeAtStartOfDay().plus(1));
             // 搭乗日が該当するピーク時期積算比率を返却
             if (peakTimeInterval.contains(depDate.getTime())) {
                 return peakTime;

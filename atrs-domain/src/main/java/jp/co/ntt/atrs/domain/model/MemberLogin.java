@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 NTT Corporation.
+ * Copyright(c) 2015 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,10 +9,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package jp.co.ntt.atrs.domain.model;
 
@@ -24,7 +23,6 @@ import java.util.Date;
 
 /**
  * カード会員ログイン情報。
- * 
  * @author NTT 電電太郎
  */
 public class MemberLogin implements Serializable {
@@ -56,7 +54,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * パスワード を取得する。
-     * 
      * @return パスワード
      */
     public String getPassword() {
@@ -65,7 +62,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * パスワード を設定する。
-     * 
      * @param password パスワード
      */
     public void setPassword(String password) {
@@ -74,7 +70,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * 前回パスワード を取得する。
-     * 
      * @return 前回パスワード
      */
     public String getLastPassword() {
@@ -83,7 +78,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * 前回パスワード を設定する。
-     * 
      * @param lastPassword 前回パスワード
      */
     public void setLastPassword(String lastPassword) {
@@ -92,7 +86,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * ログイン時刻 を取得する。
-     * 
      * @return ログイン時刻
      */
     public Date getLoginDateTime() {
@@ -101,7 +94,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * ログイン時刻 を設定する。
-     * 
      * @param loginDateTime ログイン時刻
      */
     public void setLoginDateTime(Date loginDateTime) {
@@ -110,7 +102,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * ログインフラグ を取得する。
-     * 
      * @return ログインフラグ
      */
     public Boolean getLoginFlg() {
@@ -119,7 +110,6 @@ public class MemberLogin implements Serializable {
 
     /**
      * ログインフラグ を設定する。
-     * 
      * @param loginFlg ログインフラグ
      */
     public void setLoginFlg(Boolean loginFlg) {
@@ -131,6 +121,7 @@ public class MemberLogin implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }
