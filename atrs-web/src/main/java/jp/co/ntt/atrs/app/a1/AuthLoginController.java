@@ -17,10 +17,10 @@ package jp.co.ntt.atrs.app.a1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * ログイン認証コントローラ。
- * 
  * @author NTT 電電太郎
  */
 @Controller
@@ -29,10 +29,9 @@ public class AuthLoginController {
 
     /**
      * ログイン画面を表示する。
-     * 
      * @return View論理名
      */
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public String loginForm() {
         return "A1/loginForm";
     }

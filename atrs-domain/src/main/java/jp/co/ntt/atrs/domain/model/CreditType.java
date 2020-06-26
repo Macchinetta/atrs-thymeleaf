@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * クレジットカード種別情報。
- * 
  * @author NTT 電電太郎
  */
 public class CreditType implements Serializable {
@@ -44,7 +43,6 @@ public class CreditType implements Serializable {
 
     /**
      * クレジットカード種別コードを取得する。
-     * 
      * @return クレジットカード種別コード
      */
     public String getCreditTypeCd() {
@@ -53,7 +51,6 @@ public class CreditType implements Serializable {
 
     /**
      * クレジットカード種別コードを設定する。
-     * 
      * @param creditTypeCd クレジットカード種別コード
      */
     public void setCreditTypeCd(String creditTypeCd) {
@@ -62,7 +59,6 @@ public class CreditType implements Serializable {
 
     /**
      * クレジットカード会社を取得する。
-     * 
      * @return クレジットカード会社
      */
     public String getCreditFirm() {
@@ -71,7 +67,6 @@ public class CreditType implements Serializable {
 
     /**
      * クレジットカード会社を設定する。
-     * 
      * @param creditFirm クレジットカード会社
      */
     public void setCreditFirm(String creditFirm) {
@@ -83,6 +78,7 @@ public class CreditType implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

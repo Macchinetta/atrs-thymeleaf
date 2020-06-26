@@ -28,7 +28,6 @@ import java.util.List;
 
 /**
  * 空席情報検索条件を保持するクラス。
- * 
  * @author NTT 電電太郎
  */
 public class VacantSeatSearchCriteriaDto implements Serializable {
@@ -65,7 +64,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param depDate 出発日
      * @param route 区間情報
      * @param boardingClass 搭乗クラス
@@ -73,7 +71,8 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      * @param fareTypeList 運賃種別コードリスト
      */
     public VacantSeatSearchCriteriaDto(Date depDate, Route route,
-            BoardingClassCd boardingClass, Integer beforeDayNum, List<FareTypeCd> fareTypeList) {
+            BoardingClassCd boardingClass, Integer beforeDayNum,
+            List<FareTypeCd> fareTypeList) {
 
         this.depDate = depDate;
         this.route = route;
@@ -84,7 +83,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗クラスを取得する。
-     * 
      * @return 搭乗クラス
      */
     public BoardingClassCd getBoardingClass() {
@@ -93,7 +91,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 出発日を取得する。
-     * 
      * @return 出発日
      */
     public Date getDepDate() {
@@ -102,7 +99,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 区間情報を取得する。
-     * 
      * @return 区間情報
      */
     public Route getRoute() {
@@ -111,7 +107,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗日前日数を取得する。
-     * 
      * @return 区間情報
      */
     public Integer getBeforeDayNum() {
@@ -120,7 +115,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 運賃種別コードリストを取得する。
-     * 
      * @return 運賃種別コードリスト
      */
     public List<FareTypeCd> getFareTypeList() {
@@ -132,6 +126,7 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

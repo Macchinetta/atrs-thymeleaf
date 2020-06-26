@@ -33,7 +33,6 @@ import javax.validation.constraints.Pattern;
 
 /**
  * 半角文字チェックアノテーション
- * 
  * @author NTT 電電太郎
  */
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })

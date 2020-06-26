@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.app.b0;
 
 /**
  * 路線種別の列挙型。
- * 
  * @author NTT 電電次郎
  */
 public enum LineType {
@@ -44,7 +43,6 @@ public enum LineType {
 
     /**
      * コンストラクタ。
-     *
      * @param code 路線種別コード
      * @param name 路線種別名称
      */
@@ -55,7 +53,6 @@ public enum LineType {
 
     /**
      * 路線種別コードを取得する。
-     *
      * @return 路線種別コード
      */
     public String getCode() {
@@ -64,7 +61,6 @@ public enum LineType {
 
     /**
      * 路線種別名称を取得する。
-     *
      * @return 路線種別名称
      */
     public String getName() {

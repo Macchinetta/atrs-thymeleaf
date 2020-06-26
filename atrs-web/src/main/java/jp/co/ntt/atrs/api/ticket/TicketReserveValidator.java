@@ -38,7 +38,6 @@ import org.springframework.validation.Validator;
  * <li>搭乗者情報の必須チェック。</li>
  * <li>搭乗者情報が少なくとも1件以上入力されていることのチェック。</li>
  * </ul>
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -99,7 +98,6 @@ public class TicketReserveValidator implements Validator {
 
     /**
      * 予約代表者電話番号の相関チェックを行う。
-     * 
      * @param errors エラーメッセージを保持するクラス
      * @param repTel1 予約代表者電話番号1
      * @param repTel2 予約代表者電話番号2
@@ -119,7 +117,6 @@ public class TicketReserveValidator implements Validator {
 
     /**
      * 搭乗者情報フォームリストのフィールド必須チェックを行う。
-     * 
      * @param errors エラーメッセージを保持するクラス。
      * @param itemName チェック項目名
      * @param index リストのインデックス値

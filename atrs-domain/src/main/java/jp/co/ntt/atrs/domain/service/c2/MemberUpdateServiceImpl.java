@@ -32,7 +32,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報変更を行うService実装クラス。
- * 
  * @author NTT 電電花子
  */
 @Service
@@ -52,7 +51,6 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     PasswordEncoder passwordEncoder;
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -64,7 +62,6 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     }
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -77,28 +74,28 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
         // 会員情報更新
         int updateMemberCount = memberRepository.update(member);
         if (updateMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(updateMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(updateMemberCount, 1));
         }
 
         // パスワードの変更がある場合のみ会員ログイン情報を更新
         if (StringUtils.hasLength(memberLogin.getPassword())) {
 
             // パスワードのハッシュ化
-            memberLogin.setPassword(
-                    passwordEncoder.encode(member.getMemberLogin().getPassword()));
+            memberLogin.setPassword(passwordEncoder.encode(member
+                    .getMemberLogin().getPassword()));
 
             // 会員ログイン情報更新
-            int updateMemberLoginCount = memberRepository.updateMemberLogin(member);
+            int updateMemberLoginCount = memberRepository
+                    .updateMemberLogin(member);
             if (updateMemberLoginCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                        LogMessages.E_AR_A0_L9002.getMessage(updateMemberLoginCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                        .getMessage(updateMemberLoginCount, 1));
             }
         }
     }
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override

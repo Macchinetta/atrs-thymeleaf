@@ -27,7 +27,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報登録フォームのバリデータ。
- * 
  * @author NTT 電電花子
  */
 @Component
@@ -57,7 +56,7 @@ public class MemberRegisterValidator implements Validator {
 
         // パスワードチェック
         if (!errors.hasFieldErrors("password")
-            && !errors.hasFieldErrors("reEnterPassword")) {
+                && !errors.hasFieldErrors("reEnterPassword")) {
 
             String password = form.getPassword();
             String reEnterPassword = form.getReEnterPassword();

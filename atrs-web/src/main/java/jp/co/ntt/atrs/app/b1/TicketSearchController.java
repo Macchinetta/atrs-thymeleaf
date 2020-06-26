@@ -39,7 +39,6 @@ import javax.inject.Inject;
 
 /**
  * 空席照会コントローラ。
- * 
  * @author NTT 電電次郎
  */
 @Controller
@@ -72,7 +71,6 @@ public class TicketSearchController {
 
     /**
      * 空席照会フォームのバリデータをバインダに追加する。
-     * 
      * @param binder バインダ
      */
     @InitBinder("ticketSearchForm")
@@ -82,7 +80,6 @@ public class TicketSearchController {
 
     /**
      * 予約フライト選択フォームのバリデータをバインダに追加する。
-     * 
      * @param binder バインダ
      */
     @InitBinder("reservationFlightForm")
@@ -92,7 +89,6 @@ public class TicketSearchController {
 
     /**
      * TOP画面を表示する。
-     * 
      * @param model 出力情報を保持するオブジェクト
      * @return View論理名
      */
@@ -116,7 +112,6 @@ public class TicketSearchController {
      * <li>空席照会条件はデフォルト値。</li>
      * <li>初期空席照会はしない。</li>
      * </ul>
-     * 
      * @param model 出力情報を保持するオブジェクト
      * @return View論理名
      */
@@ -141,15 +136,15 @@ public class TicketSearchController {
      * <li>空席照会条件はTOP画面入力値。</li>
      * <li>入力値エラーがある場合を除き初期空席照会を実施。</li>
      * </ul>
-     * 
      * @param ticketSearchForm 空席照会フォーム
      * @param result チェック結果
      * @param model 出力情報を保持するオブジェクト
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.GET, params = "flightForm")
-    public String searchFlightForm(@Validated TicketSearchForm ticketSearchForm,
-        BindingResult result, Model model) {
+    public String searchFlightForm(
+            @Validated TicketSearchForm ticketSearchForm, BindingResult result,
+            Model model) {
 
         if (result.hasErrors()) {
             // 検証エラーがある場合初期空席照会を実施しない
@@ -164,7 +159,6 @@ public class TicketSearchController {
 
     /**
      * 空席照会画面を再表示する。
-     * 
      * @param ticketSearchForm 空席照会フォーム
      * @param reservationFlightForm 予約フライト選択フォーム
      * @param model 出力情報を保持するオブジェクト
@@ -172,7 +166,7 @@ public class TicketSearchController {
      */
     @RequestMapping(method = RequestMethod.GET, params = "redo")
     public String searchRedo(TicketSearchForm ticketSearchForm,
-        ReservationFlightForm reservationFlightForm, Model model) {
+            ReservationFlightForm reservationFlightForm, Model model) {
 
         // 空席照会画面(TOP画面)表示情報設定
         model.addAttribute(ticketSearchHelper.createFlightSearchOutputDto());
@@ -186,7 +180,6 @@ public class TicketSearchController {
      * <li>チェックエラーがある場合、空席照会画面を再表示する。</li>
      * <li>チェックOKの場合、お客様情報入力画面をリダイレクトで表示する。</li>
      * </ul>
-     * 
      * @param ticketSearchForm 空席照会フォーム
      * @param reservationFlightForm 予約フライト選択フォーム
      * @param result チェック結果
@@ -196,12 +189,12 @@ public class TicketSearchController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String searchSelect(TicketSearchForm ticketSearchForm,
-        @Validated ReservationFlightForm reservationFlightForm,
-        BindingResult result, Model model,
-        RedirectAttributes redirectAttributes) {
+            @Validated ReservationFlightForm reservationFlightForm,
+            BindingResult result, Model model,
+            RedirectAttributes redirectAttributes) {
 
         if (result.hasFieldErrors("selectFlightFormList*")
-            || result.hasFieldErrors("flightType")) {
+                || result.hasFieldErrors("flightType")) {
 
             // 非表示項目(選択フライト情報、フライト種別)に検証エラーがある場合は
             // 改ざんとみなす
@@ -214,8 +207,8 @@ public class TicketSearchController {
         }
 
         // 選択フライト情報の業務ロジックチェック
-        List<Flight> flightList =
-            ticketHelper.toFlightList(reservationFlightForm.getSelectFlightFormList());
+        List<Flight> flightList = ticketHelper
+                .toFlightList(reservationFlightForm.getSelectFlightFormList());
         try {
             ticketSearchHelper.validateFlightList(flightList);
         } catch (BusinessException e) {
@@ -227,8 +220,8 @@ public class TicketSearchController {
         }
 
         // 選択フライト情報をリダイレクトパラメータに設定
-        Map<String, String> params =
-            ticketHelper.createParameterMapForSelectFlight(reservationFlightForm);
+        Map<String, String> params = ticketHelper
+                .createParameterMapForSelectFlight(reservationFlightForm);
         for (String key : params.keySet()) {
             redirectAttributes.addAttribute(key, params.get(key));
         }

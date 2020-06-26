@@ -31,13 +31,14 @@ import javax.inject.Inject;
 
 /**
  * チケット予約フォームのバリデータ。
- * <p>以下のチェックを行う。</p>
+ * <p>
+ * 以下のチェックを行う。
+ * </p>
  * <ul>
  * <li>予約代表者電話番号1と予約代表者電話番号2の指定合計文字数チェック。</li>
  * <li>搭乗者情報の必須チェック。</li>
  * <li>搭乗者情報が少なくとも1件以上入力されていることのチェック。</li>
  * </ul>
- * 
  * @author NTT 電電三郎
  */
 @Component
@@ -66,7 +67,8 @@ public class TicketReserveValidator implements Validator {
         TicketReserveForm form = (TicketReserveForm) target;
 
         // 予約代表者電話番号チェック
-        if (!(errors.hasFieldErrors("repTel1") || errors.hasFieldErrors("repTel2"))) {
+        if (!(errors.hasFieldErrors("repTel1") || errors
+                .hasFieldErrors("repTel2"))) {
             checkRepresentativeTel(errors, form.getRepTel1(), form.getRepTel2());
         }
 
@@ -92,12 +94,12 @@ public class TicketReserveValidator implements Validator {
         }
 
         // 予約フライトチェック
-        ValidationUtils.invokeValidator(reservationFlightValidator, form, errors);
+        ValidationUtils.invokeValidator(reservationFlightValidator, form,
+                errors);
     }
 
     /**
      * 予約代表者電話番号の相関チェックを行う。
-     * 
      * @param errors エラーメッセージを保持するクラス
      * @param tel1 予約代表者電話番号1
      * @param tel2 予約代表者電話番号2
@@ -110,13 +112,13 @@ public class TicketReserveValidator implements Validator {
                     new DefaultMessageSourceResolvable("repTel2"),
                     ValidationUtil.TEL1_AND_TEL2_MIN_LENGTH,
                     ValidationUtil.TEL1_AND_TEL2_MAX_LENGTH };
-            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(), errorArgs, "");
+            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(),
+                    errorArgs, "");
         }
     }
 
     /**
      * 搭乗者情報フォームリストのフィールド必須チェックを行う。
-     * 
      * @param errors エラーメッセージを保持するクラス。
      * @param itemName チェック項目名
      * @param index リストのインデックス値
@@ -125,7 +127,7 @@ public class TicketReserveValidator implements Validator {
 
         String target = "passengerFormList[" + index + "]." + itemName;
         ValidationUtils.rejectIfEmpty(errors, target, "NotNull",
-            new Object[] { new DefaultMessageSourceResolvable(target) });
+                new Object[] { new DefaultMessageSourceResolvable(target) });
     }
 
 }

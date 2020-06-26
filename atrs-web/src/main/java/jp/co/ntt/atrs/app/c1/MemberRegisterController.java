@@ -37,7 +37,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報登録コントローラ。
- * 
  * @author NTT 電電花子
  */
 @Controller
@@ -65,7 +64,6 @@ public class MemberRegisterController {
 
     /**
      * 会員情報登録フォームのバリデータをバインダに追加する。
-     * 
      * @param binder バインダ
      */
     @InitBinder("memberRegisterForm")
@@ -75,7 +73,6 @@ public class MemberRegisterController {
 
     /**
      * 会員情報登録フォームを初期化する。
-     * 
      * @return 会員情報登録フォーム
      */
     @ModelAttribute("memberRegisterForm")
@@ -86,7 +83,6 @@ public class MemberRegisterController {
 
     /**
      * 会員情報登録画面を表示する。
-     * 
      * @param model 出力情報を保持するクラス
      * @return View論理名
      */
@@ -94,8 +90,10 @@ public class MemberRegisterController {
     public String registerForm(Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper
+                .getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper
+                .getDateOfBirthMaxDate());
 
         return "C1/memberRegisterForm";
     }
@@ -107,7 +105,6 @@ public class MemberRegisterController {
      * <li>チェックエラーがある場合、会員情報登録画面を再表示する。</li>
      * <li>チェックOKの場合、会員登録確認画面を表示する。</li>
      * </ul>
-     * 
      * @param memberRegisterForm 会員情報登録フォーム
      * @param result チェック結果
      * @param model 出力情報を保持するクラス
@@ -115,8 +112,9 @@ public class MemberRegisterController {
      */
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.POST, params = "confirm")
-    public String registerConfirm(@Validated MemberRegisterForm memberRegisterForm,
-        BindingResult result, Model model) {
+    public String registerConfirm(
+            @Validated MemberRegisterForm memberRegisterForm,
+            BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             // 検証エラーがある場合は画面再表示
@@ -128,17 +126,19 @@ public class MemberRegisterController {
 
     /**
      * 会員情報登録画面を再表示する。
-     * 
      * @param memberRegisterForm 会員情報登録フォーム
      * @param model 出力情報を保持するクラス
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.POST, params = "redo")
-    public String registerRedo(MemberRegisterForm memberRegisterForm, Model model) {
+    public String registerRedo(MemberRegisterForm memberRegisterForm,
+            Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper
+                .getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper
+                .getDateOfBirthMaxDate());
 
         return "C1/memberRegisterForm";
     }
@@ -149,7 +149,6 @@ public class MemberRegisterController {
      * <li>トランザクショントークンチェックを行う。</li>
      * <li>登録後、会員登録完了画面をリダイレクトで表示する。</li>
      * </ul>
-     * 
      * @param memberRegisterForm 会員情報登録フォーム
      * @param model 出力情報を保持するクラス
      * @param result チェック結果
@@ -159,7 +158,8 @@ public class MemberRegisterController {
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST)
     public String register(@Validated MemberRegisterForm memberRegisterForm,
-        BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+            BindingResult result, Model model,
+            RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             // 非表示項目に検証エラーがある場合は改ざんとみなす
@@ -179,7 +179,6 @@ public class MemberRegisterController {
 
     /**
      * 会員登録完了画面を表示する。
-     * 
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.GET, params = "complete")

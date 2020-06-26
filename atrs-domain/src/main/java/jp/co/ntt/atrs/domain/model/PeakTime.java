@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * ピーク時期情報。
- * 
  * @author NTT 電電太郎
  */
 public class PeakTime implements Serializable {
@@ -55,7 +54,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期コードを取得する。
-     * 
      * @return ピーク時期コード
      */
     public String getPeakTimeCd() {
@@ -64,7 +62,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期コードを設定する。
-     * 
      * @param peakTimeCd ピーク時期コード
      */
     public void setPeakTimeCd(String peakTimeCd) {
@@ -73,7 +70,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期開始日を取得する。
-     * 
      * @return ピーク時期開始日
      */
     public Date getPeakStartDate() {
@@ -82,7 +78,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期開始日を設定する。
-     * 
      * @param peakStartDate ピーク時期開始日
      */
     public void setPeakStartDate(Date peakStartDate) {
@@ -91,7 +86,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期終了日を取得する。
-     * 
      * @return ピーク時期終了日
      */
     public Date getPeakEndDate() {
@@ -100,7 +94,6 @@ public class PeakTime implements Serializable {
 
     /**
      * ピーク時期終了日を設定する。
-     * 
      * @param peakEndDate ピーク時期終了日
      */
     public void setPeakEndDate(Date peakEndDate) {
@@ -109,7 +102,6 @@ public class PeakTime implements Serializable {
 
     /**
      * 積算比率を取得する。
-     * 
      * @return 積算比率
      */
     public Integer getMultiplicationRatio() {
@@ -118,7 +110,6 @@ public class PeakTime implements Serializable {
 
     /**
      * 積算比率を設定する。
-     * 
      * @param multiplicationRatio 積算比率
      */
     public void setMultiplicationRatio(Integer multiplicationRatio) {
@@ -130,6 +121,7 @@ public class PeakTime implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

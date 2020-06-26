@@ -22,11 +22,10 @@ import org.terasoluna.gfw.common.exception.ExceptionCodeProvider;
 
 /**
  * 不正リクエスト例外。
- * 
  * @author NTT 電電太郎
  */
 public class BadRequestException extends RuntimeException implements
-    ExceptionCodeProvider {
+                                                         ExceptionCodeProvider {
 
     /**
      * serialVersionUID。
@@ -35,7 +34,6 @@ public class BadRequestException extends RuntimeException implements
 
     /**
      * コンストラクタ。
-     * 
      * @param causeMessage エラーメッセージ
      */
     public BadRequestException(String causeMessage) {
@@ -44,7 +42,6 @@ public class BadRequestException extends RuntimeException implements
 
     /**
      * コンストラクタ。
-     * 
      * @param errors エラーオブジェクト
      */
     public BadRequestException(Errors errors) {
@@ -53,7 +50,6 @@ public class BadRequestException extends RuntimeException implements
 
     /**
      * コンストラクタ。
-     * 
      * @param e 例外オブジェクト
      */
     public BadRequestException(Exception e) {

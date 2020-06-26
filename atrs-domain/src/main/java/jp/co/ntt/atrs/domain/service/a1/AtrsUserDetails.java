@@ -27,7 +27,6 @@ import java.util.List;
 
 /**
  * ログインユーザ情報クラス。
- * 
  * @author NTT 電電太郎
  */
 public class AtrsUserDetails implements UserDetails {
@@ -40,8 +39,8 @@ public class AtrsUserDetails implements UserDetails {
     /**
      * デフォルト権限設定。
      */
-    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES =
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES = Collections
+            .singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     /**
      * カード会員情報。
@@ -50,7 +49,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * コンストラクタ。
-     * 
      * @param member カード会員情報
      */
     public AtrsUserDetails(Member member) {
@@ -115,7 +113,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * カード会員情報を取得する。
-     * 
      * @return カード会員情報
      */
     public Member getMember() {
@@ -124,7 +121,6 @@ public class AtrsUserDetails implements UserDetails {
 
     /**
      * カード会員情報を設定する。
-     * 
      * @param member カード会員情報
      */
     public void setMember(Member member) {

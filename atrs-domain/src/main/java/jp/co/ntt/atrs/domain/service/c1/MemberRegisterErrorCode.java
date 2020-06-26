@@ -19,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsErrorCode;
 
 /**
  * 会員情報登録サービスでのエラーコードを表す列挙型。
- * 
  * @author NTT 電電花子
  */
 public enum MemberRegisterErrorCode implements AtrsErrorCode {
@@ -36,7 +35,6 @@ public enum MemberRegisterErrorCode implements AtrsErrorCode {
 
     /**
      * コンストラクタ。
-     *
      * @param code エラーコード。
      */
     private MemberRegisterErrorCode(String code) {

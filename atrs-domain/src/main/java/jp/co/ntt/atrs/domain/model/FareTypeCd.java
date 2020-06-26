@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.domain.model;
 
 /**
  * 運賃種別コードの列挙型。
- * 
  * @author NTT 電電太郎
  */
 public enum FareTypeCd {
@@ -74,7 +73,6 @@ public enum FareTypeCd {
 
     /**
      * 運賃種別コードを取得する。
-     *
      * @return 運賃種別コード
      */
     public String getCode() {

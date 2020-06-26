@@ -31,7 +31,6 @@ import jp.co.ntt.atrs.domain.service.c0.MemberErrorCode;
 
 /**
  * 会員情報フォームの入力チェックを行うバリデータ。
- * 
  * @author NTT 電電花子
  */
 @Component
@@ -66,7 +65,8 @@ public class MemberValidator implements Validator {
         IMemberForm form = (IMemberForm) target;
 
         // メールアドレスチェック
-        if (!errors.hasFieldErrors("mail") && !errors.hasFieldErrors("reEnterMail")) {
+        if (!errors.hasFieldErrors("mail")
+                && !errors.hasFieldErrors("reEnterMail")) {
             String mail = form.getMail();
             String reEnterMail = form.getReEnterMail();
             if (!mail.equals(reEnterMail)) {
@@ -87,7 +87,8 @@ public class MemberValidator implements Validator {
         // 生年月日チェック
         if (!errors.hasFieldErrors("dateOfBirth")) {
 
-            DateTime dateOfBirthMin = DateTimeUtil.toDateTime(dateOfBirthMinDate);
+            DateTime dateOfBirthMin = DateTimeUtil
+                    .toDateTime(dateOfBirthMinDate);
             DateTime dateOfBirthMax = dateFactory.newDateTime();
             DateTime dateOfBirth = new DateTime(form.getDateOfBirth());
 
@@ -95,9 +96,10 @@ public class MemberValidator implements Validator {
             if (!interval.contains(dateOfBirth)) {
                 // 生年月日の入力許容範囲(1900年1月1日から現在まで)でなければエラー
                 errors.reject(
-                    MemberErrorCode.E_AR_C0_5003.code(),
-                    new Object[] { dateOfBirthMinDate,
-                            DateTimeUtil.toFormatDateString(dateOfBirthMax) }, "");
+                        MemberErrorCode.E_AR_C0_5003.code(),
+                        new Object[] { dateOfBirthMinDate,
+                                DateTimeUtil.toFormatDateString(dateOfBirthMax) },
+                        "");
             }
         }
 

@@ -25,7 +25,6 @@ import java.util.Set;
 
 /**
  * 運賃種別に関するユーティリティクラス。
- * 
  * @author NTT 電電太郎
  */
 public class FareTypeUtil {
@@ -65,7 +64,6 @@ public class FareTypeUtil {
 
     /**
      * 運賃種別が往復の運賃種別かを判定する。
-     * 
      * @param fareTypeCd 運賃種別
      * @return 往復の運賃種別の場合true
      */
@@ -75,7 +73,6 @@ public class FareTypeUtil {
 
     /**
      * 運賃種別が片道の運賃種別かを判定する。
-     * 
      * @param fareTypeCd 運賃種別
      * @return 片道の運賃種別の場合true
      */
@@ -85,7 +82,6 @@ public class FareTypeUtil {
 
     /**
      * フライト種別に応じた運賃種別リストを取得する。
-     * 
      * @param flightType フライト種別
      * @return 運賃種別リスト
      */

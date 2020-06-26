@@ -30,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 会員WebAPIコントローラ。
- * 
  * @author NTT 電電太郎
  */
 @Controller
@@ -45,7 +44,6 @@ public class MemberApiController {
 
     /**
      * 存在する会員番号かを判定する。
-     * 
      * @param membershipNumber 会員番号
      * @return OKステータス:存在する、NOT_FOUNDステータス:存在しない
      */
@@ -59,9 +57,8 @@ public class MemberApiController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        return membershipSharedService.isMember(membershipNumber) ?
-                new ResponseEntity<>(HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return membershipSharedService.isMember(membershipNumber) ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

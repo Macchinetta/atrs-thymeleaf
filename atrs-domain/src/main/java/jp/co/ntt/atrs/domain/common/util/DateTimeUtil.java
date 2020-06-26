@@ -25,7 +25,6 @@ import java.util.Date;
 
 /**
  * 日時に関するユーティリティクラス。
- * 
  * @author NTT 電電太郎
  */
 public class DateTimeUtil {
@@ -33,14 +32,14 @@ public class DateTimeUtil {
     /**
      * 日付(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormat.forPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat
+            .forPattern("yyyy/MM/dd");
 
     /**
      * 時間(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter TIME_FORMATTER =
-            DateTimeFormat.forPattern("HHmm");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat
+            .forPattern("HHmm");
 
     /**
      * コンストラクタ。
@@ -51,18 +50,17 @@ public class DateTimeUtil {
 
     /**
      * DateTimeへ変換する。
-     * 
      * @param date 日付オブジェクト
      * @param timeString 時刻文字列(HHmm)
      * @return 引数で指定された日付および時刻を保持するDateTimeオブジェクト
      */
     public static DateTime toDateTime(Date date, String timeString) {
-        return new LocalDate(date).toDateTime(DateTimeUtil.toLocalTime(timeString));
+        return new LocalDate(date).toDateTime(DateTimeUtil
+                .toLocalTime(timeString));
     }
 
     /**
      * DateTimeへ変換する。
-     * 
      * @param dateString 日付文字列(yyyy/MM/dd)
      * @return 引数で指定された日付を保持するDateTimeオブジェクト
      */
@@ -72,7 +70,6 @@ public class DateTimeUtil {
 
     /**
      * LocalTimeへ変換する。
-     * 
      * @param timeString 時刻文字列(HHmm)
      * @return 引数で指定された時刻を保持するLocalTimeオブジェクト
      */
@@ -82,7 +79,6 @@ public class DateTimeUtil {
 
     /**
      * 整形日付文字列(yyyy/MM/dd)へ変換する。
-     * 
      * @param date 日付オブジェクト
      * @return 日付文字列(yyyy/MM/dd)
      */
@@ -90,12 +86,11 @@ public class DateTimeUtil {
         if (date == null) {
             return "";
         }
-        return new DateTime(date).toString("yyyy/MM/dd");
+        return DATE_FORMATTER.print(new DateTime(date));
     }
 
     /**
      * 整形日付文字列(yyyy/MM/dd)へ変換する。
-     * 
      * @param dateTime DateTimeオブジェクト
      * @return 日付文字列(yyyy/MM/dd)
      */
@@ -103,12 +98,11 @@ public class DateTimeUtil {
         if (dateTime == null) {
             return "";
         }
-        return dateTime.toString("yyyy/MM/dd");
+        return DATE_FORMATTER.print(dateTime);
     }
 
     /**
      * 整形時刻文字列(HH:mm)へ変換する。
-     * 
      * @param timeString 時刻文字列(HHmm)
      * @return 時刻文字列(HH:mm)
      */

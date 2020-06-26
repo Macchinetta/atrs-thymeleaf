@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * チケット予約完了画面出力用DTO。
- * 
  * @author NTT 電電三郎
  */
 public class ReserveCompleteOutputDto implements Serializable {
@@ -50,7 +49,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 予約番号を取得する。
-     * 
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -59,7 +57,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -68,7 +65,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 支払期限を取得する。
-     * 
      * @return 支払期限
      */
     public Date getPaymentDate() {
@@ -77,7 +73,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 支払期限を設定する。
-     * 
      * @param paymentDate 支払期限
      */
     public void setPaymentDate(Date paymentDate) {
@@ -86,7 +81,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 予約チケットの合計金額を取得する。
-     * 
      * @return 予約チケットの合計金額
      */
     public Integer getTotalFare() {
@@ -95,7 +89,6 @@ public class ReserveCompleteOutputDto implements Serializable {
 
     /**
      * 予約チケットの合計金額を設定する。
-     * 
      * @param totalFare 予約チケットの合計金額
      */
     public void setTotalFare(Integer totalFare) {
@@ -107,6 +100,7 @@ public class ReserveCompleteOutputDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

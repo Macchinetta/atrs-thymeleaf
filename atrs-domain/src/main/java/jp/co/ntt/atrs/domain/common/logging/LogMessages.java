@@ -19,7 +19,6 @@ import java.text.MessageFormat;
 
 /**
  * ログメッセージを定義する列挙型。
- * 
  * @author NTT 電電太郎
  */
 public enum LogMessages {
@@ -106,7 +105,6 @@ public enum LogMessages {
 
     /**
      * コンストラクタ。
-     * 
      * @param code メッセージコード
      * @param message メッセージ内容
      */
@@ -117,7 +115,6 @@ public enum LogMessages {
 
     /**
      * メッセージコードを取得する。
-     * 
      * @return メッセージコード
      */
     public String getCode() {
@@ -126,7 +123,6 @@ public enum LogMessages {
 
     /**
      * メッセージ内容を取得する。
-     * 
      * @return メッセージ内容
      */
     public String getMessage() {
@@ -135,7 +131,6 @@ public enum LogMessages {
 
     /**
      * パラメータを指定してメッセージ内容を取得する。
-     * 
      * @param args パラメータ
      * @return メッセージ内容
      */

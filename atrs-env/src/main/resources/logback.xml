@@ -37,6 +37,10 @@
     <level value="debug" />
   </logger>
 
+  <logger name="jp.co.ntt.atrs.domain.repository">
+    <level value="trace" />
+  </logger>
+
   <!-- アクセスログ(infoで出力) -->
   <logger name="jp.co.ntt.atrs.app.common.logging.AccessLogFilter">
     <level value="info" />
@@ -65,8 +69,8 @@
     <level value="info" />
   </logger>
 
-  <logger name="jdbc.sqltiming">
-    <level value="debug" />
+  <logger name="org.springframework.jdbc.core.JdbcTemplate">
+    <level value="trace" />
   </logger>
 
   <root>

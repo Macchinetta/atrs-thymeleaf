@@ -19,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsErrorCode;
 
 /**
  * 空席照会サービスエラーコードを表す列挙型。
- * 
  * @author NTT 電電次郎
  */
 public enum TicketSearchErrorCode implements AtrsErrorCode {
@@ -56,7 +55,6 @@ public enum TicketSearchErrorCode implements AtrsErrorCode {
 
     /**
      * コンストラクタ。
-     * 
      * @param code エラーコード。
      */
     private TicketSearchErrorCode(String code) {

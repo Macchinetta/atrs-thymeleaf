@@ -23,15 +23,15 @@ import jp.co.ntt.atrs.domain.model.ReserveFlight;
 
 /**
  * 予約テーブルにアクセスするリポジトリインターフェース。
- * 
  * @author NTT 電電太郎
  */
 public interface ReservationRepository {
 
     /**
      * 予約情報を登録する。
-     * <p>登録時に発出された予約番号が引数の予約情報に格納される。</p>
-     * 
+     * <p>
+     * 登録時に発出された予約番号が引数の予約情報に格納される。
+     * </p>
      * @param reservation 予約情報
      * @return 登録件数
      */
@@ -39,7 +39,6 @@ public interface ReservationRepository {
 
     /**
      * 予約フライト情報を登録する。
-     * 
      * @param reserveFlight 予約フライト情報
      * @return 登録件数
      */
@@ -47,7 +46,6 @@ public interface ReservationRepository {
 
     /**
      * 搭乗者情報を登録する。
-     * 
      * @param passenger 搭乗者情報
      * @return 登録件数
      */
@@ -58,6 +56,7 @@ public interface ReservationRepository {
      * @param membershipNumber 会員番号
      * @return 予約リスト
      */
-    List<ReservationHistoryDto> findAllByMembershipNumberForReport(String membershipNumber);
+    List<ReservationHistoryDto> findAllByMembershipNumberForReport(
+            String membershipNumber);
 
 }

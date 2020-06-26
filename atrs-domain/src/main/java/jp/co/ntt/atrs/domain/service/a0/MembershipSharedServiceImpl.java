@@ -25,7 +25,6 @@ import javax.inject.Inject;
 
 /**
  * 会員共通サービス実装クラス。
- * 
  * @author NTT 電電太郎
  */
 @Service

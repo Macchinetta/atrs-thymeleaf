@@ -27,13 +27,14 @@ import org.springframework.validation.Validator;
 
 /**
  * 空席照会フォームのバリデータ。
- * <p>下記の場合をエラーとする。</p>
+ * <p>
+ * 下記の場合をエラーとする。
+ * </p>
  * <ul>
  * <li>出発空港と到着空港が同じ場合。</li>
  * <li>フライト種別が往復の場合に復路搭乗日が入力されていない場合。</li>
  * <li>復路搭乗日が往路搭乗日以降ではない場合。</li>
  * </ul>
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -57,7 +58,7 @@ public class TicketSearchValidator implements Validator {
 
         // 出発空港と到着空港が同じでないかチェック
         if (!errors.hasFieldErrors("depAirportCd")
-            && !errors.hasFieldErrors("arrAirportCd")) {
+                && !errors.hasFieldErrors("arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {
@@ -69,15 +70,13 @@ public class TicketSearchValidator implements Validator {
         if (FlightType.RT.equals(form.getFlightType())) {
 
             // 復路搭乗日必須チェック
-            if (form.getHomewardDate() == null) {
-
-                ValidationUtils.rejectIfEmpty(errors, "homewardDate", "NotNull",
-                    new Object[] { new DefaultMessageSourceResolvable("homewardDate") });
-            }
+            ValidationUtils.rejectIfEmpty(errors, "homewardDate", "NotNull",
+                    new Object[] {
+                            new DefaultMessageSourceResolvable("homewardDate") });
 
             // 復路搭乗日が往路搭乗日以降かチェック
             if (!errors.hasFieldErrors("outwardDate")
-                && !errors.hasFieldErrors("homewardDate")) {
+                    && !errors.hasFieldErrors("homewardDate")) {
 
                 DateTime outwardDate = new DateTime(form.getOutwardDate());
                 DateTime homewardDate = new DateTime(form.getHomewardDate());

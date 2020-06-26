@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * REST API用エラー情報クラス。
- * 
  * @author NTT 電電太郎
  */
 public class ApiError implements Serializable {
@@ -57,7 +56,6 @@ public class ApiError implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param code エラーコード
      * @param message エラーメッセージ
      */
@@ -67,7 +65,6 @@ public class ApiError implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param code エラーコード
      * @param message エラーメッセージ
      * @param target エラー対象
@@ -80,7 +77,6 @@ public class ApiError implements Serializable {
 
     /**
      * エラーコードを取得する。
-     * 
      * @return エラーコード
      */
     public String getCode() {
@@ -89,7 +85,6 @@ public class ApiError implements Serializable {
 
     /**
      * エラーメッセージを設定する。
-     * 
      * @return エラーメッセージ
      */
     public String getMessage() {
@@ -98,7 +93,6 @@ public class ApiError implements Serializable {
 
     /**
      * エラー対象を取得する。
-     * 
      * @return エラー対象
      */
     public String getTarget() {
@@ -107,7 +101,6 @@ public class ApiError implements Serializable {
 
     /**
      * エラー詳細情報リストを取得する。
-     * 
      * @return エラー詳細情報リスト
      */
     public List<ApiError> getDetails() {
@@ -116,7 +109,6 @@ public class ApiError implements Serializable {
 
     /**
      * エラー詳細情報を設定する。
-     * 
      * @param detail エラー詳細情報
      */
     public void addDetail(ApiError detail) {

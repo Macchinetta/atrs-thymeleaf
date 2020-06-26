@@ -64,8 +64,8 @@ public class HistoryReportDownload extends AbstractFileDownloadView {
             HttpServletRequest request, HttpServletResponse response) {
 
         Path path = (Path) model.get(REPORT_FILE_PATH);
-        response.setHeader("Content-Disposition", "attachment;filename=" + path
-                .getFileName());
+        response.setHeader("Content-Disposition", "attachment;filename="
+                + path.getFileName());
 
         response.setContentType("text/csv");
     }

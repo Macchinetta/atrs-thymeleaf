@@ -36,7 +36,6 @@ import jp.co.ntt.atrs.domain.model.Gender;
 
 /**
  * チケット予約リソース。
- * 
  * @author NTT 電電太郎
  */
 public class TicketReserveResource implements Serializable {
@@ -153,7 +152,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約番号を取得する。
-     *
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -162,7 +160,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -171,7 +168,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 支払期限を取得する。
-     *
      * @return 支払期限
      */
     public Date getPaymentDate() {
@@ -180,7 +176,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 支払期限を設定する。
-     * 
      * @param paymentDate 支払期限
      */
     public void setPaymentDate(Date paymentDate) {
@@ -189,7 +184,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約チケットの合計金額を取得する。
-     *
      * @return 予約チケットの合計金額
      */
     public Integer getTotalFare() {
@@ -198,7 +192,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約チケットの合計金額を設定する。
-     * 
      * @param totalFare 予約チケットの合計金額
      */
     public void setTotalFare(Integer totalFare) {
@@ -207,7 +200,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者姓を取得する。
-     *
      * @return 予約代表者姓
      */
     public String getRepFamilyName() {
@@ -216,7 +208,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者姓を設定する。
-     * 
      * @param repFamilyName 予約代表者姓
      */
     public void setRepFamilyName(String repFamilyName) {
@@ -225,7 +216,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者名を取得する。
-     *
      * @return 予約代表者名
      */
     public String getRepGivenName() {
@@ -234,7 +224,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者名を設定する。
-     * 
      * @param repGivenName 予約代表者名
      */
     public void setRepGivenName(String repGivenName) {
@@ -243,7 +232,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者年齢を取得する。
-     *
      * @return 予約代表者年齢
      */
     public Integer getRepAge() {
@@ -252,7 +240,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者年齢を設定する。
-     * 
      * @param repAge 予約代表者年齢
      */
     public void setRepAge(Integer repAge) {
@@ -261,7 +248,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者性別を取得する。
-     *
      * @return 予約代表者性別
      */
     public Gender getRepGender() {
@@ -270,7 +256,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者性別を設定する。
-     * 
      * @param repGender 予約代表者性別
      */
     public void setRepGender(Gender repGender) {
@@ -279,7 +264,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者会員番号を取得する。
-     *
      * @return 予約代表者会員番号
      */
     public String getRepMembershipNumber() {
@@ -288,7 +272,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者会員番号を設定する。
-     * 
      * @param repMembershipNumber 予約代表者会員番号
      */
     public void setRepMembershipNumber(String repMembershipNumber) {
@@ -297,7 +280,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号1を取得する。
-     *
      * @return 予約代表者電話番号1
      */
     public String getRepTel1() {
@@ -306,7 +288,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号1を設定する。
-     * 
      * @param repTel1 予約代表者電話番号1
      */
     public void setRepTel1(String repTel1) {
@@ -315,7 +296,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号2を取得する。
-     *
      * @return 予約代表者電話番号2
      */
     public String getRepTel2() {
@@ -324,7 +304,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号2を設定する。
-     * 
      * @param repTel2 予約代表者電話番号2
      */
     public void setRepTel2(String repTel2) {
@@ -333,7 +312,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号3を取得する。
-     *
      * @return 予約代表者電話番号3
      */
     public String getRepTel3() {
@@ -342,7 +320,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者電話番号3を設定する。
-     * 
      * @param repTel3 予約代表者電話番号3
      */
     public void setRepTel3(String repTel3) {
@@ -351,7 +328,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者メールアドレスを取得する。
-     *
      * @return 予約代表者メールアドレス
      */
     public String getRepMail() {
@@ -360,7 +336,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 予約代表者メールアドレスを設定する。
-     * 
      * @param repMail 予約代表者メールアドレス
      */
     public void setRepMail(String repMail) {
@@ -369,7 +344,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * フライト種別を取得する。
-     *
      * @return フライト種別
      */
     public FlightType getFlightType() {
@@ -378,7 +352,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -387,7 +360,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 選択フライトリソースリストを取得する。
-     *
      * @return 選択フライトリソースリスト
      */
     public List<SelectFlightResource> getSelectFlightResourceList() {
@@ -396,7 +368,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 選択フライトリソースリストを設定する。
-     * 
      * @param selectedflightResource 選択フライトリソースリスト
      */
     public void setSelectFlightResourceList(
@@ -406,7 +377,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 搭乗者リソースリストを取得する。
-     *
      * @return 搭乗者リソースリスト
      */
     public List<PassengerResource> getPassengerResourceList() {
@@ -415,7 +385,6 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 搭乗者リソースリストを設定する。
-     * 
      * @param passengerResource 搭乗者リソースリスト
      */
     public void setPassengerResourceList(

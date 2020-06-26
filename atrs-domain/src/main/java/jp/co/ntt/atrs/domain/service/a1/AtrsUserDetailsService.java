@@ -34,7 +34,6 @@ import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**
  * ログインユーザ情報サービス。
- * 
  * @author NTT 電電太郎
  */
 @Transactional
@@ -43,8 +42,8 @@ public class AtrsUserDetailsService implements UserDetailsService {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(AtrsUserDetailsService.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AtrsUserDetailsService.class);
 
     /**
      * メッセージプロパティ設定。
@@ -62,8 +61,7 @@ public class AtrsUserDetailsService implements UserDetailsService {
      * {@inheritDoc}
      */
     @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Assert.hasText(username);
 
@@ -71,8 +69,8 @@ public class AtrsUserDetailsService implements UserDetailsService {
         Member member = memberRepository.findOneForLogin(username);
 
         if (member == null) {
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info(LogMessages.I_AR_A1_L2001.getMessage(username));
+            if (logger.isInfoEnabled()) {
+                logger.info(LogMessages.I_AR_A1_L2001.getMessage(username));
             }
             String errorMessage = messageSource.getMessage(
                     AuthLoginErrorCode.E_AR_A1_2001.code(), null, Locale

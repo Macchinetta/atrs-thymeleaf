@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * 予約情報を格納するDTO。
- * 
  * @author NTT 電電三郎
  */
 public class TicketReserveDto implements Serializable {
@@ -45,7 +44,6 @@ public class TicketReserveDto implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param reserveNo 予約番号
      * @param paymentDate 支払期限
      */
@@ -56,7 +54,6 @@ public class TicketReserveDto implements Serializable {
 
     /**
      * 予約番号を取得する。
-     * 
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -65,7 +62,6 @@ public class TicketReserveDto implements Serializable {
 
     /**
      * 支払期限を取得する。
-     * 
      * @return 支払期限
      */
     public Date getPaymentDate() {
@@ -74,7 +70,6 @@ public class TicketReserveDto implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -83,7 +78,6 @@ public class TicketReserveDto implements Serializable {
 
     /**
      * 支払期限を設定する。
-     * 
      * @param paymentDate 支払期限
      */
     public void setPaymentDate(Date paymentDate) {
@@ -95,6 +89,7 @@ public class TicketReserveDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

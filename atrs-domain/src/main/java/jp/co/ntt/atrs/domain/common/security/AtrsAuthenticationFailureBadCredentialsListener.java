@@ -26,33 +26,33 @@ import org.springframework.stereotype.Component;
 
 /**
  * パスワード不正が原因で認証が失敗した事をハンドリングするための認証イベントリスナクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationFailureBadCredentialsListener implements
-        ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
+public class AtrsAuthenticationFailureBadCredentialsListener
+                                                            implements
+                                                            ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     /**
      * ロガー。
      */
-    private static final Logger LOGGER = LoggerFactory
+    private static final Logger logger = LoggerFactory
             .getLogger(AtrsAuthenticationFailureBadCredentialsListener.class);
 
     /**
      * {@inheritDoc}
-     * 
      * <p>
      * パスワード不一致を通知するログを出力する。
      * </p>
      */
     @Override
-    public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
+    public void onApplicationEvent(
+            AuthenticationFailureBadCredentialsEvent event) {
         if (!(event.getException() instanceof BadCredentialsException)) {
             return;
         }
-        LOGGER.info(LogMessages.I_AR_A1_L2003.getMessage(
-                event.getAuthentication().getName()), event.getException());
+        logger.info(LogMessages.I_AR_A1_L2003.getMessage(event
+                .getAuthentication().getName()), event.getException());
     }
 
 }

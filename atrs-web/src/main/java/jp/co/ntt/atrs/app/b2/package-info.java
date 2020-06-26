@@ -19,3 +19,4 @@
  * @author NTT 電電三郎
  */
 package jp.co.ntt.atrs.app.b2;
+

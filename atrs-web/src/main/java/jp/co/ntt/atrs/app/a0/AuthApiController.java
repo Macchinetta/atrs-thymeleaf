@@ -29,7 +29,6 @@ import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
 
 /**
  * 認証WebAPIコントローラ。
- * 
  * @author NTT 電電太郎
  */
 @Controller
@@ -44,18 +43,17 @@ public class AuthApiController {
 
     /**
      * ログイン状態を取得する。
-     *
      * @param principal ログイン情報を保持するオブジェクト
      * @return OKステータス:ログイン中、NOT_FOUNDステータス:未ログイン
      */
     @RequestMapping(value = "status", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getStatus(@AuthenticationPrincipal AtrsUserDetails userDetails) {
+    public ResponseEntity<Object> getStatus(
+            @AuthenticationPrincipal AtrsUserDetails userDetails) {
 
         // ログイン状態を返却
-        return authenticationHelper.isAuthenticatedPrincipal(userDetails) ?
-                new ResponseEntity<>(HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return authenticationHelper.isAuthenticatedPrincipal(userDetails) ? new ResponseEntity<>(HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

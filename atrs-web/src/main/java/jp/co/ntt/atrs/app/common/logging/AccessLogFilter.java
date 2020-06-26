@@ -29,7 +29,6 @@ import javax.servlet.http.HttpSession;
 
 /**
  * アクセスログを出力するフィルタ。
- * 
  * @author NTT 電電太郎
  */
 public class AccessLogFilter extends OncePerRequestFilter {
@@ -37,26 +36,24 @@ public class AccessLogFilter extends OncePerRequestFilter {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-        LoggerFactory.getLogger(AccessLogFilter.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AccessLogFilter.class);
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-        HttpServletResponse response, FilterChain filterChain)
-        throws ServletException, IOException {
+            HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String logMessage = getLogMessage(request);
-        LOGGER.info("ACCESS START {}", logMessage);
+        logger.info("ACCESS START {}", logMessage);
         filterChain.doFilter(request, response);
-        LOGGER.info("ACCESS FINISH {}", logMessage);
+        logger.info("ACCESS FINISH {}", logMessage);
     }
 
     /**
      * ログメッセージを取得する。
-     * 
      * @param request リクエスト
      * @return ログメッセージ
      */
@@ -76,7 +73,8 @@ public class AccessLogFilter extends OncePerRequestFilter {
             sb.append("[SessionID:").append(session.getId()).append("], ");
         }
 
-        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append("], ");
+        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append(
+                "], ");
         sb.append("[RemoteHost:").append(request.getRemoteHost()).append("] ");
 
         return sb.toString();

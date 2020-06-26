@@ -30,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * フライト基本情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -52,7 +51,8 @@ public class FlightMasterProvider {
      */
     @PostConstruct
     public void load() {
-        List<FlightMaster> flightMasterList = flightRepository.findAllFlightMaster();
+        List<FlightMaster> flightMasterList = flightRepository
+                .findAllFlightMaster();
         for (FlightMaster flightMaster : flightMasterList) {
             flightMasterMap.put(flightMaster.getFlightName(), flightMaster);
         }
@@ -60,7 +60,6 @@ public class FlightMasterProvider {
 
     /**
      * 指定便名に該当するフライト基本情報を取得する。
-     * 
      * @param flightName 便名
      * @return フライト基本情報。該当するフライト基本情報がない場合はnull。
      */

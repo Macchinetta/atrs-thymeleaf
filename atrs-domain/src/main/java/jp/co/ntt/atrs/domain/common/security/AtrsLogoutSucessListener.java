@@ -26,12 +26,12 @@ import javax.inject.Inject;
 
 /**
  * ログアウト成功イベントハンドリングクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsLogoutSucessListener implements
-    ApplicationListener<AtrsLogoutSuccessEvent> {
+public class AtrsLogoutSucessListener
+                                     implements
+                                     ApplicationListener<AtrsLogoutSuccessEvent> {
 
     /**
      * 会員ログアウトサービス。
@@ -41,14 +41,16 @@ public class AtrsLogoutSucessListener implements
 
     /**
      * {@inheritDoc}
-     * 
-     * <p>ログアウト成功後に会員ログインステータスを更新する。</p>
+     * <p>
+     * ログアウト成功後に会員ログインステータスを更新する。
+     * </p>
      */
     @Override
     public void onApplicationEvent(AtrsLogoutSuccessEvent event) {
         Authentication authentication = event.getAuthentication();
 
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
+                .getPrincipal();
         authLogoutService.logout(userDetails.getMember());
 
     }

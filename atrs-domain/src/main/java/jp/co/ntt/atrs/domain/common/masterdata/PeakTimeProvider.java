@@ -32,7 +32,6 @@ import javax.inject.Inject;
 
 /**
  * ピーク時期情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -59,7 +58,6 @@ public class PeakTimeProvider {
 
     /**
      * 指定搭乗日に該当するピーク時期情報を取得する。
-     * 
      * @param depDate 搭乗日
      * @return ピーク時期情報。該当するピーク時期情報が存在しない場合null。
      */
@@ -67,9 +65,9 @@ public class PeakTimeProvider {
         Assert.notNull(depDate);
 
         for (PeakTime peakTime : peakTimeList) {
-            Interval peakTimeInterval = new Interval(
-                    new DateTime(peakTime.getPeakStartDate()).withTimeAtStartOfDay(),
-                    new DateTime(peakTime.getPeakEndDate()).withTimeAtStartOfDay().plus(1));
+            Interval peakTimeInterval = new Interval(new DateTime(peakTime
+                    .getPeakStartDate()).withTimeAtStartOfDay(), new DateTime(peakTime
+                    .getPeakEndDate()).withTimeAtStartOfDay().plus(1));
             // 搭乗日が該当するピーク時期積算比率を返却
             if (peakTimeInterval.contains(depDate.getTime())) {
                 return peakTime;

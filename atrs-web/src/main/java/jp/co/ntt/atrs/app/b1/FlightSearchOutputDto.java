@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * 空席照会画面(TOP画面)出力用DTO。
- * 
  * @author NTT 電電次郎
  */
 public class FlightSearchOutputDto implements Serializable {
@@ -50,7 +49,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(始)を取得する。
-     * 
      * @return 空席照会可能時期(始)
      */
     public Date getBeginningPeriod() {
@@ -59,7 +57,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(始)を設定する。
-     * 
      * @param beginningPeriod 空席照会可能時期(始)
      */
     public void setBeginningPeriod(Date beginningPeriod) {
@@ -68,7 +65,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(終)を取得する。
-     * 
      * @return 空席照会可能時期(終)
      */
     public Date getEndingPeriod() {
@@ -77,7 +73,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 空席照会可能時期(終)を設定する。
-     * 
      * @param endingPeriod 空席照会可能時期(終)
      */
     public void setEndingPeriod(Date endingPeriod) {
@@ -86,7 +81,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 復路予約可能時間間隔(分)。
-     *
      * @return 復路予約可能時間間隔(分)
      */
     public Integer getReserveIntervalTime() {
@@ -95,7 +89,6 @@ public class FlightSearchOutputDto implements Serializable {
 
     /**
      * 復路予約可能時間間隔(分)。
-     * 
      * @param reserveIntervalTime 復路予約可能時間間隔(分)
      */
     public void setReserveIntervalTime(Integer reserveIntervalTime) {
@@ -107,7 +100,8 @@ public class FlightSearchOutputDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

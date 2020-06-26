@@ -40,7 +40,8 @@ public class ReservationHistoryReportListener {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReservationHistoryReportListener.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(ReservationHistoryReportListener.class);
 
     /**
      * お客様番号文字数
@@ -59,8 +60,7 @@ public class ReservationHistoryReportListener {
      */
     @JmsListener(destination = "jms/queue/ReservationHistoryReportRequestQueue")
     public void receive(Message reqMsg) {
-        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(
-                reqMsg);
+        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(reqMsg);
         if (criteria != null) {
             createReportService.createReport(criteria);
         }
@@ -71,43 +71,45 @@ public class ReservationHistoryReportListener {
      * @param reqMsg 受信JMSメッセージ
      * @return レポート作成条件格納オブジェクト
      */
-   private ReservationHistoryReportCriteriaDto getCreateReportCriteria(
-           Message reqMsg) {
-       if (!(reqMsg instanceof TextMessage)) {
-           if (LOGGER.isWarnEnabled()) {
-               LOGGER.warn(LogMessages.W_AR_D1_L0002.getMessage(reqMsg
-                       .getClass().getName(), TextMessage.class.getName()));
-           }
-           return null;
-       }
+    private ReservationHistoryReportCriteriaDto getCreateReportCriteria(
+            Message reqMsg) {
+        if (!(reqMsg instanceof TextMessage)) {
+            if (logger.isWarnEnabled()) {
+                logger.warn(LogMessages.W_AR_D1_L0002.getMessage(reqMsg
+                        .getClass().getName(), TextMessage.class.getName()));
+            }
+            return null;
+        }
 
-       String msgBody = null;
-       try {
-           msgBody = ((TextMessage) reqMsg).getText();
-       } catch (JMSException e) {
-           throw new SystemException(LogMessages.E_AR_D1_L0004
-                   .getCode(), LogMessages.E_AR_D1_L0004.getMessage(), e);
-       }
+        String msgBody = null;
+        try {
+            msgBody = ((TextMessage) reqMsg).getText();
+        } catch (JMSException e) {
+            throw new SystemException(LogMessages.E_AR_D1_L0004.getCode(), LogMessages.E_AR_D1_L0004
+                    .getMessage(), e);
+        }
 
-       return convertToDto(msgBody);
-   }
+        return convertToDto(msgBody);
+    }
 
-   /**
-    * 受信JMSメッセージのボディをDTOに変換する。
-    * @param msgBody 受信JMSメッセージボディ
-    * @return DTO
-    */
-   private ReservationHistoryReportCriteriaDto convertToDto(String msgBody) {
-       String membershipNumber = msgBody;
-       if (membershipNumber == null || membershipNumber.length() != CUSTOMER_NO_LENGTH) {
-           if(LOGGER.isWarnEnabled()) {
-               LOGGER.warn(LogMessages.W_AR_D1_L0003.getMessage(membershipNumber));
-               return null;
-           }
-       }
-       ReservationHistoryReportCriteriaDto criteria = new ReservationHistoryReportCriteriaDto();
-       criteria.setMembershipNumber(membershipNumber);
-       return criteria;
-   }
+    /**
+     * 受信JMSメッセージのボディをDTOに変換する。
+     * @param msgBody 受信JMSメッセージボディ
+     * @return DTO
+     */
+    private ReservationHistoryReportCriteriaDto convertToDto(String msgBody) {
+        String membershipNumber = msgBody;
+        if (membershipNumber == null
+                || membershipNumber.length() != CUSTOMER_NO_LENGTH) {
+            if (logger.isWarnEnabled()) {
+                logger.warn(LogMessages.W_AR_D1_L0003
+                        .getMessage(membershipNumber));
+                return null;
+            }
+        }
+        ReservationHistoryReportCriteriaDto criteria = new ReservationHistoryReportCriteriaDto();
+        criteria.setMembershipNumber(membershipNumber);
+        return criteria;
+    }
 
 }

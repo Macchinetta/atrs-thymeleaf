@@ -24,7 +24,6 @@ import java.util.List;
 
 /**
  * 予約フライト情報。
- * 
  * @author NTT 電電太郎
  */
 public class ReserveFlight implements Serializable {
@@ -56,7 +55,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約フライト番号を取得する。
-     * 
      * @return 予約フライト番号
      */
     public Integer getReserveFlightNo() {
@@ -65,7 +63,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約フライト番号を設定する。
-     * 
      * @param reserveFlightNo 予約フライト番号
      */
     public void setReserveFlightNo(Integer reserveFlightNo) {
@@ -74,7 +71,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約番号を取得する。
-     * 
      * @return 予約番号
      */
     public String getReserveNo() {
@@ -83,7 +79,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 予約番号を設定する。
-     * 
      * @param reserveNo 予約番号
      */
     public void setReserveNo(String reserveNo) {
@@ -92,7 +87,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * フライト情報を取得する。
-     * 
      * @return フライト情報
      */
     public Flight getFlight() {
@@ -101,7 +95,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * フライト情報を設定する。
-     * 
      * @param flight フライト情報
      */
     public void setFlight(Flight flight) {
@@ -110,7 +103,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 搭乗者リストを取得する。
-     * 
      * @return 搭乗者リスト
      */
     public List<Passenger> getPassengerList() {
@@ -119,7 +111,6 @@ public class ReserveFlight implements Serializable {
 
     /**
      * 搭乗者リストを設定する。
-     * 
      * @param passengerList 搭乗者リスト
      */
     public void setPassengerList(List<Passenger> passengerList) {
@@ -131,7 +122,8 @@ public class ReserveFlight implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

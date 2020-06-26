@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 
 /**
  * 運賃に関するユーティリティクラス。
- * 
  * @author NTT 電電太郎
  */
 public class FareUtil {
@@ -38,13 +37,11 @@ public class FareUtil {
 
     /**
      * 運賃の100円未満の値を切上げる。
-     * 
      * @param fare 運賃
      * @return 100円未満を切上げた運賃
      */
     public static int ceilFare(int fare) {
-        return new BigDecimal(fare)
-                .setScale(CEIL_FARE_SCALE, BigDecimal.ROUND_UP)
-                .intValue();
+        return new BigDecimal(fare).setScale(CEIL_FARE_SCALE,
+                BigDecimal.ROUND_UP).intValue();
     }
 }

@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 /**
  * 運賃種別情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -61,7 +60,6 @@ public class FareTypeProvider {
 
     /**
      * 指定運賃種別コードに該当する運賃種別情報を取得。
-     * 
      * @param fareTypeCd 運賃種別コード
      * @return 運賃種別情報。該当する運賃種別情報がない場合null。
      */

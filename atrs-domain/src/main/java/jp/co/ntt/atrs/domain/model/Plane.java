@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 航空機情報。
- * 
  * @author NTT 電電太郎
  */
 public class Plane implements Serializable {
@@ -49,7 +48,6 @@ public class Plane implements Serializable {
 
     /**
      * 機種を取得する。
-     * 
      * @return 機種
      */
     public String getCraftType() {
@@ -58,7 +56,6 @@ public class Plane implements Serializable {
 
     /**
      * 機種を設定する。
-     * 
      * @param craftType 機種
      */
     public void setCraftType(String craftType) {
@@ -67,7 +64,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(一般席)を取得する。
-     * 
      * @return 席数(一般席)
      */
     public Integer getNSeatNum() {
@@ -76,7 +72,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(一般席)を設定する。
-     * 
      * @param seatNum 席数(一般席)
      */
     public void setNSeatNum(Integer seatNum) {
@@ -85,7 +80,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(特別席)を取得する。
-     * 
      * @return 席数(特別席)
      */
     public Integer getSSeatNum() {
@@ -94,7 +88,6 @@ public class Plane implements Serializable {
 
     /**
      * 席数(特別席)を設定する。
-     * 
      * @param seatNum 席数(特別席)
      */
     public void setSSeatNum(Integer seatNum) {
@@ -106,6 +99,7 @@ public class Plane implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

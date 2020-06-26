@@ -30,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 区間情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -54,21 +53,20 @@ public class RouteProvider {
     public void load() {
         List<Route> routeList = routeRepository.findAll();
         for (Route route : routeList) {
-            String cacheKey = makeCacheKey(
-                    route.getDepartureAirport().getCode(),
-                    route.getArrivalAirport().getCode());
+            String cacheKey = makeCacheKey(route.getDepartureAirport()
+                    .getCode(), route.getArrivalAirport().getCode());
             routeMap.put(cacheKey, route);
         }
     }
 
     /**
      * 出発空港コード、到着空港コードに該当する区間情報を取得する。
-     * 
      * @param departureAirportCd 出発空港コード
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報。該当する区間情報が見つからない場合はnull。
      */
-    public Route getRouteByAirportCd(String departureAirportCd, String arrivalAirportCd) {
+    public Route getRouteByAirportCd(String departureAirportCd,
+            String arrivalAirportCd) {
 
         Assert.hasText(departureAirportCd);
         Assert.hasText(arrivalAirportCd);
@@ -82,12 +80,12 @@ public class RouteProvider {
      * <p>
      * キー値は、"[出発空港コード]-[到着空港コード]"形式の文字列となる。
      * </p>
-     * 
      * @param departureAirportCd 出発空港コード
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報マップにキャッシュするためのキー値
      */
-    private String makeCacheKey(String departureAirportCd, String arrivalAirportCd) {
+    private String makeCacheKey(String departureAirportCd,
+            String arrivalAirportCd) {
         return departureAirportCd + "-" + arrivalAirportCd;
     }
 

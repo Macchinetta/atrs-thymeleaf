@@ -19,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsErrorCode;
 
 /**
  * ログインサービスエラーコードを表す列挙型。
- * 
  * @author NTT 電電太郎
  */
 public enum AuthLoginErrorCode implements AtrsErrorCode {
@@ -36,7 +35,6 @@ public enum AuthLoginErrorCode implements AtrsErrorCode {
 
     /**
      * コンストラクタ。
-     * 
      * @param code エラーコード。
      */
     private AuthLoginErrorCode(String code) {

@@ -29,10 +29,10 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 予約フライト選択フォーム。
- * 
  * @author NTT 電電次郎
  */
-public class ReservationFlightForm implements IReservationFlightForm, Serializable {
+public class ReservationFlightForm implements IReservationFlightForm,
+                                  Serializable {
 
     /**
      * serialVersionUID。
@@ -53,7 +53,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     @Override
@@ -63,7 +62,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -72,7 +70,6 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * 選択フライト情報フォームのリストを取得する。
-     * 
      * @return 選択フライト情報フォームのリスト
      */
     @Override
@@ -82,10 +79,10 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
 
     /**
      * 選択フライト情報フォームのリストを設定する。
-     * 
      * @param selectFlightFormList 選択フライト情報フォームのリスト
      */
-    public void setSelectFlightFormList(List<SelectFlightForm> selectFlightFormList) {
+    public void setSelectFlightFormList(
+            List<SelectFlightForm> selectFlightFormList) {
         this.selectFlightFormList = selectFlightFormList;
     }
 
@@ -94,7 +91,8 @@ public class ReservationFlightForm implements IReservationFlightForm, Serializab
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

@@ -27,7 +27,6 @@ import org.terasoluna.gfw.common.exception.ExceptionLogger;
 /**
  * JMSリスナーで発生した例外を処理する例外ハンドラ
  * @author NTT 電電次郎
- *
  */
 @Component
 public class AtrsJmsErrorHandler implements ErrorHandler {
@@ -35,8 +34,8 @@ public class AtrsJmsErrorHandler implements ErrorHandler {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(
-            AtrsJmsErrorHandler.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AtrsJmsErrorHandler.class);
 
     /**
      * ExceptionLogger
@@ -51,18 +50,18 @@ public class AtrsJmsErrorHandler implements ErrorHandler {
     @Override
     public void handleError(Throwable t) {
 
-        //Listenerでの例外はListenerExecutionFailedExceptionにwrapされている為、その原因例外を処理ログ出力する
+        // Listenerでの例外はListenerExecutionFailedExceptionにwrapされている為、その原因例外を処理ログ出力する
         if (t instanceof ListenerExecutionFailedException) {
             Throwable wrappedException = t.getCause();
             if (wrappedException instanceof Exception) {
                 exceptionLogger.error((Exception) wrappedException);
             } else {
-                LOGGER.error("UNEXPECTED ERROR", wrappedException);
+                logger.error("UNEXPECTED ERROR", wrappedException);
             }
         } else if (t instanceof Exception) {
             exceptionLogger.error((Exception) t);
         } else {
-            LOGGER.error("UNEXPECTEC ERROR", t);
+            logger.error("UNEXPECTEC ERROR", t);
         }
     }
 

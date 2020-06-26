@@ -27,12 +27,12 @@ import javax.inject.Inject;
 
 /**
  * ログイン成功イベントハンドリングクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationSuccessListener implements
-    ApplicationListener<AuthenticationSuccessEvent> {
+public class AtrsAuthenticationSuccessListener
+                                              implements
+                                              ApplicationListener<AuthenticationSuccessEvent> {
 
     /**
      * 会員ログインサービス。
@@ -42,14 +42,16 @@ public class AtrsAuthenticationSuccessListener implements
 
     /**
      * {@inheritDoc}
-     * 
-     * <p>ログイン処理成功後に会員ログインステータスを更新する。</p>
+     * <p>
+     * ログイン処理成功後に会員ログインステータスを更新する。
+     * </p>
      */
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         Authentication authentication = event.getAuthentication();
 
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
+                .getPrincipal();
         authLoginService.login(userDetails.getMember());
 
     }

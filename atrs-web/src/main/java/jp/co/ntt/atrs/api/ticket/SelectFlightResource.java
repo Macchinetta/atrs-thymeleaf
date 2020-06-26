@@ -27,7 +27,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 選択フライトリソース
- * 
  * @author NTT 電電太郎
  */
 public class SelectFlightResource implements Serializable {
@@ -64,7 +63,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     *
      * @return 搭乗日
      */
     public Date getDepDate() {
@@ -73,7 +71,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param depDate 搭乗日
      */
     public void setDepDate(Date depDate) {
@@ -82,7 +79,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 便名を取得する。
-     *
      * @return 便名
      */
     public String getFlightName() {
@@ -91,7 +87,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 便名を設定する。
-     * 
      * @param flightName 便名
      */
     public void setFlightName(String flightName) {
@@ -100,7 +95,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     *
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -109,7 +103,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -118,7 +111,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 運賃種別コードを取得する。
-     *
      * @return 運賃種別コード
      */
     public FareTypeCd getFareTypeCd() {
@@ -127,7 +119,6 @@ public class SelectFlightResource implements Serializable {
 
     /**
      * 運賃種別コードを設定する。
-     * 
      * @param fareTypeCd 運賃種別コード
      */
     public void setFareTypeCd(FareTypeCd fareTypeCd) {

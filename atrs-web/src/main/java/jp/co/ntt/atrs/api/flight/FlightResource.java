@@ -23,7 +23,6 @@ import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 
 /**
  * 空席状況取得RESTAPI用リソースクラス
- * 
  * @author NTT 電電太郎
  */
 public class FlightResource implements Serializable {

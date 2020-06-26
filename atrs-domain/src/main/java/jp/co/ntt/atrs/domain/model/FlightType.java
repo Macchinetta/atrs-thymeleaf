@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.domain.model;
 
 /**
  * フライト種別の列挙型。
- * 
  * @author NTT 電電太郎
  */
 public enum FlightType {
@@ -34,7 +33,6 @@ public enum FlightType {
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     public String getCode() {

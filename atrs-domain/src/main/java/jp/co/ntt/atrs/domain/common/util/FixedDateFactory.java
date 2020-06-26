@@ -20,7 +20,6 @@ import org.terasoluna.gfw.common.date.jodatime.AbstractJodaTimeDateFactory;
 
 /**
  * 現在日付を固定するための日付生成クラス。
- * 
  * @author NTT 電電太郎
  */
 public class FixedDateFactory extends AbstractJodaTimeDateFactory {
@@ -60,7 +59,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 年を設定する。
-     * 
      * @param year 年
      */
     public void setYear(int year) {
@@ -69,7 +67,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 月を設定する。
-     * 
      * @param month 月
      */
     public void setMonth(int month) {
@@ -78,7 +75,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 日を設定する。
-     * 
      * @param dayOfMonth 日
      */
     public void setDayOfMonth(int dayOfMonth) {
@@ -87,7 +83,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 時を設定する。
-     * 
      * @param hour 時
      */
     public void setHour(int hour) {
@@ -96,7 +91,6 @@ public class FixedDateFactory extends AbstractJodaTimeDateFactory {
 
     /**
      * 分を設定する。
-     * 
      * @param minute 分
      */
     public void setMinute(int minute) {

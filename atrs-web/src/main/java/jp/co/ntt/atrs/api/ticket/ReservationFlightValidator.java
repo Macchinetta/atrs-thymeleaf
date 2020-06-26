@@ -33,7 +33,6 @@ import org.springframework.validation.Validator;
  * <ul>
  * <li>フライトが正しく選択されていない場合。</li>
  * </ul>
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -86,7 +85,8 @@ public class ReservationFlightValidator implements Validator {
                         // 選択フライト情報にフィールドとしてエラー設定し、
                         // 後続処理で不正リクエスト例外とする
                         // Invalidは独自エラーコード(対応するメッセージ定義はない)
-                        errors.rejectValue("selectFlightResourceList", "Invalid");
+                        errors.rejectValue("selectFlightResourceList",
+                                "Invalid");
                     }
                 }
 
@@ -111,7 +111,8 @@ public class ReservationFlightValidator implements Validator {
                         // 選択フライト情報にフィールドとしてエラー設定し、
                         // 後続処理で不正リクエスト例外とする
                         // Invalidは独自エラーコード(対応するメッセージ定義はない)
-                        errors.rejectValue("selectFlightResourceList", "Invalid");
+                        errors.rejectValue("selectFlightResourceList",
+                                "Invalid");
                     }
                 }
 

@@ -15,10 +15,8 @@
  */
 package jp.co.ntt.atrs.domain.service.b0;
 
-
 /**
  * フライト情報不正例外。
- * 
  * @author NTT 電電次郎
  */
 public class InvalidFlightException extends RuntimeException {
@@ -30,7 +28,6 @@ public class InvalidFlightException extends RuntimeException {
 
     /**
      * コンストラクタ。
-     * 
      * @param message エラーメッセージ
      */
     public InvalidFlightException(String message) {
@@ -39,7 +36,6 @@ public class InvalidFlightException extends RuntimeException {
 
     /**
      * コンストラクタ。
-     * 
      * @param e 例外オブジェクト
      */
     public InvalidFlightException(Exception e) {

@@ -39,7 +39,6 @@ import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 
 /**
  * API例外ハンドラ。
- * 
  * @author NTT 電電太郎
  */
 @ControllerAdvice
@@ -103,7 +102,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * 例外情報生成共通処理。
-     * 
      * @param ex Exception
      * @param bindingResult 処理結果
      * @param headers HTTPヘッダ情報
@@ -122,7 +120,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * リソース未検出例外ハンドリング。
-     * 
      * @param ex リソース未検出例外
      * @param request リクエスト
      * @return
@@ -136,7 +133,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * ATRS業務エラー例外ハンドリング。
-     * 
      * @param ex 業務エラー例外
      * @param request リクエスト
      * @return
@@ -150,7 +146,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * フライト情報非存在業務例外ハンドリング。
-     * 
      * @param ex 業務エラー例外
      * @param request リクエスト
      * @return
@@ -164,7 +159,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * 排他エラー例外。
-     * 
      * @param ex 排他エラー例外
      * @param request リクエスト
      * @return
@@ -179,7 +173,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * システムエラー例外。
-     * 
      * @param ex システムエラー例外
      * @param request リクエスト
      * @return
@@ -193,7 +186,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * 例外ハンドリング共通処理。
-     * 
      * @param ex 例外
      * @param headers HTTPヘッダ情報
      * @param status HTTPステータス情報

@@ -27,8 +27,9 @@ import javax.sql.DataSource;
 
 /**
  * 空港コードリストクラス。
- * <p>キー：空港コード, 値：空港名。</p>
- * 
+ * <p>
+ * キー：空港コード, 値：空港名。
+ * </p>
  * @author NTT 電電太郎
  */
 public class AirportCodeList extends AbstractReloadableCodeList {
@@ -121,7 +122,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * 空港名の区切り行の表示順を設定する。
-     * 
      * @param airportNopInsertOrder 空港名の区切り行の表示順
      */
     public void setAirportNopInsertOrder(int airportNopInsertOrder) {
@@ -133,7 +133,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
      * <p>
      * デフォルト値は「""」(ブランク)。
      * </p>
-     * 
      * @param airportNopValue 空港名の区切り行の値
      */
     public void setAirportNopValue(String airportNopValue) {
@@ -145,7 +144,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
      * <p>
      * デフォルト値は「"-----------"」。
      * </p>
-     * 
      * @param airportNopName 空港名の区切り行の表示名
      */
     public void setAirportNopName(String airportNopName) {
@@ -154,7 +152,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * データソースを設定する。
-     * 
      * @param dataSource データソース
      */
     public void setDataSource(DataSource dataSource) {
@@ -163,7 +160,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * JdbcTemplateを設定する。
-     * 
      * @param jdbcTemplate JdbcTemplateオブジェクト
      */
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -172,7 +168,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * ラベル表示カラム名を設定する。
-     * 
      * @param labelColumn ラベル表示カラム名
      */
     public void setLabelColumn(String labelColumn) {
@@ -181,7 +176,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * 値カラム名を設定する。
-     * 
      * @param valueColumn 値カラム名
      */
     public void setValueColumn(String valueColumn) {
@@ -190,7 +184,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * 表示順カラム名を設定する
-     * 
      * @param orderColumn 表示順カラム名
      */
     public void setOrderColumn(String orderColumn) {
@@ -199,7 +192,6 @@ public class AirportCodeList extends AbstractReloadableCodeList {
 
     /**
      * 検索SQL文を設定する。
-     * 
      * @param querySql 検索SQL
      */
     public void setQuerySql(String querySql) {

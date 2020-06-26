@@ -30,7 +30,6 @@ import org.terasoluna.gfw.common.codelist.ExistInCodeList;
 
 /**
  * 空席照会条件クエリ。
- * 
  * @author NTT 電電太郎
  */
 public class FlightSearchQuery implements Serializable {

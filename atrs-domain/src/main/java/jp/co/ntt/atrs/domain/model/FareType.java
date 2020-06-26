@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 運賃種別情報。
- * 
  * @author NTT 電電太郎
  */
 public class FareType implements Serializable {
@@ -64,7 +63,6 @@ public class FareType implements Serializable {
 
     /**
      * 運賃種別コードを取得する。
-     * 
      * @return 運賃種別コード
      */
     public FareTypeCd getFareTypeCd() {
@@ -73,7 +71,6 @@ public class FareType implements Serializable {
 
     /**
      * 運賃種別コードを設定する。
-     * 
      * @param fareTypeCd 運賃種別コード
      */
     public void setFareTypeCd(FareTypeCd fareTypeCd) {
@@ -82,7 +79,6 @@ public class FareType implements Serializable {
 
     /**
      * 運賃種別名を取得する。
-     * 
      * @return 運賃種別名
      */
     public String getFareTypeName() {
@@ -91,7 +87,6 @@ public class FareType implements Serializable {
 
     /**
      * 運賃種別名を設定する。
-     * 
      * @param fareTypeName 運賃種別名
      */
     public void setFareTypeName(String fareTypeName) {
@@ -100,7 +95,6 @@ public class FareType implements Serializable {
 
     /**
      * 割引率(%)を取得する。
-     * 
      * @return 割引率(%)
      */
     public Integer getDiscountRate() {
@@ -109,7 +103,6 @@ public class FareType implements Serializable {
 
     /**
      * 割引率(%)を設定する。
-     * 
      * @param discountRate 割引率(%)
      */
     public void setDiscountRate(Integer discountRate) {
@@ -118,7 +111,6 @@ public class FareType implements Serializable {
 
     /**
      * 予約可能前日数(始)を取得する。
-     * 
      * @return 予約可能前日数(始)
      */
     public Integer getRsrvAvailableStartDayNum() {
@@ -127,7 +119,6 @@ public class FareType implements Serializable {
 
     /**
      * 予約可能前日数(始)を設定する。
-     * 
      * @param rsrvAvailableStartDayNum 予約可能前日数(始)
      */
     public void setRsrvAvailableStartDayNum(Integer rsrvAvailableStartDayNum) {
@@ -136,7 +127,6 @@ public class FareType implements Serializable {
 
     /**
      * 予約可能前日数(終)を取得する。
-     * 
      * @return 予約可能前日数(終)
      */
     public Integer getRsrvAvailableEndDayNum() {
@@ -145,7 +135,6 @@ public class FareType implements Serializable {
 
     /**
      * 予約可能前日数(終)を設定する。
-     * 
      * @param rsrvAvailableEndDayNum 予約可能前日数(終)
      */
     public void setRsrvAvailableEndDayNum(Integer rsrvAvailableEndDayNum) {
@@ -154,7 +143,6 @@ public class FareType implements Serializable {
 
     /**
      * 利用可能最少人数を取得する。
-     * 
      * @return 利用可能最少人数
      */
     public Integer getPassengerMinNum() {
@@ -163,7 +151,6 @@ public class FareType implements Serializable {
 
     /**
      * 利用可能最少人数を設定する。
-     * 
      * @param passengerMinNum 利用可能最少人数
      */
     public void setPassengerMinNum(Integer passengerMinNum) {
@@ -175,6 +162,7 @@ public class FareType implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

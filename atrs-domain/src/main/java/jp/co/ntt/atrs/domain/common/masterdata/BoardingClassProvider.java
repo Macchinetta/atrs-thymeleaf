@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 /**
  * 搭乗クラス情報を提供するクラス。
- * 
  * @author NTT 電電太郎
  */
 @Component
@@ -46,23 +45,23 @@ public class BoardingClassProvider {
     /**
      * 搭乗クラスコードと搭乗クラスの関係を保持するマップ。
      */
-    private final Map<BoardingClassCd, BoardingClass> boardingClassCodeMap =
-            new HashMap<>();
+    private final Map<BoardingClassCd, BoardingClass> boardingClassCodeMap = new HashMap<>();
 
     /**
      * 搭乗クラス情報をロードし、キャッシュする。
      */
     @PostConstruct
     public void load() {
-        List<BoardingClass> boardingClassList = boardingClassRepository.findAll();
+        List<BoardingClass> boardingClassList = boardingClassRepository
+                .findAll();
         for (BoardingClass boardingClass : boardingClassList) {
-            boardingClassCodeMap.put(boardingClass.getBoardingClassCd(), boardingClass);
+            boardingClassCodeMap.put(boardingClass.getBoardingClassCd(),
+                    boardingClass);
         }
     }
 
     /**
      * 搭乗クラスコードに該当する搭乗クラス情報を取得する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      * @return 搭乗クラス情報。該当する搭乗クラス情報がない場合はnull。
      */

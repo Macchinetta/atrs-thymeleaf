@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * フライト基本情報。
- * 
  * @author NTT 電電太郎
  */
 public class FlightMaster implements Serializable {
@@ -59,7 +58,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 便名を取得する。
-     * 
      * @return 便名
      */
     public String getFlightName() {
@@ -68,7 +66,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 便名を設定する。
-     * 
      * @param flightName 便名
      */
     public void setFlightName(String flightName) {
@@ -77,7 +74,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 出発時刻を取得する。
-     * 
      * @return 出発時刻
      */
     public String getDepartureTime() {
@@ -86,7 +82,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 出発時刻を設定する。
-     * 
      * @param departureTime 出発時刻
      */
     public void setDepartureTime(String departureTime) {
@@ -95,7 +90,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 到着時刻を取得する。
-     * 
      * @return 到着時刻
      */
     public String getArrivalTime() {
@@ -104,7 +98,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 到着時刻を設定する。
-     * 
      * @param arrivalTime 到着時刻
      */
     public void setArrivalTime(String arrivalTime) {
@@ -113,7 +106,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 区間を取得する。
-     * 
      * @return 区間
      */
     public Route getRoute() {
@@ -122,7 +114,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 区間を設定する。
-     * 
      * @param route 区間
      */
     public void setRoute(Route route) {
@@ -131,7 +122,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 機種を取得する。
-     * 
      * @return 機種
      */
     public Plane getPlane() {
@@ -140,7 +130,6 @@ public class FlightMaster implements Serializable {
 
     /**
      * 機種を設定する。
-     * 
      * @param plane 機種
      */
     public void setPlane(Plane plane) {
@@ -152,6 +141,7 @@ public class FlightMaster implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 }

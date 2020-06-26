@@ -24,7 +24,6 @@ import java.util.List;
 
 /**
  * エラー情報DTOクラス。
- * 
  * @author NTT 電電太郎
  */
 public class ErrorResultDto implements Serializable {
@@ -41,7 +40,6 @@ public class ErrorResultDto implements Serializable {
 
     /**
      * メッセージリストを取得する。
-     * 
      * @return 処理結果
      */
     public List<String> getMessages() {
@@ -50,7 +48,6 @@ public class ErrorResultDto implements Serializable {
 
     /**
      * メッセージを追加する。
-     * 
      * @param message メッセージ
      */
     public void add(String message) {
@@ -62,7 +59,8 @@ public class ErrorResultDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

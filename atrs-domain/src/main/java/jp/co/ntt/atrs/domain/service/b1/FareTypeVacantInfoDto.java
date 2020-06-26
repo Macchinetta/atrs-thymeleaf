@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /**
  * 運賃種別に対応する空席照会結果を格納するDTO。
- * 
  * @author NTT 電電太郎
  */
 public class FareTypeVacantInfoDto implements Serializable {
@@ -49,12 +48,12 @@ public class FareTypeVacantInfoDto implements Serializable {
 
     /**
      * コンストラクタ。
-     * 
      * @param fareTypeName 運賃種別名
      * @param fare 運賃
      * @param vacantNum 空席数
      */
-    public FareTypeVacantInfoDto(String fareTypeName, String fare, Integer vacantNum) {
+    public FareTypeVacantInfoDto(String fareTypeName, String fare,
+            Integer vacantNum) {
         this.fareTypeName = fareTypeName;
         this.fare = fare;
         this.vacantNum = vacantNum;
@@ -62,7 +61,6 @@ public class FareTypeVacantInfoDto implements Serializable {
 
     /**
      * 運賃種別名を取得する。
-     * 
      * @return 運賃種別名
      */
     public String getFareTypeName() {
@@ -71,7 +69,6 @@ public class FareTypeVacantInfoDto implements Serializable {
 
     /**
      * 運賃を取得する。
-     * 
      * @return 運賃
      */
     public String getFare() {
@@ -80,7 +77,6 @@ public class FareTypeVacantInfoDto implements Serializable {
 
     /**
      * 空席数を取得する。
-     * 
      * @return 空席数
      */
     public Integer getVacantNum() {
@@ -92,7 +88,8 @@ public class FareTypeVacantInfoDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

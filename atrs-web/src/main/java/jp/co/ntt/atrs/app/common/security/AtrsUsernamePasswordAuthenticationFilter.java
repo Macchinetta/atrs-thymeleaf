@@ -33,17 +33,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * ユーザーログイン入力チェックフィルタ。
- * 
  * @author NTT 電電太郎
  */
 public class AtrsUsernamePasswordAuthenticationFilter extends
-    UsernamePasswordAuthenticationFilter {
+                                                     UsernamePasswordAuthenticationFilter {
 
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-        LoggerFactory.getLogger(AtrsUsernamePasswordAuthenticationFilter.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AtrsUsernamePasswordAuthenticationFilter.class);
 
     /**
      * 会員番号文字数。
@@ -65,7 +64,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは10。
      * </p>
-     * 
      * @param membershipNumberLength 会員番号文字数
      */
     public void setMembershipNumberLength(int membershipNumberLength) {
@@ -77,7 +75,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは8。
      * </p>
-     * 
      * @param passwordMinLength パスワードの最小桁数
      */
     public void setPasswordMinLength(int passwordMinLength) {
@@ -89,7 +86,6 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      * <p>
      * デフォルトは20。
      * </p>
-     * 
      * @param passwordMaxLength パスワードの最大桁数
      */
     public void setPasswordMaxLength(int passwordMaxLength) {
@@ -101,24 +97,25 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-        HttpServletResponse response) throws AuthenticationException {
+            HttpServletResponse response) throws AuthenticationException {
 
         String username = obtainUsername(request);
         String password = obtainPassword(request);
 
         if (username == null || username.length() != membershipNumberLength) {
-            LOGGER.info(LogMessages.I_AR_A1_L2001.getMessage(username));
-            String errorMessage = messages.getMessage(
-                AuthLoginErrorCode.E_AR_A1_2001.code(), Locale.getDefault());
+            logger.info(LogMessages.I_AR_A1_L2001.getMessage(username));
+            String errorMessage = messages
+                    .getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
+                            .getDefault());
             throw new UsernameNotFoundException(errorMessage);
         }
 
-        if (password == null
-            || password.length() < passwordMinLength
-            || password.length() > passwordMaxLength) {
-            LOGGER.info(LogMessages.I_AR_A1_L2002.getMessage(username));
-            String errorMessage = messages.getMessage(
-                AuthLoginErrorCode.E_AR_A1_2001.code(), Locale.getDefault());
+        if (password == null || password.length() < passwordMinLength
+                || password.length() > passwordMaxLength) {
+            logger.info(LogMessages.I_AR_A1_L2002.getMessage(username));
+            String errorMessage = messages
+                    .getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
+                            .getDefault());
             throw new BadCredentialsException(errorMessage);
         }
 

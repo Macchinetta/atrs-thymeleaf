@@ -30,7 +30,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報登録を行うService実装クラス。
- * 
  * @author NTT 電電花子
  */
 @Service
@@ -50,7 +49,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     PasswordEncoder passwordEncoder;
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override
@@ -62,8 +60,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         Assert.notNull(memberLogin);
 
         // パスワードをエンコード
-        String hashedPassword =
-                passwordEncoder.encode(member.getMemberLogin().getPassword());
+        String hashedPassword = passwordEncoder.encode(member.getMemberLogin()
+                .getPassword());
 
         memberLogin.setPassword(hashedPassword);
         memberLogin.setLastPassword(hashedPassword);
@@ -73,15 +71,15 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         // (MyBatis3の機能(SelectKey)によりパラメータの会員情報に会員番号が格納される)
         int insertMemberCount = memberRepository.insert(member);
         if (insertMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(insertMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(insertMemberCount, 1));
         }
 
         // 会員ログイン情報登録
         int insertMemberLoginCount = memberRepository.insertMemberLogin(member);
         if (insertMemberLoginCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(insertMemberLoginCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(insertMemberLoginCount, 1));
         }
 
         return member;

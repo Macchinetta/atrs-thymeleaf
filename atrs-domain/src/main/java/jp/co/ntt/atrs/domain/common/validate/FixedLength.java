@@ -34,7 +34,6 @@ import javax.validation.constraints.Size;
 
 /**
  * 指定サイズチェックアノテーション
- * 
  * @author NTT 電電太郎
  */
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
@@ -54,8 +53,7 @@ public @interface FixedLength {
 
     @OverridesAttribute.List({
             @OverridesAttribute(constraint = Size.class, name = "min"),
-            @OverridesAttribute(constraint = Size.class, name = "max")
-    })
+            @OverridesAttribute(constraint = Size.class, name = "max") })
     int value();
 
     /**

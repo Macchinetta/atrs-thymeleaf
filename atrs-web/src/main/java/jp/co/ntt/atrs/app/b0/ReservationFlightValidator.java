@@ -27,11 +27,12 @@ import java.util.List;
 
 /**
  * 予約フライト選択フォームのバリデータ。
- * <p>下記の場合をエラーとする。</p>
+ * <p>
+ * 下記の場合をエラーとする。
+ * </p>
  * <ul>
  * <li>フライトが正しく選択されていない場合。</li>
  * </ul>
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -52,7 +53,8 @@ public class ReservationFlightValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         IReservationFlightForm form = (IReservationFlightForm) target;
-        List<SelectFlightForm> selectFlightFormList = form.getSelectFlightFormList();
+        List<SelectFlightForm> selectFlightFormList = form
+                .getSelectFlightFormList();
 
         // フライト種別に応じてチェック
         if (!errors.hasFieldErrors("flightType")) {
@@ -65,10 +67,14 @@ public class ReservationFlightValidator implements Validator {
                 if (CollectionUtils.isEmpty(selectFlightFormList)) {
 
                     // 往路、復路共に未入力の場合
-                    errors.reject("NotNull.outwardFlight", new Object[] {
-                        new DefaultMessageSourceResolvable("outwardFlight") }, "");
-                    errors.reject("NotNull.homewardFlight", new Object[] {
-                        new DefaultMessageSourceResolvable("homewardFlight") }, "");
+                    errors.reject(
+                            "NotNull.outwardFlight",
+                            new Object[] { new DefaultMessageSourceResolvable("outwardFlight") },
+                            "");
+                    errors.reject(
+                            "NotNull.homewardFlight",
+                            new Object[] { new DefaultMessageSourceResolvable("homewardFlight") },
+                            "");
                 } else {
 
                     // フライトが2つ選択されていることをチェック
@@ -77,7 +83,8 @@ public class ReservationFlightValidator implements Validator {
                     } else if (selectFlightFormList.size() == 1) {
 
                         // 往路か復路のいずれかが未入力の場合
-                        errors.reject(TicketReserveErrorCode.E_AR_B2_5001.code());
+                        errors.reject(TicketReserveErrorCode.E_AR_B2_5001
+                                .code());
                     } else {
 
                         // 往復で選択数が0-2以外は通常操作では設定されないケースであり、
@@ -96,8 +103,10 @@ public class ReservationFlightValidator implements Validator {
 
                 // 選択フライト必須チェック
                 if (CollectionUtils.isEmpty(selectFlightFormList)) {
-                    errors.reject("NotNull.outwardFlight", new Object[] {
-                        new DefaultMessageSourceResolvable("outwardFlight") }, "");
+                    errors.reject(
+                            "NotNull.outwardFlight",
+                            new Object[] { new DefaultMessageSourceResolvable("outwardFlight") },
+                            "");
                 } else {
 
                     // フライトが1つ選択されていることをチェック

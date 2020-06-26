@@ -26,7 +26,6 @@ import java.util.Date;
 
 /**
  * 空席照会の検索条件を保持するクラス。
- * 
  * @author NTT 電電次郎
  */
 public class TicketSearchCriteriaDto implements Serializable {
@@ -63,7 +62,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * フライト種別を取得する。
-     * 
      * @return フライト種別
      */
     public FlightType getFlightType() {
@@ -72,7 +70,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * フライト種別を設定する。
-     * 
      * @param flightType フライト種別
      */
     public void setFlightType(FlightType flightType) {
@@ -81,7 +78,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 出発空港コードを取得する。
-     * 
      * @return 出発空港
      */
     public String getDepartureAirportCd() {
@@ -90,7 +86,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 出発空港コードを設定する。
-     * 
      * @param departureAirportCd 出発空港コード
      */
     public void setDepartureAirportCd(String departureAirportCd) {
@@ -99,7 +94,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 到着空港コードを取得する。
-     * 
      * @return 到着空港
      */
     public String getArrivalAirportCd() {
@@ -108,7 +102,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 到着空港コードを設定する。
-     * 
      * @param arrivalAirportCd 到着空港コード
      */
     public void setArrivalAirportCd(String arrivalAirportCd) {
@@ -117,7 +110,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗日を取得する。
-     * 
      * @return 搭乗日
      */
     public Date getDepDate() {
@@ -126,7 +118,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗日を設定する。
-     * 
      * @param depDate 搭乗日
      */
     public void setDepDate(Date depDate) {
@@ -135,7 +126,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗クラスコードを取得する。
-     * 
      * @return 搭乗クラスコード
      */
     public BoardingClassCd getBoardingClassCd() {
@@ -144,7 +134,6 @@ public class TicketSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗クラスコードを設定する。
-     * 
      * @param boardingClassCd 搭乗クラスコード
      */
     public void setBoardingClassCd(BoardingClassCd boardingClassCd) {
@@ -156,7 +145,8 @@ public class TicketSearchCriteriaDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

@@ -27,19 +27,18 @@ import org.springframework.stereotype.Component;
 
 /**
  * ユーザーログイン成功ハンドラ。
- * 
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class AtrsAuthenticationSuccessHandler extends
+                                             SavedRequestAwareAuthenticationSuccessHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-        HttpServletResponse response, Authentication authentication)
-        throws IOException, ServletException {
+            HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         // for Ajax request
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {

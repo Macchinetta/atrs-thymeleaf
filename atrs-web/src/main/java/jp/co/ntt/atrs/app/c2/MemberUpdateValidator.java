@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 /**
  * 会員情報変更フォームのバリデータ。
- * 
  * @author NTT 電電花子
  */
 @Component
@@ -58,8 +57,8 @@ public class MemberUpdateValidator implements Validator {
 
         // パスワードチェック
         if (!errors.hasFieldErrors("currentPassword")
-            && !errors.hasFieldErrors("password")
-            && !errors.hasFieldErrors("reEnterPassword")) {
+                && !errors.hasFieldErrors("password")
+                && !errors.hasFieldErrors("reEnterPassword")) {
 
             String currentPassword = form.getCurrentPassword();
             String password = form.getPassword();
@@ -67,12 +66,12 @@ public class MemberUpdateValidator implements Validator {
 
             // 現在のパスワード、パスワード、パスワード再入力のいずれかが入力されているか
             if (StringUtils.hasLength(currentPassword)
-                || StringUtils.hasLength(password)
-                || StringUtils.hasLength(reEnterPassword)) {
+                    || StringUtils.hasLength(password)
+                    || StringUtils.hasLength(reEnterPassword)) {
 
                 if (!StringUtils.hasLength(currentPassword)
-                    || !StringUtils.hasLength(password)
-                    || !StringUtils.hasLength(reEnterPassword)) {
+                        || !StringUtils.hasLength(password)
+                        || !StringUtils.hasLength(reEnterPassword)) {
 
                     // 空欄がある場合エラー
                     errors.reject(MemberUpdateErrorCode.E_AR_C2_5002.code());

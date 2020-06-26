@@ -27,16 +27,13 @@ import java.util.List;
 
 /**
  * フライト情報テーブルにアクセスするリポジトリインターフェース。
- * 
  * @author NTT 電電太郎
  */
 public interface FlightRepository {
 
     /**
      * 空席情報検索条件に該当する空席情報を取得する。
-     * 
      * @param criteria 空席情報検索条件
-     * 
      * @return 空席情報リスト
      */
     List<Flight> findByVacantSeatSearchCriteria(
@@ -44,7 +41,6 @@ public interface FlightRepository {
 
     /**
      * 指定したフライトのフライト情報を排他ロックをかけて取得する。</p>
-     * 
      * @param departureDate 搭乗日
      * @param flightName 便名
      * @param boardingClass 搭乗クラス
@@ -58,7 +54,6 @@ public interface FlightRepository {
 
     /**
      * フライト情報テーブルの空席数を更新する。
-     * 
      * @param flight フライト情報
      * @return 更新件数
      */
@@ -66,14 +61,12 @@ public interface FlightRepository {
 
     /**
      * 全てのフライト基本情報を取得する。
-     * 
      * @return フライト基本情報リスト
      */
     List<FlightMaster> findAllFlightMaster();
 
     /**
      * 指定したフライトのフライト情報が存在するかチェックする。
-     * 
      * @param departureDate 搭乗日
      * @param flightName 便名
      * @param boardingClass 搭乗クラス

@@ -24,6 +24,7 @@ import javax.servlet.RequestDispatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
@@ -33,7 +34,6 @@ import org.springframework.web.context.request.WebRequest;
  * <ul>
  * <li>サーブレットコンテナに通知されたエラーのエラー応答を行う。</li>
  * <ul>
- * 
  * @author NTT 電電太郎
  */
 @RequestMapping("error")
@@ -66,7 +66,7 @@ public class ApiErrorPageController {
      * @param request
      * @return
      */
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<ApiError> handleErrorPage(WebRequest request) {
         HttpStatus httpStatus = HttpStatus.valueOf((Integer) request
                 .getAttribute(RequestDispatcher.ERROR_STATUS_CODE,

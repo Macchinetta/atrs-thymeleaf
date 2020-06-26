@@ -32,7 +32,6 @@ import javax.inject.Inject;
 
 /**
  * 会員ログインサービス実装クラス。
- * 
  * @author NTT 電電太郎
  */
 @Service
@@ -42,8 +41,8 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(AuthLoginServiceImpl.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AuthLoginServiceImpl.class);
 
     /**
      * 日付生成インターフェース。
@@ -72,11 +71,12 @@ public class AuthLoginServiceImpl implements AuthLoginService {
         memberLogin.setLoginFlg(true);
         int updateCount = memberRepository.updateToLoginStatus(member);
         if (updateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(updateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(updateCount, 1));
         }
 
-        LOGGER.info(LogMessages.I_AR_A1_L0001.getMessage(member.getMembershipNumber()));
+        logger.info(LogMessages.I_AR_A1_L0001.getMessage(member
+                .getMembershipNumber()));
     }
 
 }

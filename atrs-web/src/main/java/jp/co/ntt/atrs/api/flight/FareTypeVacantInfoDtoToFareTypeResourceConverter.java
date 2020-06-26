@@ -29,10 +29,11 @@ import com.github.dozermapper.core.MapperAware;
  * 空席情報をリソースにマッピングするためのカスタムコンバータ
  * @author NTT 電電太郎
  */
-public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
-                                                              DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
-                                                              implements
-                                                              MapperAware {
+public class FareTypeVacantInfoDtoToFareTypeResourceConverter
+                                                             extends
+                                                             DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
+                                                                                                                                                                  implements
+                                                                                                                                                                  MapperAware {
 
     /**
      * Beanマッパー。
@@ -43,8 +44,8 @@ public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
      * コンバート対象の2つのクラスを設定するコンストラクタ
      */
     public FareTypeVacantInfoDtoToFareTypeResourceConverter() {
-        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil.autoCast(
-                LinkedHashMap.class));
+        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil
+                .autoCast(LinkedHashMap.class));
     }
 
     /**

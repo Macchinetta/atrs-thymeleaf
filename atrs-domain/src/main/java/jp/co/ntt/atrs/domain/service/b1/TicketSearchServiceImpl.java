@@ -52,7 +52,6 @@ import javax.inject.Inject;
 
 /**
  * 空席照会サービス実装クラス。
- * 
  * @author NTT 電電次郎
  */
 @Service
@@ -105,8 +104,8 @@ public class TicketSearchServiceImpl implements TicketSearchService {
      * {@inheritDoc}
      */
     @Override
-    public List<FlightVacantInfoDto> searchFlight(TicketSearchCriteriaDto searchCriteria)
-            throws BusinessException {
+    public List<FlightVacantInfoDto> searchFlight(
+            TicketSearchCriteriaDto searchCriteria) throws BusinessException {
 
         // 引数チェック
         Assert.notNull(searchCriteria);
@@ -127,8 +126,8 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         ticketSharedService.validateDepatureDate(depDate);
 
         // 指定された出発空港・到着空港に該当する区間が存在するかどうかチェック
-        Route route =
-                routeProvider.getRouteByAirportCd(depAirportCd, arrAirportCd);
+        Route route = routeProvider.getRouteByAirportCd(depAirportCd,
+                arrAirportCd);
         if (route == null) {
             throw new AtrsBusinessException(TicketSearchErrorCode.E_AR_B1_2002);
         }
@@ -136,17 +135,18 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         // システム日付が搭乗日から何日前かを計算
         LocalDate sysLocalDate = dateFactory.newDateTime().toLocalDate();
         LocalDate depLocalDate = new LocalDate(depDate);
-        int beforeDayNum = Days.daysBetween(sysLocalDate, depLocalDate).getDays();
+        int beforeDayNum = Days.daysBetween(sysLocalDate, depLocalDate)
+                .getDays();
 
         // フライト種別に応じて運賃種別コードを空席照会条件Dtoに設定
-        List<FareTypeCd> fareTypeList = FareTypeUtil.getFareTypeCdList(flightType);
+        List<FareTypeCd> fareTypeList = FareTypeUtil
+                .getFareTypeCdList(flightType);
 
-        VacantSeatSearchCriteriaDto criteria = new VacantSeatSearchCriteriaDto(depDate,
-                route, boardingClassCd, beforeDayNum, fareTypeList);
+        VacantSeatSearchCriteriaDto criteria = new VacantSeatSearchCriteriaDto(depDate, route, boardingClassCd, beforeDayNum, fareTypeList);
 
         // リポジトリから照会結果を取得
-        List<Flight> flightList =
-                flightRepository.findByVacantSeatSearchCriteria(criteria);
+        List<Flight> flightList = flightRepository
+                .findByVacantSeatSearchCriteria(criteria);
 
         // 照会結果件数をチェック
         if (flightList.isEmpty()) {
@@ -159,24 +159,24 @@ public class TicketSearchServiceImpl implements TicketSearchService {
             flight.setFareType(fareTypeProvider.getFareType(fareTypeCd));
             flight.setFlightMaster(flightMasterProvider.getFlightMaster(flight
                     .getFlightMaster().getFlightName()));
-            flight.setBoardingClass(boardingClassProvider.getBoardingClass(flight
-                    .getBoardingClass().getBoardingClassCd()));
+            flight.setBoardingClass(boardingClassProvider
+                    .getBoardingClass(flight.getBoardingClass()
+                            .getBoardingClassCd()));
         }
 
         // 基本運賃の計算
-        int basicFare = ticketSharedService.calculateBasicFare(route.getBasicFare(),
-                boardingClassCd, depDate);
+        int basicFare = ticketSharedService.calculateBasicFare(route
+                .getBasicFare(), boardingClassCd, depDate);
 
         // 照会結果のリストを作成
-        List<FlightVacantInfoDto> flightVacantInfoList =
-                createFlightVacantInfoList(flightList, basicFare);
+        List<FlightVacantInfoDto> flightVacantInfoList = createFlightVacantInfoList(
+                flightList, basicFare);
 
         return flightVacantInfoList;
     }
 
     /**
      * フライトリストから空席状況一覧リストを作成する。
-     * 
      * @param flightList フライトリスト
      * @param basicFare 基本運賃
      * @return 空席状況一覧リスト
@@ -201,16 +201,14 @@ public class TicketSearchServiceImpl implements TicketSearchService {
 
             // 運賃種別情報を設定
             FareType fareType = flight.getFareType();
-            int fare = ticketSharedService.calculateFare(
-                    basicFare, fareType.getDiscountRate());
-            FareTypeVacantInfoDto fareTypeVacantInfo =
-                    new FareTypeVacantInfoDto(
-                            fareType.getFareTypeName(),
-                            fareFormatter.format(fare),
-                            flight.getVacantNum());
+            int fare = ticketSharedService.calculateFare(basicFare, fareType
+                    .getDiscountRate());
+            FareTypeVacantInfoDto fareTypeVacantInfo = new FareTypeVacantInfoDto(fareType
+                    .getFareTypeName(), fareFormatter.format(fare), flight
+                    .getVacantNum());
 
-            vacantInfo.addFareTypeVacantInfo(
-                    fareType.getFareTypeCd(), fareTypeVacantInfo);
+            vacantInfo.addFareTypeVacantInfo(fareType.getFareTypeCd(),
+                    fareTypeVacantInfo);
         }
 
         // リストに変換して返却
@@ -219,7 +217,6 @@ public class TicketSearchServiceImpl implements TicketSearchService {
 
     /**
      * 空席状況情報を作成する。
-     * 
      * @param flight フライト情報
      * @return 空席照会結果
      */
@@ -232,12 +229,16 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         Route route = flightMaster.getRoute();
         vacantInfo.setDepAirportName(route.getDepartureAirport().getName());
         vacantInfo.setArrAirportName(route.getArrivalAirport().getName());
-        String depTime = DateTimeUtil.toFormatTimeString(flightMaster.getDepartureTime());
+        String depTime = DateTimeUtil.toFormatTimeString(flightMaster
+                .getDepartureTime());
         vacantInfo.setDepTime(depTime);
-        String arrTime = DateTimeUtil.toFormatTimeString(flightMaster.getArrivalTime());
+        String arrTime = DateTimeUtil.toFormatTimeString(flightMaster
+                .getArrivalTime());
         vacantInfo.setArrTime(arrTime);
-        vacantInfo.setDepDate(DateTimeUtil.toFormatDateString(flight.getDepartureDate()));
-        vacantInfo.setBoardingClassCd(flight.getBoardingClass().getBoardingClassCd());
+        vacantInfo.setDepDate(DateTimeUtil.toFormatDateString(flight
+                .getDepartureDate()));
+        vacantInfo.setBoardingClassCd(flight.getBoardingClass()
+                .getBoardingClassCd());
 
         return vacantInfo;
     }

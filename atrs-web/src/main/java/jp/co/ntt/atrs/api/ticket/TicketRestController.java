@@ -84,8 +84,9 @@ public class TicketRestController {
     public TicketReserveResource postTicket(
             @RequestBody @Validated TicketReserveResource ticketReserveResource) {
         // 選択フライト情報の業務ロジックチェック
-        List<Flight> flightList = ticketHelper.toFlightList(
-                ticketReserveResource.getSelectFlightResourceList());
+        List<Flight> flightList = ticketHelper
+                .toFlightList(ticketReserveResource
+                        .getSelectFlightResourceList());
         ticketHelper.validateFlightList(flightList);
 
         // チケット予約

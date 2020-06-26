@@ -29,19 +29,18 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * ユーザーログイン失敗ハンドラ。
- * 
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class AtrsAuthenticationFailureHandler extends
+                                             SimpleUrlAuthenticationFailureHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
-        HttpServletResponse response, AuthenticationException exception)
-        throws IOException, ServletException {
+            HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
         // AuthenticationServiceExceptionの場合はシステム例外とする
         if (exception instanceof AuthenticationServiceException) {

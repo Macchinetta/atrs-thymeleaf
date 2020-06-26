@@ -20,7 +20,6 @@ import org.springframework.security.core.Authentication;
 
 /**
  * ログアウト成功イベントクラス。
- * 
  * @author NTT 電電太郎
  */
 public class AtrsLogoutSuccessEvent extends AbstractAuthenticationEvent {
@@ -32,7 +31,6 @@ public class AtrsLogoutSuccessEvent extends AbstractAuthenticationEvent {
 
     /**
      * コンストラクタ。
-     * 
      * @param authentication 認証情報
      */
     public AtrsLogoutSuccessEvent(Authentication authentication) {

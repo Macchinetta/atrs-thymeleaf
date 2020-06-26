@@ -15,11 +15,18 @@
  */
 package jp.co.ntt.atrs.api.flight;
 
+import java.io.Serializable;
+
 /**
  * 運賃種別リソース
  * @author NTT 電電太郎
  */
-public class FareTypeResource {
+public class FareTypeResource implements Serializable  {
+
+    /**
+     * serialVersionUID。
+     */
+    private static final long serialVersionUID = 730209437933903652L;
 
     /**
      * 運賃種別名。

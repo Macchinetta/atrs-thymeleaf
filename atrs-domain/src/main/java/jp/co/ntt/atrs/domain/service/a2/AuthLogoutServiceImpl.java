@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 /**
  * 会員ログアウトサービス実装クラス。
- * 
  * @author NTT 電電太郎
  */
 @Service
@@ -41,8 +40,8 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(AuthLogoutServiceImpl.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(AuthLogoutServiceImpl.class);
 
     /**
      * カード会員情報リポジトリ。
@@ -63,10 +62,11 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
         memberLogin.setLoginFlg(false);
         int updateCount = memberRepository.updateToLogoutStatus(member);
         if (updateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
-                    LogMessages.E_AR_A0_L9002.getMessage(updateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
+                    .getMessage(updateCount, 1));
         }
 
-        LOGGER.info(LogMessages.I_AR_A2_L0001.getMessage(member.getMembershipNumber()));
+        logger.info(LogMessages.I_AR_A2_L0001.getMessage(member
+                .getMembershipNumber()));
     }
 }

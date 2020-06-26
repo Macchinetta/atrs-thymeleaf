@@ -33,7 +33,6 @@ import javax.validation.constraints.Pattern;
 
 /**
  * 全角カタカナチェックアノテーション
- * 
  * @author NTT 電電太郎
  */
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })

@@ -19,7 +19,6 @@ import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
 
 /**
  * フライト情報非存在業務例外クラス。
- * 
  * @author NTT 電電次郎
  */
 public class FlightNotFoundException extends AtrsBusinessException {

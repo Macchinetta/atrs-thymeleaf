@@ -31,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * 搭乗者リソース
- * 
  * @author NTT 電電太郎
  */
 public class PassengerResource implements Serializable {
@@ -80,7 +79,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者姓を取得する。
-     * 
      * @return 搭乗者姓
      */
     public String getFamilyName() {
@@ -89,7 +87,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者姓を設定する。
-     * 
      * @param familyName 搭乗者姓
      */
     public void setFamilyName(String familyName) {
@@ -98,7 +95,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者名を取得する。
-     * 
      * @return 搭乗者名
      */
     public String getGivenName() {
@@ -107,7 +103,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者名を設定する。
-     * 
      * @param givenName 搭乗者名
      */
     public void setGivenName(String givenName) {
@@ -116,7 +111,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者年齢を取得する。
-     * 
      * @return 搭乗者年齢
      */
     public Integer getAge() {
@@ -125,7 +119,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者年齢を設定する。
-     * 
      * @param age 搭乗者年齢
      */
     public void setAge(Integer age) {
@@ -134,7 +127,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者性別を取得する。
-     * 
      * @return 搭乗者性別
      */
     public Gender getGender() {
@@ -143,7 +135,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者性別を設定する。
-     * 
      * @param gender 搭乗者性別
      */
     public void setGender(Gender gender) {
@@ -152,7 +143,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者の会員番号を取得する。
-     * 
      * @return 搭乗者の会員番号
      */
     public String getMembershipNumber() {
@@ -161,7 +151,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 搭乗者の会員番号を設定する。
-     * 
      * @param membershipNumber 搭乗者の会員番号
      */
     public void setMembershipNumber(String membershipNumber) {
@@ -170,7 +159,6 @@ public class PassengerResource implements Serializable {
 
     /**
      * 情報を保持しているか判定する。
-     * 
      * @return 保持プロパティが全てnullまたは空文字の場合true
      */
     public boolean isEmpty() {

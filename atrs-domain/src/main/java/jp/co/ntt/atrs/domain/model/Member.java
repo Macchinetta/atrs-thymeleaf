@@ -23,7 +23,6 @@ import java.util.Date;
 
 /**
  * カード会員情報。
- * 
  * @author NTT 電電太郎
  */
 public class Member implements Serializable {
@@ -110,7 +109,6 @@ public class Member implements Serializable {
 
     /**
      * 会員番号を取得する。
-     * 
      * @return 会員番号
      */
     public String getMembershipNumber() {
@@ -119,7 +117,6 @@ public class Member implements Serializable {
 
     /**
      * 会員番号を設定する。
-     * 
      * @param membershipNumber 会員番号
      */
     public void setMembershipNumber(String membershipNumber) {
@@ -128,7 +125,6 @@ public class Member implements Serializable {
 
     /**
      * 漢字姓を取得する。
-     *
      * @return 漢字姓
      */
     public String getKanjiFamilyName() {
@@ -137,7 +133,6 @@ public class Member implements Serializable {
 
     /**
      * 漢字姓を設定する。
-     *
      * @param kanjiFamilyName 漢字姓
      */
     public void setKanjiFamilyName(String kanjiFamilyName) {
@@ -146,7 +141,6 @@ public class Member implements Serializable {
 
     /**
      * 漢字名を取得する。
-     *
      * @return 漢字名
      */
     public String getKanjiGivenName() {
@@ -155,7 +149,6 @@ public class Member implements Serializable {
 
     /**
      * 漢字名を設定する。
-     *
      * @param kanjiGivenName 漢字名
      */
     public void setKanjiGivenName(String kanjiGivenName) {
@@ -164,7 +157,6 @@ public class Member implements Serializable {
 
     /**
      * カナ姓を取得する。
-     * 
      * @return カナ姓
      */
     public String getKanaFamilyName() {
@@ -173,7 +165,6 @@ public class Member implements Serializable {
 
     /**
      * カナ姓を設定する。
-     * 
      * @param kanaFamilyName カナ姓
      */
     public void setKanaFamilyName(String kanaFamilyName) {
@@ -182,7 +173,6 @@ public class Member implements Serializable {
 
     /**
      * カナ名を取得する。
-     * 
      * @return カナ名
      */
     public String getKanaGivenName() {
@@ -191,7 +181,6 @@ public class Member implements Serializable {
 
     /**
      * カナ名を設定する。
-     * 
      * @param kanaGivenName カナ名
      */
     public void setKanaGivenName(String kanaGivenName) {
@@ -200,7 +189,6 @@ public class Member implements Serializable {
 
     /**
      * 生年月日を取得する。
-     * 
      * @return 生年月日
      */
     public Date getBirthday() {
@@ -209,7 +197,6 @@ public class Member implements Serializable {
 
     /**
      * 生年月日を設定する。
-     * 
      * @param birthday 生年月日
      */
     public void setBirthday(Date birthday) {
@@ -218,7 +205,6 @@ public class Member implements Serializable {
 
     /**
      * 性別を取得する。
-     * 
      * @return 性別
      */
     public Gender getGender() {
@@ -227,7 +213,6 @@ public class Member implements Serializable {
 
     /**
      * 性別を設定する。
-     * 
      * @param gender 性別
      */
     public void setGender(Gender gender) {
@@ -236,7 +221,6 @@ public class Member implements Serializable {
 
     /**
      * 電話番号を取得する。
-     * 
      * @return 電話番号
      */
     public String getTel() {
@@ -245,7 +229,6 @@ public class Member implements Serializable {
 
     /**
      * 電話番号を設定する。
-     * 
      * @param tel 電話番号
      */
     public void setTel(String tel) {
@@ -254,7 +237,6 @@ public class Member implements Serializable {
 
     /**
      * 郵便番号を取得する。
-     * 
      * @return 郵便番号
      */
     public String getZipCode() {
@@ -263,7 +245,6 @@ public class Member implements Serializable {
 
     /**
      * 郵便番号を設定する。
-     * 
      * @param zipCode 郵便番号
      */
     public void setZipCode(String zipCode) {
@@ -272,7 +253,6 @@ public class Member implements Serializable {
 
     /**
      * 住所を取得する。
-     * 
      * @return 住所
      */
     public String getAddress() {
@@ -281,7 +261,6 @@ public class Member implements Serializable {
 
     /**
      * 住所を設定する。
-     * 
      * @param address 住所
      */
     public void setAddress(String address) {
@@ -290,7 +269,6 @@ public class Member implements Serializable {
 
     /**
      * メールアドレスを取得する。
-     * 
      * @return メールアドレス
      */
     public String getMail() {
@@ -299,7 +277,6 @@ public class Member implements Serializable {
 
     /**
      * メールアドレスを設定する。
-     * 
      * @param mail メールアドレス
      */
     public void setMail(String mail) {
@@ -308,7 +285,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード番号を取得する。
-     * 
      * @return クレジットカード番号
      */
     public String getCreditNo() {
@@ -317,7 +293,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード番号を設定する。
-     * 
      * @param creditNo クレジットカード番号
      */
     public void setCreditNo(String creditNo) {
@@ -326,7 +301,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード有効期限を取得する。
-     * 
      * @return クレジットカード有効期限
      */
     public String getCreditTerm() {
@@ -335,7 +309,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード有効期限を設定する。
-     * 
      * @param creditTerm クレジットカード有効期限
      */
     public void setCreditTerm(String creditTerm) {
@@ -344,7 +317,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード種別を取得する。
-     * 
      * @return クレジットカード種別
      */
     public CreditType getCreditType() {
@@ -353,7 +325,6 @@ public class Member implements Serializable {
 
     /**
      * クレジットカード種別を設定する。
-     * 
      * @param creditType クレジットカード種別
      */
     public void setCreditType(CreditType creditType) {
@@ -362,7 +333,6 @@ public class Member implements Serializable {
 
     /**
      * カード会員ログイン情報を取得する。
-     * 
      * @return カード会員ログイン情報
      */
     public MemberLogin getMemberLogin() {
@@ -371,7 +341,6 @@ public class Member implements Serializable {
 
     /**
      * カード会員ログイン情報を設定する。
-     * 
      * @param memberLogin カード会員ログイン情報
      */
     public void setMemberLogin(MemberLogin memberLogin) {
@@ -383,7 +352,8 @@ public class Member implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

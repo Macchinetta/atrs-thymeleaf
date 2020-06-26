@@ -37,7 +37,6 @@ import javax.validation.constraints.Email;
 
 /**
  * 会員情報変更フォーム。
- * 
  * @author NTT 電電花子
  */
 public class MemberUpdateForm implements IMemberForm, Serializable {
@@ -211,7 +210,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名(姓)を取得する。
-     * 
      * @return 氏名(姓)
      */
     public String getKanjiFamilyName() {
@@ -220,7 +218,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名(姓)を設定する。
-     * 
      * @param kanjiFamilyName 氏名(姓)
      */
     public void setKanjiFamilyName(String kanjiFamilyName) {
@@ -229,7 +226,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名(名)を取得する。
-     * 
      * @return 氏名(名)
      */
     public String getKanjiGivenName() {
@@ -238,7 +234,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名(名)を設定する。
-     * 
      * @param kanjiGivenName 氏名(名)
      */
     public void setKanjiGivenName(String kanjiGivenName) {
@@ -247,7 +242,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名カタカナ(セイ)を取得する。
-     * 
      * @return 氏名カタカナ(セイ)
      */
     public String getKanaFamilyName() {
@@ -256,7 +250,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名カタカナ(セイ)を設定する。
-     * 
      * @param kanaFamilyName 氏名カタカナ(セイ)
      */
     public void setKanaFamilyName(String kanaFamilyName) {
@@ -265,7 +258,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名カタカナ(メイ)を取得する。
-     * 
      * @return 氏名カタカナ(メイ)
      */
     public String getKanaGivenName() {
@@ -274,7 +266,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 氏名カタカナ(メイ)を設定する。
-     * 
      * @param kanaGivenName 氏名カタカナ(メイ)
      */
     public void setKanaGivenName(String kanaGivenName) {
@@ -283,7 +274,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 性別を取得する。
-     * 
      * @return 性別
      */
     public Gender getGender() {
@@ -292,7 +282,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 性別を設定する。
-     * 
      * @param gender 性別
      */
     public void setGender(Gender gender) {
@@ -301,7 +290,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 生年月日を取得する。
-     * 
      * @return 生年月日
      */
     @Override
@@ -311,7 +299,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 生年月日を設定する。
-     * 
      * @param dateOfBirth 生年月日
      */
     public void setDateOfBirth(Date dateOfBirth) {
@@ -320,7 +307,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号1を取得する。
-     * 
      * @return 電話番号1
      */
     @Override
@@ -330,7 +316,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号1を設定する。
-     * 
      * @param tel1 電話番号1
      */
     public void setTel1(String tel1) {
@@ -339,7 +324,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号2を取得する。
-     * 
      * @return 電話番号2
      */
     @Override
@@ -349,7 +333,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号2を設定する。
-     * 
      * @param tel2 電話番号2
      */
     public void setTel2(String tel2) {
@@ -358,7 +341,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号3を取得する。
-     * 
      * @return 電話番号3
      */
     @Override
@@ -368,7 +350,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 電話番号3を設定する。
-     * 
      * @param tel3 電話番号3
      */
     public void setTel3(String tel3) {
@@ -377,7 +358,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 郵便番号1を取得する。
-     * 
      * @return 郵便番号1
      */
     @Override
@@ -387,7 +367,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 郵便番号1を設定する。
-     * 
      * @param zipCode1 郵便番号1
      */
     public void setZipCode1(String zipCode1) {
@@ -396,7 +375,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 郵便番号2を取得する。
-     * 
      * @return 郵便番号2
      */
     @Override
@@ -406,7 +384,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 郵便番号2を設定する。
-     * 
      * @param zipCode2 郵便番号2
      */
     public void setZipCode2(String zipCode2) {
@@ -415,7 +392,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 住所を取得する。
-     * 
      * @return 住所
      */
     public String getAddress() {
@@ -424,7 +400,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 住所を設定する。
-     * 
      * @param address 住所
      */
     public void setAddress(String address) {
@@ -433,7 +408,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * Eメールを取得する。
-     * 
      * @return Eメール
      */
     @Override
@@ -443,7 +417,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * Eメールを設定する。
-     * 
      * @param mail Eメール
      */
     public void setMail(String mail) {
@@ -452,7 +425,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * Eメール再入力を取得する。
-     * 
      * @return Eメール再入力
      */
     @Override
@@ -462,7 +434,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * Eメール再入力を設定する。
-     * 
      * @param reEnterMail Eメール再入力
      */
     public void setReEnterMail(String reEnterMail) {
@@ -471,7 +442,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード会社を取得する。
-     * 
      * @return クレジットカード会社
      */
     public String getCreditTypeCd() {
@@ -480,7 +450,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード会社を設定する。
-     * 
      * @param creditTypeCd クレジットカード会社
      */
     public void setCreditTypeCd(String creditTypeCd) {
@@ -489,7 +458,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード番号を取得する。
-     * 
      * @return クレジットカード番号
      */
     public String getCreditNo() {
@@ -498,7 +466,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード番号を設定する。
-     * 
      * @param creditNo クレジットカード番号
      */
     public void setCreditNo(String creditNo) {
@@ -507,7 +474,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード有効期限（月）を取得する。
-     * 
      * @return クレジットカード有効期限（月）
      */
     @Override
@@ -517,7 +483,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード有効期限（月）を設定する。
-     * 
      * @param creditMonth クレジットカード有効期限（月）
      */
     public void setCreditMonth(String creditMonth) {
@@ -526,7 +491,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード有効期限（年）を取得する。
-     * 
      * @return クレジットカード有効期限（年）
      */
     @Override
@@ -536,7 +500,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * クレジットカード有効期限（年）を設定する。
-     * 
      * @param creditYear クレジットカード有効期限（年）
      */
     public void setCreditYear(String creditYear) {
@@ -545,7 +508,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * パスワードを取得する。
-     * 
      * @return パスワード
      */
     public String getPassword() {
@@ -554,7 +516,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * パスワードを設定する。
-     * 
      * @param password パスワード
      */
     public void setPassword(String password) {
@@ -563,7 +524,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * パスワード再入力を取得する。
-     * 
      * @return パスワード再入力
      */
     public String getReEnterPassword() {
@@ -572,7 +532,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * パスワード再入力を設定する。
-     * 
      * @param reEnterPassword パスワード再入力
      */
     public void setReEnterPassword(String reEnterPassword) {
@@ -581,7 +540,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 現在のパスワードを取得する。
-     * 
      * @return 確認用パスワード
      */
     public String getCurrentPassword() {
@@ -590,7 +548,6 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
 
     /**
      * 現在のパスワードを設定する。
-     * 
      * @param currentPassword 確認用パスワード
      */
     public void setCurrentPassword(String currentPassword) {

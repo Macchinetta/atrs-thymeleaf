@@ -17,14 +17,12 @@ package jp.co.ntt.atrs.api.common.util;
 
 /**
  * キャスト用ユーティリティクラス
- * 
  * @author NTT 電電太郎
  */
 public class CastUtil {
 
     /**
      * 戻り値の型に合わせてキャストする。
-     * 
      * @param obj 受け取るオブジェクト
      * @return キャストするオブジェクト
      */

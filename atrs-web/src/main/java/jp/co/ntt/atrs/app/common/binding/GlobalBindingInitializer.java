@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  * 全コントローラ共通のバインダ初期化処理を行うクラス。
- * 
  * @author NTT 電電太郎
  */
 @ControllerAdvice
@@ -33,7 +32,6 @@ public class GlobalBindingInitializer {
      * <p>
      * Stringフィールドが空欄の場合に、空文字ではなくnullをバインドするよう設定する。
      * </p>
-     * 
      * @param binder バインダ
      */
     @InitBinder

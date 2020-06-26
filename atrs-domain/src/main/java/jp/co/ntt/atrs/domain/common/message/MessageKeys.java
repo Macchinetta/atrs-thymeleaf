@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.domain.common.message;
 
 /**
  * メッセージキーを表す列挙型。
- * 
  * @author NTT 電電太郎
  */
 public enum MessageKeys {
@@ -34,7 +33,6 @@ public enum MessageKeys {
 
     /**
      * コンストラクタ。
-     * 
      * @param key メッセージキー。
      */
     private MessageKeys(String key) {
@@ -43,7 +41,6 @@ public enum MessageKeys {
 
     /**
      * メッセージキーを取得する。
-     * 
      * @return メッセージキー
      */
     public String key() {

@@ -37,7 +37,6 @@ import javax.inject.Inject;
 
 /**
  * チケット予約共通Helper。
- * 
  * @author NTT 電電次郎
  */
 @Component
@@ -63,7 +62,6 @@ public class TicketHelper {
 
     /**
      * 選択フライト情報フォームをフライト情報に変換する。
-     * 
      * @param selectFlightFormList 選択フライト情報フォームのリスト
      * @return フライト情報のリスト
      */
@@ -75,12 +73,14 @@ public class TicketHelper {
             Flight flight = new Flight();
             flight.setDepartureDate(selectFlightForm.getDepDate());
             String flightName = selectFlightForm.getFlightName();
-            flight.setFlightMaster(flightMasterProvider.getFlightMaster(flightName));
+            flight.setFlightMaster(flightMasterProvider
+                    .getFlightMaster(flightName));
             FareTypeCd fareTypeCd = selectFlightForm.getFareTypeCd();
             flight.setFareType(fareTypeProvider.getFareType(fareTypeCd));
-            BoardingClassCd boardingClassCd = selectFlightForm.getBoardingClassCd();
+            BoardingClassCd boardingClassCd = selectFlightForm
+                    .getBoardingClassCd();
             flight.setBoardingClass(boardingClassProvider
-                .getBoardingClass(boardingClassCd));
+                    .getBoardingClass(boardingClassCd));
 
             flightList.add(flight);
         }
@@ -90,15 +90,14 @@ public class TicketHelper {
 
     /**
      * 選択フライト情報からリダイレクト時の選択フライト情報パラメータマップを生成する。
-     *
      * @param reservationFlightForm 予約フライトフォーム
      * @return パラメータマップ
      */
     public Map<String, String> createParameterMapForSelectFlight(
-        IReservationFlightForm reservationFlightForm) {
+            IReservationFlightForm reservationFlightForm) {
 
-        List<SelectFlightForm> selectFlightFormList =
-            reservationFlightForm.getSelectFlightFormList();
+        List<SelectFlightForm> selectFlightFormList = reservationFlightForm
+                .getSelectFlightFormList();
 
         // 選択フライト情報がない場合はエラーとする
         if (CollectionUtils.isEmpty(selectFlightFormList)) {
@@ -118,11 +117,12 @@ public class TicketHelper {
             SelectFlightForm selectFlight = selectFlightFormList.get(i);
             String paramName = "selectFlightFormList[" + i + "]";
             params.put(paramName + ".flightName", selectFlight.getFlightName());
-            params.put(paramName + ".fareTypeCd", selectFlight.getFareTypeCd().getCode());
-            params.put(paramName + ".depDate",
-                DateTimeUtil.toFormatDateString(selectFlight.getDepDate()));
-            params.put(paramName + ".boardingClassCd",
-                selectFlight.getBoardingClassCd().getCode());
+            params.put(paramName + ".fareTypeCd", selectFlight.getFareTypeCd()
+                    .getCode());
+            params.put(paramName + ".depDate", DateTimeUtil
+                    .toFormatDateString(selectFlight.getDepDate()));
+            params.put(paramName + ".boardingClassCd", selectFlight
+                    .getBoardingClassCd().getCode());
         }
 
         return params;
