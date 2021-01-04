@@ -111,7 +111,7 @@
                 th:style="(${passengerNo} &lt; 4) or ${ticketReserveForm.hasAdditionalPassenger()} ? '' : 'display: none'">
                 <h4 th:text="'搭乗者' + ${passengerNo}">搭乗者1</h4>
                 <div class="form-group">
-                  <label th:for="|passengerFormList[__${statusStat.index}__].familyName|"
+                  <label th:for="|passengerFormList[${statusStat.index}].familyName|"
                     class="col-md-2 control-label">お名前(カタカナ)</label>
                   <div class="col-md-6">
                     <div class="input-group inline-half">
@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label th:for="|passengerFormList[__${statusStat.index}__].age|"
+                  <label th:for="|passengerFormList[${statusStat.index}].age|"
                     class="col-md-2 control-label">年齢</label>
                   <div class="col-md-3">
                     <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].age}"
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label th:for="|passengerFormList[__${statusStat.index}__].membershipNumber|"
+                  <label th:for="|passengerFormList[${statusStat.index}].membershipNumber|"
                     class="col-md-2 control-label">会員番号(10桁)</label>
                   <div class="col-md-3">
                     <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].membershipNumber}"
