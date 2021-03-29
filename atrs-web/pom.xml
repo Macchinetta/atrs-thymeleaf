@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.7.1.RELEASE</version>
+        <version>1.7.2.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>atrs-web</artifactId>
@@ -121,22 +121,6 @@
             <id>warpack</id>
             <dependencies>
             </dependencies>
-        </profile>
-        <profile>
-          <id>jdk11</id>
-          <activation>
-            <jdk>11</jdk>
-          </activation>
-          <dependencies>
-            <dependency>
-              <groupId>com.sun.xml.bind</groupId>
-              <artifactId>jaxb-core</artifactId>
-            </dependency>
-            <dependency>
-              <groupId>com.sun.xml.bind</groupId>
-              <artifactId>jaxb-impl</artifactId>
-            </dependency>
-          </dependencies>
         </profile>
     </profiles>
 

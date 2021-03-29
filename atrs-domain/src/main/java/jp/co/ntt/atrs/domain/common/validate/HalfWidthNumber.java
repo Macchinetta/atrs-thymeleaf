@@ -20,9 +20,11 @@ import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -31,16 +33,19 @@ import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.Pattern;
 
+import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber.List;
+
 /**
  * 半角数字チェックアノテーション
  * @author NTT 電電太郎
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
 @Pattern(regexp = "^[0-9]+$")
 @ReportAsSingleViolation
+@Repeatable(List.class)
 public @interface HalfWidthNumber {
 
     String message() default "{jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber.message}";
@@ -52,7 +57,8 @@ public @interface HalfWidthNumber {
     /**
      * 複数設定用リスト
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER,
+            TYPE_USE })
     @Retention(RUNTIME)
     @Documented
     @interface List {

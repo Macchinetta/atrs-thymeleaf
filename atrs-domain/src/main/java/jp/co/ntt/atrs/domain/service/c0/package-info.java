@@ -14,7 +14,7 @@
  * governing permissions and limitations under the License.
  */
 /**
- * 会員情報サ－ビス共通パッケージ。
+ * 会員情報サービス共通パッケージ。
  * 
  * @author NTT 電電花子
  */
