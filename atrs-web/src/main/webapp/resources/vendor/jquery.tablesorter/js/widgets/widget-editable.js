@@ -1,4 +1,4 @@
-﻿/*! tablesorter Editable Content widget - updated 8/1/2014 (core v2.17.6)
+/*! tablesorter Editable Content widget - updated 8/1/2014 (core v2.17.6)
  * Requires tablesorter v2.8+ and jQuery 1.7+
  * by Rob Garrison
  */

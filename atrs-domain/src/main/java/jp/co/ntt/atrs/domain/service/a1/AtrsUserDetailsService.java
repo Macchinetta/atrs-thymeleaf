@@ -63,7 +63,7 @@ public class AtrsUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Assert.hasText(username);
+        Assert.hasText(username, "username must have some text.");
 
         // 会員情報(ログイン時に必要な情報のみ)を取得
         Member member = memberRepository.findOneForLogin(username);

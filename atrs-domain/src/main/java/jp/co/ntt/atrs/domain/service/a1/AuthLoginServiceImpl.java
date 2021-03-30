@@ -63,7 +63,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     public void login(Member member) {
 
         // パラメータチェック
-        Assert.notNull(member);
+        Assert.notNull(member, "member must not null.");
 
         // ログインフラグ、ログイン日時を更新
         MemberLogin memberLogin = member.getMemberLogin();

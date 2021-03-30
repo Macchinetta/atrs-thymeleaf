@@ -64,7 +64,7 @@ public class FlightMasterProvider {
      * @return フライト基本情報。該当するフライト基本情報がない場合はnull。
      */
     public FlightMaster getFlightMaster(String flightName) {
-        Assert.hasText(flightName);
+        Assert.hasText(flightName, "flightName must have some text.");
         return this.flightMasterMap.get(flightName);
     }
 }

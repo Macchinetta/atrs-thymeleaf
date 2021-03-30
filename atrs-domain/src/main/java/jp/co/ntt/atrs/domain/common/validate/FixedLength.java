@@ -20,9 +20,11 @@ import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -32,17 +34,20 @@ import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.Size;
 
+import jp.co.ntt.atrs.domain.common.validate.FixedLength.List;
+
 /**
  * 指定サイズチェックアノテーション
  * @author NTT 電電太郎
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
 // 0はダミー。内部で置き換える
 @Size(min = 0, max = 0)
 @ReportAsSingleViolation
+@Repeatable(List.class)
 public @interface FixedLength {
 
     String message() default "{jp.co.ntt.atrs.domain.common.validate.FixedLength.message}";
@@ -59,7 +64,8 @@ public @interface FixedLength {
     /**
      * 複数設定用リスト
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER,
+            TYPE_USE })
     @Retention(RUNTIME)
     @Documented
     @interface List {

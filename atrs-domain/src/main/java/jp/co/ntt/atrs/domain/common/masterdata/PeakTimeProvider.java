@@ -62,7 +62,7 @@ public class PeakTimeProvider {
      * @return ピーク時期情報。該当するピーク時期情報が存在しない場合null。
      */
     public PeakTime getPeakTime(Date depDate) {
-        Assert.notNull(depDate);
+        Assert.notNull(depDate, "depDate must not null.");
 
         for (PeakTime peakTime : peakTimeList) {
             Interval peakTimeInterval = new Interval(new DateTime(peakTime

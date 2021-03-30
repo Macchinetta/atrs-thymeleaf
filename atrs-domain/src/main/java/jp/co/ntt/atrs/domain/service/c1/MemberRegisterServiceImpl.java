@@ -54,10 +54,10 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     @Override
     public Member register(Member member) {
 
-        Assert.notNull(member);
+        Assert.notNull(member, "member must not null.");
 
         MemberLogin memberLogin = member.getMemberLogin();
-        Assert.notNull(memberLogin);
+        Assert.notNull(memberLogin, "memberLogin must not null.");
 
         // パスワードをエンコード
         String hashedPassword = passwordEncoder.encode(member.getMemberLogin()

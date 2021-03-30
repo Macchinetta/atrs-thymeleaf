@@ -53,7 +53,7 @@ public class MemberApiController {
             @RequestParam("membershipNumber") String membershipNumber) {
 
         // 値がない場合は、メッセージ表示不要のため OK を返却
-        if (StringUtils.isEmpty(membershipNumber)) {
+        if (!StringUtils.hasText(membershipNumber)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 

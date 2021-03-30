@@ -108,7 +108,7 @@ public class TicketSearchServiceImpl implements TicketSearchService {
             TicketSearchCriteriaDto searchCriteria) throws BusinessException {
 
         // 引数チェック
-        Assert.notNull(searchCriteria);
+        Assert.notNull(searchCriteria, "searchCriteria must not null.");
 
         Date depDate = searchCriteria.getDepDate();
         BoardingClassCd boardingClassCd = searchCriteria.getBoardingClassCd();
@@ -116,11 +116,11 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         String arrAirportCd = searchCriteria.getArrivalAirportCd();
         FlightType flightType = searchCriteria.getFlightType();
 
-        Assert.notNull(depDate);
-        Assert.notNull(boardingClassCd);
-        Assert.hasText(depAirportCd);
-        Assert.hasText(arrAirportCd);
-        Assert.notNull(flightType);
+        Assert.notNull(depDate, "depDate must not null.");
+        Assert.notNull(boardingClassCd, "boardingClassCd must not null.");
+        Assert.hasText(depAirportCd, "depAirportCd must have some text.");
+        Assert.hasText(arrAirportCd, "arrAirportCd must have some text.");
+        Assert.notNull(flightType, "flightType must not null.");
 
         // 搭乗日が照会可能な範囲かチェック
         ticketSharedService.validateDepatureDate(depDate);

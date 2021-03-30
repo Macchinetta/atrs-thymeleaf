@@ -56,7 +56,7 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     @Override
     public Member findMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber);
+        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
 
         return memberRepository.findOne(membershipNumber);
     }
@@ -67,9 +67,9 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     @Override
     public void updateMember(Member member) {
 
-        Assert.notNull(member);
+        Assert.notNull(member, "member must not null.");
         MemberLogin memberLogin = member.getMemberLogin();
-        Assert.notNull(memberLogin);
+        Assert.notNull(memberLogin, "memberLogin must not null.");
 
         // 会員情報更新
         int updateMemberCount = memberRepository.update(member);
@@ -121,7 +121,7 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     @Override
     public Member findMemberForLogin(String membershipNumber) {
 
-        Assert.hasText(membershipNumber);
+        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
 
         return memberRepository.findOneForLogin(membershipNumber);
     }

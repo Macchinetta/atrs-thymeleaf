@@ -112,12 +112,12 @@ public class TicketSharedServiceImpl implements TicketSharedService {
     @Override
     public void validateFlightList(List<Flight> flightList) throws BusinessException, InvalidFlightException {
 
-        Assert.notEmpty(flightList);
-        Assert.isTrue(flightList.size() <= 2);
+        Assert.notEmpty(flightList, "flightList must not empty.");
+        Assert.isTrue(flightList.size() <= 2, "flightList size must be 2 or less.");
 
         // 往路フライトのチェックを行う
         Flight outwardFlight = flightList.get(0);
-        Assert.notNull(outwardFlight);
+        Assert.notNull(outwardFlight, "outwardFlight must not null.");
         if (outwardFlight.getFlightMaster() == null) {
             throw new InvalidFlightException("flightMaster is null :"
                     + outwardFlight);
@@ -132,7 +132,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
 
             // 復路フライト
             Flight homewardFlight = flightList.get(1);
-            Assert.notNull(homewardFlight);
+            Assert.notNull(homewardFlight, "homewardFlight must not null.");
             if (homewardFlight.getFlightMaster() == null) {
                 throw new InvalidFlightException("flightMaster is null :"
                         + homewardFlight);
@@ -256,7 +256,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      */
     @Override
     public void validateDepatureDate(Date departureDate) throws BusinessException {
-        Assert.notNull(departureDate);
+        Assert.notNull(departureDate, "departureDate must not null.");
 
         DateTime sysDateMidnight = dateFactory.newDateTime()
                 .withTimeAtStartOfDay();
@@ -276,8 +276,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      */
     @Override
     public boolean isAvailableFareType(FareType fareType, Date depDate) {
-        Assert.notNull(fareType);
-        Assert.notNull(depDate);
+        Assert.notNull(fareType, "fareType must not null.");
+        Assert.notNull(depDate, "depDate must not null.");
 
         DateTime depDateMidnight = new DateTime(depDate).withTimeAtStartOfDay();
 
@@ -304,9 +304,9 @@ public class TicketSharedServiceImpl implements TicketSharedService {
     @Override
     public int calculateBasicFare(int basicFareOfRoute,
             BoardingClassCd boardingClassCd, Date depDate) {
-        Assert.isTrue(basicFareOfRoute >= 0);
-        Assert.notNull(boardingClassCd);
-        Assert.notNull(depDate);
+        Assert.isTrue(basicFareOfRoute >= 0, "basicFareOfRoute must be 0 or higher.");
+        Assert.notNull(boardingClassCd, "boardingClassCd must not null.");
+        Assert.notNull(depDate, "depDate must not null.");
 
         // 搭乗クラスの加算料金の取得
         BoardingClass boardingClass = boardingClassProvider
@@ -346,9 +346,9 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      */
     @Override
     public int calculateFare(int basicFare, int discountRate) {
-        Assert.isTrue(basicFare >= 0);
-        Assert.isTrue(discountRate >= 0);
-        Assert.isTrue(discountRate <= 100);
+        Assert.isTrue(basicFare >= 0, "basicFare must be 0 or higher.");
+        Assert.isTrue(discountRate >= 0, "discountRate must be 0 or higher.");
+        Assert.isTrue(discountRate <= 100, "discountRate must be 100 or less.");
 
         // 運賃の計算
         int fare = (int) (basicFare * (1 - (discountRate * 0.01)));
@@ -362,8 +362,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      */
     @Override
     public boolean existsFlight(Flight flight) {
-        Assert.notNull(flight);
-        Assert.notNull(flight.getFlightMaster());
+        Assert.notNull(flight, "flight must not null.");
+        Assert.notNull(flight.getFlightMaster(), "flightMaster must not null.");
         return flightRepository.exists(flight.getDepartureDate(), flight
                 .getFlightMaster().getFlightName(), flight.getBoardingClass(),
                 flight.getFareType());

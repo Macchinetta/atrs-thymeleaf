@@ -13,10 +13,10 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.6.1.RELEASE</version>
+        <version>5.7.0.RELEASE</version>
         <relativePath />
     </parent>
-    <version>1.7.1.RELEASE</version>
+    <version>1.8.0.RELEASE</version>
     <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
     <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
     <licenses>
@@ -207,13 +207,20 @@
                           <artifactId>activemq-openwire-legacy</artifactId>
                         </dependency>
                         <dependency>
-                          <groupId>javax.jms</groupId>
-                          <artifactId>javax.jms-api</artifactId>
+                          <groupId>jakarta.jms</groupId>
+                          <artifactId>jakarta.jms-api</artifactId>
                         </dependency>
                       </dependencies>
                     </container>
                   </configuration>
                 </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-javadoc-plugin</artifactId>
+                  <configuration>
+                    <source>${java-version}</source>
+                  </configuration>
+               </plugin>
             </plugins>
         </pluginManagement>
         <plugins />
@@ -256,19 +263,6 @@
             </dependency>
             <!-- == End Thymeleaf == -->
 
-            <!-- == Begin For JDK 11 == -->
-            <dependency>
-              <groupId>com.sun.xml.bind</groupId>
-              <artifactId>jaxb-core</artifactId>
-              <version>${jaxb-core.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>com.sun.xml.bind</groupId>
-              <artifactId>jaxb-impl</artifactId>
-              <version>${jaxb-impl.version}</version>
-            </dependency>
-            <!-- == End For JDK 11 == -->
-
         </dependencies>
     </dependencyManagement>
 
@@ -287,8 +281,6 @@
         <!-- == Dependency Versions == -->
         <postgresql.version>42.2.9</postgresql.version>
         <thymeleaf-joda-dialect.version>2.0.0</thymeleaf-joda-dialect.version>
-        <jaxb-core.version>2.3.0.1</jaxb-core.version>
-        <jaxb-impl.version>2.3.2</jaxb-impl.version>
         <!-- == Project Properties == -->
         <project.root.basedir>${project.basedir}</project.root.basedir>
         <encoding>UTF-8</encoding>

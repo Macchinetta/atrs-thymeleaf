@@ -22,12 +22,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.util.StringUtils;
+
 import jp.co.ntt.atrs.domain.common.validate.FixedLength;
 import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana;
 import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber;
 import jp.co.ntt.atrs.domain.model.Gender;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 搭乗者リソース
@@ -162,9 +162,9 @@ public class PassengerResource implements Serializable {
      * @return 保持プロパティが全てnullまたは空文字の場合true
      */
     public boolean isEmpty() {
-        return (StringUtils.isEmpty(familyName)
-                && StringUtils.isEmpty(givenName) && age == null
-                && gender == null && StringUtils.isEmpty(membershipNumber));
+        return !StringUtils.hasText(familyName)
+                && !StringUtils.hasText(givenName) && age == null
+                && gender == null && !StringUtils.hasText(membershipNumber);
     }
 
 }

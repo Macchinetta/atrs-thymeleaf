@@ -65,6 +65,10 @@
     <level value="warn" />
   </logger>
 
+  <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <level value="trace" />
+  </logger>
+
   <root>
     <level value="info" />
     <appender-ref ref="APPLICATION_LOG_FILE" />

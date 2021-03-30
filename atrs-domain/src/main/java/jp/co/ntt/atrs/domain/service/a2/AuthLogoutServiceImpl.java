@@ -55,7 +55,7 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
     @Override
     public void logout(Member member) {
 
-        Assert.notNull(member);
+        Assert.notNull(member, "member must not null.");
 
         // ログインフラグを更新
         MemberLogin memberLogin = member.getMemberLogin();

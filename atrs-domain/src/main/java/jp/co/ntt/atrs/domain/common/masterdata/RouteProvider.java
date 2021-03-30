@@ -68,8 +68,8 @@ public class RouteProvider {
     public Route getRouteByAirportCd(String departureAirportCd,
             String arrivalAirportCd) {
 
-        Assert.hasText(departureAirportCd);
-        Assert.hasText(arrivalAirportCd);
+        Assert.hasText(departureAirportCd, "departureAirportCd must have some text.");
+        Assert.hasText(arrivalAirportCd, "arrivalAirportCd must have some text.");
 
         String searchKey = makeCacheKey(departureAirportCd, arrivalAirportCd);
         return routeMap.get(searchKey);

@@ -102,15 +102,15 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     public int calculateTotalFare(List<Flight> flightList,
             List<Passenger> passengerList) {
 
-        Assert.notEmpty(flightList);
-        Assert.notEmpty(passengerList);
+        Assert.notEmpty(flightList, "flightList must not empty.");
+        Assert.notEmpty(passengerList, "passengerList must not empty.");
 
         // 小児搭乗者数(12歳未満の搭乗者数)
         int childNum = 0;
         // 小児搭乗者数をカウント
         for (Passenger passenger : passengerList) {
             // リスト要素の null チェック
-            Assert.notNull(passenger);
+            Assert.notNull(passenger, "passenger must not null.");
             if (passenger.getAge() < adultPassengerMinAge) {
                 childNum++;
             }
@@ -129,7 +129,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         int totalFare = 0;
         for (Flight flight : flightList) {
             // リスト要素の null チェック
-            Assert.notNull(flight);
+            Assert.notNull(flight, "flight must not null.");
 
             Route route = flight.getFlightMaster().getRoute();
             int baseFare = ticketSharedService.calculateBasicFare(route
@@ -159,8 +159,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     @Override
     public void validateReservation(Reservation reservation) throws BusinessException {
 
-        Assert.notNull(reservation);
-        Assert.notEmpty(reservation.getReserveFlightList());
+        Assert.notNull(reservation, "reservation must not null.");
+        Assert.notEmpty(reservation.getReserveFlightList(), "reserveFlightList must not empty.");
 
         // 予約代表者の年齢が18歳以上であることを検証
         validateRepresentativeAge(reservation.getRepAge());
@@ -189,17 +189,17 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
-            Assert.notNull(reserveFlight);
+            Assert.notNull(reserveFlight, "reserveFlight must not null.");
 
             // 搭乗者情報が登録されている会員情報と同一であることを確認
 
             // 搭乗者情報一覧
             List<Passenger> passengerList = reserveFlight.getPassengerList();
-            Assert.notEmpty(passengerList);
+            Assert.notEmpty(passengerList, "passengerList must not empty.");
 
             int position = 1;
             for (Passenger passenger : passengerList) {
-                Assert.notNull(passenger);
+                Assert.notNull(passenger, "passenger must not null.");
 
                 String membershipNumber = passenger.getMember()
                         .getMembershipNumber();
@@ -272,7 +272,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
-            Assert.notNull(reserveFlight);
+            Assert.notNull(reserveFlight, "reserveFlight must not null.");
 
             // 運賃種別
             FareType fareType = reserveFlight.getFlight().getFareType();
@@ -282,13 +282,13 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
             // 搭乗者情報一覧
             List<Passenger> passengerList = reserveFlight.getPassengerList();
-            Assert.notEmpty(passengerList);
+            Assert.notEmpty(passengerList, "passengerList must not empty.");
 
             if (fareTypeCd == FareTypeCd.LD) {
                 // 運賃種別がレディース割の場合
 
                 for (Passenger passenger : passengerList) {
-                    Assert.notNull(passenger);
+                    Assert.notNull(passenger, "passenger must not null.");
                     if (passenger.getGender() == Gender.M) {
                         // 男性の搭乗者がいる場合、業務例外をスロー
                         throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2007);
@@ -324,19 +324,19 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     @Override
     public TicketReserveDto registerReservation(Reservation reservation) throws BusinessException {
 
-        Assert.notNull(reservation);
+        Assert.notNull(reservation, "reservation must not null.");
 
         // 予約フライト情報一覧
         List<ReserveFlight> reserveFlightList = reservation
                 .getReserveFlightList();
-        Assert.notEmpty(reserveFlightList);
+        Assert.notEmpty(reserveFlightList, "reserveFlightList must not empty.");
 
         // 予約フライト情報に対して空席数の確認および更新を実施
         for (ReserveFlight reserveFlight : reserveFlightList) {
-            Assert.notNull(reserveFlight);
+            Assert.notNull(reserveFlight, "reserveFlight must not null.");
 
             Flight flight = reserveFlight.getFlight();
-            Assert.notNull(flight);
+            Assert.notNull(flight, "flight must not null.");
 
             // 搭乗日が運賃種別予約可能時期範囲内かチェック
             if (!ticketSharedService.isAvailableFareType(flight.getFareType(),
@@ -423,7 +423,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     @Override
     public Member findMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber);
+        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
 
         return memberRepository.findOne(membershipNumber);
     }

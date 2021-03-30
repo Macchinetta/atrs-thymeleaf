@@ -64,7 +64,7 @@ public class FareTypeProvider {
      * @return 運賃種別情報。該当する運賃種別情報がない場合null。
      */
     public FareType getFareType(FareTypeCd fareTypeCd) {
-        Assert.notNull(fareTypeCd);
+        Assert.notNull(fareTypeCd, "fareTypeCd must not null.");
         return fareTypeMap.get(fareTypeCd);
     }
 

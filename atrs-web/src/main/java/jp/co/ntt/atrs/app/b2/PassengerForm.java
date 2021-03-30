@@ -159,9 +159,9 @@ public class PassengerForm implements Serializable {
      * @return 保持プロパティが全てnullまたは空文字列の場合true
      */
     public boolean isEmpty() {
-        return (StringUtils.isEmpty(familyName)
-                && StringUtils.isEmpty(givenName) && age == null
-                && gender == null && StringUtils.isEmpty(membershipNumber));
+        return (!StringUtils.hasText(familyName)
+                && !StringUtils.hasText(givenName) && age == null
+                && gender == null && !StringUtils.hasText(membershipNumber));
     }
 
     /**

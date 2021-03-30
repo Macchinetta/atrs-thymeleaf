@@ -66,7 +66,7 @@ public class BoardingClassProvider {
      * @return 搭乗クラス情報。該当する搭乗クラス情報がない場合はnull。
      */
     public BoardingClass getBoardingClass(BoardingClassCd boardingClassCd) {
-        Assert.notNull(boardingClassCd);
+        Assert.notNull(boardingClassCd, "boardingClassCd must not null.");
         return boardingClassCodeMap.get(boardingClassCd);
     }
 

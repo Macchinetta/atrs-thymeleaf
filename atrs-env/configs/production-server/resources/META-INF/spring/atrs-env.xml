@@ -19,6 +19,11 @@
   <bean id="destinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
     <property name="resourceRef" value="true" />
   </bean>
+
+  <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    <property name="targetConnectionFactory" ref="atrsJmsConnectionFactory" />
+    <property name="sessionCacheSize" value="1" />
+  </bean>
   <!-- == JMS送受信用の設定　ここまで == -->
 
 </beans>
