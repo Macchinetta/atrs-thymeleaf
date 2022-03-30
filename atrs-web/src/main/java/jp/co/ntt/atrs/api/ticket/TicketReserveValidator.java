@@ -19,14 +19,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import jp.co.ntt.atrs.domain.common.validate.ValidationUtil;
-import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
-
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jp.co.ntt.atrs.domain.common.validate.ValidationUtil;
+import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
 
 /**
  * チケット予約リソースバリデータ。
@@ -63,8 +63,8 @@ public class TicketReserveValidator implements Validator {
         TicketReserveResource resource = (TicketReserveResource) target;
 
         // 予約代表者電話番号チェック
-        if (!(errors.hasFieldErrors("repTel1") || errors
-                .hasFieldErrors("repTel2"))) {
+        if (!(errors.hasFieldErrors("repTel1") || errors.hasFieldErrors(
+                "repTel2"))) {
             checkRepresentativeTel(errors, resource.getRepTel1(), resource
                     .getRepTel2());
         }
@@ -110,8 +110,8 @@ public class TicketReserveValidator implements Validator {
                     new DefaultMessageSourceResolvable("repTel2"),
                     ValidationUtil.TEL1_AND_TEL2_MIN_LENGTH,
                     ValidationUtil.TEL1_AND_TEL2_MAX_LENGTH };
-            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(),
-                    errorArgs, "");
+            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(), errorArgs,
+                    "");
         }
     }
 
@@ -123,7 +123,7 @@ public class TicketReserveValidator implements Validator {
      */
     private void checkRequired(Errors errors, String itemName, int index) {
         String target = "passengerResourceList[" + index + "]." + itemName;
-        ValidationUtils.rejectIfEmpty(errors, target, "NotNull",
-                new Object[] { new DefaultMessageSourceResolvable(target) });
+        ValidationUtils.rejectIfEmpty(errors, target, "NotNull", new Object[] {
+                new DefaultMessageSourceResolvable(target) });
     }
 }

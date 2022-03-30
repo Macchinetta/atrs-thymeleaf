@@ -15,13 +15,13 @@
  */
 package jp.co.ntt.atrs.domain.service.a0;
 
-import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**
  * 会員共通サービス実装クラス。
@@ -43,7 +43,8 @@ public class MembershipSharedServiceImpl implements MembershipSharedService {
     @Transactional(readOnly = true)
     public boolean isMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
+        Assert.hasText(membershipNumber,
+                "membershipNumber must have some text.");
 
         // 該当する会員情報が存在するか判定
         return (memberRepository.findOne(membershipNumber) != null);

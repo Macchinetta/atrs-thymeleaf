@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import jp.co.ntt.atrs.domain.model.FlightType;
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
-
 import org.joda.time.DateTime;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jp.co.ntt.atrs.domain.model.FlightType;
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
 
 /**
  * 空席照会フォームのバリデータ。
@@ -57,8 +57,8 @@ public class TicketSearchValidator implements Validator {
         TicketSearchForm form = (TicketSearchForm) target;
 
         // 出発空港と到着空港が同じでないかチェック
-        if (!errors.hasFieldErrors("depAirportCd")
-                && !errors.hasFieldErrors("arrAirportCd")) {
+        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors(
+                "arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {
@@ -75,8 +75,8 @@ public class TicketSearchValidator implements Validator {
                             new DefaultMessageSourceResolvable("homewardDate") });
 
             // 復路搭乗日が往路搭乗日以降かチェック
-            if (!errors.hasFieldErrors("outwardDate")
-                    && !errors.hasFieldErrors("homewardDate")) {
+            if (!errors.hasFieldErrors("outwardDate") && !errors.hasFieldErrors(
+                    "homewardDate")) {
 
                 DateTime outwardDate = new DateTime(form.getOutwardDate());
                 DateTime homewardDate = new DateTime(form.getHomewardDate());

@@ -40,8 +40,8 @@ public class ReservationHistoryReportListener {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory
-            .getLogger(ReservationHistoryReportListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            ReservationHistoryReportListener.class);
 
     /**
      * お客様番号文字数
@@ -60,7 +60,8 @@ public class ReservationHistoryReportListener {
      */
     @JmsListener(destination = "jms/queue/ReservationHistoryReportRequestQueue")
     public void receive(Message reqMsg) {
-        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(reqMsg);
+        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(
+                reqMsg);
         if (criteria != null) {
             createReportService.createReport(criteria);
         }
@@ -85,8 +86,8 @@ public class ReservationHistoryReportListener {
         try {
             msgBody = ((TextMessage) reqMsg).getText();
         } catch (JMSException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0004.getCode(), LogMessages.E_AR_D1_L0004
-                    .getMessage(), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0004
+                    .getCode(), LogMessages.E_AR_D1_L0004.getMessage(), e);
         }
 
         return convertToDto(msgBody);
@@ -99,11 +100,11 @@ public class ReservationHistoryReportListener {
      */
     private ReservationHistoryReportCriteriaDto convertToDto(String msgBody) {
         String membershipNumber = msgBody;
-        if (membershipNumber == null
-                || membershipNumber.length() != CUSTOMER_NO_LENGTH) {
+        if (membershipNumber == null || membershipNumber
+                .length() != CUSTOMER_NO_LENGTH) {
             if (logger.isWarnEnabled()) {
-                logger.warn(LogMessages.W_AR_D1_L0003
-                        .getMessage(membershipNumber));
+                logger.warn(LogMessages.W_AR_D1_L0003.getMessage(
+                        membershipNumber));
                 return null;
             }
         }

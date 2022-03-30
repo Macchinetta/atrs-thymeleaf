@@ -15,18 +15,18 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
-import jp.co.ntt.atrs.domain.model.FlightMaster;
-import jp.co.ntt.atrs.domain.repository.flight.FlightRepository;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import jp.co.ntt.atrs.domain.model.FlightMaster;
+import jp.co.ntt.atrs.domain.repository.flight.FlightRepository;
 
 /**
  * フライト基本情報を提供するクラス。

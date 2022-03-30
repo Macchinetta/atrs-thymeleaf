@@ -15,13 +15,11 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
-import jp.co.ntt.atrs.app.b0.ReservationFlightForm;
-import jp.co.ntt.atrs.app.b0.SelectFlightDto;
-import jp.co.ntt.atrs.app.b0.SelectFlightForm;
-import jp.co.ntt.atrs.app.b0.TicketHelper;
-import jp.co.ntt.atrs.app.common.exception.BadRequestException;
-import jp.co.ntt.atrs.domain.model.Flight;
-import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -37,11 +35,13 @@ import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.b0.ReservationFlightForm;
+import jp.co.ntt.atrs.app.b0.SelectFlightDto;
+import jp.co.ntt.atrs.app.b0.SelectFlightForm;
+import jp.co.ntt.atrs.app.b0.TicketHelper;
+import jp.co.ntt.atrs.app.common.exception.BadRequestException;
+import jp.co.ntt.atrs.domain.model.Flight;
+import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
 
 /**
  * チケット予約コントローラ。
@@ -100,8 +100,8 @@ public class TicketReserveController {
         ticketReserveForm.setFlightType(reservationFlightForm.getFlightType());
 
         // 表示用選択フライト情報を設定
-        List<Flight> flightList = ticketHelper
-                .toFlightList(reservationFlightForm.getSelectFlightFormList());
+        List<Flight> flightList = ticketHelper.toFlightList(
+                reservationFlightForm.getSelectFlightFormList());
         List<SelectFlightDto> selectFlightDtoList = ticketReserveHelper
                 .createSelectFlightDtoList(flightList);
 
@@ -118,7 +118,8 @@ public class TicketReserveController {
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.POST, params = "redo")
-    public String reserveRedo(TicketReserveForm ticketReserveForm, Model model) {
+    public String reserveRedo(TicketReserveForm ticketReserveForm,
+            Model model) {
 
         // 表示用選択フライト情報を設定
         List<Flight> flightList = ticketHelper.toFlightList(ticketReserveForm
@@ -145,12 +146,11 @@ public class TicketReserveController {
      */
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.POST, params = "confirm")
-    public String reserveConfirm(
-            @Validated TicketReserveForm ticketReserveForm,
+    public String reserveConfirm(@Validated TicketReserveForm ticketReserveForm,
             BindingResult result, Model model) throws BadRequestException {
 
-        if (result.hasFieldErrors("selectFlightFormList*")
-                || result.hasFieldErrors("flightType")) {
+        if (result.hasFieldErrors("selectFlightFormList*") || result
+                .hasFieldErrors("flightType")) {
 
             // 非表示項目(選択フライト情報、フライト種別)に検証エラーがある場合は
             // 改ざんとみなす
@@ -284,10 +284,10 @@ public class TicketReserveController {
         Map<String, String> params = new LinkedHashMap<>();
         List<SelectFlightForm> flightFormList = reservationFlightForm
                 .getSelectFlightFormList();
-        params.putAll(ticketReserveHelper
-                .createParameterMapForFlightSearch(flightFormList));
-        params.putAll(ticketHelper
-                .createParameterMapForSelectFlight(reservationFlightForm));
+        params.putAll(ticketReserveHelper.createParameterMapForFlightSearch(
+                flightFormList));
+        params.putAll(ticketHelper.createParameterMapForSelectFlight(
+                reservationFlightForm));
 
         for (String key : params.keySet()) {
             redirectAttributes.addAttribute(key, params.get(key));

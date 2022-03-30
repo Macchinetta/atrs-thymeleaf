@@ -15,10 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.service.a1;
 
-import jp.co.ntt.atrs.domain.common.logging.LogMessages;
-import jp.co.ntt.atrs.domain.model.Member;
-import jp.co.ntt.atrs.domain.model.MemberLogin;
-import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +25,10 @@ import org.springframework.util.Assert;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.SystemException;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.domain.common.logging.LogMessages;
+import jp.co.ntt.atrs.domain.model.Member;
+import jp.co.ntt.atrs.domain.model.MemberLogin;
+import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**
  * 会員ログインサービス実装クラス。
@@ -41,8 +41,8 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory
-            .getLogger(AuthLoginServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            AuthLoginServiceImpl.class);
 
     /**
      * 日付生成インターフェース。
@@ -71,8 +71,9 @@ public class AuthLoginServiceImpl implements AuthLoginService {
         memberLogin.setLoginFlg(true);
         int updateCount = memberRepository.updateToLoginStatus(member);
         if (updateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
-                    .getMessage(updateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002
+                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                            updateCount, 1));
         }
 
         logger.info(LogMessages.I_AR_A1_L0001.getMessage(member

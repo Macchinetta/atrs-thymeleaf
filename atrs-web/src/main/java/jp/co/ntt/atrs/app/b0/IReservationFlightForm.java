@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.app.b0;
 
-import jp.co.ntt.atrs.domain.model.FlightType;
-
 import java.util.List;
+
+import jp.co.ntt.atrs.domain.model.FlightType;
 
 /**
  * 予約フライトフォームインタフェース。 予約フライト共通入力値チェックで使用するメソッドを定義する。

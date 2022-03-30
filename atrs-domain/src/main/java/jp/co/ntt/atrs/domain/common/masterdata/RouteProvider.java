@@ -15,18 +15,18 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
-import jp.co.ntt.atrs.domain.model.Route;
-import jp.co.ntt.atrs.domain.repository.route.RouteRepository;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import jp.co.ntt.atrs.domain.model.Route;
+import jp.co.ntt.atrs.domain.repository.route.RouteRepository;
 
 /**
  * 区間情報を提供するクラス。
@@ -68,8 +68,10 @@ public class RouteProvider {
     public Route getRouteByAirportCd(String departureAirportCd,
             String arrivalAirportCd) {
 
-        Assert.hasText(departureAirportCd, "departureAirportCd must have some text.");
-        Assert.hasText(arrivalAirportCd, "arrivalAirportCd must have some text.");
+        Assert.hasText(departureAirportCd,
+                "departureAirportCd must have some text.");
+        Assert.hasText(arrivalAirportCd,
+                "arrivalAirportCd must have some text.");
 
         String searchKey = makeCacheKey(departureAirportCd, arrivalAirportCd);
         return routeMap.get(searchKey);

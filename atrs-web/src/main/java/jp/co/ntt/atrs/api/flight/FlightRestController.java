@@ -20,11 +20,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import jp.co.ntt.atrs.domain.service.b1.FlightVacantInfoDto;
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchCriteriaDto;
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchService;
-
-import com.github.dozermapper.core.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -33,6 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.dozermapper.core.Mapper;
+
+import jp.co.ntt.atrs.domain.service.b1.FlightVacantInfoDto;
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchCriteriaDto;
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchService;
 
 /**
  * 空席状況取得RESTAPIコントローラ。
@@ -82,12 +83,12 @@ public class FlightRestController {
         TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
                 flightSearchQuery, TicketSearchCriteriaDto.class);
         // 空席照会
-        List<FlightVacantInfoDto> flights = ticketSearchService
-                .searchFlight(searchCriteriaDto);
+        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(
+                searchCriteriaDto);
         List<FlightResource> flightResourceList = new ArrayList<>();
         for (FlightVacantInfoDto flight : flights) {
-            flightResourceList
-                    .add(beanMapper.map(flight, FlightResource.class));
+            flightResourceList.add(beanMapper.map(flight,
+                    FlightResource.class));
         }
         return flightResourceList;
     }

@@ -21,7 +21,7 @@ import java.io.Serializable;
  * 運賃種別リソース
  * @author NTT 電電太郎
  */
-public class FareTypeResource implements Serializable  {
+public class FareTypeResource implements Serializable {
 
     /**
      * serialVersionUID。

@@ -15,6 +15,16 @@
  */
 package jp.co.ntt.atrs.app.b0;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;
@@ -24,16 +34,6 @@ import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FareTypeCd;
 import jp.co.ntt.atrs.domain.model.Flight;
 import jp.co.ntt.atrs.domain.model.FlightType;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
 
 /**
  * チケット予約共通Helper。
@@ -65,7 +65,8 @@ public class TicketHelper {
      * @param selectFlightFormList 選択フライト情報フォームのリスト
      * @return フライト情報のリスト
      */
-    public List<Flight> toFlightList(List<SelectFlightForm> selectFlightFormList) {
+    public List<Flight> toFlightList(
+            List<SelectFlightForm> selectFlightFormList) {
 
         List<Flight> flightList = new ArrayList<>();
 
@@ -73,14 +74,14 @@ public class TicketHelper {
             Flight flight = new Flight();
             flight.setDepartureDate(selectFlightForm.getDepDate());
             String flightName = selectFlightForm.getFlightName();
-            flight.setFlightMaster(flightMasterProvider
-                    .getFlightMaster(flightName));
+            flight.setFlightMaster(flightMasterProvider.getFlightMaster(
+                    flightName));
             FareTypeCd fareTypeCd = selectFlightForm.getFareTypeCd();
             flight.setFareType(fareTypeProvider.getFareType(fareTypeCd));
             BoardingClassCd boardingClassCd = selectFlightForm
                     .getBoardingClassCd();
-            flight.setBoardingClass(boardingClassProvider
-                    .getBoardingClass(boardingClassCd));
+            flight.setBoardingClass(boardingClassProvider.getBoardingClass(
+                    boardingClassCd));
 
             flightList.add(flight);
         }
@@ -119,8 +120,8 @@ public class TicketHelper {
             params.put(paramName + ".flightName", selectFlight.getFlightName());
             params.put(paramName + ".fareTypeCd", selectFlight.getFareTypeCd()
                     .getCode());
-            params.put(paramName + ".depDate", DateTimeUtil
-                    .toFormatDateString(selectFlight.getDepDate()));
+            params.put(paramName + ".depDate", DateTimeUtil.toFormatDateString(
+                    selectFlight.getDepDate()));
             params.put(paramName + ".boardingClassCd", selectFlight
                     .getBoardingClassCd().getCode());
         }

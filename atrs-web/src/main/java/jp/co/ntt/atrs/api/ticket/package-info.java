@@ -15,7 +15,6 @@
  */
 /**
  * チケット予約APIアプリケーション層パッケージ
- * 
  * @author NTT 電電太郎
  */
 package jp.co.ntt.atrs.api.ticket;

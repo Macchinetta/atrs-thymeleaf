@@ -15,20 +15,20 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
-import jp.co.ntt.atrs.domain.common.validate.FixedLength;
-import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana;
-import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber;
-import jp.co.ntt.atrs.domain.model.Gender;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.util.StringUtils;
+
+import jp.co.ntt.atrs.domain.common.validate.FixedLength;
+import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana;
+import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber;
+import jp.co.ntt.atrs.domain.model.Gender;
 
 /**
  * 搭乗者情報フォーム。
@@ -159,9 +159,9 @@ public class PassengerForm implements Serializable {
      * @return 保持プロパティが全てnullまたは空文字列の場合true
      */
     public boolean isEmpty() {
-        return (!StringUtils.hasText(familyName)
-                && !StringUtils.hasText(givenName) && age == null
-                && gender == null && !StringUtils.hasText(membershipNumber));
+        return (!StringUtils.hasText(familyName) && !StringUtils.hasText(
+                givenName) && age == null && gender == null && !StringUtils
+                        .hasText(membershipNumber));
     }
 
     /**

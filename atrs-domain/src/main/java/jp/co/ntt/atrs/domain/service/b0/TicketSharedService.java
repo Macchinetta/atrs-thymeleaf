@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.domain.service.b0;
 
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.model.FareType;
-import jp.co.ntt.atrs.domain.model.Flight;
+import java.util.Date;
+import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
-import java.util.Date;
-import java.util.List;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.model.FareType;
+import jp.co.ntt.atrs.domain.model.Flight;
 
 /**
  * チケット予約共通サービスインタフェース。
@@ -43,7 +43,8 @@ public interface TicketSharedService {
      * @throws BusinessException 業務例外
      * @throws InvalidFlightException フライト情報不正例外
      */
-    void validateFlightList(List<Flight> flightList) throws BusinessException, InvalidFlightException;
+    void validateFlightList(
+            List<Flight> flightList) throws BusinessException, InvalidFlightException;
 
     /**
      * 搭乗日の有効性チェックを実行する。

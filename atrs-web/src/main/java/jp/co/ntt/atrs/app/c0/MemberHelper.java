@@ -17,11 +17,12 @@ package jp.co.ntt.atrs.app.c0;
 
 import javax.inject.Inject;
 
-import com.github.dozermapper.core.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+
+import com.github.dozermapper.core.Mapper;
 
 import jp.co.ntt.atrs.app.c2.MemberUpdateForm;
 import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
@@ -99,8 +100,8 @@ public class MemberHelper {
         }
 
         // 郵便番号
-        if (StringUtils.hasLength(member.getZipCode())
-                && member.getZipCode().length() >= 7) {
+        if (StringUtils.hasLength(member.getZipCode()) && member.getZipCode()
+                .length() >= 7) {
             memberUpdateForm.setZipCode1(member.getZipCode().substring(0, 3));
             memberUpdateForm.setZipCode2(member.getZipCode().substring(3, 7));
         }

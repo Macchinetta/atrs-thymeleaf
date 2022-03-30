@@ -15,11 +15,9 @@
  */
 package jp.co.ntt.atrs.app.c2;
 
-import jp.co.ntt.atrs.app.c0.MemberHelper;
-import jp.co.ntt.atrs.domain.common.message.MessageKeys;
-import jp.co.ntt.atrs.domain.model.Member;
-import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
-import jp.co.ntt.atrs.domain.service.c2.MemberUpdateService;
+import java.security.Principal;
+
+import javax.inject.Inject;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -35,9 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
-import java.security.Principal;
-
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.c0.MemberHelper;
+import jp.co.ntt.atrs.domain.common.message.MessageKeys;
+import jp.co.ntt.atrs.domain.model.Member;
+import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
+import jp.co.ntt.atrs.domain.service.c2.MemberUpdateService;
 
 /**
  * 会員情報変更コントローラ。
@@ -98,8 +98,8 @@ public class MemberUpdateController {
 
         // 会員情報から会員情報変更フォームを生成し、設定
         Member member = memberUpdateService.findMember(membershipNumber);
-        MemberUpdateForm memberUpdateForm = memberHelper
-                .toMemberUpdateForm(member);
+        MemberUpdateForm memberUpdateForm = memberHelper.toMemberUpdateForm(
+                member);
         model.addAttribute(memberUpdateForm);
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
@@ -158,8 +158,8 @@ public class MemberUpdateController {
         Authentication authentication = (Authentication) principal;
         AtrsUserDetails userDetails = (AtrsUserDetails) authentication
                 .getPrincipal();
-        Member loginMember = memberUpdateService
-                .findMemberForLogin(membershipNumber);
+        Member loginMember = memberUpdateService.findMemberForLogin(
+                membershipNumber);
         userDetails.setMember(loginMember);
 
         // 更新完了メッセージ設定

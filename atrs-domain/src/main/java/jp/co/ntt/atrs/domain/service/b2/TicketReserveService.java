@@ -15,14 +15,14 @@
  */
 package jp.co.ntt.atrs.domain.service.b2;
 
+import java.util.List;
+
+import org.terasoluna.gfw.common.exception.BusinessException;
+
 import jp.co.ntt.atrs.domain.model.Flight;
 import jp.co.ntt.atrs.domain.model.Member;
 import jp.co.ntt.atrs.domain.model.Passenger;
 import jp.co.ntt.atrs.domain.model.Reservation;
-
-import org.terasoluna.gfw.common.exception.BusinessException;
-
-import java.util.List;
 
 /**
  * チケット予約のサービスインターフェース。
@@ -52,7 +52,8 @@ public interface TicketReserveService {
      * @return 予約番号と予約したチケット料金の支払期限
      * @throws BusinessException 空席数が搭乗者数未満の場合にスローする例外
      */
-    TicketReserveDto registerReservation(Reservation reservation) throws BusinessException;
+    TicketReserveDto registerReservation(
+            Reservation reservation) throws BusinessException;
 
     /**
      * 会員番号に該当するカード会員情報を検索する。

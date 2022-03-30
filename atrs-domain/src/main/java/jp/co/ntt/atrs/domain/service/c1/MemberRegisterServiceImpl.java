@@ -15,10 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.service.c1;
 
-import jp.co.ntt.atrs.domain.common.logging.LogMessages;
-import jp.co.ntt.atrs.domain.model.Member;
-import jp.co.ntt.atrs.domain.model.MemberLogin;
-import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
+import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.terasoluna.gfw.common.exception.SystemException;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.domain.common.logging.LogMessages;
+import jp.co.ntt.atrs.domain.model.Member;
+import jp.co.ntt.atrs.domain.model.MemberLogin;
+import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**
  * 会員情報登録を行うService実装クラス。
@@ -71,15 +71,17 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
         // (MyBatis3の機能(SelectKey)によりパラメータの会員情報に会員番号が格納される)
         int insertMemberCount = memberRepository.insert(member);
         if (insertMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
-                    .getMessage(insertMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002
+                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                            insertMemberCount, 1));
         }
 
         // 会員ログイン情報登録
         int insertMemberLoginCount = memberRepository.insertMemberLogin(member);
         if (insertMemberLoginCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
-                    .getMessage(insertMemberLoginCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002
+                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                            insertMemberLoginCount, 1));
         }
 
         return member;

@@ -15,8 +15,6 @@
  */
 package jp.co.ntt.atrs.domain.common.security;
 
-import jp.co.ntt.atrs.domain.common.logging.LogMessages;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -24,20 +22,21 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.stereotype.Component;
 
+import jp.co.ntt.atrs.domain.common.logging.LogMessages;
+
 /**
  * パスワード不正が原因で認証が失敗した事をハンドリングするための認証イベントリスナクラス。
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationFailureBadCredentialsListener
-                                                            implements
-                                                            ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
+public class AtrsAuthenticationFailureBadCredentialsListener implements
+                                                             ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory
-            .getLogger(AtrsAuthenticationFailureBadCredentialsListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            AtrsAuthenticationFailureBadCredentialsListener.class);
 
     /**
      * {@inheritDoc}

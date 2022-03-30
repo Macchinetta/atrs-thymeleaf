@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.domain.repository.flight;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import jp.co.ntt.atrs.domain.model.BoardingClass;
 import jp.co.ntt.atrs.domain.model.FareType;
 import jp.co.ntt.atrs.domain.model.Flight;
 import jp.co.ntt.atrs.domain.model.FlightMaster;
-
-import org.apache.ibatis.annotations.Param;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * フライト情報テーブルにアクセスするリポジトリインターフェース。
@@ -40,7 +40,8 @@ public interface FlightRepository {
             @Param("criteria") VacantSeatSearchCriteriaDto criteria);
 
     /**
-     * 指定したフライトのフライト情報を排他ロックをかけて取得する。</p>
+     * 指定したフライトのフライト情報を排他ロックをかけて取得する。
+     * </p>
      * @param departureDate 搭乗日
      * @param flightName 便名
      * @param boardingClass 搭乗クラス

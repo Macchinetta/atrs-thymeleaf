@@ -15,10 +15,10 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.io.Serializable;
 
 /**
  * 申し込み内容確認画面出力用DTO。

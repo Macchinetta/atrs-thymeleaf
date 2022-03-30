@@ -22,10 +22,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Email;
 
 import jp.co.ntt.atrs.domain.common.validate.FixedLength;
 import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana;

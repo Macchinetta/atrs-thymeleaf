@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.domain.repository.route;
 
-import jp.co.ntt.atrs.domain.model.Route;
-
 import java.util.List;
+
+import jp.co.ntt.atrs.domain.model.Route;
 
 /**
  * 区間テーブルにアクセスするリポジトリインターフェース。

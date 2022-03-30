@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.app.c1;
 
-import jp.co.ntt.atrs.app.c0.MemberValidator;
-import jp.co.ntt.atrs.domain.service.c1.MemberRegisterErrorCode;
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.c0.MemberValidator;
+import jp.co.ntt.atrs.domain.service.c1.MemberRegisterErrorCode;
 
 /**
  * 会員情報登録フォームのバリデータ。
@@ -55,8 +55,8 @@ public class MemberRegisterValidator implements Validator {
         MemberRegisterForm form = (MemberRegisterForm) target;
 
         // パスワードチェック
-        if (!errors.hasFieldErrors("password")
-                && !errors.hasFieldErrors("reEnterPassword")) {
+        if (!errors.hasFieldErrors("password") && !errors.hasFieldErrors(
+                "reEnterPassword")) {
 
             String password = form.getPassword();
             String reEnterPassword = form.getReEnterPassword();

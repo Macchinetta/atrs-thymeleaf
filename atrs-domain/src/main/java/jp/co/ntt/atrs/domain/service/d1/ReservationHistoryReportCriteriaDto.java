@@ -43,7 +43,7 @@ public class ReservationHistoryReportCriteriaDto implements Serializable {
 
     /**
      * 会員番号を設定する。
-     * @param membershipNumber　番号
+     * @param membershipNumber 番号
      */
     public void setMembershipNumber(String membershipNumber) {
         this.membershipNumber = membershipNumber;

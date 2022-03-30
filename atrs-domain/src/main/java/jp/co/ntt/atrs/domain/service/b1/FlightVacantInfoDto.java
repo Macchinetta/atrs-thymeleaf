@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.domain.service.b1;
 
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.model.FareTypeCd;
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.model.FareTypeCd;
 
 /**
  * 便ごとの空席状況を格納するDTO。

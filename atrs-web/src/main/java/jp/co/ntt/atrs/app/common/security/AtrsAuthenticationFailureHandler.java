@@ -15,17 +15,17 @@
  */
 package jp.co.ntt.atrs.app.common.security;
 
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.exception.SystemException;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
+import org.terasoluna.gfw.common.exception.SystemException;
 
 /**
  * ユーザーログイン失敗ハンドラ。
@@ -33,14 +33,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AtrsAuthenticationFailureHandler extends
-                                             SimpleUrlAuthenticationFailureHandler {
+                                              SimpleUrlAuthenticationFailureHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
-            HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+            HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
 
         // AuthenticationServiceExceptionの場合はシステム例外とする
         if (exception instanceof AuthenticationServiceException) {

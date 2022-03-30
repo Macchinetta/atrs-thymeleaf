@@ -15,6 +15,18 @@
  */
 package jp.co.ntt.atrs.app.c1;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.terasoluna.gfw.common.codelist.ExistInCodeList;
+
 import jp.co.ntt.atrs.app.c0.IMemberForm;
 import jp.co.ntt.atrs.domain.common.validate.FixedLength;
 import jp.co.ntt.atrs.domain.common.validate.FullWidth;
@@ -22,18 +34,6 @@ import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana;
 import jp.co.ntt.atrs.domain.common.validate.HalfWidth;
 import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber;
 import jp.co.ntt.atrs.domain.model.Gender;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.terasoluna.gfw.common.codelist.ExistInCodeList;
-
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Email;
 
 /**
  * 会員情報登録フォーム。

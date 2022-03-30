@@ -20,10 +20,10 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FareTypeCd;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 選択フライトリソース

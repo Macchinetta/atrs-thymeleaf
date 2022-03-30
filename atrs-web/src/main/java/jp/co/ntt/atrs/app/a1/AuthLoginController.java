@@ -31,7 +31,7 @@ public class AuthLoginController {
      * ログイン画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
     public String loginForm() {
         return "A1/loginForm";
     }

@@ -3,46 +3,45 @@
     xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
-    ">
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <mvc:annotation-driven>
-        <mvc:argument-resolvers>
-            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
-        </mvc:argument-resolvers>
-        <mvc:message-converters register-defaults="false">
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
-                        <property name="dateFormat">
-                            <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+  <mvc:annotation-driven>
+    <mvc:argument-resolvers>
+      <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+    </mvc:argument-resolvers>
+    <mvc:message-converters register-defaults="false">
+      <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+          <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+            <property name="dateFormat">
+              <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+            </property>
+          </bean>
+        </property>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
 
-    <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
+  <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
 
-    <context:component-scan base-package="jp.co.ntt.atrs.api" />
+  <context:component-scan base-package="jp.co.ntt.atrs.api" />
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**" />
-            <bean class="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <bean class="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor" />
+    </mvc:interceptor>
+  </mvc:interceptors>
 
-    <!-- Setting AOP. -->
-    <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
-        <property name="exceptionLogger" ref="exceptionLogger" />
-    </bean>
-    <aop:config>
-        <aop:advisor advice-ref="handlerExceptionResolverLoggingInterceptor"
-            pointcut="execution(* org.springframework.web.servlet.HandlerExceptionResolver.resolveException(..))" />
-    </aop:config>
+  <!-- Setting AOP. -->
+  <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
+    <property name="exceptionLogger" ref="exceptionLogger" />
+  </bean>
+  <aop:config>
+    <aop:advisor advice-ref="handlerExceptionResolverLoggingInterceptor"
+      pointcut="execution(* org.springframework.web.servlet.HandlerExceptionResolver.resolveException(..))" />
+  </aop:config>
 </beans>

@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.domain.service.a1;
 
-import jp.co.ntt.atrs.domain.model.Member;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import jp.co.ntt.atrs.domain.model.Member;
 
 /**
  * ログインユーザ情報クラス。

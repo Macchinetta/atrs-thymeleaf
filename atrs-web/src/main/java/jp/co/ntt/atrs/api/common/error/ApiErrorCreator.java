@@ -94,7 +94,8 @@ public class ApiErrorCreator {
         String localizedMessage = messageSource.getMessage(messageResolvable,
                 request.getLocale());
 
-        return new ApiError(messageResolvable.getCode(), localizedMessage, target);
+        return new ApiError(messageResolvable
+                .getCode(), localizedMessage, target);
     }
 
     /**
@@ -126,7 +127,7 @@ public class ApiErrorCreator {
             for (ResultMessage resultMessage : resultMessages.getList()) {
                 apiError.addDetail(createApiError(request, resultMessage
                         .getCode(), resultMessage.getText(), resultMessage
-                        .getArgs()));
+                                .getArgs()));
             }
         }
 

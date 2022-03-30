@@ -18,22 +18,21 @@ package jp.co.ntt.atrs.api.flight;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import jp.co.ntt.atrs.api.common.util.CastUtil;
-import jp.co.ntt.atrs.domain.service.b1.FareTypeVacantInfoDto;
-
 import com.github.dozermapper.core.DozerConverter;
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.core.MapperAware;
+
+import jp.co.ntt.atrs.api.common.util.CastUtil;
+import jp.co.ntt.atrs.domain.service.b1.FareTypeVacantInfoDto;
 
 /**
  * 空席情報をリソースにマッピングするためのカスタムコンバータ
  * @author NTT 電電太郎
  */
-public class FareTypeVacantInfoDtoToFareTypeResourceConverter
-                                                             extends
-                                                             DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
-                                                                                                                                                                  implements
-                                                                                                                                                                  MapperAware {
+public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
+                                                              DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
+                                                              implements
+                                                              MapperAware {
 
     /**
      * Beanマッパー。
@@ -44,8 +43,8 @@ public class FareTypeVacantInfoDtoToFareTypeResourceConverter
      * コンバート対象の2つのクラスを設定するコンストラクタ
      */
     public FareTypeVacantInfoDtoToFareTypeResourceConverter() {
-        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil
-                .autoCast(LinkedHashMap.class));
+        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil.autoCast(
+                LinkedHashMap.class));
     }
 
     /**

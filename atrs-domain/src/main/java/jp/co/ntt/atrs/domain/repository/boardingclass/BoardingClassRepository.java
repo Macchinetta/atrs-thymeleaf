@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.domain.repository.boardingclass;
 
-import jp.co.ntt.atrs.domain.model.BoardingClass;
-
 import java.util.List;
+
+import jp.co.ntt.atrs.domain.model.BoardingClass;
 
 /**
  * 搭乗クラステーブルにアクセスするリポジトリインターフェース。

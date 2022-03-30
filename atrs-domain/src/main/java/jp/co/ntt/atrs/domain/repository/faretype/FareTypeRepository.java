@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.domain.repository.faretype;
 
-import jp.co.ntt.atrs.domain.model.FareType;
-
 import java.util.List;
+
+import jp.co.ntt.atrs.domain.model.FareType;
 
 /**
  * 運賃種別テーブルにアクセスするリポジトリインターフェース。

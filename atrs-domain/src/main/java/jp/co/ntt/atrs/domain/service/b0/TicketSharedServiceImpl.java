@@ -15,6 +15,21 @@
  */
 package jp.co.ntt.atrs.domain.service.b0;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Interval;
+import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
+
 import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.PeakTimeProvider;
@@ -31,21 +46,6 @@ import jp.co.ntt.atrs.domain.model.Route;
 import jp.co.ntt.atrs.domain.repository.flight.FlightRepository;
 import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
-
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
-import org.terasoluna.gfw.common.exception.BusinessException;
-
-import java.util.Date;
-import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * チケット予約共通サービス実装クラス。
@@ -110,10 +110,12 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public void validateFlightList(List<Flight> flightList) throws BusinessException, InvalidFlightException {
+    public void validateFlightList(
+            List<Flight> flightList) throws BusinessException, InvalidFlightException {
 
         Assert.notEmpty(flightList, "flightList must not empty.");
-        Assert.isTrue(flightList.size() <= 2, "flightList size must be 2 or less.");
+        Assert.isTrue(flightList.size() <= 2,
+                "flightList size must be 2 or less.");
 
         // 往路フライトのチェックを行う
         Flight outwardFlight = flightList.get(0);
@@ -147,7 +149,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
                     homewardFlight);
 
             // 復路が往路の逆区間であることを検証
-            validateFlightRouteForRoundTripFlight(outwardFlight, homewardFlight);
+            validateFlightRouteForRoundTripFlight(outwardFlight,
+                    homewardFlight);
 
         }
 
@@ -163,12 +166,13 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * @throws BusinessException 業務例外
      */
     private void validateFlightDepartureDateForRoundTripFlight(
-            Flight outwardFlight, Flight homewardFlight) throws BusinessException {
+            Flight outwardFlight,
+            Flight homewardFlight) throws BusinessException {
 
         // 往路のフライトの到着時刻
         DateTime outwardArriveDateTime = DateTimeUtil.toDateTime(outwardFlight
                 .getDepartureDate(), outwardFlight.getFlightMaster()
-                .getArrivalTime());
+                        .getArrivalTime());
 
         // 復路のフライト出発時刻
         DateTime homewardDepartureDateTime = DateTimeUtil.toDateTime(
@@ -196,10 +200,10 @@ public class TicketSharedServiceImpl implements TicketSharedService {
         // 復路が往路の逆区間であることを確認
         Route outwardRoute = outwardFlight.getFlightMaster().getRoute();
         Route homewardRoute = homewardFlight.getFlightMaster().getRoute();
-        if (!outwardRoute.getDepartureAirport().getCode().equals(
-                homewardRoute.getArrivalAirport().getCode())
-                || !outwardRoute.getArrivalAirport().getCode().equals(
-                        homewardRoute.getDepartureAirport().getCode())) {
+        if (!outwardRoute.getDepartureAirport().getCode().equals(homewardRoute
+                .getArrivalAirport().getCode()) || !outwardRoute
+                        .getArrivalAirport().getCode().equals(homewardRoute
+                                .getDepartureAirport().getCode())) {
 
             // 復路が往路の逆区間でない場合、フライト不正例外をスロー
             throw new InvalidFlightException("homeward route is not outward route reverse");
@@ -211,7 +215,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * @param flightList フライト情報リスト
      * @throws BusinessException 業務例外
      */
-    private void validateFlightFareType(List<Flight> flightList) throws BusinessException {
+    private void validateFlightFareType(
+            List<Flight> flightList) throws BusinessException {
 
         FareTypeCd owFareTypeCd;
         FareTypeCd hwFareTypeCd;
@@ -255,7 +260,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public void validateDepatureDate(Date departureDate) throws BusinessException {
+    public void validateDepatureDate(
+            Date departureDate) throws BusinessException {
         Assert.notNull(departureDate, "departureDate must not null.");
 
         DateTime sysDateMidnight = dateFactory.newDateTime()
@@ -304,20 +310,22 @@ public class TicketSharedServiceImpl implements TicketSharedService {
     @Override
     public int calculateBasicFare(int basicFareOfRoute,
             BoardingClassCd boardingClassCd, Date depDate) {
-        Assert.isTrue(basicFareOfRoute >= 0, "basicFareOfRoute must be 0 or higher.");
+        Assert.isTrue(basicFareOfRoute >= 0,
+                "basicFareOfRoute must be 0 or higher.");
         Assert.notNull(boardingClassCd, "boardingClassCd must not null.");
         Assert.notNull(depDate, "depDate must not null.");
 
         // 搭乗クラスの加算料金の取得
-        BoardingClass boardingClass = boardingClassProvider
-                .getBoardingClass(boardingClassCd);
+        BoardingClass boardingClass = boardingClassProvider.getBoardingClass(
+                boardingClassCd);
         int boardingClassFare = boardingClass.getExtraCharge();
 
         // 搭乗日の料金積算比率の取得
         int multiplicationRatio = getMultiplicationRatio(depDate);
 
         // 基本運賃の計算
-        int basicFare = (int) ((basicFareOfRoute + boardingClassFare) * (multiplicationRatio * 0.01));
+        int basicFare = (int) ((basicFareOfRoute + boardingClassFare)
+                * (multiplicationRatio * 0.01));
 
         return basicFare;
     }

@@ -15,19 +15,19 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
-import jp.co.ntt.atrs.domain.model.FareType;
-import jp.co.ntt.atrs.domain.model.FareTypeCd;
-import jp.co.ntt.atrs.domain.repository.faretype.FareTypeRepository;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import jp.co.ntt.atrs.domain.model.FareType;
+import jp.co.ntt.atrs.domain.model.FareTypeCd;
+import jp.co.ntt.atrs.domain.repository.faretype.FareTypeRepository;
 
 /**
  * 運賃種別情報を提供するクラス。

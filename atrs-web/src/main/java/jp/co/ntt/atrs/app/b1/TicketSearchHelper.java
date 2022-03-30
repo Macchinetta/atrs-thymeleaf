@@ -15,21 +15,21 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import jp.co.ntt.atrs.app.common.exception.BadRequestException;
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.model.Flight;
-import jp.co.ntt.atrs.domain.model.FlightType;
-import jp.co.ntt.atrs.domain.service.b0.InvalidFlightException;
-import jp.co.ntt.atrs.domain.service.b0.TicketSharedService;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
-import java.util.List;
-
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.common.exception.BadRequestException;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.model.Flight;
+import jp.co.ntt.atrs.domain.model.FlightType;
+import jp.co.ntt.atrs.domain.service.b0.InvalidFlightException;
+import jp.co.ntt.atrs.domain.service.b0.TicketSharedService;
 
 /**
  * 空席照会Helper。
@@ -121,7 +121,8 @@ public class TicketSearchHelper {
      * @throws BusinessException 業務例外
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(List<Flight> flightList) throws BusinessException, BadRequestException {
+    public void validateFlightList(
+            List<Flight> flightList) throws BusinessException, BadRequestException {
 
         // フライト情報チェック
         try {

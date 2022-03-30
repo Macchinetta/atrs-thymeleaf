@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.app.b0;
 
-import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
+import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.util.List;
+import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
 
 /**
  * 予約フライト選択フォームのバリデータ。
@@ -61,68 +61,13 @@ public class ReservationFlightValidator implements Validator {
 
             switch (form.getFlightType()) {
             case RT:
-                // 往復の場合
-
-                // 選択フライト必須チェック
-                if (CollectionUtils.isEmpty(selectFlightFormList)) {
-
-                    // 往路、復路共に未入力の場合
-                    errors.reject(
-                            "NotNull.outwardFlight",
-                            new Object[] { new DefaultMessageSourceResolvable("outwardFlight") },
-                            "");
-                    errors.reject(
-                            "NotNull.homewardFlight",
-                            new Object[] { new DefaultMessageSourceResolvable("homewardFlight") },
-                            "");
-                } else {
-
-                    // フライトが2つ選択されていることをチェック
-                    if (selectFlightFormList.size() == 2) {
-                        // OK
-                    } else if (selectFlightFormList.size() == 1) {
-
-                        // 往路か復路のいずれかが未入力の場合
-                        errors.reject(TicketReserveErrorCode.E_AR_B2_5001
-                                .code());
-                    } else {
-
-                        // 往復で選択数が0-2以外は通常操作では設定されないケースであり、
-                        // 改ざんとみなす
-                        // 選択フライト情報にフィールドとしてエラー設定し、
-                        // 後続処理で不正リクエスト例外とする
-                        // Invalidは独自エラーコード(対応するメッセージ定義はない)
-                        errors.rejectValue("selectFlightFormList", "Invalid");
-                    }
-                }
-
+                // 往復の場合のチェック
+                validateRoundTrip(selectFlightFormList, errors);
                 break;
 
             case OW:
-                // 片道の場合
-
-                // 選択フライト必須チェック
-                if (CollectionUtils.isEmpty(selectFlightFormList)) {
-                    errors.reject(
-                            "NotNull.outwardFlight",
-                            new Object[] { new DefaultMessageSourceResolvable("outwardFlight") },
-                            "");
-                } else {
-
-                    // フライトが1つ選択されていることをチェック
-                    if (1 == selectFlightFormList.size()) {
-                        // OK
-                    } else {
-
-                        // 片道で選択数が0-1以外は通常操作では設定されないケースであり、
-                        // 改ざんとみなす
-                        // 選択フライト情報にフィールドとしてエラー設定し、
-                        // 後続処理で不正リクエスト例外とする
-                        // Invalidは独自エラーコード(対応するメッセージ定義はない)
-                        errors.rejectValue("selectFlightFormList", "Invalid");
-                    }
-                }
-
+                // 片道の場合のチェック
+                validateOneWay(selectFlightFormList, errors);
                 break;
 
             default:
@@ -132,6 +77,69 @@ public class ReservationFlightValidator implements Validator {
             }
         }
 
+    }
+
+    /**
+     * 往復の場合のチェックを行う。
+     * @param selectFlightFormList 予約フライト選択フォーム
+     * @param errors エラーメッセージを保持するクラス
+     */
+    private void validateRoundTrip(List<SelectFlightForm> selectFlightFormList,
+            Errors errors) {
+        // 選択フライト必須チェック
+        if (CollectionUtils.isEmpty(selectFlightFormList)) {
+
+            // 往路、復路共に未入力の場合
+            errors.reject("NotNull.outwardFlight", new Object[] {
+                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
+            errors.reject("NotNull.homewardFlight", new Object[] {
+                    new DefaultMessageSourceResolvable("homewardFlight") }, "");
+        } else {
+            // フライトが2つ選択されていることをチェック
+            if (selectFlightFormList.size() == 2) {
+                // OK
+            } else if (selectFlightFormList.size() == 1) {
+
+                // 往路か復路のいずれかが未入力の場合
+                errors.reject(TicketReserveErrorCode.E_AR_B2_5001.code());
+            } else {
+
+                // 往復で選択数が0-2以外は通常操作では設定されないケースであり、
+                // 改ざんとみなす
+                // 選択フライト情報にフィールドとしてエラー設定し、
+                // 後続処理で不正リクエスト例外とする
+                // Invalidは独自エラーコード(対応するメッセージ定義はない)
+                errors.rejectValue("selectFlightFormList", "Invalid");
+            }
+        }
+    }
+
+    /**
+     * 片道の場合のチェックを行う。
+     * @param selectFlightFormList 予約フライト選択フォーム
+     * @param errors エラーメッセージを保持するクラス
+     */
+    private void validateOneWay(List<SelectFlightForm> selectFlightFormList,
+            Errors errors) {
+        // 選択フライト必須チェック
+        if (CollectionUtils.isEmpty(selectFlightFormList)) {
+            errors.reject("NotNull.outwardFlight", new Object[] {
+                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
+        } else {
+
+            // フライトが1つ選択されていることをチェック
+            if (selectFlightFormList.size() == 1) {
+                // OK
+            } else {
+
+                // 片道で選択数が0-1以外は通常操作では設定されないケースであり、
+                // 改ざんとみなす
+                // 選択フライト情報にフィールドとしてエラー設定し、
+                // 後続処理で不正リクエスト例外とする
+                // Invalidは独自エラーコード(対応するメッセージ定義はない)
+                errors.rejectValue("selectFlightFormList", "Invalid");
+            }
+        }
     }
 
 }

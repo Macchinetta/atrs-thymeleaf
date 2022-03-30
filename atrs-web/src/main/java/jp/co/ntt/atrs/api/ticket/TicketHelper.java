@@ -20,6 +20,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Component;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
+
+import com.github.dozermapper.core.Mapper;
+
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;
@@ -32,11 +38,6 @@ import jp.co.ntt.atrs.domain.service.b0.InvalidFlightException;
 import jp.co.ntt.atrs.domain.service.b0.TicketSharedService;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveDto;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveService;
-
-import com.github.dozermapper.core.Mapper;
-import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
-import org.terasoluna.gfw.common.exception.BusinessException;
 
 /**
  * チケット予約API Helper。
@@ -98,13 +99,13 @@ public class TicketHelper {
         List<Flight> flightList = new ArrayList<>();
         for (SelectFlightResource selectFlightResource : selectFlightResourceList) {
             Flight flight = new Flight();
-            flight.setBoardingClass(boardingClassProvider
-                    .getBoardingClass(selectFlightResource.getBoardingClassCd()));
+            flight.setBoardingClass(boardingClassProvider.getBoardingClass(
+                    selectFlightResource.getBoardingClassCd()));
             flight.setDepartureDate(selectFlightResource.getDepDate());
-            flight.setFareType(fareTypeProvider
-                    .getFareType(selectFlightResource.getFareTypeCd()));
-            flight.setFlightMaster(flightMasterProvider
-                    .getFlightMaster(selectFlightResource.getFlightName()));
+            flight.setFareType(fareTypeProvider.getFareType(selectFlightResource
+                    .getFareTypeCd()));
+            flight.setFlightMaster(flightMasterProvider.getFlightMaster(
+                    selectFlightResource.getFlightName()));
             flightList.add(flight);
         }
 
@@ -117,7 +118,8 @@ public class TicketHelper {
      * @param flightList フライト情報リスト
      */
     public TicketReserveResource reserve(
-            TicketReserveResource ticketReserveResource, List<Flight> flightList) {
+            TicketReserveResource ticketReserveResource,
+            List<Flight> flightList) {
         // 予約情報生成
         Reservation reservation = createReservation(ticketReserveResource,
                 flightList);
@@ -164,7 +166,8 @@ public class TicketHelper {
      * @return 予約情報
      */
     private Reservation createReservation(
-            TicketReserveResource ticketReserveResource, List<Flight> flightList) {
+            TicketReserveResource ticketReserveResource,
+            List<Flight> flightList) {
         // 搭乗者情報リスト生成
         List<Passenger> passengerList = new ArrayList<>();
         for (PassengerResource passengerResource : ticketReserveResource
@@ -205,7 +208,8 @@ public class TicketHelper {
      * @param flightList フライト情報リスト
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(List<Flight> flightList) throws BadRequestException {
+    public void validateFlightList(
+            List<Flight> flightList) throws BadRequestException {
         // フライト情報チェック
         try {
             ticketSharedService.validateFlightList(flightList);

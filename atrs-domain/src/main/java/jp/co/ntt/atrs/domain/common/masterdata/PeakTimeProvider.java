@@ -15,20 +15,20 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
-import jp.co.ntt.atrs.domain.model.PeakTime;
-import jp.co.ntt.atrs.domain.repository.peaktime.PeakTimeRepository;
-
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import jp.co.ntt.atrs.domain.model.PeakTime;
+import jp.co.ntt.atrs.domain.repository.peaktime.PeakTimeRepository;
 
 /**
  * ピーク時期情報を提供するクラス。
@@ -66,8 +66,10 @@ public class PeakTimeProvider {
 
         for (PeakTime peakTime : peakTimeList) {
             Interval peakTimeInterval = new Interval(new DateTime(peakTime
-                    .getPeakStartDate()).withTimeAtStartOfDay(), new DateTime(peakTime
-                    .getPeakEndDate()).withTimeAtStartOfDay().plus(1));
+                    .getPeakStartDate())
+                            .withTimeAtStartOfDay(), new DateTime(peakTime
+                                    .getPeakEndDate()).withTimeAtStartOfDay()
+                                            .plus(1));
             // 搭乗日が該当するピーク時期積算比率を返却
             if (peakTimeInterval.contains(depDate.getTime())) {
                 return peakTime;

@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.app.a0;
 
-import jp.co.ntt.atrs.domain.service.a0.MembershipSharedService;
+import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.domain.service.a0.MembershipSharedService;
 
 /**
  * 会員WebAPIコントローラ。
@@ -57,7 +57,8 @@ public class MemberApiController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        return membershipSharedService.isMember(membershipNumber) ? new ResponseEntity<>(HttpStatus.OK)
+        return membershipSharedService.isMember(membershipNumber)
+                ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

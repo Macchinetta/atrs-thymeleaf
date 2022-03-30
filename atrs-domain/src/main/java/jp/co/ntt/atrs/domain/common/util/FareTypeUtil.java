@@ -15,13 +15,13 @@
  */
 package jp.co.ntt.atrs.domain.common.util;
 
-import jp.co.ntt.atrs.domain.model.FareTypeCd;
-import jp.co.ntt.atrs.domain.model.FlightType;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import jp.co.ntt.atrs.domain.model.FareTypeCd;
+import jp.co.ntt.atrs.domain.model.FlightType;
 
 /**
  * 運賃種別に関するユーティリティクラス。

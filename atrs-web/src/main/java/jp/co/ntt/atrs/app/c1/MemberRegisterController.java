@@ -15,10 +15,7 @@
  */
 package jp.co.ntt.atrs.app.c1;
 
-import jp.co.ntt.atrs.app.c0.MemberHelper;
-import jp.co.ntt.atrs.app.common.exception.BadRequestException;
-import jp.co.ntt.atrs.domain.model.Member;
-import jp.co.ntt.atrs.domain.service.c1.MemberRegisterService;
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +30,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.c0.MemberHelper;
+import jp.co.ntt.atrs.app.common.exception.BadRequestException;
+import jp.co.ntt.atrs.domain.model.Member;
+import jp.co.ntt.atrs.domain.service.c1.MemberRegisterService;
 
 /**
  * 会員情報登録コントローラ。

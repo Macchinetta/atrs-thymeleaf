@@ -15,11 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.service.c2;
 
-import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
-import jp.co.ntt.atrs.domain.common.logging.LogMessages;
-import jp.co.ntt.atrs.domain.model.Member;
-import jp.co.ntt.atrs.domain.model.MemberLogin;
-import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
+import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +24,11 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.exception.SystemException;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
+import jp.co.ntt.atrs.domain.common.logging.LogMessages;
+import jp.co.ntt.atrs.domain.model.Member;
+import jp.co.ntt.atrs.domain.model.MemberLogin;
+import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**
  * 会員情報変更を行うService実装クラス。
@@ -56,7 +56,8 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     @Override
     public Member findMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
+        Assert.hasText(membershipNumber,
+                "membershipNumber must have some text.");
 
         return memberRepository.findOne(membershipNumber);
     }
@@ -74,8 +75,9 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
         // 会員情報更新
         int updateMemberCount = memberRepository.update(member);
         if (updateMemberCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
-                    .getMessage(updateMemberCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002
+                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                            updateMemberCount, 1));
         }
 
         // パスワードの変更がある場合のみ会員ログイン情報を更新
@@ -86,11 +88,12 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
                     .getMemberLogin().getPassword()));
 
             // 会員ログイン情報更新
-            int updateMemberLoginCount = memberRepository
-                    .updateMemberLogin(member);
+            int updateMemberLoginCount = memberRepository.updateMemberLogin(
+                    member);
             if (updateMemberLoginCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(), LogMessages.E_AR_A0_L9002
-                        .getMessage(updateMemberLoginCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002
+                        .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
+                                updateMemberLoginCount, 1));
             }
         }
     }
@@ -121,7 +124,8 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     @Override
     public Member findMemberForLogin(String membershipNumber) {
 
-        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
+        Assert.hasText(membershipNumber,
+                "membershipNumber must have some text.");
 
         return memberRepository.findOneForLogin(membershipNumber);
     }

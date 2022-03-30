@@ -15,11 +15,11 @@
  */
 package jp.co.ntt.atrs.api.flight;
 
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
-
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
 
 /**
  * 空席照会条件クエリのバリデータ。
@@ -50,8 +50,8 @@ public class FlightValidator implements Validator {
         FlightSearchQuery form = (FlightSearchQuery) target;
 
         // 出発空港と到着空港が同じでないかチェック
-        if (!errors.hasFieldErrors("depAirportCd")
-                && !errors.hasFieldErrors("arrAirportCd")) {
+        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors(
+                "arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {

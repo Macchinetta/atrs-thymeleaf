@@ -27,12 +27,12 @@
     <property name="authenticationManager" ref="authenticationManager" />
     <property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
     <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
-    <property name="requiresAuthenticationRequestMatcher"> 
-        <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"> 
-            <constructor-arg index="0" value="/auth/dologin" /> 
-            <constructor-arg index="1" value="POST" /> 
-        </bean> 
-    </property> 
+    <property name="requiresAuthenticationRequestMatcher">
+      <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+        <constructor-arg index="0" value="/auth/dologin" />
+        <constructor-arg index="1" value="POST" />
+      </bean>
+    </property>
     <property name="usernameParameter" value="membershipNumber" />
     <property name="passwordParameter" value="password" />
   </bean>
@@ -69,23 +69,18 @@
   </bean>
 
   <bean id="accessDeniedHandler"
-       class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+    class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
     <constructor-arg index="0">
       <map>
-        <entry
-            key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
-          <bean
-              class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
-            <property name="errorPage"
-                value="/common/error/csrf-error" />
+        <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+          <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+            <property name="errorPage" value="/common/error/csrf-error" />
           </bean>
         </entry>
       </map>
     </constructor-arg>
     <constructor-arg index="1">
-        <bean
-            class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
-        </bean>
+      <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
     </constructor-arg>
   </bean>
 

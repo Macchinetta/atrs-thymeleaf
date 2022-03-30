@@ -15,6 +15,21 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import jp.co.ntt.atrs.app.b0.IReservationFlightForm;
 import jp.co.ntt.atrs.app.b0.SelectFlightForm;
 import jp.co.ntt.atrs.domain.common.validate.FixedLength;
@@ -23,21 +38,6 @@ import jp.co.ntt.atrs.domain.common.validate.HalfWidth;
 import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber;
 import jp.co.ntt.atrs.domain.model.FlightType;
 import jp.co.ntt.atrs.domain.model.Gender;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Email;
 
 /**
  * チケット予約フォーム。

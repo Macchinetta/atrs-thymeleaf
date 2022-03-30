@@ -15,15 +15,15 @@
  */
 package jp.co.ntt.atrs.domain.common.codelist;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.codelist.AbstractReloadableCodeList;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.Assert;
+import org.terasoluna.gfw.common.codelist.AbstractReloadableCodeList;
 
 /**
  * 空港コードリストクラス。

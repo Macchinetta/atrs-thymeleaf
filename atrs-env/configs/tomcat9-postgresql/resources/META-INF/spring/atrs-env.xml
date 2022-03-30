@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- for development environment on local PC -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="${database.driverClassName}" />
+    <property name="url" value="${database.url}" />
+    <property name="username" value="${database.username}" />
+    <property name="password" value="${database.password}" />
+    <property name="defaultAutoCommit" value="false" />
+    <property name="maxTotal" value="${cp.maxActive}" />
+    <property name="maxIdle" value="${cp.maxIdle}" />
+    <property name="minIdle" value="${cp.minIdle}" />
+    <property name="maxWaitMillis" value="${cp.maxWait}" />
+  </bean>
+
+<!--
+  <jdbc:initialize-database data-source="dataSource"
+    ignore-failures="ALL">
+    <jdbc:script location="classpath:/database/${database}-schema.sql" encoding="UTF-8" />
+    <jdbc:script location="classpath:/database/${database}-dataload.sql" encoding="UTF-8" />
+  </jdbc:initialize-database>
+-->
+
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <bean id="dateFactory" class="org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory" />
+
+  <!-- JMS送受信用の設定 -->
+  <bean id="brokerService" class="org.apache.activemq.broker.BrokerService" init-method="start" destroy-method="stop">
+    <property name="brokerName" value="broker" />
+    <property name="useJmx" value="false" />
+    <property name="persistent" value="false" />
+    <property name="transportConnectorURIs">
+      <list>
+        <value>tcp://${jms.mq.host}:${jms.mq.port}</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="atrsJmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    <property name="brokerURL" value="tcp://${jms.mq.host}:${jms.mq.port}?jms.blobTransferPolicy.uploadUrl=file:/tmp" />
+  </bean>
+
+  <bean id="destinationResolver" class="org.springframework.jms.support.destination.DynamicDestinationResolver">
+  </bean>
+
+  <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    <property name="targetConnectionFactory" ref="atrsJmsConnectionFactory" />
+    <property name="sessionCacheSize" value="1" />
+  </bean>
+
+</beans>

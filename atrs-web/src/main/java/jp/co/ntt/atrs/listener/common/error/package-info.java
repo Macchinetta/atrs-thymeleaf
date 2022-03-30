@@ -15,7 +15,6 @@
  */
 /**
  * リスナーの例外ハンドリングパッケージ
- * 
  * @author NTT 電電花子
  */
 package jp.co.ntt.atrs.listener.common.error;

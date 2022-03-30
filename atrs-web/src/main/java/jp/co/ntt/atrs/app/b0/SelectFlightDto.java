@@ -15,14 +15,14 @@
  */
 package jp.co.ntt.atrs.app.b0;
 
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.model.FareTypeCd;
+import java.io.Serializable;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.io.Serializable;
-import java.util.Date;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.model.FareTypeCd;
 
 /**
  * 選択フライト情報DTOクラス。

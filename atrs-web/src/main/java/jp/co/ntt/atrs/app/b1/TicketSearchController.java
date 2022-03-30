@@ -15,11 +15,10 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import jp.co.ntt.atrs.app.b0.ReservationFlightForm;
-import jp.co.ntt.atrs.app.b0.ReservationFlightValidator;
-import jp.co.ntt.atrs.app.b0.TicketHelper;
-import jp.co.ntt.atrs.app.common.exception.BadRequestException;
-import jp.co.ntt.atrs.domain.model.Flight;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +31,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.b0.ReservationFlightForm;
+import jp.co.ntt.atrs.app.b0.ReservationFlightValidator;
+import jp.co.ntt.atrs.app.b0.TicketHelper;
+import jp.co.ntt.atrs.app.common.exception.BadRequestException;
+import jp.co.ntt.atrs.domain.model.Flight;
 
 /**
  * 空席照会コントローラ。
@@ -142,9 +142,8 @@ public class TicketSearchController {
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.GET, params = "flightForm")
-    public String searchFlightForm(
-            @Validated TicketSearchForm ticketSearchForm, BindingResult result,
-            Model model) {
+    public String searchFlightForm(@Validated TicketSearchForm ticketSearchForm,
+            BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             // 検証エラーがある場合初期空席照会を実施しない
@@ -193,8 +192,8 @@ public class TicketSearchController {
             BindingResult result, Model model,
             RedirectAttributes redirectAttributes) {
 
-        if (result.hasFieldErrors("selectFlightFormList*")
-                || result.hasFieldErrors("flightType")) {
+        if (result.hasFieldErrors("selectFlightFormList*") || result
+                .hasFieldErrors("flightType")) {
 
             // 非表示項目(選択フライト情報、フライト種別)に検証エラーがある場合は
             // 改ざんとみなす
@@ -207,8 +206,8 @@ public class TicketSearchController {
         }
 
         // 選択フライト情報の業務ロジックチェック
-        List<Flight> flightList = ticketHelper
-                .toFlightList(reservationFlightForm.getSelectFlightFormList());
+        List<Flight> flightList = ticketHelper.toFlightList(
+                reservationFlightForm.getSelectFlightFormList());
         try {
             ticketSearchHelper.validateFlightList(flightList);
         } catch (BusinessException e) {

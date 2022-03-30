@@ -15,11 +15,6 @@
  */
 package jp.co.ntt.atrs.app.b0;
 
-import jp.co.ntt.atrs.domain.model.FlightType;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +22,17 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import jp.co.ntt.atrs.domain.model.FlightType;
+
 /**
  * 予約フライト選択フォーム。
  * @author NTT 電電次郎
  */
 public class ReservationFlightForm implements IReservationFlightForm,
-                                  Serializable {
+                                   Serializable {
 
     /**
      * serialVersionUID。

@@ -52,7 +52,8 @@ public class AuthApiController {
             @AuthenticationPrincipal AtrsUserDetails userDetails) {
 
         // ログイン状態を返却
-        return authenticationHelper.isAuthenticatedPrincipal(userDetails) ? new ResponseEntity<>(HttpStatus.OK)
+        return authenticationHelper.isAuthenticatedPrincipal(userDetails)
+                ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

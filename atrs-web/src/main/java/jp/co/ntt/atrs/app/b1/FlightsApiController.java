@@ -15,13 +15,11 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import jp.co.ntt.atrs.app.a0.ErrorResultDto;
-import jp.co.ntt.atrs.domain.service.b1.FlightNotFoundException;
-import jp.co.ntt.atrs.domain.service.b1.FlightVacantInfoDto;
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchCriteriaDto;
-import jp.co.ntt.atrs.domain.service.b1.TicketSearchService;
+import java.util.List;
+import java.util.Locale;
 
-import com.github.dozermapper.core.Mapper;
+import javax.inject.Inject;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -40,10 +38,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessage;
 
-import java.util.List;
-import java.util.Locale;
+import com.github.dozermapper.core.Mapper;
 
-import javax.inject.Inject;
+import jp.co.ntt.atrs.app.a0.ErrorResultDto;
+import jp.co.ntt.atrs.domain.service.b1.FlightNotFoundException;
+import jp.co.ntt.atrs.domain.service.b1.FlightVacantInfoDto;
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchCriteriaDto;
+import jp.co.ntt.atrs.domain.service.b1.TicketSearchService;
 
 /**
  * 空席状況取得WebAPIコントローラ。
@@ -110,8 +111,8 @@ public class FlightsApiController {
         // 空席照会
         TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
                 flightSearchCriteriaForm, TicketSearchCriteriaDto.class);
-        List<FlightVacantInfoDto> flights = ticketSearchService
-                .searchFlight(searchCriteriaDto);
+        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(
+                searchCriteriaDto);
 
         return flights;
     }
@@ -162,10 +163,9 @@ public class FlightsApiController {
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
-            result.add(messageSource
-                    .getMessage(
-                            new DefaultMessageSourceResolvable(resultMessage
-                                    .getCode()), locale));
+            result.add(messageSource.getMessage(
+                    new DefaultMessageSourceResolvable(resultMessage.getCode()),
+                    locale));
         }
 
         return result;
@@ -190,10 +190,9 @@ public class FlightsApiController {
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
-            result.add(messageSource
-                    .getMessage(
-                            new DefaultMessageSourceResolvable(resultMessage
-                                    .getCode()), locale));
+            result.add(messageSource.getMessage(
+                    new DefaultMessageSourceResolvable(resultMessage.getCode()),
+                    locale));
         }
 
         return result;

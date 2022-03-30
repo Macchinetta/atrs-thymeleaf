@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.domain.service.b1;
 
-import org.terasoluna.gfw.common.exception.BusinessException;
-
 import java.util.List;
+
+import org.terasoluna.gfw.common.exception.BusinessException;
 
 /**
  * 空席照会サービスインタフェース。

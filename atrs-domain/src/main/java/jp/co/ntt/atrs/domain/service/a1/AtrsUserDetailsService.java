@@ -42,8 +42,8 @@ public class AtrsUserDetailsService implements UserDetailsService {
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory
-            .getLogger(AtrsUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            AtrsUserDetailsService.class);
 
     /**
      * メッセージプロパティ設定。
@@ -61,7 +61,8 @@ public class AtrsUserDetailsService implements UserDetailsService {
      * {@inheritDoc}
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(
+            String username) throws UsernameNotFoundException {
 
         Assert.hasText(username, "username must have some text.");
 

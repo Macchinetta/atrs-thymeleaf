@@ -15,7 +15,6 @@
  */
 /**
  * 予約履歴レポートサービスパッケージ。
- * 
  * @author NTT 電電花子
  */
 package jp.co.ntt.atrs.domain.service.d1;

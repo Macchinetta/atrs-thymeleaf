@@ -45,9 +45,9 @@
          f.fare_type_cd = ft.fare_type_cd
     AND
          f.fare_type_cd IN
-         <foreach item="fareType" collection="criteria.fareTypeList" open="(" separator="," close=")">
+    <foreach item="fareType" collection="criteria.fareTypeList" open="(" separator="," close=")">
              #{fareType}
-         </foreach>
+    </foreach>
     AND
          f.flight_name = fm.flight_name
     AND

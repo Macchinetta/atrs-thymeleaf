@@ -15,9 +15,9 @@
  */
 package jp.co.ntt.atrs.domain.repository.peaktime;
 
-import jp.co.ntt.atrs.domain.model.PeakTime;
-
 import java.util.List;
+
+import jp.co.ntt.atrs.domain.model.PeakTime;
 
 /**
  * ピーク時期テーブルにアクセスするリポジトリインターフェース。

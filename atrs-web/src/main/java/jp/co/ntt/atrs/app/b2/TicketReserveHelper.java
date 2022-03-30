@@ -15,6 +15,23 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
+import org.springframework.stereotype.Component;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
+
+import com.github.dozermapper.core.Mapper;
+
 import jp.co.ntt.atrs.app.a0.AuthenticationHelper;
 import jp.co.ntt.atrs.app.b0.LineType;
 import jp.co.ntt.atrs.app.b0.SelectFlightDto;
@@ -35,22 +52,6 @@ import jp.co.ntt.atrs.domain.service.b0.InvalidFlightException;
 import jp.co.ntt.atrs.domain.service.b0.TicketSharedService;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveDto;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveService;
-
-import org.apache.commons.collections.CollectionUtils;
-import com.github.dozermapper.core.Mapper;
-import org.joda.time.DateTime;
-import org.joda.time.Years;
-import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
-import org.terasoluna.gfw.common.exception.BusinessException;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
 
 /**
  * チケット予約Helper。
@@ -130,8 +131,8 @@ public class TicketReserveHelper {
      * @param flightList フライト情報リスト
      * @return チケット予約完了画面出力用DTO
      */
-    public ReserveCompleteOutputDto reserve(
-            TicketReserveForm ticketReserveForm, List<Flight> flightList) {
+    public ReserveCompleteOutputDto reserve(TicketReserveForm ticketReserveForm,
+            List<Flight> flightList) {
 
         // 予約情報生成
         Reservation reservation = createReservation(ticketReserveForm,
@@ -181,8 +182,8 @@ public class TicketReserveHelper {
                             .getDepartureDate());
             int discountRate = flightList.get(i).getFareType()
                     .getDiscountRate();
-            int fare = ticketSharedService
-                    .calculateFare(baseFare, discountRate);
+            int fare = ticketSharedService.calculateFare(baseFare,
+                    discountRate);
             selectFlight.setFare(fare);
 
             selectFlightDtoList.add(selectFlight);
@@ -196,7 +197,8 @@ public class TicketReserveHelper {
      * @param userDetails ログイン情報を保持するオブジェクト
      * @return チケット予約フォーム
      */
-    public TicketReserveForm createTicketReserveForm(AtrsUserDetails userDetails) {
+    public TicketReserveForm createTicketReserveForm(
+            AtrsUserDetails userDetails) {
 
         TicketReserveForm ticketReserveForm = new TicketReserveForm();
 
@@ -261,8 +263,8 @@ public class TicketReserveHelper {
         Reservation reservation = new Reservation();
         beanMapper.map(ticketReserveForm, reservation);
         String repTel = String.format("%s-%s-%s", ticketReserveForm
-                .getRepTel1(), ticketReserveForm.getRepTel2(),
-                ticketReserveForm.getRepTel3());
+                .getRepTel1(), ticketReserveForm.getRepTel2(), ticketReserveForm
+                        .getRepTel3());
         reservation.setRepTel(repTel);
         reservation.setReserveFlightList(reserveFlightList);
 
@@ -313,10 +315,11 @@ public class TicketReserveHelper {
 
         SelectFlightForm owFlight = selectFlightFormList.get(0);
         String flightName = owFlight.getFlightName();
-        FlightMaster flightMaster = flightMasterProvider
-                .getFlightMaster(flightName);
+        FlightMaster flightMaster = flightMasterProvider.getFlightMaster(
+                flightName);
         if (flightMaster == null) {
-            throw new BadRequestException("flight is null. value:" + flightName);
+            throw new BadRequestException("flight is null. value:"
+                    + flightName);
         }
 
         Map<String, String> params = new LinkedHashMap<>();
@@ -353,7 +356,8 @@ public class TicketReserveHelper {
      * @param flightList フライト情報のリスト
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(List<Flight> flightList) throws BadRequestException {
+    public void validateFlightList(
+            List<Flight> flightList) throws BadRequestException {
 
         // フライト情報チェック
         try {

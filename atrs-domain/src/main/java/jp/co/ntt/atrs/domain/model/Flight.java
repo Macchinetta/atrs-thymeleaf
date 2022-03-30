@@ -15,11 +15,11 @@
  */
 package jp.co.ntt.atrs.domain.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * フライト情報。
@@ -122,7 +122,8 @@ public class Flight implements Serializable {
     }
 
     /**
-     * 搭乗クラスを取得する。</p>
+     * 搭乗クラスを取得する。
+     * </p>
      * @return 搭乗クラス
      */
     public BoardingClass getBoardingClass() {

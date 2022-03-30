@@ -15,19 +15,19 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
-import jp.co.ntt.atrs.domain.model.BoardingClass;
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.repository.boardingclass.BoardingClassRepository;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import jp.co.ntt.atrs.domain.model.BoardingClass;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.repository.boardingclass.BoardingClassRepository;
 
 /**
  * 搭乗クラス情報を提供するクラス。

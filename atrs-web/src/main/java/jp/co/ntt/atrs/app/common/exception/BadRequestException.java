@@ -15,17 +15,17 @@
  */
 package jp.co.ntt.atrs.app.common.exception;
 
-import jp.co.ntt.atrs.domain.common.logging.LogMessages;
-
 import org.springframework.validation.Errors;
 import org.terasoluna.gfw.common.exception.ExceptionCodeProvider;
+
+import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 
 /**
  * 不正リクエスト例外。
  * @author NTT 電電太郎
  */
 public class BadRequestException extends RuntimeException implements
-                                                         ExceptionCodeProvider {
+                                 ExceptionCodeProvider {
 
     /**
      * serialVersionUID。

@@ -17,9 +17,6 @@ package jp.co.ntt.atrs.api.common.error;
 
 import javax.inject.Inject;
 
-import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
-import jp.co.ntt.atrs.domain.service.b1.FlightNotFoundException;
-
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
@@ -36,6 +33,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
+
+import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
+import jp.co.ntt.atrs.domain.service.b1.FlightNotFoundException;
 
 /**
  * API例外ハンドラ。
@@ -110,11 +110,11 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     protected ResponseEntity<Object> handleBindingResult(Exception ex,
-            BindingResult bindingResult, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+            BindingResult bindingResult, HttpHeaders headers, HttpStatus status,
+            WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(
-                request, errorCode, bindingResult, ex.getMessage());
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(request,
+                errorCode, bindingResult, ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
@@ -196,8 +196,8 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
             ResultMessagesNotificationException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createResultMessageApiError(
-                request, errorCode, ex.getResultMessages(), ex.getMessage());
+        ApiError apiError = apiErrorCreator.createResultMessageApiError(request,
+                errorCode, ex.getResultMessages(), ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 }

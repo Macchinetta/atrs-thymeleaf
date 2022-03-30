@@ -15,6 +15,23 @@
  */
 package jp.co.ntt.atrs.domain.service.b1;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
+
 import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;
@@ -32,23 +49,6 @@ import jp.co.ntt.atrs.domain.model.Route;
 import jp.co.ntt.atrs.domain.repository.flight.FlightRepository;
 import jp.co.ntt.atrs.domain.repository.flight.VacantSeatSearchCriteriaDto;
 import jp.co.ntt.atrs.domain.service.b0.TicketSharedService;
-
-import org.joda.time.LocalDate;
-import org.joda.time.Days;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
-import org.terasoluna.gfw.common.exception.BusinessException;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
 
 /**
  * 空席照会サービス実装クラス。
@@ -139,8 +139,8 @@ public class TicketSearchServiceImpl implements TicketSearchService {
                 .getDays();
 
         // フライト種別に応じて運賃種別コードを空席照会条件Dtoに設定
-        List<FareTypeCd> fareTypeList = FareTypeUtil
-                .getFareTypeCdList(flightType);
+        List<FareTypeCd> fareTypeList = FareTypeUtil.getFareTypeCdList(
+                flightType);
 
         VacantSeatSearchCriteriaDto criteria = new VacantSeatSearchCriteriaDto(depDate, route, boardingClassCd, beforeDayNum, fareTypeList);
 
@@ -159,9 +159,8 @@ public class TicketSearchServiceImpl implements TicketSearchService {
             flight.setFareType(fareTypeProvider.getFareType(fareTypeCd));
             flight.setFlightMaster(flightMasterProvider.getFlightMaster(flight
                     .getFlightMaster().getFlightName()));
-            flight.setBoardingClass(boardingClassProvider
-                    .getBoardingClass(flight.getBoardingClass()
-                            .getBoardingClassCd()));
+            flight.setBoardingClass(boardingClassProvider.getBoardingClass(
+                    flight.getBoardingClass().getBoardingClassCd()));
         }
 
         // 基本運賃の計算
@@ -205,7 +204,7 @@ public class TicketSearchServiceImpl implements TicketSearchService {
                     .getDiscountRate());
             FareTypeVacantInfoDto fareTypeVacantInfo = new FareTypeVacantInfoDto(fareType
                     .getFareTypeName(), fareFormatter.format(fare), flight
-                    .getVacantNum());
+                            .getVacantNum());
 
             vacantInfo.addFareTypeVacantInfo(fareType.getFareTypeCd(),
                     fareTypeVacantInfo);

@@ -31,14 +31,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AtrsAuthenticationSuccessHandler extends
-                                             SavedRequestAwareAuthenticationSuccessHandler {
+                                              SavedRequestAwareAuthenticationSuccessHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+            HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
 
         // for Ajax request
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {

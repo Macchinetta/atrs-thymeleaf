@@ -163,8 +163,8 @@ public class ReservationHistoryDto implements Serializable {
     public String toCsvLineString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"",
-                reserveNo, dateFormat.format(reserveDate), totalFare,
-                dateFormat.format(departureDate), reserveFlightNo, flightName);
+                reserveNo, dateFormat.format(reserveDate), totalFare, dateFormat
+                        .format(departureDate), reserveFlightNo, flightName);
     }
 
 }

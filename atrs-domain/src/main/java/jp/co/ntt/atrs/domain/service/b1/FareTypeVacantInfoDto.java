@@ -15,10 +15,10 @@
  */
 package jp.co.ntt.atrs.domain.service.b1;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.io.Serializable;
 
 /**
  * 運賃種別に対応する空席照会結果を格納するDTO。

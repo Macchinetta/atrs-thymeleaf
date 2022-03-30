@@ -15,16 +15,16 @@
  */
 package jp.co.ntt.atrs.domain.repository.flight;
 
-import jp.co.ntt.atrs.domain.model.BoardingClassCd;
-import jp.co.ntt.atrs.domain.model.FareTypeCd;
-import jp.co.ntt.atrs.domain.model.Route;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import jp.co.ntt.atrs.domain.model.BoardingClassCd;
+import jp.co.ntt.atrs.domain.model.FareTypeCd;
+import jp.co.ntt.atrs.domain.model.Route;
 
 /**
  * 空席情報検索条件を保持するクラス。
