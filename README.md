@@ -6,7 +6,7 @@ This is a reference application for developers to learn how to build application
 
 ### Download source code
 
-Download source code from [here](https://github.com/Macchinetta/atrs/releases "here").
+Download source code from [here](https://github.com/Macchinetta/atrs/tags "here").
 Extract the zip file at any location of choice.
 
 ### Install PostgreSQL
@@ -32,9 +32,23 @@ If not, install it and try again.
 
 Execute the command below at the directory where the downloaded source code is unzipped.
 
+#### JDK 8
+
 ```console
 $ mvn clean install
 $ mvn cargo:run -f atrs-web/pom.xml
 ```
 
-Access [http://localhost:8080/atrs/].
+#### JDK 11
+
+When you use JDK 11, you need to set a profile.
+
+```console
+$ mvn clean install -P default
+$ mvn cargo:run -P default -f atrs-web/pom.xml
+```
+
+### Web access
+
+Access <http://localhost:8080/atrs/>.
+
