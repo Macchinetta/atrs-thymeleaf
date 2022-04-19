@@ -1,4 +1,4 @@
-/*! IPv6 Address parser (WIP)
+﻿/*! IPv6 Address parser (WIP)
 * IPv6 Address (ffff:0000:0000:0000:0000:0000:0000:0000)
 * needs to support short versions like "::8" or "1:2::7:8"
 * and "::00:192.168.10.184" (embedded IPv4 address)

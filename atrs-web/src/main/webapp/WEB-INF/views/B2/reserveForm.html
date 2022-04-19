@@ -58,7 +58,7 @@
                 <td><span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class='glyphicon glyphicon-arrow-right'></span><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span></td>
                 <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
                 <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
-                <td th:text="|&yen; ${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">¥19,600</td>
+                <td th:text="|&yen; ${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
               </tr>
               <!--/*-->
               <tr>
@@ -70,7 +70,7 @@
                 <td>沖縄&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;東京（羽田）</td>
                 <td>一般席</td>
                 <td>往復運賃</td>
-                <td>¥19,600</td>
+                <td>￥19,600</td>
               </tr>
               <!--*/-->
             </tbody>

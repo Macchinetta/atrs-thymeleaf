@@ -43,7 +43,7 @@ import jp.co.ntt.atrs.domain.common.validate.FullWidth.List;
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
-@Pattern(regexp = "^[^ -~。-゜]*$")
+@Pattern(regexp = "^[^ -~｡-ﾟ]*$")
 @ReportAsSingleViolation
 @Repeatable(List.class)
 public @interface FullWidth {

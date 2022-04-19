@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ntt.atrs</groupId>
         <artifactId>atrs</artifactId>
-        <version>1.7.2.RELEASE</version>
+        <version>1.7.2.SP1.RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 

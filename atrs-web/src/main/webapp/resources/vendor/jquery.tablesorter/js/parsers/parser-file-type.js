@@ -1,4 +1,4 @@
-/*! File Type parser
+﻿/*! File Type parser
  * When a file type extension is found, the equivalent name is
  * prefixed into the parsed data, so sorting occurs in groups
  */
