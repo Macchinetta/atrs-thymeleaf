@@ -39,9 +39,9 @@ $ mvn clean install
 $ mvn cargo:run -f atrs-web/pom.xml
 ```
 
-#### JDK 11
+#### JDK 11+
 
-When you use JDK 11, you need to set a profile.
+When you use JDK 11+, you need to set a profile.
 
 ```console
 $ mvn clean install -P default

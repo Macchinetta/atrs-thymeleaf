@@ -13,10 +13,10 @@
   <parent>
     <groupId>org.terasoluna.gfw</groupId>
     <artifactId>terasoluna-gfw-parent</artifactId>
-    <version>5.7.1.SP1.RELEASE</version>
+    <version>5.7.2.RELEASE</version>
     <relativePath />
   </parent>
-  <version>1.8.1.SP1.RELEASE</version>
+  <version>1.8.2.RELEASE</version>
   <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
   <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
   <licenses>
@@ -215,14 +215,6 @@
       </dependency>
       <!-- == End Database == -->
 
-      <!-- == Begin Thymeleaf == -->
-      <dependency>
-        <groupId>nz.net.ultraq.thymeleaf</groupId>
-        <artifactId>thymeleaf-joda-dialect</artifactId>
-        <version>${thymeleaf-joda-dialect.version}</version>
-      </dependency>
-      <!-- == End Thymeleaf == -->
-
     </dependencies>
   </dependencyManagement>
 
@@ -236,8 +228,7 @@
     <org.codehaus.mojo.xml-maven-plugin.version>1.0.2</org.codehaus.mojo.xml-maven-plugin.version>
     <com.mycila.license-maven-plugin.version>4.1</com.mycila.license-maven-plugin.version>
     <!-- == Dependency Versions == -->
-    <postgresql.version>42.3.1</postgresql.version>
-    <thymeleaf-joda-dialect.version>2.0.0</thymeleaf-joda-dialect.version>
+    <postgresql.version>42.5.1</postgresql.version>
     <!-- == Project Properties == -->
     <project.root.basedir>${project.basedir}</project.root.basedir>
     <encoding>UTF-8</encoding>
@@ -251,6 +242,16 @@
       </activation>
       <properties>
         <java-version>11</java-version>
+        <cargo.jvmargs>-Xms512m -Xmx1024m -Djava.locale.providers=COMPAT,CLDR,SPI</cargo.jvmargs>
+      </properties>
+    </profile>
+    <profile>
+      <id>jdk17</id>
+      <activation>
+        <jdk>17</jdk>
+      </activation>
+      <properties>
+        <java-version>17</java-version>
         <cargo.jvmargs>-Xms512m -Xmx1024m -Djava.locale.providers=COMPAT,CLDR,SPI</cargo.jvmargs>
       </properties>
     </profile>
