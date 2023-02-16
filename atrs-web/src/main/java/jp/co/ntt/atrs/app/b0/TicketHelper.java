@@ -20,11 +20,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;

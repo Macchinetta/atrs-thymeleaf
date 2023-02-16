@@ -20,13 +20,13 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.terasoluna.gfw.web.download.AbstractFileDownloadView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * ダウンロードカスタムビュー
@@ -43,7 +43,7 @@ public class HistoryReportDownload extends AbstractFileDownloadView {
     /*
      * (non-Javadoc)
      * @see org.terasoluna.gfw.web.download.AbstractFileDownloadView#getInputStream( java.util.Map,
-     * javax.servlet.http.HttpServletRequest)
+     * jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     protected InputStream getInputStream(Map<String, Object> model,
@@ -58,7 +58,7 @@ public class HistoryReportDownload extends AbstractFileDownloadView {
     /*
      * (non-Javadoc)
      * @see org.terasoluna.gfw.web.download.AbstractFileDownloadView# addResponseHeader (java.util.Map,
-     * javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     protected void addResponseHeader(Map<String, Object> model,
             HttpServletRequest request, HttpServletResponse response) {

@@ -4,7 +4,7 @@
   <parent>
     <groupId>jp.co.ntt.atrs</groupId>
     <artifactId>atrs</artifactId>
-    <version>1.8.1.SP1.RELEASE</version>
+    <version>1.9.0.RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>atrs-web</artifactId>
@@ -12,60 +12,10 @@
   <packaging>war</packaging>
 
   <build>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </resource>
-    </resources>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <webResources>
-            <webResource>
-              <directory>${project.root.basedir}/atrs-web/src/main/webapp/resources</directory>
-              <targetPath>resources</targetPath>
-            </webResource>
-            <webResource>
-              <directory>${project.root.basedir}/atrs-web/src/main/webapp/WEB-INF/views</directory>
-              <targetPath>WEB-INF/views</targetPath>
-              <exclude>**/*.jsp</exclude>
-            </webResource>
-          </webResources>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add-sources</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.root.basedir}/atrs-web/src/main/java</source>
-              </sources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-resources</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${project.root.basedir}/atrs-web/src/main/resources</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.cargo</groupId>
@@ -100,19 +50,6 @@
         <dependency>
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
-          <scope>runtime</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.activemq</groupId>
-          <artifactId>activemq-client</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.activemq</groupId>
-          <artifactId>activemq-broker</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>jakarta.jms</groupId>
-          <artifactId>jakarta.jms-api</artifactId>
           <scope>runtime</scope>
         </dependency>
       </dependencies>
@@ -152,15 +89,11 @@
     </dependency>
     <dependency>
       <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
+      <artifactId>thymeleaf-spring6</artifactId>
     </dependency>
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-java8time</artifactId>
+      <artifactId>thymeleaf-extras-springsecurity6</artifactId>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
@@ -169,14 +102,6 @@
     </dependency>
     <!-- == End Thymeleaf == -->
 
-    <!-- == Begin ActiveMQ == -->
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-client</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- == End ActiveMQ == -->
-
     <!-- == Begin Unit Test == -->
     <dependency>
       <groupId>junit</groupId>
@@ -184,7 +109,9 @@
     </dependency>
     <!-- == End Unit Test == -->
   </dependencies>
+
   <properties>
     <project.root.basedir>${project.parent.basedir}</project.root.basedir>
   </properties>
+
 </project>

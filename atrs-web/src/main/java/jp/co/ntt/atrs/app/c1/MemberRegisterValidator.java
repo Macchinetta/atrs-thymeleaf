@@ -15,13 +15,12 @@
  */
 package jp.co.ntt.atrs.app.c1;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.c0.MemberValidator;
 import jp.co.ntt.atrs.domain.service.c1.MemberRegisterErrorCode;
 

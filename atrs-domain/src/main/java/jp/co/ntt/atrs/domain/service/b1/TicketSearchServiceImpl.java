@@ -16,22 +16,20 @@
 package jp.co.ntt.atrs.domain.service.b1;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
-import org.joda.time.Days;
-import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;
@@ -62,7 +60,7 @@ public class TicketSearchServiceImpl implements TicketSearchService {
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * フライト情報リポジトリ。
@@ -133,10 +131,10 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         }
 
         // システム日付が搭乗日から何日前かを計算
-        LocalDate sysLocalDate = dateFactory.newDateTime().toLocalDate();
-        LocalDate depLocalDate = new LocalDate(depDate);
-        int beforeDayNum = Days.daysBetween(sysLocalDate, depLocalDate)
-                .getDays();
+        LocalDate sysLocalDate = LocalDate.now(dateFactory.tick());
+        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
+        sysLocalDate.compareTo(depLocalDate);
+        int beforeDayNum = sysLocalDate.compareTo(depLocalDate);
 
         // フライト種別に応じて運賃種別コードを空席照会条件Dtoに設定
         List<FareTypeCd> fareTypeList = FareTypeUtil.getFareTypeCdList(

@@ -15,18 +15,17 @@
  */
 package jp.co.ntt.atrs.domain.common.masterdata;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.model.PeakTime;
 import jp.co.ntt.atrs.domain.repository.peaktime.PeakTimeRepository;
 
@@ -63,15 +62,17 @@ public class PeakTimeProvider {
      */
     public PeakTime getPeakTime(Date depDate) {
         Assert.notNull(depDate, "depDate must not null.");
+        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
 
         for (PeakTime peakTime : peakTimeList) {
-            Interval peakTimeInterval = new Interval(new DateTime(peakTime
-                    .getPeakStartDate())
-                            .withTimeAtStartOfDay(), new DateTime(peakTime
-                                    .getPeakEndDate()).withTimeAtStartOfDay()
-                                            .plus(1));
+            LocalDate peakStartDate = DateTimeUtil.toLocalDate(peakTime
+                    .getPeakStartDate());
+            LocalDate peakEndDate = DateTimeUtil.toLocalDate(peakTime
+                    .getPeakEndDate());
+
             // 搭乗日が該当するピーク時期積算比率を返却
-            if (peakTimeInterval.contains(depDate.getTime())) {
+            if (!(depLocalDate.isBefore(peakStartDate) || depLocalDate.isAfter(
+                    peakEndDate))) {
                 return peakTime;
             }
         }

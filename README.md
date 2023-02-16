@@ -32,17 +32,6 @@ If not, install it and try again.
 
 Execute the command below at the directory where the downloaded source code is unzipped.
 
-#### JDK 8
-
-```console
-$ mvn clean install
-$ mvn cargo:run -f atrs-web/pom.xml
-```
-
-#### JDK 11
-
-When you use JDK 11, you need to set a profile.
-
 ```console
 $ mvn clean install -P default
 $ mvn cargo:run -P default -f atrs-web/pom.xml

@@ -62,24 +62,24 @@
 
   <mvc:view-resolvers>
     <mvc:bean-name />
-    <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+    <bean class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
       <property name="templateEngine" ref="templateEngine" />
       <property name="characterEncoding" value="UTF-8" />
     </bean>
   </mvc:view-resolvers>
-  <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+  <bean id="templateResolver" class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
     <property name="prefix" value="/WEB-INF/views/" />
     <property name="suffix" value=".html" />
     <property name="templateMode" value="HTML" />
     <property name="characterEncoding" value="UTF-8" />
   </bean>
  
-  <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+  <bean id="templateEngine" class="org.thymeleaf.spring6.SpringTemplateEngine">
     <property name="enableSpringELCompiler" value="true" />
     <property name="templateResolver" ref="templateResolver" />
     <property name="additionalDialects">
       <set>
-        <bean class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect" />
+        <bean class="org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect" />
       </set>
     </property>
   </bean>
@@ -109,7 +109,6 @@
     </property>
     <property name="excludedExceptions">
       <array>
-        <value>org.springframework.web.util.NestedServletException</value>
       </array>
     </property>
     <property name="defaultStatusCode" value="500" />

@@ -12,7 +12,7 @@
     var MSG_TIMEOUT = '接続がタイムアウトになりました。';
     var MSG_UNAUTHORIZED = '会員番号またはパスワードが確認できませんでした。入力情報をご確認ください。';
     var MSG_FORBIDDEN = 'リクエストが許可されていません。';
-    var MSG_INVALID_FLIGHT_TIME = '選択された復路のフライトはご利用できません。復路のフライトは往路の搭乗時刻より2時間以上経過している必要があります。';
+    var MSG_INVALID_FLIGHT_TIME = '選択された復路のフライトはご利用できません。復路のフライトは往路の到着時刻より2時間以上経過している必要があります。';
 
     /** 日付フォーマット */
     var DATE_FORMAT = 'YYYY/MM/DD';
@@ -117,7 +117,7 @@
 
             $.ajax({
                 type : 'GET',
-                url : contextPath + '/api/auth/status',
+                url : contextPath + 'api/auth/status',
                 cache : false,
                 timeout : 15000
             }).done(function() {
@@ -384,7 +384,7 @@
 
             $.ajax({
                 type : 'GET',
-                url : contextPath + '/api/flights',
+                url : contextPath + 'api/flights',
                 data : param,
                 dataType : 'json',
                 cache : false,

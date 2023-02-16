@@ -18,13 +18,12 @@ package jp.co.ntt.atrs.app.b1;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.terasoluna.gfw.common.codelist.ExistInCodeList;
 
+import jakarta.validation.constraints.NotNull;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FlightType;
 

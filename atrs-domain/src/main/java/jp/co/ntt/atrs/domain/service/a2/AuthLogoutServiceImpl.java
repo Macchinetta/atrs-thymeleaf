@@ -15,8 +15,6 @@
  */
 package jp.co.ntt.atrs.domain.service.a2;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.terasoluna.gfw.common.exception.SystemException;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.model.Member;
 import jp.co.ntt.atrs.domain.model.MemberLogin;

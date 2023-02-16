@@ -18,9 +18,6 @@ package jp.co.ntt.atrs.api.common.error;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
+
+import jakarta.inject.Inject;
+import jakarta.servlet.RequestDispatcher;
 
 /**
  * REST API用エラー応答コントローラ。

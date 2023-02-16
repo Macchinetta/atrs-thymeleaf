@@ -15,15 +15,14 @@
  */
 package jp.co.ntt.atrs.app.c0;
 
-import javax.inject.Inject;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
-import com.github.dozermapper.core.Mapper;
-
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.c2.MemberUpdateForm;
 import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.model.Member;
@@ -39,13 +38,13 @@ public class MemberHelper {
      * Beanマッパー。
      */
     @Inject
-    Mapper beanMapper;
+    C0Mapper beanMapper;
 
     /**
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * 会員登録可能な最小生年月日。
@@ -61,7 +60,7 @@ public class MemberHelper {
     public Member toMember(IMemberForm memberForm) {
 
         // MemberFormからmemberへ詰め替える
-        Member member = beanMapper.map(memberForm, Member.class);
+        Member member = beanMapper.map(memberForm);
 
         // 電話番号
         String tel = String.format("%s-%s-%s", memberForm.getTel1(), memberForm
@@ -88,8 +87,7 @@ public class MemberHelper {
      */
     public MemberUpdateForm toMemberUpdateForm(Member member) {
 
-        MemberUpdateForm memberUpdateForm = beanMapper.map(member,
-                MemberUpdateForm.class);
+        MemberUpdateForm memberUpdateForm = beanMapper.map(member);
 
         // 電話番号
         String[] tel = member.getTel().split("-");
@@ -129,7 +127,8 @@ public class MemberHelper {
      * @return 会員登録可能な最大生年月日
      */
     public String getDateOfBirthMaxDate() {
-        return DateTimeUtil.toFormatDateString(dateFactory.newDate());
+        return DateTimeUtil.toFormatDateString(Date.from(dateFactory.tick()
+                .instant()));
     }
 
 }

@@ -18,15 +18,14 @@ package jp.co.ntt.atrs.app.c2;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.terasoluna.gfw.common.codelist.ExistInCodeList;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jp.co.ntt.atrs.app.c0.IMemberForm;
 import jp.co.ntt.atrs.domain.common.validate.FixedLength;
 import jp.co.ntt.atrs.domain.common.validate.FullWidth;

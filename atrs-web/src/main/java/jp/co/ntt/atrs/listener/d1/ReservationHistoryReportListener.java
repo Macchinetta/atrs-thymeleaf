@@ -15,17 +15,16 @@
  */
 package jp.co.ntt.atrs.listener.d1;
 
-import javax.inject.Inject;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.TextMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import org.terasoluna.gfw.common.exception.SystemException;
 
+import jakarta.inject.Inject;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.service.d1.ReservationHistoryReportCriteriaDto;
 import jp.co.ntt.atrs.domain.service.d1.ReservationHistoryReportService;

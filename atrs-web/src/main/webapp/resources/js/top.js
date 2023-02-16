@@ -16,17 +16,13 @@
         setValidator();
 
         // イベントハンドラの設定
-        $('#outwardDate').datepicker().on('changeDate',
-                handlers.onDateChangeDatepicker);
-        $('#homewardDate').datepicker().on('changeDate',
-                handlers.onDateChangeDatepicker);
-        $(document).on('change', '#flights-search-form input[name=flightType]',
-                handlers.onChangeFlightType);
+        $('#outwardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
+        $('#homewardDate').datepicker().on('changeDate', handlers.onDateChangeDatepicker);
+        $(document).on('change', '#flights-search-form input[name=flightType]', handlers.onChangeFlightType);
 
         // 初期化用イベント発火
         // - 選択中のフライト種別に応じて復路搭乗日の表示状態を制御
-        $('#flights-search-form input[name=flightType]:checked').trigger(
-                'change');
+        $('#flights-search-form input[name=flightType]:checked').trigger('change');
     });
 
     /**
@@ -60,22 +56,18 @@
     function setValidator() {
 
         // バリデーションを有効化
-        $('#flights-search-form')
-                .parsley(
-                        {
-                            excluded : 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], :hidden',
-                            errorClass : 'has-error',
-                            classHandler : function(parsleyField) {
-                                return parsleyField.$element
-                                        .closest('.form-group');
-                            },
-                            errorsContainer : function(parsleyField) {
-                                return parsleyField.$element
-                                        .closest('.form-group');
-                            },
-                            errorsWrapper : '<div class="col-md-offset-4 col-md-8"></div>',
-                            errorTemplate : '<span class="invalid"></span>'
-                        });
+        $('#flights-search-form').parsley({
+            excluded : 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], :hidden',
+            errorClass : 'has-error',
+            classHandler : function(parsleyField) {
+                return parsleyField.$element.closest('.form-group');
+            },
+            errorsContainer : function(parsleyField) {
+                return parsleyField.$element.closest('.form-group');
+            },
+            errorsWrapper : '<div class="col-md-offset-4 col-md-8"></div>',
+            errorTemplate : '<span class="invalid"></span>'
+        });
     }
 
 }());

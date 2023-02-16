@@ -15,8 +15,6 @@
  */
 package jp.co.ntt.atrs.api.common.error;
 
-import javax.inject.Inject;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
@@ -26,6 +24,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.context.request.WebRequest;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
+
+import jakarta.inject.Inject;
 
 /**
  * REST API用エラー情報生成クラス。

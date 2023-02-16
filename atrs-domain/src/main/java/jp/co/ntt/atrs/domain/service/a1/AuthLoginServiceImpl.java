@@ -15,16 +15,17 @@
  */
 package jp.co.ntt.atrs.domain.service.a1;
 
-import javax.inject.Inject;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.SystemException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.model.Member;
 import jp.co.ntt.atrs.domain.model.MemberLogin;
@@ -48,7 +49,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
      * 日付生成インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * カード会員情報リポジトリ。
@@ -67,7 +68,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
 
         // ログインフラグ、ログイン日時を更新
         MemberLogin memberLogin = member.getMemberLogin();
-        memberLogin.setLoginDateTime(dateFactory.newDate());
+        memberLogin.setLoginDateTime(Date.from(dateFactory.tick().instant()));
         memberLogin.setLoginFlg(true);
         int updateCount = memberRepository.updateToLoginStatus(member);
         if (updateCount != 1) {

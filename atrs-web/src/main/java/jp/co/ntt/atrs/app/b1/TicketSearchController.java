@@ -18,8 +18,6 @@ package jp.co.ntt.atrs.app.b1;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.b0.ReservationFlightForm;
 import jp.co.ntt.atrs.app.b0.ReservationFlightValidator;
 import jp.co.ntt.atrs.app.b0.TicketHelper;

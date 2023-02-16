@@ -15,10 +15,10 @@
  */
 package jp.co.ntt.atrs.domain.service.b0;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.LocalDate;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;

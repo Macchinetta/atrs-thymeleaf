@@ -15,13 +15,13 @@
  */
 package jp.co.ntt.atrs.domain.common.util;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 /**
  * 日時に関するユーティリティクラス。
@@ -32,14 +32,14 @@ public class DateTimeUtil {
     /**
      * 日付(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat
-            .forPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
+            .ofPattern("yyyy/MM/dd");
 
     /**
      * 時間(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat
-            .forPattern("HHmm");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter
+            .ofPattern("HHmm");
 
     /**
      * コンストラクタ。
@@ -49,23 +49,72 @@ public class DateTimeUtil {
     }
 
     /**
-     * DateTimeへ変換する。
-     * @param date 日付オブジェクト
-     * @param timeString 時刻文字列(HHmm)
-     * @return 引数で指定された日付および時刻を保持するDateTimeオブジェクト
+     * Dateへ変換する。
+     * @param localDateTime LocalDateTimeオブジェクト
+     * @return Dateオブジェクト
      */
-    public static DateTime toDateTime(Date date, String timeString) {
-        return new LocalDate(date).toDateTime(DateTimeUtil.toLocalTime(
-                timeString));
+    public static Date toDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.toInstant(ZoneOffset.ofHours(9)));
     }
 
     /**
-     * DateTimeへ変換する。
-     * @param dateString 日付文字列(yyyy/MM/dd)
-     * @return 引数で指定された日付を保持するDateTimeオブジェクト
+     * Dateへ変換する。
+     * @param localDate LocalDateオブジェクト
+     * @return Dateオブジェクト
      */
-    public static DateTime toDateTime(String dateString) {
-        return DATE_FORMATTER.parseDateTime(dateString);
+    public static Date toDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault())
+                .toInstant());
+    }
+
+    /**
+     * LocalDateTimeへ変換する。
+     * @param date 日付オブジェクト
+     * @return 引数で指定された時刻を保持するLocalDateTimeオブジェクト
+     */
+    public static LocalDateTime toLocalDateTime(Date date) {
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId
+                .systemDefault());
+    }
+
+    /**
+     * LocalDateTimeへ変換する。
+     * @param date 日付オブジェクト
+     * @param timeString 時刻文字列(HHmm)
+     * @return 引数で指定された日付および時刻を保持するLocalDateTimeオブジェクト
+     */
+    public static LocalDateTime toLocalDateTime(Date date, String timeString) {
+        LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId
+                .systemDefault());
+        LocalTime localTime = DateTimeUtil.toLocalTime(timeString);
+        return localDate.atTime(localTime);
+    }
+
+    /**
+     * LocalDateへ変換する。
+     * @param dateString 日付文字列(yyyy/MM/dd)
+     * @return 引数で指定された日付を保持するLocalDateオブジェクト
+     */
+    public static LocalDate toLocalDate(String dateString) {
+        return LocalDate.from(DATE_FORMATTER.parse(dateString));
+    }
+
+    /**
+     * LocalDateへ変換する。
+     * @param date 日付オブジェクト
+     * @return 引数で指定された時刻を保持するLocalDateオブジェクト
+     */
+    public static LocalDate toLocalDate(Date date) {
+        return LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    /**
+     * LocalTimeへ変換する。
+     * @param date 日付オブジェクト
+     * @return 引数で指定された時刻を保持するLocalTimeオブジェクト
+     */
+    public static LocalTime toLocalTime(Date date) {
+        return LocalTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
     /**
@@ -74,7 +123,7 @@ public class DateTimeUtil {
      * @return 引数で指定された時刻を保持するLocalTimeオブジェクト
      */
     public static LocalTime toLocalTime(String timeString) {
-        return TIME_FORMATTER.parseLocalTime(timeString);
+        return LocalTime.from(TIME_FORMATTER.parse(timeString));
     }
 
     /**
@@ -86,19 +135,19 @@ public class DateTimeUtil {
         if (date == null) {
             return "";
         }
-        return DATE_FORMATTER.print(new DateTime(date));
+        return DATE_FORMATTER.format(toLocalDate(date));
     }
 
     /**
      * 整形日付文字列(yyyy/MM/dd)へ変換する。
-     * @param dateTime DateTimeオブジェクト
+     * @param localDate LocalDateオブジェクト
      * @return 日付文字列(yyyy/MM/dd)
      */
-    public static String toFormatDateString(DateTime dateTime) {
-        if (dateTime == null) {
+    public static String toFormatDateString(LocalDate localDate) {
+        if (localDate == null) {
             return "";
         }
-        return DATE_FORMATTER.print(dateTime);
+        return DATE_FORMATTER.format(localDate);
     }
 
     /**

@@ -28,21 +28,30 @@
     <property name="dataSource" ref="dataSource" />
   </bean>
 
-  <bean id="dateFactory" class="org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory" />
+  <bean id="dateFactory" class="org.terasoluna.gfw.common.time.DefaultClockFactory" />
 
   <!-- JMS送受信用の設定 -->
-  <bean id="brokerService" class="org.apache.activemq.broker.BrokerService" init-method="start" destroy-method="stop">
-    <property name="brokerName" value="broker" />
-    <property name="useJmx" value="false" />
-    <property name="persistent" value="false" />
-    <property name="transportConnectorURIs">
+  <bean id="activeMQServer" class="org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl" init-method="start" destroy-method="stop">
+    <constructor-arg name="configuration" ref="activeMQServerConfig" />
+    <constructor-arg name="securityManager" ref="activeMQJAASSecurityManager" />
+  </bean>
+  <bean id="activeMQServerConfig" class="org.apache.activemq.artemis.core.config.impl.ConfigurationImpl" >
+    <property name="acceptorConfigurations" ref="activeMQServerAcceptorConfig"/>
+    <property name="securityEnabled" value="false"/>
+  </bean>
+  <bean id="activeMQServerAcceptorConfig" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetClass" value="org.apache.activemq.artemis.core.config.ConfigurationUtils" />
+    <property name="targetMethod" value="parseAcceptorURI" />
+    <property name="arguments">
       <list>
+        <value>tcp</value>
         <value>tcp://${jms.mq.host}:${jms.mq.port}</value>
       </list>
     </property>
   </bean>
+  <bean id="activeMQJAASSecurityManager" class="org.apache.activemq.artemis.spi.core.security.ActiveMQJAASSecurityManager"/>
 
-  <bean id="atrsJmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+  <bean id="atrsJmsConnectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory">
     <property name="brokerURL" value="tcp://${jms.mq.host}:${jms.mq.port}?jms.blobTransferPolicy.uploadUrl=file:/tmp" />
   </bean>
 

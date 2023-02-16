@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="contextPath" th:content="${#request.getContextPath()}" />
+    <meta name="contextPath" th:content="@{/}" />
     <meta name="reserveIntervalTime" th:content="${flightSearchOutputDto.reserveIntervalTime}" />
     <meta name="isInitialSearchUnnecessary" th:content="${isInitialSearchUnnecessary}" />
     <meta name="_csrf_parameter" th:content="${_csrf.parameterName}" />

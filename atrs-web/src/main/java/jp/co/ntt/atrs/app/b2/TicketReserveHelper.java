@@ -15,23 +15,20 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.apache.commons.collections.CollectionUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Years;
 import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
-import com.github.dozermapper.core.Mapper;
-
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.a0.AuthenticationHelper;
 import jp.co.ntt.atrs.app.b0.LineType;
 import jp.co.ntt.atrs.app.b0.SelectFlightDto;
@@ -64,13 +61,13 @@ public class TicketReserveHelper {
      * Beanマッパー。
      */
     @Inject
-    Mapper beanMapper;
+    B2Mapper beanMapper;
 
     /**
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * 認証共通Helper。
@@ -142,7 +139,7 @@ public class TicketReserveHelper {
         ticketReserveService.validateReservation(reservation);
 
         // 予約情報登録
-        reservation.setReserveDate(dateFactory.newDate());
+        reservation.setReserveDate(Date.from(dateFactory.tick().instant()));
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
         TicketReserveDto ticketReserveDto = ticketReserveService
                 .registerReservation(reservation);
@@ -167,8 +164,7 @@ public class TicketReserveHelper {
         List<SelectFlightDto> selectFlightDtoList = new ArrayList<>();
         for (int i = 0; i < flightList.size(); i++) {
             // フライト情報から選択フライト情報DTOを生成
-            SelectFlightDto selectFlight = beanMapper.map(flightList.get(i),
-                    SelectFlightDto.class);
+            SelectFlightDto selectFlight = beanMapper.map(flightList.get(i));
 
             // 路線種別を設定
             selectFlight.setLineType(i == 0 ? LineType.OUTWARD
@@ -222,8 +218,7 @@ public class TicketReserveHelper {
             ticketReserveForm.setRepAge(calculateAge(member.getBirthday()));
 
             // 一番目の搭乗者情報に予約代表者情報(ログインユーザ情報)を設定
-            PassengerForm passengerForm = beanMapper.map(ticketReserveForm,
-                    PassengerForm.class);
+            PassengerForm passengerForm = beanMapper.map(ticketReserveForm);
             ticketReserveForm.setPassenger(0, passengerForm);
         }
 
@@ -244,8 +239,7 @@ public class TicketReserveHelper {
         for (PassengerForm passengerForm : ticketReserveForm
                 .getPassengerFormList()) {
             if (!passengerForm.isEmpty()) {
-                Passenger passenger = beanMapper.map(passengerForm,
-                        Passenger.class);
+                Passenger passenger = beanMapper.map(passengerForm);
                 passengerList.add(passenger);
             }
         }
@@ -295,10 +289,10 @@ public class TicketReserveHelper {
      */
     private Integer calculateAge(Date birthday) {
 
-        DateTime today = dateFactory.newDateTime();
-        DateTime birthdayDateTime = new DateTime(birthday);
+        LocalDateTime today = LocalDateTime.now(dateFactory.tick());
+        LocalDateTime birthdayDateTime = DateTimeUtil.toLocalDateTime(birthday);
 
-        return Years.yearsBetween(birthdayDateTime, today).getYears();
+        return (int) ChronoUnit.YEARS.between(birthdayDateTime, today);
     }
 
     /**

@@ -15,16 +15,17 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
+import java.util.Date;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
+import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.Flight;
 import jp.co.ntt.atrs.domain.model.FlightType;
@@ -42,7 +43,7 @@ public class TicketSearchHelper {
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * チケット予約共通サービス。
@@ -90,8 +91,10 @@ public class TicketSearchHelper {
         ticketSearchForm.setFlightType(defaultFlightType);
         ticketSearchForm.setDepAirportCd(defaultDepAirportCd);
         ticketSearchForm.setArrAirportCd(defaultArrAirportCd);
-        ticketSearchForm.setOutwardDate(dateFactory.newDate());
-        ticketSearchForm.setHomewardDate(dateFactory.newDate());
+        ticketSearchForm.setOutwardDate(Date.from(dateFactory.tick()
+                .instant()));
+        ticketSearchForm.setHomewardDate(Date.from(dateFactory.tick()
+                .instant()));
         ticketSearchForm.setBoardingClassCd(defaultBoardingClassCd);
 
         return ticketSearchForm;
@@ -104,9 +107,9 @@ public class TicketSearchHelper {
     public FlightSearchOutputDto createFlightSearchOutputDto() {
 
         FlightSearchOutputDto outputDto = new FlightSearchOutputDto();
-        outputDto.setBeginningPeriod(dateFactory.newDate());
-        outputDto.setEndingPeriod(ticketSharedService.getSearchLimitDate()
-                .toDate());
+        outputDto.setBeginningPeriod(Date.from(dateFactory.tick().instant()));
+        outputDto.setEndingPeriod(DateTimeUtil.toDate(ticketSharedService
+                .getSearchLimitDate()));
         outputDto.setReserveIntervalTime(reserveIntervalTime);
 
         return outputDto;

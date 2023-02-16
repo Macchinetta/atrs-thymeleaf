@@ -18,8 +18,6 @@ package jp.co.ntt.atrs.app.b1;
 import java.util.List;
 import java.util.Locale;
 
-import javax.inject.Inject;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -38,8 +36,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessage;
 
-import com.github.dozermapper.core.Mapper;
-
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.a0.ErrorResultDto;
 import jp.co.ntt.atrs.domain.service.b1.FlightNotFoundException;
 import jp.co.ntt.atrs.domain.service.b1.FlightVacantInfoDto;
@@ -64,7 +61,7 @@ public class FlightsApiController {
      * Beanマッパー。
      */
     @Inject
-    Mapper beanMapper;
+    B1Mapper beanMapper;
 
     /**
      * 空席照会サービス。
@@ -110,7 +107,7 @@ public class FlightsApiController {
 
         // 空席照会
         TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
-                flightSearchCriteriaForm, TicketSearchCriteriaDto.class);
+                flightSearchCriteriaForm);
         List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(
                 searchCriteriaDto);
 

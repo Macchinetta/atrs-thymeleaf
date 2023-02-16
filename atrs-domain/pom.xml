@@ -5,7 +5,7 @@
   <parent>
     <groupId>jp.co.ntt.atrs</groupId>
     <artifactId>atrs</artifactId>
-    <version>1.8.1.SP1.RELEASE</version>
+    <version>1.9.0.RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>atrs-domain</artifactId>
@@ -22,6 +22,7 @@
   </build>
 
   <dependencies>
+
     <!-- == Begin ATRS == -->
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -33,11 +34,6 @@
     <dependency>
       <groupId>org.terasoluna.gfw</groupId>
       <artifactId>terasoluna-gfw-common-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.terasoluna.gfw</groupId>
-      <artifactId>terasoluna-gfw-jodatime-dependencies</artifactId>
       <type>pom</type>
     </dependency>
     <dependency>
@@ -64,6 +60,13 @@
     </dependency>
     <!-- == End TERASOLUNA == -->
 
+    <!-- == Begin @PostConstruct == -->
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+    <!-- == End @PostConstruct == -->
+
     <!-- == Begin Spring JMS == -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -74,13 +77,11 @@
     <!-- == Begin ActiveMQ == -->
     <dependency>
       <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-client</artifactId>
-      <scope>provided</scope>
+      <artifactId>artemis-jakarta-client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-broker</artifactId>
-      <scope>provided</scope>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>artemis-server</artifactId>
     </dependency>
     <!-- == End ActiveMQ == -->
 
@@ -96,18 +97,4 @@
   <properties>
     <project.root.basedir>${project.parent.basedir}</project.root.basedir>
   </properties>
-  <profiles>
-    <profile>
-      <id>jdk11</id>
-      <activation>
-        <jdk>11</jdk>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>jakarta.annotation</groupId>
-          <artifactId>jakarta.annotation-api</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
 </project>

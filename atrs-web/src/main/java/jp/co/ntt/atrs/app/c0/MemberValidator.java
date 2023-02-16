@@ -15,16 +15,15 @@
  */
 package jp.co.ntt.atrs.app.c0;
 
-import javax.inject.Inject;
+import java.time.LocalDate;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.common.validate.ValidationUtil;
 import jp.co.ntt.atrs.domain.service.c0.MemberErrorCode;
@@ -40,7 +39,7 @@ public class MemberValidator implements Validator {
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * 会員登録可能な最小生年月日。
@@ -86,14 +85,14 @@ public class MemberValidator implements Validator {
 
         // 生年月日チェック
         if (!errors.hasFieldErrors("dateOfBirth")) {
-
-            DateTime dateOfBirthMin = DateTimeUtil.toDateTime(
+            LocalDate dateOfBirthMin = DateTimeUtil.toLocalDate(
                     dateOfBirthMinDate);
-            DateTime dateOfBirthMax = dateFactory.newDateTime();
-            DateTime dateOfBirth = new DateTime(form.getDateOfBirth());
+            LocalDate dateOfBirthMax = LocalDate.now(dateFactory.tick());
+            LocalDate dateOfBirth = DateTimeUtil.toLocalDate(form
+                    .getDateOfBirth());
 
-            Interval interval = new Interval(dateOfBirthMin, dateOfBirthMax);
-            if (!interval.contains(dateOfBirth)) {
+            if (dateOfBirth.isBefore(dateOfBirthMin) || dateOfBirth.isAfter(
+                    dateOfBirthMax)) {
                 // 生年月日の入力許容範囲(1900年1月1日から現在まで)でなければエラー
                 errors.reject(MemberErrorCode.E_AR_C0_5003.code(),
                         new Object[] { dateOfBirthMinDate, DateTimeUtil

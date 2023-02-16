@@ -15,14 +15,14 @@
  */
 package jp.co.ntt.atrs.listener.common.error;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.listener.adapter.ListenerExecutionFailedException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ErrorHandler;
 import org.terasoluna.gfw.common.exception.ExceptionLogger;
+
+import jakarta.inject.Inject;
 
 /**
  * JMSリスナーで発生した例外を処理する例外ハンドラ

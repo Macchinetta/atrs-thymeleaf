@@ -17,7 +17,7 @@ if ('undefined' !== typeof window.Parsley) {
         validateString : function(value) {
             var contextPath = $('meta[name="contextPath"]').attr('content');
             var status = $.ajax({
-                url : contextPath + '/api/member/available',
+                url : contextPath + 'api/member/available',
                 data : 'membershipNumber=' + value,
                 cache : false,
                 async : false

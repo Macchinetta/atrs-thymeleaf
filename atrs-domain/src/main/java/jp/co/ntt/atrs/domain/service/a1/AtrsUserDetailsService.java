@@ -17,8 +17,6 @@ package jp.co.ntt.atrs.domain.service.a1;
 
 import java.util.Locale;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -28,6 +26,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.model.Member;
 import jp.co.ntt.atrs.domain.repository.member.MemberRepository;

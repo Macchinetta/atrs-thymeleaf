@@ -15,8 +15,6 @@
  */
 package jp.co.ntt.atrs.app.c1;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.c0.MemberHelper;
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
 import jp.co.ntt.atrs.domain.model.Member;

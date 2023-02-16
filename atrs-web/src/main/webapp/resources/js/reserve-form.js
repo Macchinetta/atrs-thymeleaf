@@ -11,10 +11,8 @@
     // ページ初期化
     // 各種イベントハンドラ、入力値チェックの設定を行う
     $(function init() {
-        $('#add-passenger-button').on('click',
-                handlers.onClickAddPassengerButton);
-        $('#copy-to-representive-button').on('click',
-                handlers.onClickCopyToRepresentiveButton);
+        $('#add-passenger-button').on('click', handlers.onClickAddPassengerButton);
+        $('#copy-to-representive-button').on('click', handlers.onClickCopyToRepresentiveButton);
 
         // 入力値チェックの設定
         setValidator();
@@ -42,8 +40,7 @@
         onClickCopyToRepresentiveButton : function() {
             var $firstPassenger = $('#passenger1');
             var $representive = $('#representive');
-            _.each([ '.family-name', '.given-name', '.age', '.gender',
-                    '.membership-number' ], function(item) {
+            _.each([ '.family-name', '.given-name', '.age', '.gender', '.membership-number' ], function(item) {
                 var $dest = $representive.find(item);
                 var $src = $firstPassenger.find(item);
                 if ($src.attr('type') === 'radio') {

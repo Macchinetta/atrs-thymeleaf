@@ -15,12 +15,11 @@
  */
 package jp.co.ntt.atrs.domain.common.security;
 
-import javax.inject.Inject;
-
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
 import jp.co.ntt.atrs.domain.service.a2.AuthLogoutService;
 

@@ -17,14 +17,13 @@ package jp.co.ntt.atrs.api.ticket;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.validate.ValidationUtil;
 import jp.co.ntt.atrs.domain.service.b2.TicketReserveErrorCode;
 

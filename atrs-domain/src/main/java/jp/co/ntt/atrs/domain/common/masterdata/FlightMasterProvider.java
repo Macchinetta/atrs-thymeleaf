@@ -19,12 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.model.FlightMaster;
 import jp.co.ntt.atrs.domain.repository.flight.FlightRepository;
 

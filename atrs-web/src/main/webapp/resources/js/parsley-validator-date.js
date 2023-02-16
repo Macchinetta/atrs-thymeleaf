@@ -8,8 +8,7 @@
 
 'use strict';
 
-if ('undefined' !== typeof window.Parsley
-        && 'undefined' !== typeof window.moment) {
+if ('undefined' !== typeof window.Parsley && 'undefined' !== typeof window.moment) {
     window.Parsley.addValidator('date', {
         /**
          * 対象が有効な日付であることを検証する。

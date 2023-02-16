@@ -20,14 +20,12 @@ import java.io.Writer;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,9 +33,11 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.SystemException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.repository.reservation.ReservationHistoryDto;
 import jp.co.ntt.atrs.domain.repository.reservation.ReservationRepository;
@@ -107,7 +107,13 @@ public class ReservationHistoryReportServiceImpl implements
      * システム日付取得用インターフェース
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
+
+    /**
+     * フォーマッタ()
+     */
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+            "yyyyMMddHHmmss");
 
     /**
      * {@inheritDoc}
@@ -115,6 +121,7 @@ public class ReservationHistoryReportServiceImpl implements
     @Override
     @Transactional("jmsSendTransactionManager")
     public void sendRequest(String membershipNumber) {
+
         this.jmsMessagingTemplate.convertAndSend(
                 "jms/queue/ReservationHistoryReportRequestQueue",
                 membershipNumber);
@@ -264,9 +271,9 @@ public class ReservationHistoryReportServiceImpl implements
      * @return レポート名
      */
     private String generateReportFileName(String membershipNumber) {
-        DateTime dateTime = this.dateFactory.newDateTime();
-        return REPORT_NAME_PREFIX + membershipNumber + "_" + dateTime.toString(
-                "yyyyMMddHHmmss") + ".csv";
+        LocalDateTime dateTime = LocalDateTime.now(this.dateFactory.tick());
+        return REPORT_NAME_PREFIX + membershipNumber + "_" + formatter.format(
+                dateTime) + ".csv";
     }
 
     /**

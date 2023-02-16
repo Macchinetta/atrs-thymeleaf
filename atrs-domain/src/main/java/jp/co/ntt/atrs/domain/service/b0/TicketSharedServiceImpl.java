@@ -15,21 +15,18 @@
  */
 package jp.co.ntt.atrs.domain.service.b0;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.exception.AtrsBusinessException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.PeakTimeProvider;
@@ -75,7 +72,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * 搭乗クラス情報提供クラス。
@@ -101,7 +98,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
     @Override
     public LocalDate getSearchLimitDate() {
         // 照会可能限界日付 = システム日付＋予約可能限界日数
-        LocalDate sysDate = dateFactory.newDateTime().toLocalDate();
+        LocalDate sysDate = LocalDate.now(dateFactory.tick());
         LocalDate limitDate = sysDate.plusDays(limitDay);
         return limitDate;
     }
@@ -170,20 +167,22 @@ public class TicketSharedServiceImpl implements TicketSharedService {
             Flight homewardFlight) throws BusinessException {
 
         // 往路のフライトの到着時刻
-        DateTime outwardArriveDateTime = DateTimeUtil.toDateTime(outwardFlight
-                .getDepartureDate(), outwardFlight.getFlightMaster()
-                        .getArrivalTime());
+        LocalDateTime outwardArriveDateTime = DateTimeUtil.toLocalDateTime(
+                outwardFlight.getDepartureDate(), outwardFlight
+                        .getFlightMaster().getArrivalTime());
+        // 搭乗可能時刻
+        LocalDateTime reserveAvailableDateTime = outwardArriveDateTime
+                .plusMinutes(reserveIntervalTime);
 
         // 復路のフライト出発時刻
-        DateTime homewardDepartureDateTime = DateTimeUtil.toDateTime(
+        LocalDateTime homewardDepartureDateTime = DateTimeUtil.toLocalDateTime(
                 homewardFlight.getDepartureDate(), homewardFlight
                         .getFlightMaster().getDepartureTime());
 
         // 選択した復路のフライトが搭乗範囲外の場合、業務例外をスロー
         // (復路のフライトは往路のフライトの到着時刻より指定時間間隔以上経過した
         // 出発時刻から搭乗可能となる)
-        Duration flightDuration = new Duration(outwardArriveDateTime, homewardDepartureDateTime);
-        if (flightDuration.getStandardMinutes() < reserveIntervalTime) {
+        if (homewardDepartureDateTime.isBefore(reserveAvailableDateTime)) {
             throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2001);
         }
     }
@@ -264,15 +263,13 @@ public class TicketSharedServiceImpl implements TicketSharedService {
             Date departureDate) throws BusinessException {
         Assert.notNull(departureDate, "departureDate must not null.");
 
-        DateTime sysDateMidnight = dateFactory.newDateTime()
-                .withTimeAtStartOfDay();
-        DateTime limitDateMidnight = getSearchLimitDate()
-                .toDateTimeAtStartOfDay();
+        LocalDate departureLocalDate = DateTimeUtil.toLocalDate(departureDate);
+        LocalDate sysDate = LocalDate.now(dateFactory.tick());
+        LocalDate limitDate = getSearchLimitDate();
 
         // 指定された搭乗日が本日から照会可能限界日迄の間にあるかチェック
-        Interval reservationAvailableInterval = new Interval(sysDateMidnight, limitDateMidnight
-                .plusDays(1));
-        if (!reservationAvailableInterval.contains(departureDate.getTime())) {
+        if (departureLocalDate.isBefore(sysDate) || departureLocalDate.isAfter(
+                limitDate)) {
             throw new AtrsBusinessException(TicketSearchErrorCode.E_AR_B1_2001);
         }
     }
@@ -285,23 +282,22 @@ public class TicketSharedServiceImpl implements TicketSharedService {
         Assert.notNull(fareType, "fareType must not null.");
         Assert.notNull(depDate, "depDate must not null.");
 
-        DateTime depDateMidnight = new DateTime(depDate).withTimeAtStartOfDay();
+        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
 
         // 予約開始日付
-        DateTime rsrvAvailableStartDate = depDateMidnight.minusDays(fareType
+        LocalDate rsrvAvailableStartDate = depLocalDate.minusDays(fareType
                 .getRsrvAvailableStartDayNum());
 
         // 予約終了日付
-        DateTime rsrvAvailableEndDate = depDateMidnight.minusDays(fareType
+        LocalDate rsrvAvailableEndDate = depLocalDate.minusDays(fareType
                 .getRsrvAvailableEndDayNum());
 
         // 現在日付
-        DateTime sysDateMidnight = dateFactory.newDateTime()
-                .withTimeAtStartOfDay();
+        LocalDate sysDate = LocalDate.now(dateFactory.tick());
 
         // 現在日付が予約可能開始日付～予約可能終了日付の間であるかチェック
-        return new Interval(rsrvAvailableStartDate, rsrvAvailableEndDate
-                .plusDays(1)).contains(sysDateMidnight);
+        return !(sysDate.isBefore(rsrvAvailableStartDate) || sysDate.isAfter(
+                rsrvAvailableEndDate));
     }
 
     /**

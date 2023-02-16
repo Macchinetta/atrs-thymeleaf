@@ -15,13 +15,15 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import org.joda.time.DateTime;
+import java.time.LocalDate;
+
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.model.FlightType;
 import jp.co.ntt.atrs.domain.service.b1.TicketSearchErrorCode;
 
@@ -78,8 +80,10 @@ public class TicketSearchValidator implements Validator {
             if (!errors.hasFieldErrors("outwardDate") && !errors.hasFieldErrors(
                     "homewardDate")) {
 
-                DateTime outwardDate = new DateTime(form.getOutwardDate());
-                DateTime homewardDate = new DateTime(form.getHomewardDate());
+                LocalDate outwardDate = DateTimeUtil.toLocalDate(form
+                        .getOutwardDate());
+                LocalDate homewardDate = DateTimeUtil.toLocalDate(form
+                        .getHomewardDate());
                 if (homewardDate.isBefore(outwardDate)) {
                     errors.reject(TicketSearchErrorCode.E_AR_B1_5002.code());
                 }

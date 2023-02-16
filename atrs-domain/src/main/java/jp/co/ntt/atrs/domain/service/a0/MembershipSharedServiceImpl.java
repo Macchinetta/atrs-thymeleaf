@@ -15,12 +15,11 @@
  */
 package jp.co.ntt.atrs.domain.service.a0;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.repository.member.MemberRepository;
 
 /**

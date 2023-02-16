@@ -16,16 +16,14 @@
 package jp.co.ntt.atrs.api.ticket;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.time.ClockFactory;
 
-import com.github.dozermapper.core.Mapper;
-
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
 import jp.co.ntt.atrs.domain.common.masterdata.BoardingClassProvider;
 import jp.co.ntt.atrs.domain.common.masterdata.FareTypeProvider;
@@ -68,13 +66,13 @@ public class TicketHelper {
      * Beanマッパー。
      */
     @Inject
-    Mapper beanMapper;
+    TicketMapper beanMapper;
 
     /**
      * 日付、時刻取得インターフェース。
      */
     @Inject
-    JodaTimeDateFactory dateFactory;
+    ClockFactory dateFactory;
 
     /**
      * チケット予約サービス。
@@ -128,15 +126,14 @@ public class TicketHelper {
         ticketReserveService.validateReservation(reservation);
 
         // 予約情報登録
-        reservation.setReserveDate(dateFactory.newDate());
+        reservation.setReserveDate(Date.from(dateFactory.tick().instant()));
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
         TicketReserveDto ticketReserveDto = ticketReserveService
                 .registerReservation(reservation);
 
         // レスポンス用チケット予約リソース生成
         TicketReserveResource createdReserveResource = beanMapper.map(
-                ticketReserveResource, TicketReserveResource.class);
-        beanMapper.map(ticketReserveDto, createdReserveResource);
+                ticketReserveResource, ticketReserveDto);
         createdReserveResource.setTotalFare(reservation.getTotalFare());
 
         return createdReserveResource;
@@ -173,8 +170,7 @@ public class TicketHelper {
         for (PassengerResource passengerResource : ticketReserveResource
                 .getPassengerResourceList()) {
             if (!passengerResource.isEmpty()) {
-                Passenger passenger = beanMapper.map(passengerResource,
-                        Passenger.class);
+                Passenger passenger = beanMapper.map(passengerResource);
                 passengerList.add(passenger);
             }
         }
@@ -190,7 +186,8 @@ public class TicketHelper {
 
         // 予約情報生成
         Reservation reservation = new Reservation();
-        beanMapper.map(ticketReserveResource, reservation);
+        reservation = beanMapper.map(ticketReserveResource);
+
         String repTel = String.format("%s-%s-%s", ticketReserveResource
                 .getRepTel1(), ticketReserveResource.getRepTel2(),
                 ticketReserveResource.getRepTel3());

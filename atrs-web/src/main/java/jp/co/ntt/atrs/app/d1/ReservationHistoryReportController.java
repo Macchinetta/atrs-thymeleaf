@@ -18,8 +18,6 @@ package jp.co.ntt.atrs.app.d1;
 import java.nio.file.Path;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.service.a1.AtrsUserDetails;
 import jp.co.ntt.atrs.domain.service.d1.ReservationHistoryReportService;
@@ -82,6 +81,7 @@ public class ReservationHistoryReportController {
     public String create(@AuthenticationPrincipal AtrsUserDetails userDetails) {
         historyReportCreationService.sendRequest(userDetails.getMember()
                 .getMembershipNumber());
+
         return "redirect:/HistoryReport/create?accepted";
     }
 

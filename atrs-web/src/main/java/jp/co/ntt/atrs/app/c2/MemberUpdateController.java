@@ -17,8 +17,6 @@ package jp.co.ntt.atrs.app.c2;
 
 import java.security.Principal;
 
-import javax.inject.Inject;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.c0.MemberHelper;
 import jp.co.ntt.atrs.domain.common.message.MessageKeys;
 import jp.co.ntt.atrs.domain.model.Member;

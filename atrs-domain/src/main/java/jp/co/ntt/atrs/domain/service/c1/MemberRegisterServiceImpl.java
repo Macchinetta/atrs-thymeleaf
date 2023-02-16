@@ -15,14 +15,13 @@
  */
 package jp.co.ntt.atrs.domain.service.c1;
 
-import javax.inject.Inject;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.terasoluna.gfw.common.exception.SystemException;
 
+import jakarta.inject.Inject;
 import jp.co.ntt.atrs.domain.common.logging.LogMessages;
 import jp.co.ntt.atrs.domain.model.Member;
 import jp.co.ntt.atrs.domain.model.MemberLogin;
