@@ -55,7 +55,7 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
     /**
      * 搭乗日前日数。
      */
-    private Integer beforeDayNum;
+    private Long beforeDayNum;
 
     /**
      * 運賃種別コードリスト。
@@ -71,7 +71,7 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      * @param fareTypeList 運賃種別コードリスト
      */
     public VacantSeatSearchCriteriaDto(Date depDate, Route route,
-            BoardingClassCd boardingClass, Integer beforeDayNum,
+            BoardingClassCd boardingClass, Long beforeDayNum,
             List<FareTypeCd> fareTypeList) {
 
         this.depDate = depDate;
@@ -109,7 +109,7 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      * 搭乗日前日数を取得する。
      * @return 区間情報
      */
-    public Integer getBeforeDayNum() {
+    public Long getBeforeDayNum() {
         return beforeDayNum;
     }
 

@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd
     http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-  <sec:http pattern="/resources/**" security="none"/>
+  <sec:http pattern="/resources/**" security="none" request-matcher="ant"/>
 
   <!-- REST API設定 -->
   <sec:http pattern="/api/v1/**" request-matcher="ant" create-session="stateless">
@@ -17,7 +17,7 @@
   </sec:http>
 
   <!-- ログイン認証の設定 -->
-  <sec:http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint">
+  <sec:http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint" request-matcher="ant">
     <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
     <sec:custom-filter position="FORM_LOGIN_FILTER" ref="atrsUsernamePasswordAuthenticationFilter" />
     <sec:logout
@@ -96,8 +96,6 @@
       <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
     </constructor-arg>
   </bean>
-
-  <bean id="mvcHandlerMappingIntrospector" class="org.springframework.web.servlet.handler.HandlerMappingIntrospector" />
 
   <bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 

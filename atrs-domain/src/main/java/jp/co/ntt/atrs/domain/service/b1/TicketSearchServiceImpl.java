@@ -16,6 +16,7 @@
 package jp.co.ntt.atrs.domain.service.b1;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -133,8 +134,8 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         // システム日付が搭乗日から何日前かを計算
         LocalDate sysLocalDate = LocalDate.now(dateFactory.tick());
         LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
-        sysLocalDate.compareTo(depLocalDate);
-        int beforeDayNum = sysLocalDate.compareTo(depLocalDate);
+        long beforeDayNum = Duration.between(sysLocalDate.atTime(0, 0),
+                depLocalDate.atTime(0, 0)).toDays();
 
         // フライト種別に応じて運賃種別コードを空席照会条件Dtoに設定
         List<FareTypeCd> fareTypeList = FareTypeUtil.getFareTypeCdList(
