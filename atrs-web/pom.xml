@@ -4,10 +4,10 @@
   <parent>
     <groupId>jp.co.ntt.atrs</groupId>
     <artifactId>atrs</artifactId>
-    <version>1.8.2.RELEASE</version>
+    <version>1.8.3.RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>atrs-web</artifactId>
+  <artifactId>atrs-web-thymeleaf</artifactId>
   <name>${project.artifactId}</name>
   <packaging>war</packaging>
 

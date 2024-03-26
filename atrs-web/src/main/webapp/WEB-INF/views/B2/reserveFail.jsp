@@ -56,7 +56,7 @@
           </section>
 
           <div class="text-center">
-            <a href="${pageContext.request.contextPath}/" class="btn btn-default">トップに戻る</a>
+            <a href="${pageContext.request.contextPath}/" id="back-to-top" class="btn btn-default">トップに戻る</a>
           </div>
         </section>
 

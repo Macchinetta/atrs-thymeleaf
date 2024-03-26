@@ -21,9 +21,9 @@
 
         <section class="col-md-offset-2 col-md-8">
 
-        <div th:if="${#fields.hasErrors('${memberUpdateForm.*}')}">
+        <div th:if="${#fields.hasErrors('${memberUpdateForm}')}">
           <div class="alert alert-danger">
-            <span id="null.errors" th:errors="*{memberUpdateForm.*}">入力された現在のパスワードが一致しません。正しいパスワードを入力してください。</span>
+            <span id="null.errors" th:errors="*{memberUpdateForm}">入力された現在のパスワードが一致しません。正しいパスワードを入力してください。</span>
           </div>
         </div>
         <!--/*/
@@ -295,7 +295,7 @@
 
                 <div class="form-group">
                   <div class="col-md-offset-4 col-md-8">
-                    <input type="submit" class="btn btn-success btn-size-default" value="更新">
+                    <input id="update" type="submit" class="btn btn-success btn-size-default" value="更新">
                   </div>
                 </div>
               </form>

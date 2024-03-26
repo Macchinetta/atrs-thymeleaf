@@ -27,7 +27,7 @@
           <div class="col-md-12 text-center">
             <form:form method="post" action="${pageContext.request.contextPath}/HistoryReport/create">
               <a href="${pageContext.request.contextPath}/" class="btn btn-default btn-lg">トップに戻る</a>
-　　　　　　　　　　　　<input type="submit" class="btn btn-success btn-lg" value="レポート作成" />
+　　　　　　　　　　　　<input type="submit" id="create-report" class="btn btn-success btn-lg" value="レポート作成" />
             </form:form>
           </div>
         </section>

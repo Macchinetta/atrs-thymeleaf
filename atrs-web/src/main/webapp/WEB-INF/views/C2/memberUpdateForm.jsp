@@ -259,7 +259,7 @@
 
                 <div class="form-group">
                   <div class="col-md-offset-4 col-md-8">
-                    <input type="submit" class="btn btn-success btn-size-default" value="更新">
+                    <input id="update" type="submit" class="btn btn-success btn-size-default" value="更新">
                   </div>
                 </div>
               </form:form>

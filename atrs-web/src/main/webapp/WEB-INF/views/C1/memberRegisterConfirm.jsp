@@ -29,7 +29,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">氏名</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="kanjiName" class="form-control-static">
                       ${f:h(memberRegisterForm.kanjiFamilyName)}&nbsp;${f:h(memberRegisterForm.kanjiGivenName)}
                     </p>
                   </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">氏名(カタカナ)</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="kanaName" class="form-control-static">
                       ${f:h(memberRegisterForm.kanaFamilyName)}&nbsp;${f:h(memberRegisterForm.kanaGivenName)}
                     </p>
                   </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">性別</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="gender" class="form-control-static">
                       ${f:h(CL_GENDER[memberRegisterForm.gender.code])}
                     </p>
                   </div>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">生年月日</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="dateOfBirth" class="form-control-static">
                       <fmt:formatDate value="${memberRegisterForm.dateOfBirth}" pattern="yyyy年MM月dd日"/>
                     </p>
                   </div>
@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">電話番号</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="tel" class="form-control-static">
                       ${f:h(memberRegisterForm.tel1)}-${f:h(memberRegisterForm.tel2)}-${f:h(memberRegisterForm.tel3)}
                     </p>
                   </div>
@@ -74,7 +74,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">郵便番号</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="zipCode" class="form-control-static">
                       &#12306;${f:h(memberRegisterForm.zipCode1)}-${f:h(memberRegisterForm.zipCode2)}
                     </p>
                   </div>
@@ -83,7 +83,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">住所</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="address" class="form-control-static">
                       ${f:h(memberRegisterForm.address)}
                     </p>
                   </div>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">Eメール</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="mail" class="form-control-static">
                       ${f:h(memberRegisterForm.mail)}
                     </p>
                   </div>
@@ -101,7 +101,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">クレジットカード会社</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="creditType" class="form-control-static">
                       ${f:h(CL_CREDITTYPE[memberRegisterForm.creditTypeCd])}
                     </p>
                   </div>
@@ -110,7 +110,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">クレジットカード番号</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="creditNo" class="form-control-static">
                       ${f:cut(memberRegisterForm.creditNo, 4)}************
                     </p>
                   </div>
@@ -119,7 +119,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">クレジットカード有効期限</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="credit-expiration-date" class="form-control-static">
                       ${f:h(memberRegisterForm.creditMonth)}/${f:h(memberRegisterForm.creditYear)}
                     </p>
                   </div>
@@ -128,7 +128,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">パスワード</label>
                   <div class="col-md-8">
-                    <p class="form-control-static">
+                    <p id="password" class="form-control-static">
                       **********
                     </p>
                   </div>
@@ -140,7 +140,7 @@
                     method="post"
                     modelAttribute="memberRegisterForm">
                     <input type="submit" class="btn btn-default btn-size-default" value="修正" name="redo" />
-                    <input type="submit" class="btn btn-success btn-size-default" value="登録" />
+                    <input type="submit" id="register-button" class="btn btn-success btn-size-default" value="登録" />
                     <form:hidden path="kanjiFamilyName"/>
                     <form:hidden path="kanjiGivenName"/>
                     <form:hidden path="kanaFamilyName"/>

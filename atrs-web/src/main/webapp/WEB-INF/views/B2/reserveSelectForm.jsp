@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
-        <p>
+        <p id="info-message">
           ATRSカード会員なら、Eメールアドレスやクレジットカード番号が登録できるので簡単にご予約いただけます。
         </p>
         <div class="row">
@@ -27,7 +27,7 @@
                     <input type="password" class="form-control" name="password">
                   </div>
                   <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="ログインして予約">
+                    <input type="submit" id="login-to-reserve" class="btn btn-primary" value="ログインして予約">
                   </div>
                 </form>
               </div>

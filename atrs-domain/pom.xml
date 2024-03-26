@@ -5,7 +5,7 @@
   <parent>
     <groupId>jp.co.ntt.atrs</groupId>
     <artifactId>atrs</artifactId>
-    <version>1.8.2.RELEASE</version>
+    <version>1.8.3.RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>atrs-domain</artifactId>
@@ -113,6 +113,18 @@
       <id>jdk17</id>
       <activation>
         <jdk>17</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>jakarta.annotation</groupId>
+          <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>jdk21</id>
+      <activation>
+        <jdk>21</jdk>
       </activation>
       <dependencies>
         <dependency>

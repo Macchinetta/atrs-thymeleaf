@@ -26,7 +26,7 @@
       <div class="row">
 
         <section class="col-md-12">
-          <h2>空席照会</h2>
+          <h2 id="screen-title">空席照会</h2>
           <div class="alert alert-info">
             <ul>
               <li>
@@ -90,11 +90,11 @@
             </c:forEach>
 
             <section id="outward-flights" style="display: none">
-              <h2>往路便の選択</h2>
+              <h2 id="outward-flights-selection">往路便の選択</h2>
               <ul class="pager pager-top text-left">
-                <li><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-                <li><span class="pager-current-date"></span></li>
-                <li><a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li id="outward-prev-date-button"><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
+                <li><span id="outward-flight-date" class="pager-current-date"></span></li>
+                <li id="outward-next-date-button"><a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
               </ul>
               <ul id="outward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>
               <table id="outward-flights-table" class="flights-table">
@@ -102,17 +102,17 @@
                 <tbody><tr></tr></tbody>
               </table>
               <ul id="outward-flights-pager" class="pager pager-bottom text-right">
-                <li class="prev"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a></li>
+                <li id="outward-prev-10-button" class="prev"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a></li>
                 <li><span class="pagedisplay"></span></li>
-                <li class="next"><a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li id="outward-next-10-button" class="next"><a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
               </ul>
             </section>
 
             <section id="homeward-flights" style="display: none">
               <h2>復路便の選択</h2>
               <ul class="pager pager-top text-left">
-                <li><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-                <li><span class="pager-current-date"></span></li>
+                <li id="homeward-prev-date-button"><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
+                <li><span id="homeward-flight-date" class="pager-current-date"></span></li>
                 <li><a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
               </ul>
               <ul id="homeward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>

@@ -19,11 +19,11 @@
       <div class="row">
 
         <section class="col-md-12">
-          <h2>予約内容確認</h2>
+          <h2 id="screen-title">予約内容確認</h2>
 
           <section>
             <h3>合計金額</h3>
-            <p>
+            <p id="total-amount">
               &yen;<fmt:formatNumber value="${reserveConfirmOutputDto.totalFare}" pattern="###,###"/>
             </p>
           </section>
@@ -95,42 +95,42 @@
             <div class="form-group">
               <label class="col-md-2 control-label">お名前(カタカナ)</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(ticketReserveForm.repFamilyName)}&nbsp;${f:h(ticketReserveForm.repGivenName)}</p>
+                <p id="representative-name" class="form-control-static">${f:h(ticketReserveForm.repFamilyName)}&nbsp;${f:h(ticketReserveForm.repGivenName)}</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label">年齢</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(ticketReserveForm.repAge)}</p>
+                <p id="representative-age" class="form-control-static">${f:h(ticketReserveForm.repAge)}</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label">性別</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(CL_GENDER[ticketReserveForm.repGender.code])}</p>
+                <p id="representative-sex" class="form-control-static">${f:h(CL_GENDER[ticketReserveForm.repGender.code])}</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label">会員番号(10桁)</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(ticketReserveForm.repMembershipNumber)}</p>
+                <p id="representative-membership-number" class="form-control-static">${f:h(ticketReserveForm.repMembershipNumber)}</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label">電話番号</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(ticketReserveForm.repTel1)}-${f:h(ticketReserveForm.repTel2)}-${f:h(ticketReserveForm.repTel3)}</p>
+                <p id="representative-telephone-number" class="form-control-static">${f:h(ticketReserveForm.repTel1)}-${f:h(ticketReserveForm.repTel2)}-${f:h(ticketReserveForm.repTel3)}</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label">Eメール</label>
               <div class="col-md-8">
-                <p class="form-control-static">${f:h(ticketReserveForm.repMail)}</p>
+                <p id="representative-e-mail" class="form-control-static">${f:h(ticketReserveForm.repMail)}</p>
               </div>
             </div>
           </section>
@@ -173,8 +173,8 @@
             <form:hidden path="repTel3" />
             <form:hidden path="repMail" />
 
-            <input type="submit" class="btn btn-default btn-lg" name="redo" value="修正" />
-            <input type="submit" class="btn btn-success btn-lg" value="予約確定" />
+            <input type="submit" id="correct-button" class="btn btn-default btn-lg" name="redo" value="修正" />
+            <input type="submit" id="reservation-confirmed-button" class="btn btn-success btn-lg" value="予約確定" />
           </form:form>
         </section>
 

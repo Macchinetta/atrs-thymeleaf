@@ -21,7 +21,7 @@
         <section class="col-md-12">
 
           <div class="alert alert-success">
-            <h2>ご予約を受け付けました。</h2>
+            <h2 id="reservation-reception-message">ご予約を受け付けました。</h2>
             <p>
               ご予約ありがとうございました。<br>
               期限までにご購入いただけない場合、すべてのフライトが自動的にキャンセルされます。
@@ -33,15 +33,15 @@
             <tbody>
               <tr>
                 <th class="col-md-4">予約番号</th>
-                <td class="col-md-8">${f:h(reserveCompleteOutputDto.reserveNo)}</td>
+                <td id="reservation-number" class="col-md-8">${f:h(reserveCompleteOutputDto.reserveNo)}</td>
               </tr>
               <tr>
                 <th>合計金額</th>
-                <td><fmt:formatNumber value="${reserveCompleteOutputDto.totalFare}" pattern="###,###"/>円</td>
+                <td id="total-amount"><fmt:formatNumber value="${reserveCompleteOutputDto.totalFare}" pattern="###,###"/>円</td>
               </tr>
               <tr>
                 <th>お支払期限</th>
-                <td><fmt:formatDate value="${reserveCompleteOutputDto.paymentDate}" pattern="MM月dd日(E)"/></td>
+                <td id="payment-deadline"><fmt:formatDate value="${reserveCompleteOutputDto.paymentDate}" pattern="MM月dd日(E)"/></td>
               </tr>
             </tbody>
           </table>

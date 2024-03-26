@@ -21,15 +21,15 @@
         <section class="col-md-12">
           <div class="alert alert-success">
             <h2>会員登録しました。</h2>
-            <p>
+            <p id="member-registration-completion-message">
               会員登録ありがとうございました。<br>
-              会員番号は<strong>${f:h(member.membershipNumber)}</strong>です。
+              会員番号は<strong id="membershipNumber">${f:h(member.membershipNumber)}</strong>です。
             </p>
           </div>
         </section>
 
         <div class="text-center">
-          <a href="${pageContext.request.contextPath}/" class="btn btn-default">トップに戻る</a>
+          <a href="${pageContext.request.contextPath}/" id="back-to-top" class="btn btn-default">トップに戻る</a>
         </div>
 
       </div><!-- /row -->

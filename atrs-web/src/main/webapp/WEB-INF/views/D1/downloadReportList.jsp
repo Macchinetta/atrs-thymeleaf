@@ -20,21 +20,23 @@
 
         <section class="col-md-12">
           <h2>予約履歴レポートダウンロード</h2>
-            <c:choose>
-              <c:when test="${fn:length(reportNameList) == 0 }">
-                <div class="alert alert-danger">
-                  <ul>
-                    <li>予約履歴レポートが存在しません。</li>
-                  </ul>
-                </div>
-              </c:when>
-              <c:otherwise>
-                <div class="alert alert-info">
-                  <ul>
-                    <li>ダウンロードするレポートを選択して下さい。</li>
-                  </ul>
-                </div>
+          <c:choose>
+            <c:when test="${fn:length(reportNameList) == 0 }">
+              <div class="alert alert-danger">
+                <ul>
+                  <li>予約履歴レポートが存在しません。</li>
+                </ul>
+              </div>
+            </c:when>
+            <c:otherwise>
+              <div class="alert alert-info">
+                <ul>
+                  <li>ダウンロードするレポートを選択して下さい。</li>
+                </ul>
+              </div>
 
+            <div>
+              <div>
                 <form:form method="get" action="${pageContext.request.contextPath}/HistoryReport/download">
                   <table class="table">
                     <thead>
@@ -52,8 +54,10 @@
                     </tbody>
                   </table>
                 </form:form>
-              </c:otherwise>
-            </c:choose>
+              </div>
+            </div>
+            </c:otherwise>
+          </c:choose>
 
           <div class="text-center">
             <a href="${pageContext.request.contextPath}/" class="btn btn-default">トップに戻る</a>

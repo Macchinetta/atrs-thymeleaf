@@ -251,7 +251,7 @@
 
                 <div class="form-group">
                   <div class="col-md-offset-4 col-md-8">
-                    <input type="submit" class="btn btn-primary btn-size-default" value="登録確認">
+                    <input type="submit" id="member-register" class="btn btn-primary btn-size-default" value="登録確認">
                   </div>
                 </div>
               </form:form>
