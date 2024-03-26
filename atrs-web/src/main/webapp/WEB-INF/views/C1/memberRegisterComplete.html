@@ -21,15 +21,15 @@
         <section class="col-md-12">
           <div class="alert alert-success">
             <h2>会員登録しました。</h2>
-            <p>
+            <p id="member-registration-completion-message">
               会員登録ありがとうございました。<br>
-              会員番号は<strong th:text="${member.membershipNumber}">0000000000</strong>です。
+              会員番号は<strong id="membershipNumber" th:text="${member.membershipNumber}">0000000000</strong>です。
             </p>
           </div>
         </section>
 
         <div class="text-center">
-          <a href="../A0/top.html" th:href="@{/}" class="btn btn-default">トップに戻る</a>
+          <a href="../A0/top.html" th:href="@{/}" id="back-to-top" class="btn btn-default">トップに戻る</a>
         </div>
 
       </div><!-- /row -->

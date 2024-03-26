@@ -13,10 +13,10 @@
   <parent>
     <groupId>org.terasoluna.gfw</groupId>
     <artifactId>terasoluna-gfw-parent</artifactId>
-    <version>5.8.1.RELEASE</version>
+    <version>5.9.0.RELEASE</version>
     <relativePath />
   </parent>
-  <version>1.9.1.RELEASE</version>
+  <version>1.10.0.RELEASE</version>
   <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
   <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
   <licenses>
@@ -47,6 +47,7 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
+            <parameters>true</parameters>
             <annotationProcessorPaths>
               <path>
                <groupId>org.mapstruct</groupId>
@@ -207,6 +208,15 @@
       </dependency>
       <!-- == End Database == -->
 
+      <!-- == Begin Unit Test == -->
+      <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>${webdrivermanager.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- == End Unit Test == -->
+
     </dependencies>
   </dependencyManagement>
 
@@ -220,7 +230,8 @@
     <org.codehaus.mojo.xml-maven-plugin.version>1.0.2</org.codehaus.mojo.xml-maven-plugin.version>
     <com.mycila.license-maven-plugin.version>4.1</com.mycila.license-maven-plugin.version>
     <!-- == Dependency Versions == -->
-    <postgresql.version>42.5.1</postgresql.version>
+    <postgresql.version>42.7.1</postgresql.version>
+    <webdrivermanager.version>5.6.3</webdrivermanager.version>
     <!-- == Project Properties == -->
     <project.root.basedir>${project.basedir}</project.root.basedir>
     <encoding>UTF-8</encoding>

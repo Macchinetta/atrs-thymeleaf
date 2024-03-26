@@ -22,10 +22,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -119,14 +119,15 @@ public class FlightsApiController {
      * <p>
      * エラー情報にエラーメッセージを設定して返却する。
      * </p>
-     * @param e バインド例外
+     * @param e 検証例外
      * @param locale ロケールオブジェクト
      * @return エラー情報
      */
-    @ExceptionHandler(BindException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResultDto handleBindException(BindException e, Locale locale) {
+    public ErrorResultDto handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException e, Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 

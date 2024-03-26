@@ -4,7 +4,7 @@
   <parent>
     <artifactId>atrs</artifactId>
     <groupId>jp.co.ntt.atrs</groupId>
-    <version>1.9.1.RELEASE</version>
+    <version>1.10.0.RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>atrs-env</artifactId>
@@ -99,10 +99,10 @@
       </properties>
     </profile>
     <profile>
-      <id>tomcat9-postgresql</id>
+      <id>tomcat10-postgresql</id>
       <properties>
-        <resource.directory>${basedir}/configs/tomcat9-postgresql/resources</resource.directory>
-        <buildFinalName>${project.artifactId}-${project.version}-tomcat9-postgresql</buildFinalName>
+        <resource.directory>${basedir}/configs/tomcat10-postgresql/resources</resource.directory>
+        <buildFinalName>${project.artifactId}-${project.version}-tomcat10-postgresql</buildFinalName>
       </properties>
     </profile>
   </profiles>

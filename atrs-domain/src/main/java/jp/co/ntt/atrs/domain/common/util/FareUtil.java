@@ -16,6 +16,7 @@
 package jp.co.ntt.atrs.domain.common.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * 運賃に関するユーティリティクラス。
@@ -41,7 +42,7 @@ public class FareUtil {
      * @return 100円未満を切上げた運賃
      */
     public static int ceilFare(int fare) {
-        return new BigDecimal(fare).setScale(CEIL_FARE_SCALE,
-                BigDecimal.ROUND_UP).intValue();
+        return new BigDecimal(fare).setScale(CEIL_FARE_SCALE, RoundingMode.UP)
+                .intValue();
     }
 }

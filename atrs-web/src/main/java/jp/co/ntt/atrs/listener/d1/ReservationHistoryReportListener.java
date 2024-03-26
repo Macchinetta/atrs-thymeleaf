@@ -104,8 +104,8 @@ public class ReservationHistoryReportListener {
             if (logger.isWarnEnabled()) {
                 logger.warn(LogMessages.W_AR_D1_L0003.getMessage(
                         membershipNumber));
-                return null;
             }
+            return null;
         }
         ReservationHistoryReportCriteriaDto criteria = new ReservationHistoryReportCriteriaDto();
         criteria.setMembershipNumber(membershipNumber);

@@ -22,8 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -77,15 +75,10 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatusCode status, WebRequest request) {
-        return handleBindingResult(ex, ex.getBindingResult(), headers, status,
-                request);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleBindException(BindException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        return handleBindingResult(ex, ex.getBindingResult(), headers, status,
-                request);
+        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(request,
+                errorCode, ex.getBindingResult(), ex.getMessage());
+        return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
     @Override
@@ -98,24 +91,6 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
         } else {
             return handleExceptionInternal(ex, null, headers, status, request);
         }
-    }
-
-    /**
-     * 例外情報生成共通処理。
-     * @param ex Exception
-     * @param bindingResult 処理結果
-     * @param headers HTTPヘッダ情報
-     * @param status HTTPステータス情報
-     * @param request リクエスト
-     * @return
-     */
-    protected ResponseEntity<Object> handleBindingResult(Exception ex,
-            BindingResult bindingResult, HttpHeaders headers,
-            HttpStatusCode status, WebRequest request) {
-        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(request,
-                errorCode, bindingResult, ex.getMessage());
-        return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
     /**
