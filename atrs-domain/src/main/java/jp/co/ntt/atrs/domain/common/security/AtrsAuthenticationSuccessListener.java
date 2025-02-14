@@ -29,8 +29,8 @@ import jp.co.ntt.atrs.domain.service.a1.AuthLoginService;
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationSuccessListener implements
-                                               ApplicationListener<AuthenticationSuccessEvent> {
+public class AtrsAuthenticationSuccessListener
+        implements ApplicationListener<AuthenticationSuccessEvent> {
 
     /**
      * 会員ログインサービス。
@@ -48,8 +48,7 @@ public class AtrsAuthenticationSuccessListener implements
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         Authentication authentication = event.getAuthentication();
 
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
-                .getPrincipal();
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
         authLoginService.login(userDetails.getMember());
 
     }

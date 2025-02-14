@@ -31,8 +31,7 @@ public class ErrorPageController {
      * badRequestエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "badRequest-error", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "badRequest-error", method = {RequestMethod.GET, RequestMethod.POST})
     public String badRequestError() {
         return "common/error/badRequest-error";
     }
@@ -41,8 +40,8 @@ public class ErrorPageController {
      * accessForbiddenエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "accessForbidden-error", method = {
-            RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "accessForbidden-error",
+            method = {RequestMethod.GET, RequestMethod.POST})
     public String accessForbiddenError() {
         return "common/error/accessForbidden-error";
     }
@@ -51,8 +50,7 @@ public class ErrorPageController {
      * notFoundエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "notFound-error", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "notFound-error", method = {RequestMethod.GET, RequestMethod.POST})
     public String notFoundError() {
         return "common/error/notFound-error";
     }
@@ -61,8 +59,7 @@ public class ErrorPageController {
      * systemエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "system-error", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "system-error", method = {RequestMethod.GET, RequestMethod.POST})
     public String systemError() {
         return "common/error/system-error";
     }
@@ -71,8 +68,7 @@ public class ErrorPageController {
      * csrfエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "csrf-error", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "csrf-error", method = {RequestMethod.GET, RequestMethod.POST})
     public String csrfError() {
         return "common/error/csrf-error";
     }
@@ -81,8 +77,7 @@ public class ErrorPageController {
      * tokenエラー画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = "token-error", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "token-error", method = {RequestMethod.GET, RequestMethod.POST})
     public String tokenError() {
         return "common/error/token-error";
     }

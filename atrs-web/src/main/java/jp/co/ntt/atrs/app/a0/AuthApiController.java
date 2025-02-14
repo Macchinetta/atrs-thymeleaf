@@ -47,8 +47,7 @@ public class AuthApiController {
      */
     @RequestMapping(value = "status", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getStatus(
-            @AuthenticationPrincipal AtrsUserDetails userDetails) {
+    public ResponseEntity<Object> getStatus(@AuthenticationPrincipal AtrsUserDetails userDetails) {
 
         // ログイン状態を返却
         return authenticationHelper.isAuthenticatedPrincipal(userDetails)

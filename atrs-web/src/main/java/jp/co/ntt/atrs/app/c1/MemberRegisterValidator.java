@@ -54,8 +54,7 @@ public class MemberRegisterValidator implements Validator {
         MemberRegisterForm form = (MemberRegisterForm) target;
 
         // パスワードチェック
-        if (!errors.hasFieldErrors("password") && !errors.hasFieldErrors(
-                "reEnterPassword")) {
+        if (!errors.hasFieldErrors("password") && !errors.hasFieldErrors("reEnterPassword")) {
 
             String password = form.getPassword();
             String reEnterPassword = form.getReEnterPassword();

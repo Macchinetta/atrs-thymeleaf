@@ -187,12 +187,10 @@ public class TicketSearchController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String searchSelect(TicketSearchForm ticketSearchForm,
-            @Validated ReservationFlightForm reservationFlightForm,
-            BindingResult result, Model model,
-            RedirectAttributes redirectAttributes) {
+            @Validated ReservationFlightForm reservationFlightForm, BindingResult result,
+            Model model, RedirectAttributes redirectAttributes) {
 
-        if (result.hasFieldErrors("selectFlightFormList*") || result
-                .hasFieldErrors("flightType")) {
+        if (result.hasFieldErrors("selectFlightFormList*") || result.hasFieldErrors("flightType")) {
 
             // 非表示項目(選択フライト情報、フライト種別)に検証エラーがある場合は
             // 改ざんとみなす
@@ -205,8 +203,8 @@ public class TicketSearchController {
         }
 
         // 選択フライト情報の業務ロジックチェック
-        List<Flight> flightList = ticketHelper.toFlightList(
-                reservationFlightForm.getSelectFlightFormList());
+        List<Flight> flightList =
+                ticketHelper.toFlightList(reservationFlightForm.getSelectFlightFormList());
         try {
             ticketSearchHelper.validateFlightList(flightList);
         } catch (BusinessException e) {
@@ -218,8 +216,8 @@ public class TicketSearchController {
         }
 
         // 選択フライト情報をリダイレクトパラメータに設定
-        Map<String, String> params = ticketHelper
-                .createParameterMapForSelectFlight(reservationFlightForm);
+        Map<String, String> params =
+                ticketHelper.createParameterMapForSelectFlight(reservationFlightForm);
         for (String key : params.keySet()) {
             redirectAttributes.addAttribute(key, params.get(key));
         }

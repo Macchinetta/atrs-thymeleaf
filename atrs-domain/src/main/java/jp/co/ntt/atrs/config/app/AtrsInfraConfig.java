@@ -16,29 +16,33 @@
 package jp.co.ntt.atrs.config.app;
 
 import javax.sql.DataSource;
-
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
+import jp.co.ntt.atrs.config.app.mybatis.MybatisConfig;
 
 /**
  * Bean definitions for infrastructure layer.
  */
 @Configuration
-@Import({ AtrsEnvConfig.class })
+@MapperScan(basePackages = "jp.co.ntt.atrs.domain.repository",
+        sqlSessionFactoryRef = "sqlSessionFactory")
+@Import({AtrsEnvConfig.class})
 public class AtrsInfraConfig {
 
     /**
      * MyBatis設定 Configure {@link SqlSessionFactory} bean.
+     * 
      * @param dataSource Bean defined by AtrsEnvConfig#dataSource
      * @see jp.co.ntt.atrs.config.app.AtrsEnvConfig#dataSource()
      * @return Bean of configured {@link SqlSessionFactoryBean}
@@ -47,24 +51,13 @@ public class AtrsInfraConfig {
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage(
-                "jp.co.ntt.atrs.domain.model, jp.co.ntt.atrs.domain.repository");
-        return bean;
-    }
-
-    /**
-     * MyBatisがマッパーを自動スキャンするパッケージを設定 Configure {@link MapperScannerConfigurer} bean.
-     * @return Bean of configured {@link MapperScannerConfigurer}
-     */
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer bean = new MapperScannerConfigurer();
-        bean.setBasePackage("jp.co.ntt.atrs.domain.repository");
+        bean.setConfiguration(MybatisConfig.configuration());
         return bean;
     }
 
     /**
      * JMS送受信用の設定 Configure {@link JmsTransactionManager} bean.
+     * 
      * @param atrsJmsConnectionFactory Bean defined by AtrsEnvConfig#atrsJmsConnectionFactory
      * @see jp.co.ntt.atrs.config.app.AtrsEnvConfig#atrsJmsConnectionFactory()
      * @return Bean of configured {@link JmsTransactionManager}
@@ -79,6 +72,7 @@ public class AtrsInfraConfig {
 
     /**
      * Configure {@link JmsTemplate} bean.
+     * 
      * @param cachingConnectionFactory Bean defined by AtrsEnvConfig#cachingConnectionFactory
      * @see jp.co.ntt.atrs.config.app.AtrsEnvConfig#cachingConnectionFactory()
      * @param destinationResolver Bean defined by AtrsEnvConfig#destinationResolver
@@ -86,8 +80,7 @@ public class AtrsInfraConfig {
      * @return Bean of configured {@link JmsTemplate}
      */
     @Bean("jmsTemplate")
-    public JmsTemplate jmsTemplate(
-            CachingConnectionFactory cachingConnectionFactory,
+    public JmsTemplate jmsTemplate(CachingConnectionFactory cachingConnectionFactory,
             DynamicDestinationResolver destinationResolver) {
         JmsTemplate bean = new JmsTemplate();
         bean.setConnectionFactory(cachingConnectionFactory);
@@ -98,6 +91,7 @@ public class AtrsInfraConfig {
 
     /**
      * Configure {@link JmsMessagingTemplate} bean.
+     * 
      * @param jmsTemplate Bean defined by #jmsTemplate
      * @see #jmsTemplate(CachingConnectionFactory, DynamicDestinationResolver)
      * @return Bean of configured {@link JmsMessagingTemplate}
@@ -107,5 +101,15 @@ public class AtrsInfraConfig {
         JmsMessagingTemplate bean = new JmsMessagingTemplate();
         bean.setJmsTemplate(jmsTemplate);
         return bean;
+    }
+
+    /**
+     * Configure {@link JdbcClient} bean.
+     * 
+     * @return Bean of configured {@link JdbcClient}
+     */
+    @Bean("jdbcClient")
+    public JdbcClient jdbcClient(DataSource dataSource) {
+        return JdbcClient.create(dataSource);
     }
 }

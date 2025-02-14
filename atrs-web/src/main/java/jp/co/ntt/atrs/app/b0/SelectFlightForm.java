@@ -22,6 +22,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FareTypeCd;
@@ -50,7 +51,7 @@ public class SelectFlightForm implements Serializable {
     /**
      * 便名。
      */
-    @NotNull
+    @NotEmpty
     private String flightName;
 
     /**
@@ -134,7 +135,6 @@ public class SelectFlightForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

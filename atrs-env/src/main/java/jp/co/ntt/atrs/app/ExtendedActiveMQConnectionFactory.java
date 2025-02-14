@@ -19,7 +19,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.DisposableBean;
 
 public class ExtendedActiveMQConnectionFactory extends ActiveMQConnectionFactory
-                                               implements DisposableBean {
+        implements DisposableBean {
 
     @Override
     public void destroy() throws Exception {

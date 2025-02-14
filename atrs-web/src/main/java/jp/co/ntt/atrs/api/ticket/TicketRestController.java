@@ -16,19 +16,21 @@
 package jp.co.ntt.atrs.api.ticket;
 
 import java.util.List;
-
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jp.co.ntt.atrs.domain.model.Flight;
 
 /**
@@ -58,6 +60,13 @@ public class TicketRestController {
     TicketReserveValidator ticketReserveValidator;
 
     /**
+     * 予約登録されていることの確認用JdbcClient。
+     */
+    @Named("jdbcClient")
+    @Inject
+    private JdbcClient jdbcClient;
+
+    /**
      * チケット予約リソースのバリデータをバインダに追加する。
      * @param binder バインダ
      */
@@ -76,15 +85,28 @@ public class TicketRestController {
     public TicketReserveResource postTicket(
             @RequestBody @Validated TicketReserveResource ticketReserveResource) {
         // 選択フライト情報の業務ロジックチェック
-        List<Flight> flightList = ticketHelper.toFlightList(
-                ticketReserveResource.getSelectFlightResourceList());
+        List<Flight> flightList =
+                ticketHelper.toFlightList(ticketReserveResource.getSelectFlightResourceList());
         ticketHelper.validateFlightList(flightList);
 
         // チケット予約
-        TicketReserveResource createdReserveResource = ticketHelper.reserve(
-                ticketReserveResource, flightList);
+        TicketReserveResource createdReserveResource =
+                ticketHelper.reserve(ticketReserveResource, flightList);
 
         return createdReserveResource;
     }
 
+    /**
+     * 予約番号で登録されていることを確認する。
+     * @param reserveNo チケット予約番号
+     * @return 登録結果
+     */
+    @GetMapping("check")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean check(@RequestParam("reserveNo") String reserveNo) {
+        Integer count = this.jdbcClient
+                .sql("select count(*) as existCount from reservation where reserve_no=?")
+                .param(reserveNo).query(Integer.class).single();
+        return count != null && count > 0;
+    }
 }

@@ -52,8 +52,7 @@ public class FareTypeVacantInfoDto implements Serializable {
      * @param fare 運賃
      * @param vacantNum 空席数
      */
-    public FareTypeVacantInfoDto(String fareTypeName, String fare,
-            Integer vacantNum) {
+    public FareTypeVacantInfoDto(String fareTypeName, String fare, Integer vacantNum) {
         this.fareTypeName = fareTypeName;
         this.fare = fare;
         this.vacantNum = vacantNum;
@@ -88,8 +87,7 @@ public class FareTypeVacantInfoDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

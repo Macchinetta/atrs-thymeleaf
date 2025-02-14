@@ -89,10 +89,8 @@ public class MemberRegisterController {
     public String registerForm(Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper
-                .getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper
-                .getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
 
         return "C1/memberRegisterForm";
     }
@@ -111,8 +109,7 @@ public class MemberRegisterController {
      */
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.POST, params = "confirm")
-    public String registerConfirm(
-            @Validated MemberRegisterForm memberRegisterForm,
+    public String registerConfirm(@Validated MemberRegisterForm memberRegisterForm,
             BindingResult result, Model model) {
 
         if (result.hasErrors()) {
@@ -130,14 +127,11 @@ public class MemberRegisterController {
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.POST, params = "redo")
-    public String registerRedo(MemberRegisterForm memberRegisterForm,
-            Model model) {
+    public String registerRedo(MemberRegisterForm memberRegisterForm, Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper
-                .getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper
-                .getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
 
         return "C1/memberRegisterForm";
     }
@@ -156,9 +150,8 @@ public class MemberRegisterController {
      */
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST)
-    public String register(@Validated MemberRegisterForm memberRegisterForm,
-            BindingResult result, Model model,
-            RedirectAttributes redirectAttributes) {
+    public String register(@Validated MemberRegisterForm memberRegisterForm, BindingResult result,
+            Model model, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             // 非表示項目に検証エラーがある場合は改ざんとみなす

@@ -106,10 +106,8 @@ public class FlightsApiController {
             @Validated FlightSearchCriteriaForm flightSearchCriteriaForm) {
 
         // 空席照会
-        TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
-                flightSearchCriteriaForm);
-        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(
-                searchCriteriaDto);
+        TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(flightSearchCriteriaForm);
+        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(searchCriteriaDto);
 
         return flights;
     }
@@ -126,8 +124,8 @@ public class FlightsApiController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResultDto handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException e, Locale locale) {
+    public ErrorResultDto handleMethodArgumentNotValidException(MethodArgumentNotValidException e,
+            Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 
@@ -154,16 +152,14 @@ public class FlightsApiController {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResultDto handleBusinessException(BusinessException e,
-            Locale locale) {
+    public ErrorResultDto handleBusinessException(BusinessException e, Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
             result.add(messageSource.getMessage(
-                    new DefaultMessageSourceResolvable(resultMessage.getCode()),
-                    locale));
+                    new DefaultMessageSourceResolvable(resultMessage.getCode()), locale));
         }
 
         return result;
@@ -181,16 +177,14 @@ public class FlightsApiController {
     @ExceptionHandler(FlightNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResultDto handleFlightNotFoundException(
-            FlightNotFoundException e, Locale locale) {
+    public ErrorResultDto handleFlightNotFoundException(FlightNotFoundException e, Locale locale) {
 
         ErrorResultDto result = new ErrorResultDto();
 
         // メッセージ設定
         for (ResultMessage resultMessage : e.getResultMessages().getList()) {
             result.add(messageSource.getMessage(
-                    new DefaultMessageSourceResolvable(resultMessage.getCode()),
-                    locale));
+                    new DefaultMessageSourceResolvable(resultMessage.getCode()), locale));
         }
 
         return result;

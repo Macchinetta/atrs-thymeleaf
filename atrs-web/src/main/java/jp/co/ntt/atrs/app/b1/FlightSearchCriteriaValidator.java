@@ -51,8 +51,7 @@ public class FlightSearchCriteriaValidator implements Validator {
         FlightSearchCriteriaForm form = (FlightSearchCriteriaForm) target;
 
         // 出発空港と到着空港が同じでないかチェック
-        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors(
-                "arrAirportCd")) {
+        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors("arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {

@@ -56,7 +56,6 @@ public interface ReservationRepository {
      * @param membershipNumber 会員番号
      * @return 予約リスト
      */
-    List<ReservationHistoryDto> findAllByMembershipNumberForReport(
-            String membershipNumber);
+    List<ReservationHistoryDto> findAllByMembershipNumberForReport(String membershipNumber);
 
 }

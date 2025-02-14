@@ -91,19 +91,17 @@ public class TicketHelper {
      * @param selectFlightResourceList 選択フライトリソースのリスト
      * @return フライト情報リスト
      */
-    public List<Flight> toFlightList(
-            List<SelectFlightResource> selectFlightResourceList) {
+    public List<Flight> toFlightList(List<SelectFlightResource> selectFlightResourceList) {
 
         List<Flight> flightList = new ArrayList<>();
         for (SelectFlightResource selectFlightResource : selectFlightResourceList) {
             Flight flight = new Flight();
-            flight.setBoardingClass(boardingClassProvider.getBoardingClass(
-                    selectFlightResource.getBoardingClassCd()));
+            flight.setBoardingClass(boardingClassProvider
+                    .getBoardingClass(selectFlightResource.getBoardingClassCd()));
             flight.setDepartureDate(selectFlightResource.getDepDate());
-            flight.setFareType(fareTypeProvider.getFareType(selectFlightResource
-                    .getFareTypeCd()));
-            flight.setFlightMaster(flightMasterProvider.getFlightMaster(
-                    selectFlightResource.getFlightName()));
+            flight.setFareType(fareTypeProvider.getFareType(selectFlightResource.getFareTypeCd()));
+            flight.setFlightMaster(
+                    flightMasterProvider.getFlightMaster(selectFlightResource.getFlightName()));
             flightList.add(flight);
         }
 
@@ -115,12 +113,10 @@ public class TicketHelper {
      * @param ticketReserveResource チケット予約リソース
      * @param flightList フライト情報リスト
      */
-    public TicketReserveResource reserve(
-            TicketReserveResource ticketReserveResource,
+    public TicketReserveResource reserve(TicketReserveResource ticketReserveResource,
             List<Flight> flightList) {
         // 予約情報生成
-        Reservation reservation = createReservation(ticketReserveResource,
-                flightList);
+        Reservation reservation = createReservation(ticketReserveResource, flightList);
 
         // 予約情報の業務ロジックチェック
         ticketReserveService.validateReservation(reservation);
@@ -128,12 +124,11 @@ public class TicketHelper {
         // 予約情報登録
         reservation.setReserveDate(Date.from(dateFactory.tick().instant()));
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
-        TicketReserveDto ticketReserveDto = ticketReserveService
-                .registerReservation(reservation);
+        TicketReserveDto ticketReserveDto = ticketReserveService.registerReservation(reservation);
 
         // レスポンス用チケット予約リソース生成
-        TicketReserveResource createdReserveResource = beanMapper.map(
-                ticketReserveResource, ticketReserveDto);
+        TicketReserveResource createdReserveResource =
+                beanMapper.map(ticketReserveResource, ticketReserveDto);
         createdReserveResource.setTotalFare(reservation.getTotalFare());
 
         return createdReserveResource;
@@ -146,12 +141,10 @@ public class TicketHelper {
      * @param reservation 予約情報
      * @return 予約チケットの合計金額
      */
-    private Integer calculateTotalFare(List<Flight> flightList,
-            Reservation reservation) {
+    private Integer calculateTotalFare(List<Flight> flightList, Reservation reservation) {
         ReserveFlight reserveFlight = reservation.getReserveFlightList().get(0);
         List<Passenger> passengerList = reserveFlight.getPassengerList();
-        int totalFare = ticketReserveService.calculateTotalFare(flightList,
-                passengerList);
+        int totalFare = ticketReserveService.calculateTotalFare(flightList, passengerList);
 
         return totalFare;
     }
@@ -162,8 +155,7 @@ public class TicketHelper {
      * @param flightList フライト情報リスト
      * @return 予約情報
      */
-    private Reservation createReservation(
-            TicketReserveResource ticketReserveResource,
+    private Reservation createReservation(TicketReserveResource ticketReserveResource,
             List<Flight> flightList) {
         // 搭乗者情報リスト生成
         List<Passenger> passengerList = new ArrayList<>();
@@ -188,9 +180,8 @@ public class TicketHelper {
         Reservation reservation = new Reservation();
         reservation = beanMapper.map(ticketReserveResource);
 
-        String repTel = String.format("%s-%s-%s", ticketReserveResource
-                .getRepTel1(), ticketReserveResource.getRepTel2(),
-                ticketReserveResource.getRepTel3());
+        String repTel = String.format("%s-%s-%s", ticketReserveResource.getRepTel1(),
+                ticketReserveResource.getRepTel2(), ticketReserveResource.getRepTel3());
         reservation.setRepTel(repTel);
         reservation.setReserveFlightList(reserveFlightList);
 
@@ -205,8 +196,7 @@ public class TicketHelper {
      * @param flightList フライト情報リスト
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(
-            List<Flight> flightList) throws BadRequestException {
+    public void validateFlightList(List<Flight> flightList) throws BadRequestException {
         // フライト情報チェック
         try {
             ticketSharedService.validateFlightList(flightList);

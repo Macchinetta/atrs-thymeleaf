@@ -36,8 +36,7 @@ public class AtrsBusinessException extends BusinessException {
      * @param args 置き換え文字列
      */
     public AtrsBusinessException(AtrsErrorCode errorCode, Object... args) {
-        super(ResultMessages.danger().add(ResultMessage.fromCode(errorCode
-                .code(), args)));
+        super(ResultMessages.danger().add(ResultMessage.fromCode(errorCode.code(), args)));
     }
 
 }

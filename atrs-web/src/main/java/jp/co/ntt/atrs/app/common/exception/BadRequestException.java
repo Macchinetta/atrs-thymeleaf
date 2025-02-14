@@ -24,8 +24,7 @@ import jp.co.ntt.atrs.domain.common.logging.LogMessages;
  * 不正リクエスト例外。
  * @author NTT 電電太郎
  */
-public class BadRequestException extends RuntimeException implements
-                                 ExceptionCodeProvider {
+public class BadRequestException extends RuntimeException implements ExceptionCodeProvider {
 
     /**
      * serialVersionUID。

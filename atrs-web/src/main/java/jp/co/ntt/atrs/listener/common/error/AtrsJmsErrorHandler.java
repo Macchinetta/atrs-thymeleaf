@@ -34,8 +34,7 @@ public class AtrsJmsErrorHandler implements ErrorHandler {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(
-            AtrsJmsErrorHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(AtrsJmsErrorHandler.class);
 
     /**
      * ExceptionLogger

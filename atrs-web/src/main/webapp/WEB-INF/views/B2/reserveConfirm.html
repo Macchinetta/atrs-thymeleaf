@@ -1,202 +1,199 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>予約内容確認 | Airline Ticket Reservation System</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>予約内容確認 | Airline Ticket Reservation System</title>
 
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
-    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
+    </head>
+    <body>
+        <header th:replace="~{A0/header :: header}"></header>
 
-  </head>
-  <body>
+        <div class="container">
+            <div class="row">
+                <section class="col-md-12">
+                    <h2 id="screen-title">予約内容確認</h2>
 
-  <header th:replace="~{A0/header :: header}"></header>
+                    <section>
+                        <h3>合計金額</h3>
+                        <p id="total-amount" th:text="|&yen;${#numbers.formatDecimal(reserveConfirmOutputDto.totalFare,1,'COMMA',0,'POINT')}|">￥39,200</p>
+                    </section>
 
-    <div class="container">
+                    <section>
+                        <h3>選択フライト</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>搭乗日</th>
+                                    <th>便名</th>
+                                    <th>出発時刻</th>
+                                    <th>到着時刻</th>
+                                    <th>区間</th>
+                                    <th>搭乗クラス</th>
+                                    <th>運賃種別</th>
+                                    <th>運賃</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="flight : ${selectFlightDtoList}">
+                                    <td th:text="${flight.lineType.name}">往路</td>
+                                    <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
+                                    <td th:text="${flight.flightName}">NTT001</td>
+                                    <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
+                                    <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
+                                    <td>
+                                        <span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class="glyphicon glyphicon-arrow-right"></span
+                                        ><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span>
+                                    </td>
+                                    <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
+                                    <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
+                                    <td th:text="|&yen;${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
+                                </tr>
+                                <!--/*-->
+                                <tr>
+                                    <td>復路</td>
+                                    <td>07月02日(水)</td>
+                                    <td>NTT136</td>
+                                    <td>18：00</td>
+                                    <td>19：00</td>
+                                    <td>沖縄&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;東京（羽田）</td>
+                                    <td>一般席</td>
+                                    <td>往復運賃</td>
+                                    <td>￥19,600</td>
+                                </tr>
+                                <!--*/-->
+                            </tbody>
+                        </table>
+                    </section>
 
-      <div class="row">
+                    <section>
+                        <h3>お客様情報</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1">No</th>
+                                    <th class="col-md-6">お名前(カタカナ)</th>
+                                    <th class="col-md-1">年齢</th>
+                                    <th class="col-md-2">性別</th>
+                                    <th class="col-md-2">会員番号(10桁)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="passenger : ${ticketReserveForm.passengerFormList}" th:if="!${passenger.isEmpty()}">
+                                    <td th:text="${passengerStat.count}">1</td>
+                                    <td th:text="|${passenger.familyName}&nbsp;${passenger.givenName}|">デンデン タロウ</td>
+                                    <td th:text="|${passenger.age}歳|">20歳</td>
+                                    <td th:text="${CL_GENDER[passenger.gender.code]}">男性</td>
+                                    <td th:text="${passenger.membershipNumber}">0000000000</td>
+                                </tr>
+                                <!--/*-->
+                                <tr>
+                                    <td>2</td>
+                                    <td>デンデン ジロウ</td>
+                                    <td>30歳</td>
+                                    <td>男性</td>
+                                    <td>0000000001</td>
+                                </tr>
+                                <!--*/-->
+                            </tbody>
+                        </table>
+                    </section>
 
-        <section class="col-md-12">
-          <h2 id="screen-title">予約内容確認</h2>
+                    <section class="form-horizontal">
+                        <h3>代表者情報</h3>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">お名前(カタカナ)</label>
+                            <div class="col-md-8">
+                                <p id="representative-name" class="form-control-static" th:text="|${ticketReserveForm.repFamilyName} ${ticketReserveForm.repGivenName}|">デンデン タロウ</p>
+                            </div>
+                        </div>
 
-          <section>
-            <h3>合計金額</h3>
-            <p id="total-amount" th:text="|&yen;${#numbers.formatDecimal(reserveConfirmOutputDto.totalFare,1,'COMMA',0,'POINT')}|">
-            ￥39,200
-            </p>
-          </section>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">年齢</label>
+                            <div class="col-md-8">
+                                <p id="representative-age" class="form-control-static" th:text="${ticketReserveForm.repAge}">20</p>
+                            </div>
+                        </div>
 
-          <section>
-            <h3>選択フライト</h3>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>搭乗日</th>
-                  <th>便名</th>
-                  <th>出発時刻</th>
-                  <th>到着時刻</th>
-                  <th>区間</th>
-                  <th>搭乗クラス</th>
-                  <th>運賃種別</th>
-                  <th>運賃</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="flight : ${selectFlightDtoList}">
-                  <td th:text="${flight.lineType.name}">往路</td>
-                  <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
-                  <td th:text="${flight.flightName}">NTT001</td>
-                  <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
-                  <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
-                  <td><span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class='glyphicon glyphicon-arrow-right'></span><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span></td>
-                  <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
-                  <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
-                  <td th:text="|&yen;${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
-                </tr>
-                <!--/*-->
-                <tr >
-                  <td>復路</td>
-                  <td>07月02日(水)</td>
-                  <td>NTT136</td>
-                  <td>18：00</td>
-                  <td>19：00</td>
-                  <td>沖縄&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;東京（羽田）</td>
-                  <td>一般席</td>
-                  <td>往復運賃</td>
-                  <td>￥19,600</td>
-                </tr>
-                <!--*/-->
-              </tbody>
-            </table>
-          </section>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">性別</label>
+                            <div class="col-md-8">
+                                <p id="representative-sex" class="form-control-static" th:text="${CL_GENDER[ticketReserveForm.repGender.code]}">男性</p>
+                            </div>
+                        </div>
 
-          <section>
-            <h3>お客様情報</h3>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th class="col-md-1">No</th>
-                  <th class="col-md-6">お名前(カタカナ)</th>
-                  <th class="col-md-1">年齢</th>
-                  <th class="col-md-2">性別</th>
-                  <th class="col-md-2">会員番号(10桁)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="passenger : ${ticketReserveForm.passengerFormList}" th:if="!${passenger.isEmpty()}">
-                  <td th:text="${passengerStat.count}">1</td>
-                  <td th:text="|${passenger.familyName}&nbsp;${passenger.givenName}|">デンデン タロウ</td>
-                  <td th:text="|${passenger.age}歳|">20歳</td>
-                  <td th:text="${CL_GENDER[passenger.gender.code]}">男性</td>
-                  <td th:text="${passenger.membershipNumber}">0000000000</td>
-                </tr>
-                <!--/*-->
-                <tr>
-                  <td>2</td>
-                  <td>デンデン ジロウ</td>
-                  <td>30歳</td>
-                  <td>男性</td>
-                  <td>0000000001</td>
-                </tr>
-                <!--*/-->
-              </tbody>
-            </table>
-          </section>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">会員番号(10桁)</label>
+                            <div class="col-md-8">
+                                <p id="representative-membership-number" class="form-control-static" th:text="${ticketReserveForm.repMembershipNumber}">0000000000</p>
+                            </div>
+                        </div>
 
-          <section class="form-horizontal">
-            <h3>代表者情報</h3>
-            <div class="form-group">
-              <label class="col-md-2 control-label">お名前(カタカナ)</label>
-              <div class="col-md-8">
-                <p id="representative-name" class="form-control-static" th:text="|${ticketReserveForm.repFamilyName} ${ticketReserveForm.repGivenName}|">デンデン タロウ</p>
-              </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">電話番号</label>
+                            <div class="col-md-8">
+                                <p id="representative-telephone-number" class="form-control-static" th:text="|${ticketReserveForm.repTel1}-${ticketReserveForm.repTel2}-${ticketReserveForm.repTel3}|">
+                                    080-0000-0000
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Eメール</label>
+                            <div class="col-md-8">
+                                <p id="representative-e-mail" class="form-control-static" th:text="${ticketReserveForm.repMail}">denden-taro@example.com</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <form action="reserveComplete.html" th:action="@{/ticket/reserve}" method="post" th:object="${ticketReserveForm}" class="text-center btns-block">
+                        <!-- 選択フライト情報 -->
+                        <input type="hidden" th:field="*{flightType}" />
+                        <div th:each="status : ${ticketReserveForm.selectFlightFormList}">
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].depDate}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].boardingClassCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].fareTypeCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].flightName}" />
+                        </div>
+
+                        <!-- 搭乗者情報 -->
+                        <div th:each="status : ${ticketReserveForm.passengerFormList}">
+                            <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].familyName}" />
+                            <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].givenName}" />
+                            <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].age}" />
+                            <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].gender}" />
+                            <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].membershipNumber}" />
+                        </div>
+
+                        <!-- 予約代表者情報 -->
+                        <input type="hidden" th:field="*{repFamilyName}" />
+                        <input type="hidden" th:field="*{repGivenName}" />
+                        <input type="hidden" th:field="*{repAge}" />
+                        <input type="hidden" th:field="*{repGender}" />
+                        <input type="hidden" th:field="*{repMembershipNumber}" />
+                        <input type="hidden" th:field="*{repTel1}" />
+                        <input type="hidden" th:field="*{repTel2}" />
+                        <input type="hidden" th:field="*{repTel3}" />
+                        <input type="hidden" th:field="*{repMail}" />
+
+                        <input type="submit" id="correct-button" class="btn btn-default btn-lg" name="redo" value="修正" />
+                        <input type="submit" id="reservation-confirmed-button" class="btn btn-success btn-lg" value="予約確定" />
+                    </form>
+                </section>
             </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
 
-            <div class="form-group">
-              <label class="col-md-2 control-label">年齢</label>
-              <div class="col-md-8">
-                <p id="representative-age" class="form-control-static" th:text="${ticketReserveForm.repAge}">20</p>
-              </div>
-            </div>
+        <footer th:replace="~{A0/footer :: footer}"></footer>
 
-            <div class="form-group">
-              <label class="col-md-2 control-label">性別</label>
-              <div class="col-md-8">
-                <p id="representative-sex" class="form-control-static" th:text="${CL_GENDER[ticketReserveForm.repGender.code]}">男性</p>
-              </div>
-            </div>
+        <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
 
-            <div class="form-group">
-              <label class="col-md-2 control-label">会員番号(10桁)</label>
-              <div class="col-md-8">
-                <p id="representative-membership-number" class="form-control-static" th:text="${ticketReserveForm.repMembershipNumber}">0000000000</p>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-2 control-label">電話番号</label>
-              <div class="col-md-8">
-                <p id="representative-telephone-number" class="form-control-static" th:text="|${ticketReserveForm.repTel1}-${ticketReserveForm.repTel2}-${ticketReserveForm.repTel3}|">080-0000-0000</p>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-2 control-label">Eメール</label>
-              <div class="col-md-8">
-                <p id="representative-e-mail" class="form-control-static" th:text="${ticketReserveForm.repMail}">denden-taro@example.com</p>
-              </div>
-            </div>
-          </section>
-
-        <form action="reserveComplete.html" th:action="@{/ticket/reserve}"
-         method="post" th:object="${ticketReserveForm}" class="text-center btns-block">
-
-            <!-- 選択フライト情報 -->
-            <input type="hidden" th:field="*{flightType}" />
-            <div th:each="status : ${ticketReserveForm.selectFlightFormList}">
-              <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].depDate}" />
-              <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].boardingClassCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].fareTypeCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].flightName}" />
-            </div>
-
-            <!-- 搭乗者情報 -->
-            <div th:each="status : ${ticketReserveForm.passengerFormList}">
-              <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].familyName}" />
-              <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].givenName}" />
-              <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].age}" />
-              <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].gender}" />
-              <input type="hidden" th:field="*{passengerFormList[__${statusStat.index}__].membershipNumber}" />
-            </div>
-
-            <!-- 予約代表者情報 -->
-            <input type="hidden" th:field="*{repFamilyName}"/>
-            <input type="hidden" th:field="*{repGivenName}" />
-            <input type="hidden" th:field="*{repAge}" />
-            <input type="hidden" th:field="*{repGender}" />
-            <input type="hidden" th:field="*{repMembershipNumber}" />
-            <input type="hidden" th:field="*{repTel1}" />
-            <input type="hidden" th:field="*{repTel2}" />
-            <input type="hidden" th:field="*{repTel3}" />
-            <input type="hidden" th:field="*{repMail}" />
-
-            <input type="submit" id="correct-button" class="btn btn-default btn-lg" name="redo" value="修正" />
-            <input type="submit" id="reservation-confirmed-button" class="btn btn-success btn-lg" value="予約確定" />
-          </form>
-        </section>
-
-      </div><!-- /row -->
-
-    </div><!-- /container -->
-
-    <footer th:replace="~{A0/footer :: footer}"></footer>
-
-    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
-    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-
-    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
-  </body>
+        <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+    </body>
 </html>

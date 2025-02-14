@@ -30,15 +30,14 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationSuccessHandler extends
-                                              SavedRequestAwareAuthenticationSuccessHandler {
+public class AtrsAuthenticationSuccessHandler
+        extends SavedRequestAwareAuthenticationSuccessHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-            HttpServletResponse response,
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
 
         // for Ajax request

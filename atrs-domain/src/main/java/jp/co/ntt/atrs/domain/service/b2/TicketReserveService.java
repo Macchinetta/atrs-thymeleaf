@@ -36,8 +36,7 @@ public interface TicketReserveService {
      * @param passengerList 搭乗者リスト
      * @return 予約チケットの合計金額
      */
-    int calculateTotalFare(List<Flight> flightList,
-            List<Passenger> passengerList);
+    int calculateTotalFare(List<Flight> flightList, List<Passenger> passengerList);
 
     /**
      * 予約情報の業務ロジックチェックを行う。
@@ -52,8 +51,7 @@ public interface TicketReserveService {
      * @return 予約番号と予約したチケット料金の支払期限
      * @throws BusinessException 空席数が搭乗者数未満の場合にスローする例外
      */
-    TicketReserveDto registerReservation(
-            Reservation reservation) throws BusinessException;
+    TicketReserveDto registerReservation(Reservation reservation) throws BusinessException;
 
     /**
      * 会員番号に該当するカード会員情報を検索する。

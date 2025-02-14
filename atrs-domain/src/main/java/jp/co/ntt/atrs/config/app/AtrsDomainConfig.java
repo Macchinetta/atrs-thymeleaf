@@ -36,8 +36,8 @@ import jakarta.inject.Inject;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "jp.co.ntt.atrs.domain" })
-@Import({ AtrsInfraConfig.class, AtrsCodeListConfig.class })
+@ComponentScan(basePackages = {"jp.co.ntt.atrs.domain"})
+@Import({AtrsInfraConfig.class, AtrsCodeListConfig.class})
 public class AtrsDomainConfig implements TransactionManagementConfigurer {
 
     /**
@@ -56,11 +56,11 @@ public class AtrsDomainConfig implements TransactionManagementConfigurer {
      * トランザクション管理実行時にエラーとなる。
      * ・transactionManager
      * ・jmsSendTransactionManager
-     * 
+     *
      * ※本設定は、TransactionManagementConfigurerを実装し、デフォルトトランザクションを紐づける方法となるが、
      * TransactionManagementConfigurerを実装せず、アプリケーション実装側のTransactionalアノテーションで、
      * 使用するTransactionManagerを明示的に設定する方法でも実装は可能となる。
-     * 
+     *
      * e.g. '@Transactional("transactionManager")'
      * </pre>
      *
@@ -95,8 +95,7 @@ public class AtrsDomainConfig implements TransactionManagementConfigurer {
     public Advisor resultMessagesLoggingInterceptorAdvisor(
             ResultMessagesLoggingInterceptor resultMessagesLoggingInterceptor) {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression(
-                "@within(org.springframework.stereotype.Service)");
+        pointcut.setExpression("@within(org.springframework.stereotype.Service)");
         return new DefaultPointcutAdvisor(pointcut, resultMessagesLoggingInterceptor);
     }
 

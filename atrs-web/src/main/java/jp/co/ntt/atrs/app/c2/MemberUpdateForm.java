@@ -24,6 +24,7 @@ import org.terasoluna.gfw.common.codelist.ExistInCodeList;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jp.co.ntt.atrs.app.c0.IMemberForm;
@@ -159,7 +160,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード会社。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_CREDITTYPE")
     private String creditTypeCd;
 
@@ -174,7 +175,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード有効期限（月）。
      */
-    @NotNull
+    @NotEmpty
     @Min(1)
     @Max(12)
     private String creditMonth;
@@ -182,7 +183,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード有効期限（年）。
      */
-    @NotNull
+    @NotEmpty
     @Min(00)
     private String creditYear;
 

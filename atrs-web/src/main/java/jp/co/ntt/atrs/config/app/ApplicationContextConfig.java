@@ -50,8 +50,8 @@ import org.terasoluna.gfw.web.exception.ExceptionLoggingFilter;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableJms
-@ComponentScan(basePackages = { "jp.co.ntt.atrs.listener" })
-@Import({ AtrsDomainConfig.class })
+@ComponentScan(basePackages = {"jp.co.ntt.atrs.listener"})
+@Import({AtrsDomainConfig.class})
 public class ApplicationContextConfig {
 
     /**
@@ -121,8 +121,7 @@ public class ApplicationContextConfig {
     @Bean("passwordEncoder")
     public PasswordEncoder passwordEncoder() {
         Map<String, PasswordEncoder> idToPasswordEncoder = new HashMap<>();
-        idToPasswordEncoder.put("pbkdf2",
-                pbkdf2PasswordEncoder());
+        idToPasswordEncoder.put("pbkdf2", pbkdf2PasswordEncoder());
         idToPasswordEncoder.put("bcrypt", bCryptPasswordEncoder());
         return new DelegatingPasswordEncoder("pbkdf2", idToPasswordEncoder);
     }
@@ -158,8 +157,7 @@ public class ApplicationContextConfig {
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(
             ActiveMQConnectionFactory atrsJmsConnectionFactory,
-            DestinationResolver destinationResolver,
-            ErrorHandler atrsJmsErrorHandler) {
+            DestinationResolver destinationResolver, ErrorHandler atrsJmsErrorHandler) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(atrsJmsConnectionFactory);
         factory.setDestinationResolver(destinationResolver);

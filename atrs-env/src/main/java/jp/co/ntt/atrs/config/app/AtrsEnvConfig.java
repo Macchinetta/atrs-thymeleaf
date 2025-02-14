@@ -134,24 +134,24 @@ public class AtrsEnvConfig {
         return bean;
     }
 
-//    /**
-//     * Configuration to set up database during initialization.
-//     * @return Bean of configured {@link DataSourceInitializer}
-//     */
-//    @Bean
-//    public DataSourceInitializer dataSourceInitializer() {
-//        DataSourceInitializer bean = new DataSourceInitializer();
-//        bean.setDataSource(dataSource());
-//        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-//        databasePopulator.addScript(new ClassPathResource("/database/"
-//                + database + "-schema.sql"));
-//        databasePopulator.addScript(new ClassPathResource("/database/"
-//                + database + "-dataload.sql"));
-//        databasePopulator.setSqlScriptEncoding("UTF-8");
-//        databasePopulator.setIgnoreFailedDrops(true);
-//        bean.setDatabasePopulator(databasePopulator);
-//        return bean;
-//    }
+    // /**
+    // * Configuration to set up database during initialization.
+    // * @return Bean of configured {@link DataSourceInitializer}
+    // */
+    // @Bean
+    // public DataSourceInitializer dataSourceInitializer() {
+    // DataSourceInitializer bean = new DataSourceInitializer();
+    // bean.setDataSource(dataSource());
+    // ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+    // databasePopulator.addScript(new ClassPathResource("/database/"
+    // + database + "-schema.sql"));
+    // databasePopulator.addScript(new ClassPathResource("/database/"
+    // + database + "-dataload.sql"));
+    // databasePopulator.setSqlScriptEncoding("UTF-8");
+    // databasePopulator.setIgnoreFailedDrops(true);
+    // bean.setDatabasePopulator(databasePopulator);
+    // return bean;
+    // }
 
     /**
      * Configure {@link TransactionManager} bean.
@@ -177,7 +177,7 @@ public class AtrsEnvConfig {
      * Configure {@link ActiveMQServer} bean.
      * @return Bean of configured {@link ActiveMQServer}
      */
-    @Bean(name="activeMQServer", initMethod = "start", destroyMethod = "stop")
+    @Bean(name = "activeMQServer", initMethod = "start", destroyMethod = "stop")
     public ActiveMQServer activeMQServer() {
         return new ActiveMQServerImpl(activeMQServerConfig(), activeMQJAASSecurityManager());
     }
@@ -200,8 +200,8 @@ public class AtrsEnvConfig {
      */
     @Bean("activeMQServerAcceptorConfig")
     public Set<TransportConfiguration> activeMQServerAcceptorConfig() {
-        List<TransportConfiguration> list = ConfigurationUtils.parseAcceptorURI("tcp", "tcp://" + jmsMqHost + ":"
-                + jmsMqPort);
+        List<TransportConfiguration> list =
+                ConfigurationUtils.parseAcceptorURI("tcp", "tcp://" + jmsMqHost + ":" + jmsMqPort);
         return new HashSet<TransportConfiguration>(list);
     }
 

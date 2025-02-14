@@ -74,14 +74,11 @@ public class FlightRestController {
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<FlightResource> getFlights(
-            @Validated FlightSearchQuery flightSearchQuery) {
+    public List<FlightResource> getFlights(@Validated FlightSearchQuery flightSearchQuery) {
 
-        TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(
-                flightSearchQuery);
+        TicketSearchCriteriaDto searchCriteriaDto = beanMapper.map(flightSearchQuery);
         // 空席照会
-        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(
-                searchCriteriaDto);
+        List<FlightVacantInfoDto> flights = ticketSearchService.searchFlight(searchCriteriaDto);
         List<FlightResource> flightResourceList = new ArrayList<>();
         for (FlightVacantInfoDto flight : flights) {
             flightResourceList.add(beanMapper.map(flight));

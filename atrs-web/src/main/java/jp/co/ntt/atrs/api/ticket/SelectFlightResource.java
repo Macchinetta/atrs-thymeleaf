@@ -20,6 +20,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FareTypeCd;
@@ -45,7 +46,7 @@ public class SelectFlightResource implements Serializable {
     /**
      * 便名。
      */
-    @NotNull
+    @NotEmpty
     private String flightName;
 
     /**

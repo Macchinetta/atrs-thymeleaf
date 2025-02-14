@@ -45,8 +45,7 @@ public interface B2Mapper {
     @Mapping(target = "totalFare", ignore = true)
     @Mapping(target = "repTel", ignore = true)
     @Mapping(target = "reserveFlightList", ignore = true)
-    void map(TicketReserveForm ticketReserveForm,
-            @MappingTarget Reservation reservation);
+    void map(TicketReserveForm ticketReserveForm, @MappingTarget Reservation reservation);
 
     @Mapping(target = "repFamilyName", source = "kanaFamilyName")
     @Mapping(target = "repGivenName", source = "kanaGivenName")

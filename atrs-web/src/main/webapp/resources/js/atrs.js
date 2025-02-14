@@ -4,10 +4,9 @@
  * Copyright(c) 2015 NTT Corporation.
  */
 
-'use strict';
+"use strict";
 
 if (window._) {
-
     // Underscore.js のテンプレート範囲を示すことに使用する記号文字列を変更
     // (JSPの特殊タグとの競合を避けるため)
     _.templateSettings.evaluate = /<@([\s\S]+?)@>/g;

@@ -91,10 +91,8 @@ public class TicketSearchHelper {
         ticketSearchForm.setFlightType(defaultFlightType);
         ticketSearchForm.setDepAirportCd(defaultDepAirportCd);
         ticketSearchForm.setArrAirportCd(defaultArrAirportCd);
-        ticketSearchForm.setOutwardDate(Date.from(dateFactory.tick()
-                .instant()));
-        ticketSearchForm.setHomewardDate(Date.from(dateFactory.tick()
-                .instant()));
+        ticketSearchForm.setOutwardDate(Date.from(dateFactory.tick().instant()));
+        ticketSearchForm.setHomewardDate(Date.from(dateFactory.tick().instant()));
         ticketSearchForm.setBoardingClassCd(defaultBoardingClassCd);
 
         return ticketSearchForm;
@@ -108,8 +106,7 @@ public class TicketSearchHelper {
 
         FlightSearchOutputDto outputDto = new FlightSearchOutputDto();
         outputDto.setBeginningPeriod(Date.from(dateFactory.tick().instant()));
-        outputDto.setEndingPeriod(DateTimeUtil.toDate(ticketSharedService
-                .getSearchLimitDate()));
+        outputDto.setEndingPeriod(DateTimeUtil.toDate(ticketSharedService.getSearchLimitDate()));
         outputDto.setReserveIntervalTime(reserveIntervalTime);
 
         return outputDto;
@@ -124,8 +121,8 @@ public class TicketSearchHelper {
      * @throws BusinessException 業務例外
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(
-            List<Flight> flightList) throws BusinessException, BadRequestException {
+    public void validateFlightList(List<Flight> flightList)
+            throws BusinessException, BadRequestException {
 
         // フライト情報チェック
         try {

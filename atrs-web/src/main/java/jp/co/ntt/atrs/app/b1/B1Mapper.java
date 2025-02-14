@@ -25,6 +25,5 @@ public interface B1Mapper {
 
     @Mapping(target = "departureAirportCd", source = "depAirportCd")
     @Mapping(target = "arrivalAirportCd", source = "arrAirportCd")
-    TicketSearchCriteriaDto map(
-            FlightSearchCriteriaForm flightSearchCriteriaForm);
+    TicketSearchCriteriaDto map(FlightSearchCriteriaForm flightSearchCriteriaForm);
 }

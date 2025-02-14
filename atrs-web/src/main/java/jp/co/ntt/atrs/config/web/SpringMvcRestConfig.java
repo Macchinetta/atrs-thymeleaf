@@ -46,7 +46,7 @@ import com.fasterxml.jackson.databind.util.StdDateFormat;
 /**
  * Configure SpringMVCRest.
  */
-@ComponentScan(basePackages = { "jp.co.ntt.atrs.api" })
+@ComponentScan(basePackages = {"jp.co.ntt.atrs.api"})
 @EnableAspectJAutoProxy
 @EnableWebMvc
 @Configuration
@@ -56,8 +56,7 @@ public class SpringMvcRestConfig implements WebMvcConfigurer {
      * {@inheritDoc}
      */
     @Override
-    public void addArgumentResolvers(
-            List<HandlerMethodArgumentResolver> argumentResolvers) {
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(pageableHandlerMethodArgumentResolver());
     }
 
@@ -74,8 +73,7 @@ public class SpringMvcRestConfig implements WebMvcConfigurer {
      * {@inheritDoc}
      */
     @Override
-    public void configureMessageConverters(
-            List<HttpMessageConverter<?>> converters) {
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(mappingJackson2HttpMessageConverter());
     }
 
@@ -96,8 +94,7 @@ public class SpringMvcRestConfig implements WebMvcConfigurer {
      */
     @Bean
     public ObjectMapper jackson2ObjectMapperFactoryBean() {
-        return Jackson2ObjectMapperBuilder.json().dateFormat(
-                new StdDateFormat()).build();
+        return Jackson2ObjectMapperBuilder.json().dateFormat(new StdDateFormat()).build();
     }
 
     /**
@@ -126,8 +123,7 @@ public class SpringMvcRestConfig implements WebMvcConfigurer {
      * @param registry {@link InterceptorRegistry}
      * @param interceptor {@link HandlerInterceptor}
      */
-    private void addInterceptor(InterceptorRegistry registry,
-            HandlerInterceptor interceptor) {
+    private void addInterceptor(InterceptorRegistry registry, HandlerInterceptor interceptor) {
         registry.addInterceptor(interceptor).addPathPatterns("/**");
     }
 
@@ -149,14 +145,16 @@ public class SpringMvcRestConfig implements WebMvcConfigurer {
     @Bean("handlerExceptionResolverLoggingInterceptor")
     public HandlerExceptionResolverLoggingInterceptor handlerExceptionResolverLoggingInterceptor(
             ExceptionLogger exceptionLogger) {
-        HandlerExceptionResolverLoggingInterceptor bean = new HandlerExceptionResolverLoggingInterceptor();
+        HandlerExceptionResolverLoggingInterceptor bean =
+                new HandlerExceptionResolverLoggingInterceptor();
         bean.setExceptionLogger(exceptionLogger);
         return bean;
     }
 
     /**
      * Configure messages logging AOP advisor.
-     * @param handlerExceptionResolverLoggingInterceptor Bean defined by #handlerExceptionResolverLoggingInterceptor
+     * @param handlerExceptionResolverLoggingInterceptor Bean defined by
+     *        #handlerExceptionResolverLoggingInterceptor
      * @see #handlerExceptionResolverLoggingInterceptor(ExceptionLogger)
      * @return Advisor configured for PointCut
      */

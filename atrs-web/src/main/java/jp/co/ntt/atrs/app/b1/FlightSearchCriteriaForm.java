@@ -23,6 +23,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.terasoluna.gfw.common.codelist.ExistInCodeList;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.FlightType;
@@ -47,14 +48,14 @@ public class FlightSearchCriteriaForm implements Serializable {
     /**
      * 出発空港コード。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_AIRPORT")
     private String depAirportCd;
 
     /**
      * 到着空港コード。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_AIRPORT")
     private String arrAirportCd;
 
@@ -156,8 +157,7 @@ public class FlightSearchCriteriaForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

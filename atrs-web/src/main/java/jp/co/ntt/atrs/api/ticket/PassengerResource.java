@@ -161,9 +161,8 @@ public class PassengerResource implements Serializable {
      * @return 保持プロパティが全てnullまたは空文字の場合true
      */
     public boolean isEmpty() {
-        return !StringUtils.hasText(familyName) && !StringUtils.hasText(
-                givenName) && age == null && gender == null && !StringUtils
-                        .hasText(membershipNumber);
+        return !StringUtils.hasText(familyName) && !StringUtils.hasText(givenName) && age == null
+                && gender == null && !StringUtils.hasText(membershipNumber);
     }
 
 }

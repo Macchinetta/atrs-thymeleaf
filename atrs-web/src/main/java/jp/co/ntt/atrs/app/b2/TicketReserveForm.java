@@ -359,8 +359,7 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
      * 選択フライト情報フォームリストを設定する。
      * @param selectFlightFormList 選択フライト情報フォームリスト
      */
-    public void setSelectFlightFormList(
-            List<SelectFlightForm> selectFlightFormList) {
+    public void setSelectFlightFormList(List<SelectFlightForm> selectFlightFormList) {
         this.selectFlightFormList = selectFlightFormList;
     }
 
@@ -395,10 +394,8 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
      * @return 存在する場合true
      */
     public boolean hasAdditionalPassenger() {
-        if (passengerFormList != null
-                && INITIAL_PASSENGERS_NUMBER < passengerFormList.size()) {
-            for (int i = INITIAL_PASSENGERS_NUMBER; i < passengerFormList
-                    .size(); i++) {
+        if (passengerFormList != null && INITIAL_PASSENGERS_NUMBER < passengerFormList.size()) {
+            for (int i = INITIAL_PASSENGERS_NUMBER; i < passengerFormList.size(); i++) {
                 PassengerForm passenger = passengerFormList.get(i);
                 if (passenger != null && !passenger.isEmpty()) {
                     return true;
@@ -414,8 +411,7 @@ public class TicketReserveForm implements IReservationFlightForm, Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

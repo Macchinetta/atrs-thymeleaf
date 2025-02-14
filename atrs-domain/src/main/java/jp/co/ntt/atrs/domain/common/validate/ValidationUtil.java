@@ -46,8 +46,7 @@ public class ValidationUtil {
      */
     public static boolean isValidTelNum(String tel1, String tel2) {
         int telLength = tel1.length() + tel2.length();
-        return TEL1_AND_TEL2_MIN_LENGTH <= telLength
-                && telLength <= TEL1_AND_TEL2_MAX_LENGTH;
+        return TEL1_AND_TEL2_MIN_LENGTH <= telLength && telLength <= TEL1_AND_TEL2_MAX_LENGTH;
     }
 
 }

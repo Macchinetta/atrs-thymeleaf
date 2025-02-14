@@ -42,7 +42,6 @@ public class FareUtil {
      * @return 100円未満を切上げた運賃
      */
     public static int ceilFare(int fare) {
-        return new BigDecimal(fare).setScale(CEIL_FARE_SCALE, RoundingMode.UP)
-                .intValue();
+        return new BigDecimal(fare).setScale(CEIL_FARE_SCALE, RoundingMode.UP).intValue();
     }
 }

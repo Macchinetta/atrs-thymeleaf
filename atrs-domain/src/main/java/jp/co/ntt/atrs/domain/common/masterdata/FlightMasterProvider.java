@@ -50,8 +50,7 @@ public class FlightMasterProvider {
      */
     @PostConstruct
     public void load() {
-        List<FlightMaster> flightMasterList = flightRepository
-                .findAllFlightMaster();
+        List<FlightMaster> flightMasterList = flightRepository.findAllFlightMaster();
         for (FlightMaster flightMaster : flightMasterList) {
             flightMasterMap.put(flightMaster.getFlightName(), flightMaster);
         }

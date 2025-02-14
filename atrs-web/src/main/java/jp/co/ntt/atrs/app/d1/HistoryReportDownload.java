@@ -42,30 +42,31 @@ public class HistoryReportDownload extends AbstractFileDownloadView {
 
     /*
      * (non-Javadoc)
+     *
      * @see org.terasoluna.gfw.web.download.AbstractFileDownloadView#getInputStream( java.util.Map,
      * jakarta.servlet.http.HttpServletRequest)
      */
     @Override
-    protected InputStream getInputStream(Map<String, Object> model,
-            HttpServletRequest request) throws IOException {
+    protected InputStream getInputStream(Map<String, Object> model, HttpServletRequest request)
+            throws IOException {
 
         Path path = (Path) model.get(REPORT_FILE_PATH);
-        Resource resource = new FileSystemResource(path.toAbsolutePath()
-                .toString());
+        Resource resource = new FileSystemResource(path.toAbsolutePath().toString());
         return resource.getInputStream();
     }
 
     /*
      * (non-Javadoc)
-     * @see org.terasoluna.gfw.web.download.AbstractFileDownloadView# addResponseHeader (java.util.Map,
-     * jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *
+     * @see org.terasoluna.gfw.web.download.AbstractFileDownloadView# addResponseHeader
+     * (java.util.Map, jakarta.servlet.http.HttpServletRequest,
+     * jakarta.servlet.http.HttpServletResponse)
      */
-    protected void addResponseHeader(Map<String, Object> model,
-            HttpServletRequest request, HttpServletResponse response) {
+    protected void addResponseHeader(Map<String, Object> model, HttpServletRequest request,
+            HttpServletResponse response) {
 
         Path path = (Path) model.get(REPORT_FILE_PATH);
-        response.setHeader("Content-Disposition", "attachment;filename=" + path
-                .getFileName());
+        response.setHeader("Content-Disposition", "attachment;filename=" + path.getFileName());
 
         response.setContentType("text/csv");
     }

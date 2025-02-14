@@ -32,14 +32,13 @@ public class DateTimeUtil {
     /**
      * 日付(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
-            .ofPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     /**
      * 時間(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter
-            .ofPattern("HHmm");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     /**
      * コンストラクタ。
@@ -63,8 +62,7 @@ public class DateTimeUtil {
      * @return Dateオブジェクト
      */
     public static Date toDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault())
-                .toInstant());
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     /**
@@ -73,8 +71,7 @@ public class DateTimeUtil {
      * @return 引数で指定された時刻を保持するLocalDateTimeオブジェクト
      */
     public static LocalDateTime toLocalDateTime(Date date) {
-        return LocalDateTime.ofInstant(date.toInstant(), ZoneId
-                .systemDefault());
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
     /**
@@ -84,8 +81,7 @@ public class DateTimeUtil {
      * @return 引数で指定された日付および時刻を保持するLocalDateTimeオブジェクト
      */
     public static LocalDateTime toLocalDateTime(Date date, String timeString) {
-        LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId
-                .systemDefault());
+        LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
         LocalTime localTime = DateTimeUtil.toLocalTime(timeString);
         return localDate.atTime(localTime);
     }
@@ -158,8 +154,7 @@ public class DateTimeUtil {
     public static String toFormatTimeString(String timeString) {
         String result = timeString;
         if (timeString != null && 2 < timeString.length()) {
-            result = String.format("%s:%s", timeString.substring(0, 2),
-                    timeString.substring(2));
+            result = String.format("%s:%s", timeString.substring(0, 2), timeString.substring(2));
         }
         return result;
     }

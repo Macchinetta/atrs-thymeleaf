@@ -65,14 +65,11 @@ public class PeakTimeProvider {
         LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
 
         for (PeakTime peakTime : peakTimeList) {
-            LocalDate peakStartDate = DateTimeUtil.toLocalDate(peakTime
-                    .getPeakStartDate());
-            LocalDate peakEndDate = DateTimeUtil.toLocalDate(peakTime
-                    .getPeakEndDate());
+            LocalDate peakStartDate = DateTimeUtil.toLocalDate(peakTime.getPeakStartDate());
+            LocalDate peakEndDate = DateTimeUtil.toLocalDate(peakTime.getPeakEndDate());
 
             // 搭乗日が該当するピーク時期積算比率を返却
-            if (!(depLocalDate.isBefore(peakStartDate) || depLocalDate.isAfter(
-                    peakEndDate))) {
+            if (!(depLocalDate.isBefore(peakStartDate) || depLocalDate.isAfter(peakEndDate))) {
                 return peakTime;
             }
         }

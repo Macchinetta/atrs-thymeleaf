@@ -41,8 +41,7 @@ public interface TicketMapper {
     @Mapping(target = "flightType", ignore = true)
     @Mapping(target = "selectFlightResourceList", ignore = true)
     @Mapping(target = "passengerResourceList", ignore = true)
-    TicketReserveResource map(
-            @MappingTarget TicketReserveResource ticketReserveResource,
+    TicketReserveResource map(@MappingTarget TicketReserveResource ticketReserveResource,
             TicketReserveDto ticketReserveDto);
 
     @Mapping(target = "member.membershipNumber", source = "membershipNumber")

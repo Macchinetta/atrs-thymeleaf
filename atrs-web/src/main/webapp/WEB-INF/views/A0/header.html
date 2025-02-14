@@ -1,55 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../../resources/css/style.css">
-</head>
-<header th:fragment="header" id="header">
-  <div class="container">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" />
+    </head>
+    <header th:fragment="header" id="header">
+        <div class="container">
+            <h1>
+                <a href="../A0/top.html" th:href="@{/}"> <span class="sr-only">Airline Ticket Reservation System</span> </a>
+            </h1>
+            <nav>
+                <ul class="vertical-middle-box">
+                    <li><a href="../B1/flightSearch.html" th:href="@{/ticket/search?form}">国内線</a></li>
+                </ul>
+            </nav>
 
-    <h1>
-      <a href="../A0/top.html" th:href="@{/}"> <span class="sr-only">Airline Ticket Reservation System</span>
-      </a>
-    </h1>
-    <nav>
-      <ul class="vertical-middle-box">
-        <li><a href="../B1/flightSearch.html" th:href="@{/ticket/search?form}">国内線</a></li>
-      </ul>
-    </nav>
+            <div class="header-right-menu">
+                <div sec:authorize="!hasRole('MEMBER')" class="vertical-middle-box">
+                    <a id="member-registration" class="btn btn-primary" href="../C1/memberRegisterForm.html" th:href="@{/member/register?form}">会員登録</a>
+                    <a id="login" class="btn btn-default" href="../A1/loginForm.html" th:href="@{/auth/login?form}"><span class="glyphicon glyphicon-user"></span>ログイン</a>
+                </div>
 
-    <div class="header-right-menu">
-
-      <div sec:authorize="!hasRole('MEMBER')" class="vertical-middle-box">
-        <a id="member-registration" class="btn btn-primary" href="../C1/memberRegisterForm.html" th:href="@{/member/register?form}">会員登録</a> <a id="login"
-          class="btn btn-default" href="../A1/loginForm.html" th:href="@{/auth/login?form}"><span
-          class="glyphicon glyphicon-user"></span>ログイン</a>
-      </div>
-
-      <div sec:authorize="hasRole('MEMBER')" class="vertical-middle-box">
-        <div class="dropdown">
-          <span class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-            th:with="member=${#authentication.principal.member}">
-            <span id="name" th:text="|ようこそ ${member.kanjiFamilyName} ${member.kanjiGivenName} さま&nbsp;|">ようこそ 電電 太郎 さま</span>
-            <span class='caret'></span>
-          </span>
-          <ul class="dropdown-menu">
-            <li><a id="member-information-change" tabindex="-1" href="../C2/memberUpdateForm.html" th:href="@{/member/update?form}">会員情報変更</a></li>
-            <li><a id="create-history-report" tabindex="-1" href="../D1/HistoryReport/create?form" th:href="@{/HistoryReport/create?form}">履歴レポート作成</a></li>
-            <li><a id="download-history-report" tabindex="-1" href="../D1/HistoryReport/download?reportList" th:href="@{/HistoryReport/download?reportList}">履歴レポートDL</a></li>
-            <li><a id="logout" tabindex="-1" href="javascript:void(0)"
-              onclick="document.logoutForm.submit(); return false;">ログアウト</a></li>
-          </ul>
+                <div sec:authorize="hasRole('MEMBER')" class="vertical-middle-box">
+                    <div class="dropdown">
+                        <span class="btn btn-default dropdown-toggle" data-toggle="dropdown" th:with="member=${#authentication.principal.member}">
+                            <span id="name" th:text="|ようこそ ${member.kanjiFamilyName} ${member.kanjiGivenName} さま&nbsp;|">ようこそ 電電 太郎 さま</span>
+                            <span class="caret"></span>
+                        </span>
+                        <ul class="dropdown-menu">
+                            <li><a id="member-information-change" tabindex="-1" href="../C2/memberUpdateForm.html" th:href="@{/member/update?form}">会員情報変更</a></li>
+                            <li><a id="create-history-report" tabindex="-1" href="../D1/HistoryReport/create?form" th:href="@{/HistoryReport/create?form}">履歴レポート作成</a></li>
+                            <li><a id="download-history-report" tabindex="-1" href="../D1/HistoryReport/download?reportList" th:href="@{/HistoryReport/download?reportList}">履歴レポートDL</a></li>
+                            <li><a id="logout" tabindex="-1" href="javascript:void(0)" onclick="document.logoutForm.submit(); return false;">ログアウト</a></li>
+                        </ul>
+                    </div>
+                    <form name="logoutForm" th:action="@{/auth/dologout}" method="POST"></form>
+                </div>
+            </div>
         </div>
-        <form name="logoutForm" th:action="@{/auth/dologout}" method="POST"></form>
-      </div>
-
-    </div>
-  </div>
-</header>
-<body>
-<script src="../../../resources/vendor/jquery/jquery.min.js"></script>
-<script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-</body>
+    </header>
+    <body>
+        <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    </body>
 </html>

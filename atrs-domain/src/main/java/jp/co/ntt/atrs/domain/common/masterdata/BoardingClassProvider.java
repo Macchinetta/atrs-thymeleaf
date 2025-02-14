@@ -51,11 +51,9 @@ public class BoardingClassProvider {
      */
     @PostConstruct
     public void load() {
-        List<BoardingClass> boardingClassList = boardingClassRepository
-                .findAll();
+        List<BoardingClass> boardingClassList = boardingClassRepository.findAll();
         for (BoardingClass boardingClass : boardingClassList) {
-            boardingClassCodeMap.put(boardingClass.getBoardingClassCd(),
-                    boardingClass);
+            boardingClassCodeMap.put(boardingClass.getBoardingClassCd(), boardingClass);
         }
     }
 

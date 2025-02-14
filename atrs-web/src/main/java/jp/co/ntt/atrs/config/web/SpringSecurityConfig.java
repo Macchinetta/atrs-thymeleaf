@@ -15,12 +15,15 @@
  */
 package jp.co.ntt.atrs.config.web;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -43,7 +46,6 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.csrf.InvalidCsrfTokenException;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter;
 
 import jp.co.ntt.atrs.app.common.security.AtrsAuthenticationFailureHandler;
@@ -66,7 +68,7 @@ public class SpringSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring().requestMatchers(
-                new AntPathRequestMatcher("/resources/**"));
+                antMatcher("/resources/**"));
     }
 
     /**
@@ -77,15 +79,14 @@ public class SpringSecurityConfig {
      */
     @Bean
     @Order(1)
-    public SecurityFilterChain restFilterChain(
-            HttpSecurity http) throws Exception {
-        http.securityMatcher(new AntPathRequestMatcher("/api/v1/**"));
+    public SecurityFilterChain restFilterChain(HttpSecurity http) throws Exception {
+        http.securityMatcher(antMatcher("/api/v1/**"));
         http.sessionManagement(session -> session.sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS));
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(authz -> authz.requestMatchers(
-                new AntPathRequestMatcher("/**")).permitAll());
+                antMatcher("/**")).permitAll());
         return http.build();
     }
 
@@ -110,9 +111,9 @@ public class SpringSecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler()));
         http.authorizeHttpRequests(authz -> authz
-                .requestMatchers(new AntPathRequestMatcher("/member/update")).hasRole("MEMBER")
-                .requestMatchers(new AntPathRequestMatcher("/HistoryReport/**")).hasRole("MEMBER")
-                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll());
+                .requestMatchers(antMatcher("/member/update")).hasRole("MEMBER")
+                .requestMatchers(antMatcher("/HistoryReport/**")).hasRole("MEMBER")
+                .requestMatchers(antMatcher("/**")).permitAll());
         http.sessionManagement(Customizer.withDefaults());
         http.exceptionHandling(exceptionHandling -> exceptionHandling
                 .accessDeniedHandler(accessDeniedHandler())
@@ -133,7 +134,7 @@ public class SpringSecurityConfig {
         bean.setAuthenticationFailureHandler(authenticationFailureHandler());
         bean.setAuthenticationSuccessHandler(authenticationSuccessHandler());
         bean.setRequiresAuthenticationRequestMatcher(
-                new AntPathRequestMatcher("/auth/dologin", "POST"));
+                antMatcher(HttpMethod.POST,"/auth/dologin"));
         bean.setUsernameParameter("membershipNumber");
         bean.setPasswordParameter("password");
         bean.setSecurityContextRepository(

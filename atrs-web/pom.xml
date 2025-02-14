@@ -1,117 +1,122 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>jp.co.ntt.atrs</groupId>
-    <artifactId>atrs</artifactId>
-    <version>1.10.0.RELEASE</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
-  <artifactId>atrs-web</artifactId>
-  <name>${project.artifactId}</name>
-  <packaging>war</packaging>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ntt.atrs</groupId>
+        <artifactId>atrs</artifactId>
+        <version>1.11.0.RELEASE</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>atrs-web</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>war</packaging>
+    <scm>
+        <connection>scm:git:git://github.com/Macchinetta/atrs-thymeleaf.git</connection>
+        <developerConnection>scm:git:ssh://github.com/Macchinetta/atrs-thymeleaf.git</developerConnection>
+        <url>https://github.com/Macchinetta/atrs-thymeleaf</url>
+    </scm>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.cargo</groupId>
-        <artifactId>cargo-maven3-plugin</artifactId>
-        <configuration>
-          <deployables>
-            <deployable>
-              <location>${project.basedir}/target/atrs.war</location>
-              <type>war</type>
-              <properties>
-                <context>atrs</context>
-              </properties>
-            </deployable>
-          </deployables>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <configuration>
+                    <deployables>
+                        <deployable>
+                            <location>${project.basedir}/target/atrs.war</location>
+                            <type>war</type>
+                            <properties>
+                                <context>atrs</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <dependencies>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>atrs-env</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>warpack</id>
+            <dependencies>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- == Begin ATRS == -->
         <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>atrs-env</artifactId>
-          <version>${project.version}</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>atrs-domain</artifactId>
+        </dependency>
+        <!-- == End ATRS == -->
+
+        <!-- == Begin TERASOLUNA == -->
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-web-dependencies</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-          <scope>runtime</scope>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-security-web-dependencies</artifactId>
+            <type>pom</type>
         </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>warpack</id>
-      <dependencies>
-      </dependencies>
-    </profile>
-  </profiles>
+        <!-- == End TERASOLUNA == -->
 
-  <dependencies>
-    <!-- == Begin ATRS == -->
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>atrs-domain</artifactId>
-    </dependency>
-    <!-- == End ATRS == -->
+        <!-- == Begin Thymeleaf == -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- == End Thymeleaf == -->
 
-    <!-- == Begin TERASOLUNA == -->
-    <dependency>
-      <groupId>org.terasoluna.gfw</groupId>
-      <artifactId>terasoluna-gfw-web-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.terasoluna.gfw</groupId>
-      <artifactId>terasoluna-gfw-security-web-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <!-- == End TERASOLUNA == -->
+        <!-- == Begin Unit Test == -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- == End Unit Test == -->
+    </dependencies>
 
-    <!-- == Begin Thymeleaf == -->
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring6</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- == End Thymeleaf == -->
-
-    <!-- == Begin Unit Test == -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <!-- == End Unit Test == -->
-  </dependencies>
-
-  <properties>
-    <project.root.basedir>${project.parent.basedir}</project.root.basedir>
-  </properties>
+    <properties>
+        <project.root.basedir>${project.parent.basedir}</project.root.basedir>
+    </properties>
 
 </project>

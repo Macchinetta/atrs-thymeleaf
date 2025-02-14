@@ -43,8 +43,8 @@ public interface TicketSharedService {
      * @throws BusinessException 業務例外
      * @throws InvalidFlightException フライト情報不正例外
      */
-    void validateFlightList(
-            List<Flight> flightList) throws BusinessException, InvalidFlightException;
+    void validateFlightList(List<Flight> flightList)
+            throws BusinessException, InvalidFlightException;
 
     /**
      * 搭乗日の有効性チェックを実行する。
@@ -71,8 +71,7 @@ public interface TicketSharedService {
      * @param depDate 搭乗日
      * @return 基本運賃
      */
-    int calculateBasicFare(int basicFareOfRoute,
-            BoardingClassCd boardingClassCd, Date depDate);
+    int calculateBasicFare(int basicFareOfRoute, BoardingClassCd boardingClassCd, Date depDate);
 
     /**
      * 運賃を計算する。

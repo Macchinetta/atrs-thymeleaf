@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.app.b0;
 
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -53,27 +53,26 @@ public class ReservationFlightValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         IReservationFlightForm form = (IReservationFlightForm) target;
-        List<SelectFlightForm> selectFlightFormList = form
-                .getSelectFlightFormList();
+        List<SelectFlightForm> selectFlightFormList = form.getSelectFlightFormList();
 
         // フライト種別に応じてチェック
         if (!errors.hasFieldErrors("flightType")) {
 
             switch (form.getFlightType()) {
-            case RT:
-                // 往復の場合のチェック
-                validateRoundTrip(selectFlightFormList, errors);
-                break;
+                case RT:
+                    // 往復の場合のチェック
+                    validateRoundTrip(selectFlightFormList, errors);
+                    break;
 
-            case OW:
-                // 片道の場合のチェック
-                validateOneWay(selectFlightFormList, errors);
-                break;
+                case OW:
+                    // 片道の場合のチェック
+                    validateOneWay(selectFlightFormList, errors);
+                    break;
 
-            default:
-                // 処理なし
+                default:
+                    // 処理なし
 
-                break;
+                    break;
             }
         }
 
@@ -84,16 +83,15 @@ public class ReservationFlightValidator implements Validator {
      * @param selectFlightFormList 予約フライト選択フォーム
      * @param errors エラーメッセージを保持するクラス
      */
-    private void validateRoundTrip(List<SelectFlightForm> selectFlightFormList,
-            Errors errors) {
+    private void validateRoundTrip(List<SelectFlightForm> selectFlightFormList, Errors errors) {
         // 選択フライト必須チェック
         if (CollectionUtils.isEmpty(selectFlightFormList)) {
 
             // 往路、復路共に未入力の場合
-            errors.reject("NotNull.outwardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
-            errors.reject("NotNull.homewardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("homewardFlight") }, "");
+            errors.reject("NotNull.outwardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("outwardFlight")}, "");
+            errors.reject("NotNull.homewardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("homewardFlight")}, "");
         } else {
             // フライトが2つ選択されていることをチェック
             if (selectFlightFormList.size() == 2) {
@@ -119,12 +117,11 @@ public class ReservationFlightValidator implements Validator {
      * @param selectFlightFormList 予約フライト選択フォーム
      * @param errors エラーメッセージを保持するクラス
      */
-    private void validateOneWay(List<SelectFlightForm> selectFlightFormList,
-            Errors errors) {
+    private void validateOneWay(List<SelectFlightForm> selectFlightFormList, Errors errors) {
         // 選択フライト必須チェック
         if (CollectionUtils.isEmpty(selectFlightFormList)) {
-            errors.reject("NotNull.outwardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
+            errors.reject("NotNull.outwardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("outwardFlight")}, "");
         } else {
 
             // フライトが1つ選択されていることをチェック

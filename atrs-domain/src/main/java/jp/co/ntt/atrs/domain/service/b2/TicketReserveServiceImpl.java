@@ -98,8 +98,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * {@inheritDoc}
      */
     @Override
-    public int calculateTotalFare(List<Flight> flightList,
-            List<Passenger> passengerList) {
+    public int calculateTotalFare(List<Flight> flightList, List<Passenger> passengerList) {
 
         Assert.notEmpty(flightList, "flightList must not empty.");
         Assert.notEmpty(passengerList, "passengerList must not empty.");
@@ -131,16 +130,14 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             Assert.notNull(flight, "flight must not null.");
 
             Route route = flight.getFlightMaster().getRoute();
-            int baseFare = ticketSharedService.calculateBasicFare(route
-                    .getBasicFare(), flight.getBoardingClass()
-                            .getBoardingClassCd(), flight.getDepartureDate());
+            int baseFare = ticketSharedService.calculateBasicFare(route.getBasicFare(),
+                    flight.getBoardingClass().getBoardingClassCd(), flight.getDepartureDate());
 
             int discountRate = flight.getFareType().getDiscountRate();
-            int boardingFare = ticketSharedService.calculateFare(baseFare,
-                    discountRate);
+            int boardingFare = ticketSharedService.calculateFare(baseFare, discountRate);
 
-            int fare = boardingFare * adultNum + baseFare * (childFareRate
-                    - discountRate) / 100 * childNum;
+            int fare = boardingFare * adultNum
+                    + baseFare * (childFareRate - discountRate) / 100 * childNum;
 
             // 合計金額
             totalFare += fare;
@@ -156,19 +153,16 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * {@inheritDoc}
      */
     @Override
-    public void validateReservation(
-            Reservation reservation) throws BusinessException {
+    public void validateReservation(Reservation reservation) throws BusinessException {
 
         Assert.notNull(reservation, "reservation must not null.");
-        Assert.notEmpty(reservation.getReserveFlightList(),
-                "reserveFlightList must not empty.");
+        Assert.notEmpty(reservation.getReserveFlightList(), "reserveFlightList must not empty.");
 
         // 予約代表者の年齢が18歳以上であることを検証
         validateRepresentativeAge(reservation.getRepAge());
 
         // 予約フライト情報一覧を取得
-        List<ReserveFlight> reserveFlightList = reservation
-                .getReserveFlightList();
+        List<ReserveFlight> reserveFlightList = reservation.getReserveFlightList();
 
         // 運賃種別の適用可否を検証
         validateFareType(reserveFlightList);
@@ -185,8 +179,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * @param reserveFlightList 予約フライト情報一覧
      * @throws AtrsBusinessException 照合失敗例外
      */
-    private void validatePassengerMemberInfo(
-            List<ReserveFlight> reserveFlightList) throws AtrsBusinessException {
+    private void validatePassengerMemberInfo(List<ReserveFlight> reserveFlightList)
+            throws AtrsBusinessException {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
@@ -202,28 +196,26 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             for (Passenger passenger : passengerList) {
                 Assert.notNull(passenger, "passenger must not null.");
 
-                String membershipNumber = passenger.getMember()
-                        .getMembershipNumber();
+                String membershipNumber = passenger.getMember().getMembershipNumber();
 
                 // 搭乗者会員番号が入力されている場合のみ照合
                 if (StringUtils.hasLength(membershipNumber)) {
 
                     // 搭乗者のカード会員情報取得
-                    Member passengerMember = memberRepository.findOne(
-                            membershipNumber);
+                    Member passengerMember = memberRepository.findOne(membershipNumber);
 
                     // 会員情報が存在することを確認
                     if (passengerMember == null) {
-                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2005, position);
+                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2005,
+                                position);
                     }
 
                     // 取得した搭乗者のカード会員情報と搭乗者情報が同一であることを確認
-                    if (!(passenger.getFamilyName().equals(passengerMember
-                            .getKanaFamilyName()) && passenger.getGivenName()
-                                    .equals(passengerMember.getKanaGivenName())
-                            && passenger.getGender().equals(passengerMember
-                                    .getGender()))) {
-                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2006, position);
+                    if (!(passenger.getFamilyName().equals(passengerMember.getKanaFamilyName())
+                            && passenger.getGivenName().equals(passengerMember.getKanaGivenName())
+                            && passenger.getGender().equals(passengerMember.getGender()))) {
+                        throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2006,
+                                position);
                     }
                 }
                 position++;
@@ -237,11 +229,10 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * @param reservation 予約情報
      * @throws AtrsBusinessException チェック失敗例外
      */
-    private void validateRepresentativeMemberInfo(
-            Reservation reservation) throws AtrsBusinessException {
+    private void validateRepresentativeMemberInfo(Reservation reservation)
+            throws AtrsBusinessException {
 
-        String repMembershipNumber = reservation.getRepMember()
-                .getMembershipNumber();
+        String repMembershipNumber = reservation.getRepMember().getMembershipNumber();
 
         // 予約代表者会員番号が入力されている場合のみチェック
         if (StringUtils.hasLength(repMembershipNumber)) {
@@ -255,11 +246,9 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             }
 
             // 取得した会員情報と予約代表者情報が同一であることを確認
-            if (!(reservation.getRepFamilyName().equals(repMember
-                    .getKanaFamilyName()) && reservation.getRepGivenName()
-                            .equals(repMember.getKanaGivenName()) && reservation
-                                    .getRepGender().equals(repMember
-                                            .getGender()))) {
+            if (!(reservation.getRepFamilyName().equals(repMember.getKanaFamilyName())
+                    && reservation.getRepGivenName().equals(repMember.getKanaGivenName())
+                    && reservation.getRepGender().equals(repMember.getGender()))) {
                 throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2003);
             }
         }
@@ -270,8 +259,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * @param reserveFlightList 予約フライト情報一覧
      * @throws AtrsBusinessException チェック失敗例外
      */
-    private void validateFareType(
-            List<ReserveFlight> reserveFlightList) throws AtrsBusinessException {
+    private void validateFareType(List<ReserveFlight> reserveFlightList)
+            throws AtrsBusinessException {
 
         for (ReserveFlight reserveFlight : reserveFlightList) {
 
@@ -303,8 +292,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
                 int passengerMinNum = fareType.getPassengerMinNum();
                 if (passengerList.size() < passengerMinNum) {
                     // 搭乗者数が利用可能最少人数未満の場合、業務例外をスロー
-                    throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2010, fareType
-                            .getFareTypeName(), passengerMinNum);
+                    throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2010,
+                            fareType.getFareTypeName(), passengerMinNum);
                 }
             }
         }
@@ -317,7 +306,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     private void validateRepresentativeAge(int age) {
 
         if (age < representativeMinAge) {
-            throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2004, representativeMinAge);
+            throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2004,
+                    representativeMinAge);
         }
     }
 
@@ -325,14 +315,12 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * {@inheritDoc}
      */
     @Override
-    public TicketReserveDto registerReservation(
-            Reservation reservation) throws BusinessException {
+    public TicketReserveDto registerReservation(Reservation reservation) throws BusinessException {
 
         Assert.notNull(reservation, "reservation must not null.");
 
         // 予約フライト情報一覧
-        List<ReserveFlight> reserveFlightList = reservation
-                .getReserveFlightList();
+        List<ReserveFlight> reserveFlightList = reservation.getReserveFlightList();
         Assert.notEmpty(reserveFlightList, "reserveFlightList must not empty.");
 
         // 予約フライト情報に対して空席数の確認および更新を実施
@@ -344,9 +332,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         // (パラメータの予約情報に予約番号が格納される)
         int reservationInsertCount = reservationRepository.insert(reservation);
         if (reservationInsertCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002
-                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
-                            reservationInsertCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
+                    LogMessages.E_AR_A0_L9002.getMessage(reservationInsertCount, 1));
         }
         // 予約番号を取得
         String reserveNo = reservation.getReserveNo();
@@ -358,31 +345,25 @@ public class TicketReserveServiceImpl implements TicketReserveService {
             reserveFlight.setReserveNo(reserveNo);
 
             // 予約フライト情報を登録
-            int reserveFlightInsertCount = reservationRepository
-                    .insertReserveFlight(reserveFlight);
+            int reserveFlightInsertCount = reservationRepository.insertReserveFlight(reserveFlight);
             if (reserveFlightInsertCount != 1) {
-                throw new SystemException(LogMessages.E_AR_A0_L9002
-                        .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
-                                reserveFlightInsertCount, 1));
+                throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
+                        LogMessages.E_AR_A0_L9002.getMessage(reserveFlightInsertCount, 1));
             }
 
             // 全搭乗者情報を登録
             for (Passenger passenger : reserveFlight.getPassengerList()) {
-                passenger.setReserveFlightNo(reserveFlight
-                        .getReserveFlightNo());
-                int passengerInsertCount = reservationRepository
-                        .insertPassenger(passenger);
+                passenger.setReserveFlightNo(reserveFlight.getReserveFlightNo());
+                int passengerInsertCount = reservationRepository.insertPassenger(passenger);
                 if (passengerInsertCount != 1) {
-                    throw new SystemException(LogMessages.E_AR_A0_L9002
-                            .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
-                                    passengerInsertCount, 1));
+                    throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
+                            LogMessages.E_AR_A0_L9002.getMessage(passengerInsertCount, 1));
                 }
             }
         }
 
         // 往路搭乗日を支払期限とする
-        Date paymentDate = reserveFlightList.get(0).getFlight()
-                .getDepartureDate();
+        Date paymentDate = reserveFlightList.get(0).getFlight().getDepartureDate();
 
         return new TicketReserveDto(reserveNo, paymentDate);
 
@@ -393,8 +374,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
      * @param reserveFlight 予約フライト情報
      * @throws AtrsBusinessException チェック失敗例外
      */
-    private void validateAndUpdateVacancy(
-            ReserveFlight reserveFlight) throws AtrsBusinessException {
+    private void validateAndUpdateVacancy(ReserveFlight reserveFlight)
+            throws AtrsBusinessException {
         Assert.notNull(reserveFlight, "reserveFlight must not null.");
 
         Flight flight = reserveFlight.getFlight();
@@ -408,8 +389,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
 
         // 空席数を更新するために、フライト情報を取得する(排他)
         flight = flightRepository.findOneForUpdate(flight.getDepartureDate(),
-                flight.getFlightMaster().getFlightName(), flight
-                        .getBoardingClass(), flight.getFareType());
+                flight.getFlightMaster().getFlightName(), flight.getBoardingClass(),
+                flight.getFareType());
         int vacantNum = flight.getVacantNum();
 
         // 搭乗者数
@@ -427,9 +408,8 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         // 空席数を更新
         int flightUpdateCount = flightRepository.update(flight);
         if (flightUpdateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002
-                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
-                            flightUpdateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
+                    LogMessages.E_AR_A0_L9002.getMessage(flightUpdateCount, 1));
         }
     }
 
@@ -439,8 +419,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
     @Override
     public Member findMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber,
-                "membershipNumber must have some text.");
+        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
 
         return memberRepository.findOne(membershipNumber);
     }

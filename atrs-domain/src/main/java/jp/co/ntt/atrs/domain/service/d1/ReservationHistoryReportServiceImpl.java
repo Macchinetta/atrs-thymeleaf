@@ -47,14 +47,13 @@ import jp.co.ntt.atrs.domain.repository.reservation.ReservationRepository;
  * @author NTT 電電次郎
  */
 @Service
-public class ReservationHistoryReportServiceImpl implements
-                                                 ReservationHistoryReportService {
+public class ReservationHistoryReportServiceImpl implements ReservationHistoryReportService {
 
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(
-            ReservationHistoryReportServiceImpl.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(ReservationHistoryReportServiceImpl.class);
 
     /**
      * レポート名接頭文字列
@@ -74,10 +73,10 @@ public class ReservationHistoryReportServiceImpl implements
     /**
      * レポートの見出し文字列
      */
-    private static final String REPORT_HEADER = String.format(
-            "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"", "Reserve No",
-            "Reservation Date", "Total Fare", "Reservation Flight Date",
-            "Reservation Flight No", "Reservation Flight Name");
+    private static final String REPORT_HEADER =
+            String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"", "Reserve No",
+                    "Reservation Date", "Total Fare", "Reservation Flight Date",
+                    "Reservation Flight No", "Reservation Flight Name");
 
     /**
      * JmsMessagingTemplate
@@ -112,8 +111,7 @@ public class ReservationHistoryReportServiceImpl implements
     /**
      * フォーマッタ()
      */
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-            "yyyyMMddHHmmss");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
     /**
      * {@inheritDoc}
@@ -122,8 +120,7 @@ public class ReservationHistoryReportServiceImpl implements
     @Transactional("jmsSendTransactionManager")
     public void sendRequest(String membershipNumber) {
 
-        this.jmsMessagingTemplate.convertAndSend(
-                "jms/queue/ReservationHistoryReportRequestQueue",
+        this.jmsMessagingTemplate.convertAndSend("jms/queue/ReservationHistoryReportRequestQueue",
                 membershipNumber);
     }
 
@@ -139,8 +136,7 @@ public class ReservationHistoryReportServiceImpl implements
 
         // 予約履歴情報の取得
         List<ReservationHistoryDto> reservationHistoryList = this.reservationRepository
-                .findAllByMembershipNumberForReport(criteria
-                        .getMembershipNumber());
+                .findAllByMembershipNumberForReport(criteria.getMembershipNumber());
         // レポート出力
         generateReport(criteria.getMembershipNumber(), reservationHistoryList);
     }
@@ -161,17 +157,15 @@ public class ReservationHistoryReportServiceImpl implements
 
         List<String> existingReportNameList = new ArrayList<>();
 
-        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(
-                customerDirPath)) {
+        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(customerDirPath)) {
 
             for (Path path : dirStream) {
                 existingReportNameList.add(path.getFileName().toString());
             }
 
         } catch (IOException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0001
-                    .getCode(), LogMessages.E_AR_D1_L0001.getMessage(
-                            membershipNumber), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0001.getCode(),
+                    LogMessages.E_AR_D1_L0001.getMessage(membershipNumber), e);
         }
 
         if (existingReportNameList.isEmpty()) {
@@ -190,8 +184,7 @@ public class ReservationHistoryReportServiceImpl implements
      * @param reportName チェック対象のファイル名
      * @return ファイルが既存する場合に <code>true</code>、既存しない場合<code>false</code>
      */
-    private boolean checkReportExistence(String membershipNumber,
-            String reportName) {
+    private boolean checkReportExistence(String membershipNumber, String reportName) {
 
         if (!StringUtils.hasText(reportName)) {
             return false;
@@ -203,17 +196,15 @@ public class ReservationHistoryReportServiceImpl implements
             return false;
         }
 
-        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(
-                customerDirPath)) {
+        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(customerDirPath)) {
             for (Path path : dirStream) {
                 if (reportName.equals(path.getFileName().toString())) {
                     return true;
                 }
             }
         } catch (IOException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0001
-                    .getCode(), LogMessages.E_AR_D1_L0001.getMessage(
-                            membershipNumber), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0001.getCode(),
+                    LogMessages.E_AR_D1_L0001.getMessage(membershipNumber), e);
         }
         return false;
     }
@@ -230,13 +221,11 @@ public class ReservationHistoryReportServiceImpl implements
 
         // システム共通の暫定レポートファイル名
         String tmpReportFileName = TMP_REPORT_NAME_PREFIX + finalReportFileName;
-        Path tmpReportFilePath = this.tmpReportDirPath.resolve(
-                tmpReportFileName);
+        Path tmpReportFilePath = this.tmpReportDirPath.resolve(tmpReportFileName);
 
         try {
             // 暫定レポートファイルへの出力
-            try (Writer csvWriter = Files.newBufferedWriter(
-                    tmpReportFilePath)) {
+            try (Writer csvWriter = Files.newBufferedWriter(tmpReportFilePath)) {
                 csvWriter.write(REPORT_HEADER);
                 csvWriter.write(LINE_SEPARATOR);
                 for (ReservationHistoryDto reservationHistory : reservationHistoryList) {
@@ -246,18 +235,15 @@ public class ReservationHistoryReportServiceImpl implements
             }
 
             // ディレクトリは顧客別に設ける
-            Path finalReportDirPath = this.reportDirPath.resolve(
-                    membershipNumber);
+            Path finalReportDirPath = this.reportDirPath.resolve(membershipNumber);
             createDirectories(finalReportDirPath);
-            Path finalReportFilePath = finalReportDirPath.resolve(
-                    finalReportFileName);
+            Path finalReportFilePath = finalReportDirPath.resolve(finalReportFileName);
             // 暫定ファイルから正式ファイルへの変換移動
             Files.move(tmpReportFilePath, finalReportFilePath);
 
         } catch (IOException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0002
-                    .getCode(), LogMessages.E_AR_D1_L0002.getMessage(
-                            membershipNumber), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0002.getCode(),
+                    LogMessages.E_AR_D1_L0002.getMessage(membershipNumber), e);
         }
 
         if (logger.isDebugEnabled()) {
@@ -272,8 +258,7 @@ public class ReservationHistoryReportServiceImpl implements
      */
     private String generateReportFileName(String membershipNumber) {
         LocalDateTime dateTime = LocalDateTime.now(this.dateFactory.tick());
-        return REPORT_NAME_PREFIX + membershipNumber + "_" + formatter.format(
-                dateTime) + ".csv";
+        return REPORT_NAME_PREFIX + membershipNumber + "_" + formatter.format(dateTime) + ".csv";
     }
 
     /**
@@ -297,9 +282,8 @@ public class ReservationHistoryReportServiceImpl implements
         try {
             Files.createDirectories(dirPath);
         } catch (IOException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0003
-                    .getCode(), LogMessages.E_AR_D1_L0003.getMessage(
-                            dirPath), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0003.getCode(),
+                    LogMessages.E_AR_D1_L0003.getMessage(dirPath), e);
         }
         if (logger.isDebugEnabled()) {
             logger.debug("directory created : " + dirPath);

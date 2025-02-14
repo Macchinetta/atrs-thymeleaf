@@ -1,191 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app
-  xmlns="https://jakarta.ee/xml/ns/jakartaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-  version="6.0">
+    xmlns="https://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+    version="6.0">
 
-  <context-param>
-    <param-name>logbackDisableServletContainerInitializer</param-name>
-    <param-value>true</param-value>
-  </context-param>
+    <context-param>
+        <param-name>logbackDisableServletContainerInitializer</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>contextClass</param-name>
-    <param-value>
-      org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-    </param-value>
-  </context-param>
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
 
-  <listener>
-    <listener-class>ch.qos.logback.classic.servlet.LogbackServletContextListener</listener-class>
-  </listener>
+    <listener>
+        <listener-class>ch.qos.logback.classic.servlet.LogbackServletContextListener</listener-class>
+    </listener>
 
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener</listener-class>
-  </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener</listener-class>
+    </listener>
 
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <!-- Root ApplicationContext -->
-    <param-value>
-      jp.co.ntt.atrs.config.app.ApplicationContextConfig
-      jp.co.ntt.atrs.config.web.SpringSecurityConfig
-    </param-value>
-  </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- Root ApplicationContext -->
+        <param-value>
+            jp.co.ntt.atrs.config.app.ApplicationContextConfig
+            jp.co.ntt.atrs.config.web.SpringSecurityConfig
+        </param-value>
+    </context-param>
 
-  <filter>
-    <filter-name>MDCClearFilter</filter-name>
-    <filter-class>org.terasoluna.gfw.web.logging.mdc.MDCClearFilter</filter-class>
-  </filter>
+    <filter>
+        <filter-name>MDCClearFilter</filter-name>
+        <filter-class>org.terasoluna.gfw.web.logging.mdc.MDCClearFilter</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>MDCClearFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>MDCClearFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <filter>
-    <filter-name>XTrackMDCPutFilter</filter-name>
-    <filter-class>org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter</filter-class>
-  </filter>
+    <filter>
+        <filter-name>XTrackMDCPutFilter</filter-name>
+        <filter-class>org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>XTrackMDCPutFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>XTrackMDCPutFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <filter>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>utf-8</param-value>
-    </init-param>
-    <init-param>
-      <param-name>forceEncoding</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <filter>
-    <filter-name>exceptionLoggingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-  </filter>
+    <filter>
+        <filter-name>exceptionLoggingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>exceptionLoggingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>exceptionLoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <filter>
-    <filter-name>HttpMethodFilter</filter-name>
-    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-  </filter>
+    <filter>
+        <filter-name>HttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>HttpMethodFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>HttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <!-- SpringSecurity -->
-  <filter>
-    <filter-name>springSecurityFilterChain</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-  </filter>
+    <!-- SpringSecurity -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>springSecurityFilterChain</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <!-- アクセスログフィルターの定義 -->
-  <filter>
-    <filter-name>AccessLogFilter</filter-name>
-    <filter-class>jp.co.ntt.atrs.app.common.logging.AccessLogFilter</filter-class>
-  </filter>
+    <!-- アクセスログフィルターの定義 -->
+    <filter>
+        <filter-name>AccessLogFilter</filter-name>
+        <filter-class>jp.co.ntt.atrs.app.common.logging.AccessLogFilter</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>AccessLogFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccessLogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <servlet>
-    <servlet-name>restApiServlet</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextClass</param-name>
-      <param-value>
-        org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-      </param-value>
-    </init-param>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <!-- ApplicationContext for Spring MVC (REST) -->
-      <param-value>jp.co.ntt.atrs.config.web.SpringMvcRestConfig</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>restApiServlet</servlet-name>
-    <url-pattern>/api/v1/*</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>restApiServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- ApplicationContext for Spring MVC (REST) -->
+            <param-value>jp.co.ntt.atrs.config.web.SpringMvcRestConfig</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>restApiServlet</servlet-name>
+        <url-pattern>/api/v1/*</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>appServlet</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextClass</param-name>
-      <param-value>
-        org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-      </param-value>
-    </init-param>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <!-- ApplicationContext for Spring MVC -->
-      <param-value>jp.co.ntt.atrs.config.web.SpringMvcConfig</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- ApplicationContext for Spring MVC -->
+            <param-value>jp.co.ntt.atrs.config.web.SpringMvcConfig</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>appServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
-  <error-page>
-    <error-code>400</error-code>
-    <location>/common/error/badRequest-error</location>
-  </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/common/error/badRequest-error</location>
+    </error-page>
 
-  <error-page>
-    <error-code>403</error-code>
-    <location>/common/error/accessForbidden-error</location>
-  </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/common/error/accessForbidden-error</location>
+    </error-page>
 
-  <error-page>
-    <error-code>404</error-code>
-    <location>/common/error/notFound-error</location>
-  </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/common/error/notFound-error</location>
+    </error-page>
 
-  <error-page>
-    <exception-type>java.lang.Exception</exception-type>
-    <location>/common/error/system-error</location>
-  </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/common/error/system-error</location>
+    </error-page>
 
-  <session-config>
-    <cookie-config>
-      <!-- <secure>true</secure> -->
-      <http-only>true</http-only>
-    </cookie-config>
-    <tracking-mode>COOKIE</tracking-mode>
-  </session-config>
+    <session-config>
+        <cookie-config>
+            <!-- <secure>true</secure> -->
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 
 </web-app>

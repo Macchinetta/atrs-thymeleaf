@@ -36,15 +36,13 @@ public class AccessLogFilter extends OncePerRequestFilter {
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory.getLogger(
-            AccessLogFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccessLogFilter.class);
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
         String logMessage = getLogMessage(request);
@@ -74,8 +72,7 @@ public class AccessLogFilter extends OncePerRequestFilter {
             sb.append("[SessionID:").append(session.getId()).append("], ");
         }
 
-        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append(
-                "], ");
+        sb.append("[RemoteAddress:").append(request.getRemoteAddr()).append("], ");
         sb.append("[RemoteHost:").append(request.getRemoteHost()).append("] ");
 
         return sb.toString();
@@ -85,8 +82,7 @@ public class AccessLogFilter extends OncePerRequestFilter {
      * {@inheritDoc}
      */
     @Override
-    protected boolean shouldNotFilter(
-            HttpServletRequest request) throws ServletException {
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
         String uri = request.getRequestURI();
         if (uri.startsWith(request.getContextPath() + "/resources/")) {
