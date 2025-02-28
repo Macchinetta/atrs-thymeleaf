@@ -31,8 +31,7 @@ import jp.co.ntt.atrs.domain.model.FlightType;
  * 予約フライト選択フォーム。
  * @author NTT 電電次郎
  */
-public class ReservationFlightForm implements IReservationFlightForm,
-                                   Serializable {
+public class ReservationFlightForm implements IReservationFlightForm, Serializable {
 
     /**
      * serialVersionUID。
@@ -81,8 +80,7 @@ public class ReservationFlightForm implements IReservationFlightForm,
      * 選択フライト情報フォームのリストを設定する。
      * @param selectFlightFormList 選択フライト情報フォームのリスト
      */
-    public void setSelectFlightFormList(
-            List<SelectFlightForm> selectFlightFormList) {
+    public void setSelectFlightFormList(List<SelectFlightForm> selectFlightFormList) {
         this.selectFlightFormList = selectFlightFormList;
     }
 
@@ -91,8 +89,7 @@ public class ReservationFlightForm implements IReservationFlightForm,
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

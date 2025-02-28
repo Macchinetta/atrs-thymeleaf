@@ -29,8 +29,7 @@ import jp.co.ntt.atrs.domain.service.a2.AuthLogoutService;
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsLogoutSucessListener implements
-                                      ApplicationListener<AtrsLogoutSuccessEvent> {
+public class AtrsLogoutSucessListener implements ApplicationListener<AtrsLogoutSuccessEvent> {
 
     /**
      * 会員ログアウトサービス。
@@ -48,8 +47,7 @@ public class AtrsLogoutSucessListener implements
     public void onApplicationEvent(AtrsLogoutSuccessEvent event) {
         Authentication authentication = event.getAuthentication();
 
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
-                .getPrincipal();
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
         authLogoutService.logout(userDetails.getMember());
 
     }

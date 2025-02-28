@@ -23,7 +23,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 import org.springframework.stereotype.Component;
@@ -102,15 +102,14 @@ public class TicketReserveHelper {
      * @param flightList フライト情報リスト
      * @return 申し込み内容確認画面出力用DTO
      */
-    public ReserveConfirmOutputDto reserveConfirm(
-            TicketReserveForm ticketReserveForm, List<Flight> flightList) {
+    public ReserveConfirmOutputDto reserveConfirm(TicketReserveForm ticketReserveForm,
+            List<Flight> flightList) {
 
         // 値の存在する搭乗者が先になるよう設定
         ticketReserveForm.resetPassengersIndex();
 
         // 予約情報生成
-        Reservation reservation = createReservation(ticketReserveForm,
-                flightList);
+        Reservation reservation = createReservation(ticketReserveForm, flightList);
 
         // 予約情報の業務ロジックチェック
         ticketReserveService.validateReservation(reservation);
@@ -135,8 +134,7 @@ public class TicketReserveHelper {
             List<Flight> flightList) {
 
         // 予約情報生成
-        Reservation reservation = createReservation(ticketReserveForm,
-                flightList);
+        Reservation reservation = createReservation(ticketReserveForm, flightList);
 
         // 予約情報の業務ロジックチェック
         ticketReserveService.validateReservation(reservation);
@@ -144,8 +142,7 @@ public class TicketReserveHelper {
         // 予約情報登録
         reservation.setReserveDate(dateFactory.newDate());
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
-        TicketReserveDto ticketReserveDto = ticketReserveService
-                .registerReservation(reservation);
+        TicketReserveDto ticketReserveDto = ticketReserveService.registerReservation(reservation);
 
         // 画面出力DTO生成
         ReserveCompleteOutputDto outputDto = new ReserveCompleteOutputDto();
@@ -161,29 +158,22 @@ public class TicketReserveHelper {
      * @param flightList フライト情報リスト
      * @return 選択フライト情報DTOのリスト
      */
-    public List<SelectFlightDto> createSelectFlightDtoList(
-            List<Flight> flightList) {
+    public List<SelectFlightDto> createSelectFlightDtoList(List<Flight> flightList) {
 
         List<SelectFlightDto> selectFlightDtoList = new ArrayList<>();
         for (int i = 0; i < flightList.size(); i++) {
             // フライト情報から選択フライト情報DTOを生成
-            SelectFlightDto selectFlight = beanMapper.map(flightList.get(i),
-                    SelectFlightDto.class);
+            SelectFlightDto selectFlight = beanMapper.map(flightList.get(i), SelectFlightDto.class);
 
             // 路線種別を設定
-            selectFlight.setLineType(i == 0 ? LineType.OUTWARD
-                    : LineType.HOMEWARD);
+            selectFlight.setLineType(i == 0 ? LineType.OUTWARD : LineType.HOMEWARD);
 
             // 運賃を算出し設定
-            int basicFare = flightList.get(i).getFlightMaster().getRoute()
-                    .getBasicFare();
+            int basicFare = flightList.get(i).getFlightMaster().getRoute().getBasicFare();
             int baseFare = ticketSharedService.calculateBasicFare(basicFare,
-                    selectFlight.getBoardingClassCd(), selectFlight
-                            .getDepartureDate());
-            int discountRate = flightList.get(i).getFareType()
-                    .getDiscountRate();
-            int fare = ticketSharedService.calculateFare(baseFare,
-                    discountRate);
+                    selectFlight.getBoardingClassCd(), selectFlight.getDepartureDate());
+            int discountRate = flightList.get(i).getFareType().getDiscountRate();
+            int fare = ticketSharedService.calculateFare(baseFare, discountRate);
             selectFlight.setFare(fare);
 
             selectFlightDtoList.add(selectFlight);
@@ -197,8 +187,7 @@ public class TicketReserveHelper {
      * @param userDetails ログイン情報を保持するオブジェクト
      * @return チケット予約フォーム
      */
-    public TicketReserveForm createTicketReserveForm(
-            AtrsUserDetails userDetails) {
+    public TicketReserveForm createTicketReserveForm(AtrsUserDetails userDetails) {
 
         TicketReserveForm ticketReserveForm = new TicketReserveForm();
 
@@ -206,8 +195,7 @@ public class TicketReserveHelper {
             // ログイン中の場合
 
             // ログインユーザに該当する会員情報取得
-            Member member = ticketReserveService.findMember(userDetails
-                    .getUsername());
+            Member member = ticketReserveService.findMember(userDetails.getUsername());
 
             // 予約代表者情報にログインユーザの会員情報を設定
             beanMapper.map(member, ticketReserveForm);
@@ -222,8 +210,7 @@ public class TicketReserveHelper {
             ticketReserveForm.setRepAge(calculateAge(member.getBirthday()));
 
             // 一番目の搭乗者情報に予約代表者情報(ログインユーザ情報)を設定
-            PassengerForm passengerForm = beanMapper.map(ticketReserveForm,
-                    PassengerForm.class);
+            PassengerForm passengerForm = beanMapper.map(ticketReserveForm, PassengerForm.class);
             ticketReserveForm.setPassenger(0, passengerForm);
         }
 
@@ -241,11 +228,9 @@ public class TicketReserveHelper {
 
         // 搭乗者情報リスト生成
         List<Passenger> passengerList = new ArrayList<>();
-        for (PassengerForm passengerForm : ticketReserveForm
-                .getPassengerFormList()) {
+        for (PassengerForm passengerForm : ticketReserveForm.getPassengerFormList()) {
             if (!passengerForm.isEmpty()) {
-                Passenger passenger = beanMapper.map(passengerForm,
-                        Passenger.class);
+                Passenger passenger = beanMapper.map(passengerForm, Passenger.class);
                 passengerList.add(passenger);
             }
         }
@@ -262,9 +247,8 @@ public class TicketReserveHelper {
         // 予約情報生成
         Reservation reservation = new Reservation();
         beanMapper.map(ticketReserveForm, reservation);
-        String repTel = String.format("%s-%s-%s", ticketReserveForm
-                .getRepTel1(), ticketReserveForm.getRepTel2(), ticketReserveForm
-                        .getRepTel3());
+        String repTel = String.format("%s-%s-%s", ticketReserveForm.getRepTel1(),
+                ticketReserveForm.getRepTel2(), ticketReserveForm.getRepTel3());
         reservation.setRepTel(repTel);
         reservation.setReserveFlightList(reserveFlightList);
 
@@ -277,13 +261,11 @@ public class TicketReserveHelper {
      * @param reservation 予約情報
      * @return 予約チケットの合計金額
      */
-    private int calculateTotalFare(List<Flight> flightList,
-            Reservation reservation) {
+    private int calculateTotalFare(List<Flight> flightList, Reservation reservation) {
 
         ReserveFlight reserveFlight = reservation.getReserveFlightList().get(0);
         List<Passenger> passengers = reserveFlight.getPassengerList();
-        int totalFare = ticketReserveService.calculateTotalFare(flightList,
-                passengers);
+        int totalFare = ticketReserveService.calculateTotalFare(flightList, passengers);
 
         return totalFare;
     }
@@ -315,24 +297,20 @@ public class TicketReserveHelper {
 
         SelectFlightForm owFlight = selectFlightFormList.get(0);
         String flightName = owFlight.getFlightName();
-        FlightMaster flightMaster = flightMasterProvider.getFlightMaster(
-                flightName);
+        FlightMaster flightMaster = flightMasterProvider.getFlightMaster(flightName);
         if (flightMaster == null) {
-            throw new BadRequestException("flight is null. value:"
-                    + flightName);
+            throw new BadRequestException("flight is null. value:" + flightName);
         }
 
         Map<String, String> params = new LinkedHashMap<>();
 
-        String outwardDate = DateTimeUtil.toFormatDateString(owFlight
-                .getDepDate());
+        String outwardDate = DateTimeUtil.toFormatDateString(owFlight.getDepDate());
         String homewardDate = "";
         if (selectFlightFormList.size() == 2) {
             // 往復の場合
             params.put("flightType", FlightType.RT.getCode());
             SelectFlightForm hwFlight = selectFlightFormList.get(1);
-            homewardDate = DateTimeUtil.toFormatDateString(hwFlight
-                    .getDepDate());
+            homewardDate = DateTimeUtil.toFormatDateString(hwFlight.getDepDate());
         } else {
             // 片道の場合
             params.put("flightType", FlightType.OW.getCode());
@@ -356,8 +334,7 @@ public class TicketReserveHelper {
      * @param flightList フライト情報のリスト
      * @throws BadRequestException 不正リクエスト例外
      */
-    public void validateFlightList(
-            List<Flight> flightList) throws BadRequestException {
+    public void validateFlightList(List<Flight> flightList) throws BadRequestException {
 
         // フライト情報チェック
         try {

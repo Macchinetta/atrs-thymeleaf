@@ -159,9 +159,8 @@ public class PassengerForm implements Serializable {
      * @return 保持プロパティが全てnullまたは空文字列の場合true
      */
     public boolean isEmpty() {
-        return (!StringUtils.hasText(familyName) && !StringUtils.hasText(
-                givenName) && age == null && gender == null && !StringUtils
-                        .hasText(membershipNumber));
+        return (!StringUtils.hasText(familyName) && !StringUtils.hasText(givenName) && age == null
+                && gender == null && !StringUtils.hasText(membershipNumber));
     }
 
     /**
@@ -169,7 +168,6 @@ public class PassengerForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

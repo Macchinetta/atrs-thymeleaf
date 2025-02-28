@@ -68,12 +68,12 @@ public class ApiErrorPageController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<ApiError> handleErrorPage(WebRequest request) {
-        HttpStatus httpStatus = HttpStatus.valueOf((Integer) request
-                .getAttribute(RequestDispatcher.ERROR_STATUS_CODE,
+        HttpStatus httpStatus = HttpStatus
+                .valueOf((Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE,
                         RequestAttributes.SCOPE_REQUEST));
         String errorCode = errorCodeMap.get(httpStatus);
-        ApiError apiError = apiErrorCreator.createApiError(request, errorCode,
-                httpStatus.getReasonPhrase());
+        ApiError apiError =
+                apiErrorCreator.createApiError(request, errorCode, httpStatus.getReasonPhrase());
 
         return ResponseEntity.status(httpStatus).body(apiError);
     }

@@ -1,138 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mappings xmlns="http://dozermapper.github.io/schema/bean-mapping"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping https://dozermapper.github.io/schema/bean-mapping.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping https://dozermapper.github.io/schema/bean-mapping.xsd">
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.domain.model.Member</class-a>
-    <class-b>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-b>
-    <field>
-      <a>kanaFamilyName</a>
-      <b>repFamilyName</b>
-    </field>
-    <field>
-      <a>kanaGivenName</a>
-      <b>repGivenName</b>
-    </field>
-    <field>
-      <a>gender</a>
-      <b>repGender</b>
-    </field>
-    <field>
-      <a>mail</a>
-      <b>repMail</b>
-    </field>
-    <field>
-      <a>membershipNumber</a>
-      <b>repMembershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.domain.model.Member</class-a>
+        <class-b>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-b>
+        <field>
+            <a>kanaFamilyName</a>
+            <b>repFamilyName</b>
+        </field>
+        <field>
+            <a>kanaGivenName</a>
+            <b>repGivenName</b>
+        </field>
+        <field>
+            <a>gender</a>
+            <b>repGender</b>
+        </field>
+        <field>
+            <a>mail</a>
+            <b>repMail</b>
+        </field>
+        <field>
+            <a>membershipNumber</a>
+            <b>repMembershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-a>
-    <class-b>jp.co.ntt.atrs.app.b2.PassengerForm</class-b>
-    <field>
-      <a>repFamilyName</a>
-      <b>familyName</b>
-    </field>
-    <field>
-      <a>repGivenName</a>
-      <b>givenName</b>
-    </field>
-    <field>
-      <a>repAge</a>
-      <b>age</b>
-    </field>
-    <field>
-      <a>repGender</a>
-      <b>gender</b>
-    </field>
-    <field>
-      <a>repMembershipNumber</a>
-      <b>membershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-a>
+        <class-b>jp.co.ntt.atrs.app.b2.PassengerForm</class-b>
+        <field>
+            <a>repFamilyName</a>
+            <b>familyName</b>
+        </field>
+        <field>
+            <a>repGivenName</a>
+            <b>givenName</b>
+        </field>
+        <field>
+            <a>repAge</a>
+            <b>age</b>
+        </field>
+        <field>
+            <a>repGender</a>
+            <b>gender</b>
+        </field>
+        <field>
+            <a>repMembershipNumber</a>
+            <b>membershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-a>
-    <class-b>jp.co.ntt.atrs.domain.model.Reservation</class-b>
-    <field>
-      <a>repMembershipNumber</a>
-      <b>repMember.membershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.app.b2.TicketReserveForm</class-a>
+        <class-b>jp.co.ntt.atrs.domain.model.Reservation</class-b>
+        <field>
+            <a>repMembershipNumber</a>
+            <b>repMember.membershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.app.b2.PassengerForm</class-a>
-    <class-b>jp.co.ntt.atrs.domain.model.Passenger</class-b>
-    <field>
-      <a>membershipNumber</a>
-      <b>member.membershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.app.b2.PassengerForm</class-a>
+        <class-b>jp.co.ntt.atrs.domain.model.Passenger</class-b>
+        <field>
+            <a>membershipNumber</a>
+            <b>member.membershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.domain.model.Flight</class-a>
-    <class-b>jp.co.ntt.atrs.app.b0.SelectFlightDto</class-b>
-    <field>
-      <a>flightMaster.flightName</a>
-      <b>flightName</b>
-    </field>
-    <field>
-      <a>flightMaster.departureTime</a>
-      <b>departureTime</b>
-    </field>
-    <field>
-      <a>flightMaster.arrivalTime</a>
-      <b>arrivalTime</b>
-    </field>
-    <field>
-      <a>flightMaster.route.departureAirport.code</a>
-      <b>depAirportCd</b>
-    </field>
-    <field>
-      <a>flightMaster.route.arrivalAirport.code</a>
-      <b>arrAirportCd</b>
-    </field>
-    <field>
-      <a>boardingClass.boardingClassCd</a>
-      <b>boardingClassCd</b>
-    </field>
-    <field>
-      <a>fareType.fareTypeCd</a>
-      <b>fareTypeCd</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.domain.model.Flight</class-a>
+        <class-b>jp.co.ntt.atrs.app.b0.SelectFlightDto</class-b>
+        <field>
+            <a>flightMaster.flightName</a>
+            <b>flightName</b>
+        </field>
+        <field>
+            <a>flightMaster.departureTime</a>
+            <b>departureTime</b>
+        </field>
+        <field>
+            <a>flightMaster.arrivalTime</a>
+            <b>arrivalTime</b>
+        </field>
+        <field>
+            <a>flightMaster.route.departureAirport.code</a>
+            <b>depAirportCd</b>
+        </field>
+        <field>
+            <a>flightMaster.route.arrivalAirport.code</a>
+            <b>arrAirportCd</b>
+        </field>
+        <field>
+            <a>boardingClass.boardingClassCd</a>
+            <b>boardingClassCd</b>
+        </field>
+        <field>
+            <a>fareType.fareTypeCd</a>
+            <b>fareTypeCd</b>
+        </field>
+    </mapping>
 
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.api.ticket.TicketReserveResource</class-a>
-    <class-b>jp.co.ntt.atrs.domain.model.Reservation</class-b>
-    <field>
-      <a>repMembershipNumber</a>
-      <b>repMember.membershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.api.ticket.TicketReserveResource</class-a>
+        <class-b>jp.co.ntt.atrs.domain.model.Reservation</class-b>
+        <field>
+            <a>repMembershipNumber</a>
+            <b>repMember.membershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.api.ticket.PassengerResource</class-a>
-    <class-b>jp.co.ntt.atrs.domain.model.Passenger</class-b>
-    <field>
-      <a>membershipNumber</a>
-      <b>member.membershipNumber</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.api.ticket.PassengerResource</class-a>
+        <class-b>jp.co.ntt.atrs.domain.model.Passenger</class-b>
+        <field>
+            <a>membershipNumber</a>
+            <b>member.membershipNumber</b>
+        </field>
+    </mapping>
 
-  <mapping type="one-way">
-    <class-a>jp.co.ntt.atrs.domain.service.b2.TicketReserveDto</class-a>
-    <class-b>jp.co.ntt.atrs.api.ticket.TicketReserveResource</class-b>
-    <field>
-      <a>reserveNo</a>
-      <b>reserveNo</b>
-    </field>
-    <field>
-      <a>paymentDate</a>
-      <b>paymentDate</b>
-    </field>
-  </mapping>
+    <mapping type="one-way">
+        <class-a>jp.co.ntt.atrs.domain.service.b2.TicketReserveDto</class-a>
+        <class-b>jp.co.ntt.atrs.api.ticket.TicketReserveResource</class-b>
+        <field>
+            <a>reserveNo</a>
+            <b>reserveNo</b>
+        </field>
+        <field>
+            <a>paymentDate</a>
+            <b>paymentDate</b>
+        </field>
+    </mapping>
 </mappings>

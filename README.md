@@ -1,54 +1,96 @@
-# Airline Ticket Reservation System (ATRS)
+# atrs（macchinetta client用）
 
-This is a reference application for developers to learn how to build applications with Macchinetta Server Framework & Macchinetta Client Libraries.
+## 事前準備
+### データベース構築
+ローカル（localhost:5432）のPostgreSQLにデータベースを作成する。  
 
-## How to run the application
+| Property   | Value    |
+|:-----------|:---------|
+| DB名       | atrs     |
+| ユーザ     | postgres |
+| パスワード | postgres |
 
-### Download source code
+### DB初期化
+以下のコマンドを実行しDBを初期化する。  
+`mvn sql:execute -pl atrs-initdb`
 
-Download source code from [here](https://github.com/Macchinetta/atrs/tags "here").
-Extract the zip file at any location of choice.
+## JDK 8を使用する場合
 
-### Install PostgreSQL
+### ビルド
+以下のコマンドを実行しコンパイルする。
 
-Install and start PostgreSQL.
-Select 'postgres' as password for postgres user.
-If you'd like to use other password, some changes will be required in setting files.
+- atrs(JSP)をコンパイルする場合  
+  `mvn clean install`
 
-### Insert test data
+- atrs(Thymeleaf)をコンパイルする場合  
+  以下のコマンドをatrs(JSP)のコンパイル後に追加で実行する。  
+  `mvn clean install -f atrs-web-thymeleaf/pom.xml`
 
-First of all, create database named 'atrs'.
+### アプリケーションの起動
+#### Tomcatの起動
+- atrs(JSP)を起動する場合  
+  `mvn cargo:run -pl atrs-web`
 
-After that, execute the command below at the directory where the downloaded source code is unzipped.
+- atrs(Thymeleaf)を起動する場合  
+  `mvn cargo:run -f atrs-web-thymeleaf/pom.xml`
 
-```console
-$ mvn sql:execute -f atrs-initdb/pom.xml
-```
+#### アクセス
+以下のURLにアクセスする。
 
-It is assumed that maven is already installed.
-If not, install it and try again.
+http://localhost:8080/atrs/
 
-### Build and run applicatoin
+## JDK 11/JDK 17を使用する場合
+JDK 11/JDK 17を使用する場合は、デフォルトプロファイルの指定がJDK 8使用時と異なるため、追加でプロファイルを指定する必要がある。
 
-Execute the command below at the directory where the downloaded source code is unzipped.
+### ビルド
+以下のコマンドを実行しコンパイルする。
 
-#### JDK 8
+- atrs(JSP)をコンパイルする場合  
+  `mvn clean install -P default`
 
-```console
-$ mvn clean install
-$ mvn cargo:run -f atrs-web/pom.xml
-```
+- atrs(Thymeleaf)をコンパイルする場合  
+  以下のコマンドをatrs(JSP)のコンパイル後に追加で実行する。  
+  `mvn clean install -P default -f atrs-web-thymeleaf/pom.xml`
 
-#### JDK 11+
+### アプリケーションの起動
+#### Tomcatの起動
+- atrs(JSP)を起動する場合  
+  `mvn cargo:run -P default -pl atrs-web`
 
-When you use JDK 11+, you need to set a profile.
+- atrs(Thymeleaf)を起動する場合  
+  `mvn cargo:run -P default -f atrs-web-thymeleaf/pom.xml`
 
-```console
-$ mvn clean install -P default
-$ mvn cargo:run -P default -f atrs-web/pom.xml
-```
+#### アクセス
+以下のURLにアクセスする。
 
-### Web access
+http://localhost:8080/atrs/
 
-Access <http://localhost:8080/atrs/>.
+### テストの実行
+atrs-seleniumフォルダに移動して
 
+- Firefoxの場合
+
+  `mvn -U test -Dwdm.cachePath=/opt/geckodriver -Dwdm.geckoDriverVersion=0.32.0`
+
+- Chromeの場合
+
+  `mvn -U test -Dwdm.cachePath=/opt/chromedriver -Dwdm.chromeDriverVersion=114.0.5735.90 -Dspring.profiles.default=chrome`
+
+- Edgeの場合
+
+  `mvn -U test -Dwdm.cachePath=/opt/edgedriver -Dwdm.edgeDriverVersion=114.0.1823.67 -Dspring.profiles.default=edge`
+
+ブラウザのバージョンが更新された場合はドライバのバージョンも適切なものに更新する必要がある。
+下記リンク先から適切なバージョンのドライバを取得し、上記コマンドからドライバのバージョンを修正して実行する。
+
+- geckodriver
+
+  https://github.com/mozilla/geckodriver/releases
+
+- ChromeDriver
+
+  https://chromedriver.chromium.org/home
+
+- Microsoft Edge WebDriver
+
+  https://developer.microsoft.com/ja-jp/microsoft-edge/tools/webdriver/

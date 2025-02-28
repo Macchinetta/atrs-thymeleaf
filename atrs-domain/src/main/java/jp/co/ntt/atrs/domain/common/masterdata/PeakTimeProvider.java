@@ -65,11 +65,9 @@ public class PeakTimeProvider {
         Assert.notNull(depDate, "depDate must not null.");
 
         for (PeakTime peakTime : peakTimeList) {
-            Interval peakTimeInterval = new Interval(new DateTime(peakTime
-                    .getPeakStartDate())
-                            .withTimeAtStartOfDay(), new DateTime(peakTime
-                                    .getPeakEndDate()).withTimeAtStartOfDay()
-                                            .plus(1));
+            Interval peakTimeInterval =
+                    new Interval(new DateTime(peakTime.getPeakStartDate()).withTimeAtStartOfDay(),
+                            new DateTime(peakTime.getPeakEndDate()).withTimeAtStartOfDay().plus(1));
             // 搭乗日が該当するピーク時期積算比率を返却
             if (peakTimeInterval.contains(depDate.getTime())) {
                 return peakTime;

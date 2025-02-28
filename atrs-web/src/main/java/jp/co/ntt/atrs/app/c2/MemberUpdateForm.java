@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -160,7 +161,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード会社。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_CREDITTYPE")
     private String creditTypeCd;
 
@@ -175,7 +176,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード有効期限（月）。
      */
-    @NotNull
+    @NotEmpty
     @Min(1)
     @Max(12)
     private String creditMonth;
@@ -183,7 +184,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
     /**
      * クレジットカード有効期限（年）。
      */
-    @NotNull
+    @NotEmpty
     @Min(00)
     private String creditYear;
 

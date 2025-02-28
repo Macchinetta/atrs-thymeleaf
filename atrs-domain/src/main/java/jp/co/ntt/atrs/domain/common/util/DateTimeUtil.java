@@ -32,14 +32,12 @@ public class DateTimeUtil {
     /**
      * 日付(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat
-            .forPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat.forPattern("yyyy/MM/dd");
 
     /**
      * 時間(文字列)のパースに使用するフォーマッタ。
      */
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat
-            .forPattern("HHmm");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern("HHmm");
 
     /**
      * コンストラクタ。
@@ -55,8 +53,7 @@ public class DateTimeUtil {
      * @return 引数で指定された日付および時刻を保持するDateTimeオブジェクト
      */
     public static DateTime toDateTime(Date date, String timeString) {
-        return new LocalDate(date).toDateTime(DateTimeUtil.toLocalTime(
-                timeString));
+        return new LocalDate(date).toDateTime(DateTimeUtil.toLocalTime(timeString));
     }
 
     /**
@@ -109,8 +106,7 @@ public class DateTimeUtil {
     public static String toFormatTimeString(String timeString) {
         String result = timeString;
         if (timeString != null && 2 < timeString.length()) {
-            result = String.format("%s:%s", timeString.substring(0, 2),
-                    timeString.substring(2));
+            result = String.format("%s:%s", timeString.substring(0, 2), timeString.substring(2));
         }
         return result;
     }

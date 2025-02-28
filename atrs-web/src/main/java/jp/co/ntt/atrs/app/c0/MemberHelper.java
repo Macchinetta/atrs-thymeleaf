@@ -64,8 +64,8 @@ public class MemberHelper {
         Member member = beanMapper.map(memberForm, Member.class);
 
         // 電話番号
-        String tel = String.format("%s-%s-%s", memberForm.getTel1(), memberForm
-                .getTel2(), memberForm.getTel3());
+        String tel = String.format("%s-%s-%s", memberForm.getTel1(), memberForm.getTel2(),
+                memberForm.getTel3());
         member.setTel(tel);
 
         // 郵便番号
@@ -73,8 +73,8 @@ public class MemberHelper {
         member.setZipCode(zipCode);
 
         // クレジットカード期限
-        String creditTerm = String.format("%s/%s", memberForm.getCreditMonth(),
-                memberForm.getCreditYear());
+        String creditTerm =
+                String.format("%s/%s", memberForm.getCreditMonth(), memberForm.getCreditYear());
         member.setCreditTerm(creditTerm);
 
         return member;
@@ -88,8 +88,7 @@ public class MemberHelper {
      */
     public MemberUpdateForm toMemberUpdateForm(Member member) {
 
-        MemberUpdateForm memberUpdateForm = beanMapper.map(member,
-                MemberUpdateForm.class);
+        MemberUpdateForm memberUpdateForm = beanMapper.map(member, MemberUpdateForm.class);
 
         // 電話番号
         String[] tel = member.getTel().split("-");
@@ -100,8 +99,7 @@ public class MemberHelper {
         }
 
         // 郵便番号
-        if (StringUtils.hasLength(member.getZipCode()) && member.getZipCode()
-                .length() >= 7) {
+        if (StringUtils.hasLength(member.getZipCode()) && member.getZipCode().length() >= 7) {
             memberUpdateForm.setZipCode1(member.getZipCode().substring(0, 3));
             memberUpdateForm.setZipCode2(member.getZipCode().substring(3, 7));
         }

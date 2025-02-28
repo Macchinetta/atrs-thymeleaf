@@ -1,307 +1,358 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="contextPath" th:content="${#request.getContextPath()}" />
-<title>予約 | Airline Ticket Reservation System</title>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="contextPath" th:content="${#request.getContextPath()}" />
+        <title>予約 | Airline Ticket Reservation System</title>
 
-<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
-<link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
-<link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
+    </head>
+    <body>
+        <header th:replace="~{A0/header :: header}"></header>
 
-</head>
-<body>
-  <header th:replace="~{A0/header :: header}"></header>
+        <div class="container">
+            <div class="row">
+                <section class="col-md-12">
+                    <h2 id="screen-title">予約</h2>
 
-  <div class="container">
-
-    <div class="row">
-
-      <section class="col-md-12">
-        <h2 id="screen-title">予約</h2>
-
-        <div th:if="${#fields.hasErrors('${ticketReserveForm}')}">
-          <div class="alert alert-danger">
-            <span id="null.errors" th:errors="${ticketReserveForm}">予約代表者の方は18歳以上である必要があります。</span>
-          </div>
-        </div>
-        <ul th:if="${resultMessages} != null" class="alert list-unstyled" th:classappend="|alert-${resultMessages.type}|">
-          <li th:each="message : ${resultMessages}"
-            th:text="${#messages.msgWithParams(message.code, message.args)}"></li>
-        </ul>
-
-        <section>
-          <h3>選択フライト</h3>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th></th>
-                <th>搭乗日</th>
-                <th>便名</th>
-                <th>出発時刻</th>
-                <th>到着時刻</th>
-                <th>区間</th>
-                <th>搭乗クラス</th>
-                <th>運賃種別</th>
-                <th>運賃</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="flight : ${selectFlightDtoList}">
-                <td th:text="${flight.lineType.name}">往路</td>
-                <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
-                <td th:text="${flight.flightName}">NTT001</td>
-                <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
-                <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
-                <td><span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class='glyphicon glyphicon-arrow-right'></span><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span></td>
-                <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
-                <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
-                <td th:text="|&yen; ${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
-              </tr>
-              <!--/*-->
-              <tr>
-                <td>復路</td>
-                <td>07月02日(水)</td>
-                <td>NTT136</td>
-                <td>18：00</td>
-                <td>19：00</td>
-                <td>沖縄&nbsp;<span class='glyphicon glyphicon-arrow-right'></span>&nbsp;東京（羽田）</td>
-                <td>一般席</td>
-                <td>往復運賃</td>
-                <td>￥19,600</td>
-              </tr>
-              <!--*/-->
-            </tbody>
-          </table>
-        </section>
-
-        <form id="customerinfo-form" class="form-horizontal passengers"
-          action="reserveConfirm.html" th:action="@{/ticket/reserve}" method="post" th:object="${ticketReserveForm}">
-
-          <!-- 選択フライト情報 -->
-          <input type="hidden" th:field="*{flightType}" />
-          <div th:each="status : ${ticketReserveForm.selectFlightFormList}">
-            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].depDate}" />
-            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].boardingClassCd}" />
-            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].fareTypeCd}" />
-            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].flightName}" />
-          </div>
-
-          <!-- 会員予約時の予約代表者情報 -->
-          <div sec:authorize="hasRole('MEMBER')">
-            <input type="hidden" th:field="*{repFamilyName}"/>
-            <input type="hidden" th:field="*{repGivenName}" />
-            <input type="hidden" th:field="*{repAge}" />
-            <input type="hidden" th:field="*{repGender}" />
-            <input type="hidden" th:field="*{repMembershipNumber}" />
-            <input type="hidden" th:field="*{repTel1}" />
-            <input type="hidden" th:field="*{repTel2}" />
-            <input type="hidden" th:field="*{repTel3}" />
-            <input type="hidden" th:field="*{repMail}" />
-          </div>
-
-          <section>
-            <h3>お客様情報</h3>
-
-            <div th:each="status : ${ticketReserveForm.passengerFormList}"
-             th:with="passengerNo=${statusStat.count}">
-              <div th:id="'passenger' + ${passengerNo}"
-                th:style="(${passengerNo} &lt; 4) or ${ticketReserveForm.hasAdditionalPassenger()} ? '' : 'display: none'">
-                <h4 th:text="'搭乗者' + ${passengerNo}">搭乗者1</h4>
-                <div class="form-group">
-                  <label th:for="|passengerFormList[${statusStat.index}].familyName|"
-                    class="col-md-2 control-label">お名前(カタカナ)</label>
-                  <div class="col-md-6">
-                    <div class="input-group inline-half">
-                      <label class="input-group-addon">セイ</label>
-                      <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].familyName}"
-                        class="form-control family-name"
-                        th:class="'form-control ' + (${passengerNo == 1} ? 'family-name' : '')"
-                        maxlength="10">
+                    <div th:if="${#fields.hasErrors('${ticketReserveForm}')}">
+                        <div class="alert alert-danger">
+                            <span id="null.errors" th:errors="${ticketReserveForm}">予約代表者の方は18歳以上である必要があります。</span>
+                        </div>
                     </div>
-                    <div class="input-group inline-half">
-                      <label class="input-group-addon">メイ</label>
-                      <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].givenName}"
-                        class="form-control given-name"
-                        th:class="'form-control ' + (${passengerNo == 1} ? 'given-name' : '')"
-                        maxlength="10">
-                    </div>
-                    <span id="passengerForm.familyName.errors" th:errors="*{passengerFormList[__${statusStat.index}__].familyName}" class="invalid"></span>
-                    <span id="passengerForm.givenName.errors" th:errors="*{passengerFormList[__${statusStat.index}__].givenName}" class="invalid"></span>
-                  </div>
-                </div>
+                    <ul th:if="${resultMessages} != null" class="alert list-unstyled" th:classappend="|alert-${resultMessages.type}|">
+                        <li th:each="message : ${resultMessages}" th:text="${#messages.msgWithParams(message.code, message.args)}"></li>
+                    </ul>
 
-                <div class="form-group">
-                  <label th:for="|passengerFormList[${statusStat.index}].age|"
-                    class="col-md-2 control-label">年齢</label>
-                  <div class="col-md-3">
-                    <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].age}"
-                      class="form-control age"
-                      th:class="'form-control ' + (${passengerNo == 1} ? 'age' : '')" maxlength="3"
-                      data-parsley-type="integer">
-                    <span id="passengerForm.age.errors" th:errors="*{passengerFormList[__${statusStat.index}__].age}" class="invalid"></span>
-                  </div>
-                </div>
+                    <section>
+                        <h3>選択フライト</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>搭乗日</th>
+                                    <th>便名</th>
+                                    <th>出発時刻</th>
+                                    <th>到着時刻</th>
+                                    <th>区間</th>
+                                    <th>搭乗クラス</th>
+                                    <th>運賃種別</th>
+                                    <th>運賃</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="flight : ${selectFlightDtoList}">
+                                    <td th:text="${flight.lineType.name}">往路</td>
+                                    <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
+                                    <td th:text="${flight.flightName}">NTT001</td>
+                                    <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
+                                    <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
+                                    <td>
+                                        <span th:remove="tag" th:text="|${CL_AIRPORT[flight.depAirportCd]} |">東京（羽田）&nbsp;</span><span class="glyphicon glyphicon-arrow-right"></span
+                                        ><span th:remove="tag" th:text="| ${CL_AIRPORT[flight.arrAirportCd]}|">&nbsp;沖縄</span>
+                                    </td>
+                                    <td th:text="${CL_BOARDINGCLASS[flight.boardingClassCd.code]}">一般席</td>
+                                    <td th:text="${CL_FARETYPE[flight.fareTypeCd.code]}">往復運賃</td>
+                                    <td th:text="|&yen; ${#numbers.formatDecimal(flight.fare,1,'COMMA',0,'POINT')}|">￥19,600</td>
+                                </tr>
+                                <!--/*-->
+                                <tr>
+                                    <td>復路</td>
+                                    <td>07月02日(水)</td>
+                                    <td>NTT136</td>
+                                    <td>18：00</td>
+                                    <td>19：00</td>
+                                    <td>沖縄&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;東京（羽田）</td>
+                                    <td>一般席</td>
+                                    <td>往復運賃</td>
+                                    <td>￥19,600</td>
+                                </tr>
+                                <!--*/-->
+                            </tbody>
+                        </table>
+                    </section>
 
-                <div class="form-group">
-                  <label class="col-md-2 control-label">性別</label>
-                  <div class="col-md-4 form-inline">
-                    <label th:each="item : ${CL_GENDER}" class="radio-inline">
-                      <input type="radio" name="gender" th:field="*{passengerFormList[__${statusStat.index}__].gender}"
-                        class="gender" th:class="${passengerNo == 1} ? 'gender' : ''" th:value="${item.key}" />
-                      <span th:text="${CL_GENDER[item.key]}">男性</span>
-                    </label>
-                    <!--/*-->
-                    <label class="radio-inline">
-                      <input type="radio" name="gender" class="gender"/>
-                      <span >女性</span>
-                    </label>
-                    <!--*/-->
-                    <div class="clearfix"></div>
-                    <span id="passengerForm.gender.errors" th:errors="*{passengerFormList[__${statusStat.index}__].gender}" class="invalid"></span>
-                  </div>
-                </div>
+                    <form id="customerinfo-form" class="form-horizontal passengers" action="reserveConfirm.html" th:action="@{/ticket/reserve}" method="post" th:object="${ticketReserveForm}">
+                        <!-- 選択フライト情報 -->
+                        <input type="hidden" th:field="*{flightType}" />
+                        <div th:each="status : ${ticketReserveForm.selectFlightFormList}">
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].depDate}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].boardingClassCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].fareTypeCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[__${statusStat.index}__].flightName}" />
+                        </div>
 
-                <div class="form-group">
-                  <label th:for="|passengerFormList[${statusStat.index}].membershipNumber|"
-                    class="col-md-2 control-label">会員番号(10桁)</label>
-                  <div class="col-md-3">
-                    <input type="text" th:field="*{passengerFormList[__${statusStat.index}__].membershipNumber}"
-                      class="form-control membership-number"
-                      th:class="'form-control ' + (${passengerNo == 1} ? 'membership-number' : '')"
-                      maxlength="10" data-parsley-type="integer" data-parsley-length="[10, 10]"
-                      data-parsley-length-message="%s 文字で入力してください。"
-                      data-parsley-memberavailable="true" />
-                    <span id="passengerForm.membershipNumber.errors" th:errors="*{passengerFormList[__${statusStat.index}__].membershipNumber}"
-                      class="invalid"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
+                        <!-- 会員予約時の予約代表者情報 -->
+                        <div sec:authorize="hasRole('MEMBER')">
+                            <input type="hidden" th:field="*{repFamilyName}" />
+                            <input type="hidden" th:field="*{repGivenName}" />
+                            <input type="hidden" th:field="*{repAge}" />
+                            <input type="hidden" th:field="*{repGender}" />
+                            <input type="hidden" th:field="*{repMembershipNumber}" />
+                            <input type="hidden" th:field="*{repTel1}" />
+                            <input type="hidden" th:field="*{repTel2}" />
+                            <input type="hidden" th:field="*{repTel3}" />
+                            <input type="hidden" th:field="*{repMail}" />
+                        </div>
 
-            <div class="form-group">
-              <div class="col-md-offset-2 col-md-8">
-                <button th:if="${!ticketReserveForm.hasAdditionalPassenger()}" type="button"
-                  id="add-passenger-button" class="btn btn-default">搭乗者を追加</button>
-              </div>
-            </div>
+                        <section>
+                            <h3>お客様情報</h3>
 
-          </section>
+                            <div th:each="status : ${ticketReserveForm.passengerFormList}" th:with="passengerNo=${statusStat.count}">
+                                <div th:id="'passenger' + ${passengerNo}" th:style="(${passengerNo} &lt; 4) or ${ticketReserveForm.hasAdditionalPassenger()} ? '' : 'display: none'">
+                                    <h4 th:text="'搭乗者' + ${passengerNo}">搭乗者1</h4>
+                                    <div class="form-group">
+                                        <label th:for="|passengerFormList[${statusStat.index}].familyName|" class="col-md-2 control-label">お名前(カタカナ)</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group inline-half">
+                                                <label class="input-group-addon">セイ</label>
+                                                <input
+                                                    type="text"
+                                                    th:field="*{passengerFormList[__${statusStat.index}__].familyName}"
+                                                    class="form-control family-name"
+                                                    th:class="'form-control ' + (${passengerNo == 1} ? 'family-name' : '')"
+                                                    maxlength="10"
+                                                />
+                                            </div>
+                                            <div class="input-group inline-half">
+                                                <label class="input-group-addon">メイ</label>
+                                                <input
+                                                    type="text"
+                                                    th:field="*{passengerFormList[__${statusStat.index}__].givenName}"
+                                                    class="form-control given-name"
+                                                    th:class="'form-control ' + (${passengerNo == 1} ? 'given-name' : '')"
+                                                    maxlength="10"
+                                                />
+                                            </div>
+                                            <span id="passengerForm.familyName.errors" th:errors="*{passengerFormList[__${statusStat.index}__].familyName}" class="invalid"></span>
+                                            <span id="passengerForm.givenName.errors" th:errors="*{passengerFormList[__${statusStat.index}__].givenName}" class="invalid"></span>
+                                        </div>
+                                    </div>
 
-          <section id="representive">
-            <h3>代表者情報</h3>
+                                    <div class="form-group">
+                                        <label th:for="|passengerFormList[${statusStat.index}].age|" class="col-md-2 control-label">年齢</label>
+                                        <div class="col-md-3">
+                                            <input
+                                                type="text"
+                                                th:field="*{passengerFormList[__${statusStat.index}__].age}"
+                                                class="form-control age"
+                                                th:class="'form-control ' + (${passengerNo == 1} ? 'age' : '')"
+                                                maxlength="3"
+                                                data-parsley-type="integer"
+                                            />
+                                            <span id="passengerForm.age.errors" th:errors="*{passengerFormList[__${statusStat.index}__].age}" class="invalid"></span>
+                                        </div>
+                                    </div>
 
-            <!-- 一般予約時 -->
-            <div sec:authorize="!hasRole('MEMBER')">
-              <div class="form-group">
-                <label for="repFamilyName" class="col-md-2 control-label">お名前(カタカナ)</label>
-                <div class="col-md-8">
-                  <div class="input-group inline-half">
-                    <label class="input-group-addon">セイ</label>
-                    <input type="text" th:field="*{repFamilyName}" class="family-name form-control" maxlength="10"
-                      data-parsley-required="true" data-parsley-required-message="セイは入力必須項目です。" />
-                  </div>
-                  <div class="input-group inline-half">
-                    <label class="input-group-addon">メイ</label>
-                    <input type="text" th:field="*{repGivenName}" class="given-name form-control" maxlength="10"
-                      data-parsley-required="true" data-parsley-required-message="メイは入力必須項目です。" />
-                  </div>
-                  <div class="clearfix"></div>
-                  <span id="repFamilyName.errors" th:errors="*{repFamilyName}" class="invalid"></span>
-                  <span id="repGivenName.errors" th:errors="*{repGivenName}" class="invalid"></span>
-                </div>
-              </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">性別</label>
+                                        <div class="col-md-4 form-inline">
+                                            <label th:each="item : ${CL_GENDER}" class="radio-inline">
+                                                <input
+                                                    type="radio"
+                                                    name="gender"
+                                                    th:field="*{passengerFormList[__${statusStat.index}__].gender}"
+                                                    class="gender"
+                                                    th:class="${passengerNo == 1} ? 'gender' : ''"
+                                                    th:value="${item.key}"
+                                                />
+                                                <span th:text="${CL_GENDER[item.key]}">男性</span>
+                                            </label>
+                                            <!--/*-->
+                                            <label class="radio-inline">
+                                                <input type="radio" name="gender" class="gender" />
+                                                <span>女性</span>
+                                            </label>
+                                            <!--*/-->
+                                            <div class="clearfix"></div>
+                                            <span id="passengerForm.gender.errors" th:errors="*{passengerFormList[__${statusStat.index}__].gender}" class="invalid"></span>
+                                        </div>
+                                    </div>
 
-              <div class="form-group">
-                <label for="repAge" class="col-md-2 control-label">年齢</label>
-                <div class="col-md-3">
-                  <input type="text" th:field="*{repAge}" class="age form-control" maxlength="3"
-                    data-parsley-required="true" data-parsley-maxlength="3"
-                    data-parsley-type="integer" />
-                  <span id="repAge.errors" th:errors="*{repAge}" class="invalid"></span>
-                </div>
-              </div>
+                                    <div class="form-group">
+                                        <label th:for="|passengerFormList[${statusStat.index}].membershipNumber|" class="col-md-2 control-label">会員番号(10桁)</label>
+                                        <div class="col-md-3">
+                                            <input
+                                                type="text"
+                                                th:field="*{passengerFormList[__${statusStat.index}__].membershipNumber}"
+                                                class="form-control membership-number"
+                                                th:class="'form-control ' + (${passengerNo == 1} ? 'membership-number' : '')"
+                                                maxlength="10"
+                                                data-parsley-type="integer"
+                                                data-parsley-length="[10, 10]"
+                                                data-parsley-length-message="%s 文字で入力してください。"
+                                                data-parsley-memberavailable="true"
+                                            />
+                                            <span id="passengerForm.membershipNumber.errors" th:errors="*{passengerFormList[__${statusStat.index}__].membershipNumber}" class="invalid"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-              <div class="form-group">
-                <label class="col-md-2 control-label">性別</label>
-                <div class="col-md-8 form-inline">
-                  <label th:each="item : ${CL_GENDER}" class="radio-inline">
-                    <input
-                      type="radio" name="repGender" th:field="*{repGender}" class="gender" value="M" th:value="${item.key}"
-                      data-parsley-required="true" />
-                    <span th:text="${CL_GENDER[item.key]}">男性</span>
-                  </label>
-                  <!--/*-->
-                  <label class="radio-inline">
-                    <input type="radio" name="repGender" data-parsley-required="true" class="gender" value="F"/>
-                    <span >女性</span>
-                  </label>
-                  <!--*/-->
-                  <div class="clearfix"></div>
-                  <span id="repGender.errors" th:errors="*{repGender}" class="invalid"></span>
-                </div>
-              </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <button th:if="${!ticketReserveForm.hasAdditionalPassenger()}" type="button" id="add-passenger-button" class="btn btn-default">搭乗者を追加</button>
+                                </div>
+                            </div>
+                        </section>
 
-              <div class="form-group">
-                <label for="repMembershipNumber" class="col-md-2 control-label">会員番号(10桁)</label>
-                <div class="col-md-3">
-                  <input type="text" th:field="*{repMembershipNumber}"
-                    class="membership-number form-control" maxlength="10"
-                    data-parsley-type="integer" data-parsley-length="[10, 10]"
-                    data-parsley-length-message="%s 文字で入力してください。"
-                    data-parsley-memberavailable="true" />
-                  <span id="repMembershipNumber.errors" th:errors="*{repMembershipNumber}"
-                    class="invalid"></span>
-                </div>
-              </div>
+                        <section id="representive">
+                            <h3>代表者情報</h3>
 
-              <div class="form-group">
-                <label for="repTel1" class="col-md-2 control-label">電話番号</label>
-                <div class="col-md-8 form-inline">
-                  <input type="text" th:field="*{repTel1}"
-                    class="form-control form-control-separated" style="width: 5.5em"
-                    maxlength="5" data-parsley-required="true"
-                    data-parsley-required-message="番号1は入力必須項目です。" data-parsley-length="[2, 5]"
-                    data-parsley-length-message="番号1は %s 文字以上 %s 文字以下で入力してください。"
-                    data-parsley-type="integer" data-parsley-type-message="番号1は数値で入力してください。" /> -
-                 <input
-                    type="text" th:field="*{repTel2}" class="form-control form-control-separated"
-                    style="width: 4.5em" maxlength="4" data-parsley-required="true"
-                    data-parsley-required-message="番号2は入力必須項目です。" data-parsley-length="[1, 4]"
-                    data-parsley-length-message="番号2は %s 文字以上 %s 文字以下で入力してください。"
-                    data-parsley-type="integer" data-parsley-type-message="番号2は数値で入力してください。" /> -
-                 <input
-                    type="text" th:field="*{repTel3}" class="form-control form-control-separated"
-                    style="width: 4.5em" maxlength="4" data-parsley-required="true"
-                    data-parsley-required-message="番号3は入力必須項目です。" data-parsley-length="[4, 4]"
-                    data-parsley-length-message="番号3は %s 文字で入力してください。" data-parsley-type="integer"
-                    data-parsley-type-message="番号3は数値で入力してください。" />
-                  <div class="clearfix"></div>
-                  <span id="repTel1.errors" th:errors="*{repTel1}" class="invalid"></span>
-                  <span id="repTel2.errors" th:errors="*{repTel2}" class="invalid"></span>
-                  <span id="repTel3.errors" th:errors="*{repTel3}" class="invalid"></span>
-                </div>
-              </div>
+                            <!-- 一般予約時 -->
+                            <div sec:authorize="!hasRole('MEMBER')">
+                                <div class="form-group">
+                                    <label for="repFamilyName" class="col-md-2 control-label">お名前(カタカナ)</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group inline-half">
+                                            <label class="input-group-addon">セイ</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{repFamilyName}"
+                                                class="family-name form-control"
+                                                maxlength="10"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="セイは入力必須項目です。"
+                                            />
+                                        </div>
+                                        <div class="input-group inline-half">
+                                            <label class="input-group-addon">メイ</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{repGivenName}"
+                                                class="given-name form-control"
+                                                maxlength="10"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="メイは入力必須項目です。"
+                                            />
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <span id="repFamilyName.errors" th:errors="*{repFamilyName}" class="invalid"></span>
+                                        <span id="repGivenName.errors" th:errors="*{repGivenName}" class="invalid"></span>
+                                    </div>
+                                </div>
 
-              <div class="form-group">
-                <label for="repMail" class="col-md-2 control-label">Eメール</label>
-                <div class="col-md-8">
-                  <input type="text" th:field="*{repMail}" class="form-control" maxlength="256"
-                    data-parsley-required="true" data-parsley-type="email" />
-                  <span id="repMail.errors" th:errors="*{repMail}" class="invalid"></span>
-                </div>
-              </div>
+                                <div class="form-group">
+                                    <label for="repAge" class="col-md-2 control-label">年齢</label>
+                                    <div class="col-md-3">
+                                        <input
+                                            type="text"
+                                            th:field="*{repAge}"
+                                            class="age form-control"
+                                            maxlength="3"
+                                            data-parsley-required="true"
+                                            data-parsley-maxlength="3"
+                                            data-parsley-type="integer"
+                                        />
+                                        <span id="repAge.errors" th:errors="*{repAge}" class="invalid"></span>
+                                    </div>
+                                </div>
 
-              <div class="form-group">
-                <div class="col-md-offset-2 col-md-8">
-                  <button type="button" id="copy-to-representive-button" class="btn btn-default">搭乗者1をコピー</button>
-                </div>
-              </div>
-            </div>
-            <!-- 会員予約時 -->
-            <!--/*/
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">性別</label>
+                                    <div class="col-md-8 form-inline">
+                                        <label th:each="item : ${CL_GENDER}" class="radio-inline">
+                                            <input type="radio" name="repGender" th:field="*{repGender}" class="gender" value="M" th:value="${item.key}" data-parsley-required="true" />
+                                            <span th:text="${CL_GENDER[item.key]}">男性</span>
+                                        </label>
+                                        <!--/*-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="repGender" data-parsley-required="true" class="gender" value="F" />
+                                            <span>女性</span>
+                                        </label>
+                                        <!--*/-->
+                                        <div class="clearfix"></div>
+                                        <span id="repGender.errors" th:errors="*{repGender}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="repMembershipNumber" class="col-md-2 control-label">会員番号(10桁)</label>
+                                    <div class="col-md-3">
+                                        <input
+                                            type="text"
+                                            th:field="*{repMembershipNumber}"
+                                            class="membership-number form-control"
+                                            maxlength="10"
+                                            data-parsley-type="integer"
+                                            data-parsley-length="[10, 10]"
+                                            data-parsley-length-message="%s 文字で入力してください。"
+                                            data-parsley-memberavailable="true"
+                                        />
+                                        <span id="repMembershipNumber.errors" th:errors="*{repMembershipNumber}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="repTel1" class="col-md-2 control-label">電話番号</label>
+                                    <div class="col-md-8 form-inline">
+                                        <input
+                                            type="text"
+                                            th:field="*{repTel1}"
+                                            class="form-control form-control-separated"
+                                            style="width: 5.5em"
+                                            maxlength="5"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号1は入力必須項目です。"
+                                            data-parsley-length="[2, 5]"
+                                            data-parsley-length-message="番号1は %s 文字以上 %s 文字以下で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号1は数値で入力してください。"
+                                        />
+                                        -
+                                        <input
+                                            type="text"
+                                            th:field="*{repTel2}"
+                                            class="form-control form-control-separated"
+                                            style="width: 4.5em"
+                                            maxlength="4"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号2は入力必須項目です。"
+                                            data-parsley-length="[1, 4]"
+                                            data-parsley-length-message="番号2は %s 文字以上 %s 文字以下で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号2は数値で入力してください。"
+                                        />
+                                        -
+                                        <input
+                                            type="text"
+                                            th:field="*{repTel3}"
+                                            class="form-control form-control-separated"
+                                            style="width: 4.5em"
+                                            maxlength="4"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号3は入力必須項目です。"
+                                            data-parsley-length="[4, 4]"
+                                            data-parsley-length-message="番号3は %s 文字で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号3は数値で入力してください。"
+                                        />
+                                        <div class="clearfix"></div>
+                                        <span id="repTel1.errors" th:errors="*{repTel1}" class="invalid"></span>
+                                        <span id="repTel2.errors" th:errors="*{repTel2}" class="invalid"></span>
+                                        <span id="repTel3.errors" th:errors="*{repTel3}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="repMail" class="col-md-2 control-label">Eメール</label>
+                                    <div class="col-md-8">
+                                        <input type="text" th:field="*{repMail}" class="form-control" maxlength="256" data-parsley-required="true" data-parsley-type="email" />
+                                        <span id="repMail.errors" th:errors="*{repMail}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <button type="button" id="copy-to-representive-button" class="btn btn-default">搭乗者1をコピー</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 会員予約時 -->
+                            <!--/*/
             <div sec:authorize="hasRole('MEMBER')">
               <div class="form-group">
                 <label class="col-md-2 control-label">お名前(カタカナ)</label>
@@ -346,33 +397,29 @@
               </div>
             </div>
             /*/-->
-          </section>
+                        </section>
 
-          <div class="text-center btns-block">
-            <input type="submit" id="reserve-confirm-button" class="btn btn-primary btn-lg btns-block-rightest-btn"
-              name="confirm" value="予約確認"> <input type="submit" id="backToListOfAvailableSeats"
-              class="btn btn-default btn-lg" name="backToSearch" value="空席一覧に戻る">
-          </div>
+                        <div class="text-center btns-block">
+                            <input type="submit" id="reserve-confirm-button" class="btn btn-primary btn-lg btns-block-rightest-btn" name="confirm" value="予約確認" />
+                            <input type="submit" id="backToListOfAvailableSeats" class="btn btn-default btn-lg" name="backToSearch" value="空席一覧に戻る" />
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
 
-        </form>
-      </section>
+        <footer th:replace="~{A0/footer :: footer}"></footer>
 
-    </div>
-    <!-- /row -->
+        <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
+        <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
 
-  </div>
-  <!-- /container -->
-
-  <footer th:replace="~{A0/footer :: footer}"></footer>
-
-  <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
-  <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-  <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
-  <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
-
-  <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
-  <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
-  <script src="../../../resources/js/parsley-validator-memberavailable.js" th:src="@{/resources/js/parsley-validator-memberavailable.js}"></script>
-  <script src="../../../resources/js/reserve-form.js" th:src="@{/resources/js/reserve-form.js}"></script>
-</body>
+        <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+        <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
+        <script src="../../../resources/js/parsley-validator-memberavailable.js" th:src="@{/resources/js/parsley-validator-memberavailable.js}"></script>
+        <script src="../../../resources/js/reserve-form.js" th:src="@{/resources/js/reserve-form.js}"></script>
+    </body>
 </html>

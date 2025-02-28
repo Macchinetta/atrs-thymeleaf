@@ -34,6 +34,6 @@ public interface TicketSearchService {
      * @return 空席照会の検索結果
      * @throws BusinessException 該当する空席情報が存在しない場合の業務例外
      */
-    List<FlightVacantInfoDto> searchFlight(
-            TicketSearchCriteriaDto searchCriteria) throws BusinessException;
+    List<FlightVacantInfoDto> searchFlight(TicketSearchCriteriaDto searchCriteria)
+            throws BusinessException;
 }

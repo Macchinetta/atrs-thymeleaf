@@ -41,8 +41,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory.getLogger(
-            AuthLoginServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthLoginServiceImpl.class);
 
     /**
      * 日付生成インターフェース。
@@ -71,13 +70,11 @@ public class AuthLoginServiceImpl implements AuthLoginService {
         memberLogin.setLoginFlg(true);
         int updateCount = memberRepository.updateToLoginStatus(member);
         if (updateCount != 1) {
-            throw new SystemException(LogMessages.E_AR_A0_L9002
-                    .getCode(), LogMessages.E_AR_A0_L9002.getMessage(
-                            updateCount, 1));
+            throw new SystemException(LogMessages.E_AR_A0_L9002.getCode(),
+                    LogMessages.E_AR_A0_L9002.getMessage(updateCount, 1));
         }
 
-        logger.info(LogMessages.I_AR_A1_L0001.getMessage(member
-                .getMembershipNumber()));
+        logger.info(LogMessages.I_AR_A1_L0001.getMessage(member.getMembershipNumber()));
     }
 
 }

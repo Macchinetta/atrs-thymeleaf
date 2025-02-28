@@ -63,15 +63,12 @@ public class TicketReserveValidator implements Validator {
         TicketReserveResource resource = (TicketReserveResource) target;
 
         // 予約代表者電話番号チェック
-        if (!(errors.hasFieldErrors("repTel1") || errors.hasFieldErrors(
-                "repTel2"))) {
-            checkRepresentativeTel(errors, resource.getRepTel1(), resource
-                    .getRepTel2());
+        if (!(errors.hasFieldErrors("repTel1") || errors.hasFieldErrors("repTel2"))) {
+            checkRepresentativeTel(errors, resource.getRepTel1(), resource.getRepTel2());
         }
 
         // 搭乗者必須チェック(入力値が1つもない搭乗者情報は対象外)
-        List<PassengerResource> passengerResourceList = resource
-                .getPassengerResourceList();
+        List<PassengerResource> passengerResourceList = resource.getPassengerResourceList();
         int inputtedPassengerCount = 0;
         for (int i = 0; i < passengerResourceList.size(); i++) {
             PassengerResource passengerForm = passengerResourceList.get(i);
@@ -92,8 +89,7 @@ public class TicketReserveValidator implements Validator {
         }
 
         // 予約フライトチェック
-        ValidationUtils.invokeValidator(reservationFlightValidator, resource,
-                errors);
+        ValidationUtils.invokeValidator(reservationFlightValidator, resource, errors);
     }
 
     /**
@@ -102,16 +98,13 @@ public class TicketReserveValidator implements Validator {
      * @param repTel1 予約代表者電話番号1
      * @param repTel2 予約代表者電話番号2
      */
-    private void checkRepresentativeTel(Errors errors, String repTel1,
-            String repTel2) {
+    private void checkRepresentativeTel(Errors errors, String repTel1, String repTel2) {
         if (!ValidationUtil.isValidTelNum(repTel1, repTel2)) {
-            Object[] errorArgs = new Object[] {
-                    new DefaultMessageSourceResolvable("repTel1"),
+            Object[] errorArgs = new Object[] {new DefaultMessageSourceResolvable("repTel1"),
                     new DefaultMessageSourceResolvable("repTel2"),
                     ValidationUtil.TEL1_AND_TEL2_MIN_LENGTH,
-                    ValidationUtil.TEL1_AND_TEL2_MAX_LENGTH };
-            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(), errorArgs,
-                    "");
+                    ValidationUtil.TEL1_AND_TEL2_MAX_LENGTH};
+            errors.reject(TicketReserveErrorCode.E_AR_B2_5003.code(), errorArgs, "");
         }
     }
 
@@ -123,7 +116,7 @@ public class TicketReserveValidator implements Validator {
      */
     private void checkRequired(Errors errors, String itemName, int index) {
         String target = "passengerResourceList[" + index + "]." + itemName;
-        ValidationUtils.rejectIfEmpty(errors, target, "NotNull", new Object[] {
-                new DefaultMessageSourceResolvable(target) });
+        ValidationUtils.rejectIfEmpty(errors, target, "NotNull",
+                new Object[] {new DefaultMessageSourceResolvable(target)});
     }
 }

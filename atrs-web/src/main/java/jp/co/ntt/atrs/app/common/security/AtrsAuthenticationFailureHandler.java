@@ -32,15 +32,13 @@ import org.terasoluna.gfw.common.exception.SystemException;
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationFailureHandler extends
-                                              SimpleUrlAuthenticationFailureHandler {
+public class AtrsAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request,
-            HttpServletResponse response,
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
 
         // AuthenticationServiceExceptionの場合はシステム例外とする

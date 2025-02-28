@@ -70,9 +70,8 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      * @param beforeDayNum 搭乗日前日数
      * @param fareTypeList 運賃種別コードリスト
      */
-    public VacantSeatSearchCriteriaDto(Date depDate, Route route,
-            BoardingClassCd boardingClass, Integer beforeDayNum,
-            List<FareTypeCd> fareTypeList) {
+    public VacantSeatSearchCriteriaDto(Date depDate, Route route, BoardingClassCd boardingClass,
+            Integer beforeDayNum, List<FareTypeCd> fareTypeList) {
 
         this.depDate = depDate;
         this.route = route;
@@ -126,7 +125,6 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

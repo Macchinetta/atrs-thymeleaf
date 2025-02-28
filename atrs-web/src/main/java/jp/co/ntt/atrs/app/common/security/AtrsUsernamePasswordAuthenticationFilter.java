@@ -35,14 +35,13 @@ import jp.co.ntt.atrs.domain.service.a1.AuthLoginErrorCode;
  * ユーザーログイン入力チェックフィルタ。
  * @author NTT 電電太郎
  */
-public class AtrsUsernamePasswordAuthenticationFilter extends
-                                                      UsernamePasswordAuthenticationFilter {
+public class AtrsUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     /**
      * ロガー。
      */
-    private static final Logger logger = LoggerFactory.getLogger(
-            AtrsUsernamePasswordAuthenticationFilter.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(AtrsUsernamePasswordAuthenticationFilter.class);
 
     /**
      * 会員番号文字数。
@@ -104,18 +103,16 @@ public class AtrsUsernamePasswordAuthenticationFilter extends
 
         if (username == null || username.length() != membershipNumberLength) {
             logger.info(LogMessages.I_AR_A1_L2001.getMessage(username));
-            String errorMessage = messages.getMessage(
-                    AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
-                            .getDefault());
+            String errorMessage = messages.getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(),
+                    Locale.getDefault());
             throw new UsernameNotFoundException(errorMessage);
         }
 
         if (password == null || password.length() < passwordMinLength
                 || password.length() > passwordMaxLength) {
             logger.info(LogMessages.I_AR_A1_L2002.getMessage(username));
-            String errorMessage = messages.getMessage(
-                    AuthLoginErrorCode.E_AR_A1_2001.code(), Locale
-                            .getDefault());
+            String errorMessage = messages.getMessage(AuthLoginErrorCode.E_AR_A1_2001.code(),
+                    Locale.getDefault());
             throw new BadCredentialsException(errorMessage);
         }
 

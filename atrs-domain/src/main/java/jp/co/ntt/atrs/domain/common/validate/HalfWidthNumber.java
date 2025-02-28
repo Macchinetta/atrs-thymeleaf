@@ -39,7 +39,7 @@ import jp.co.ntt.atrs.domain.common.validate.HalfWidthNumber.List;
  * 半角数字チェックアノテーション
  * @author NTT 電電太郎
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
@@ -57,8 +57,7 @@ public @interface HalfWidthNumber {
     /**
      * 複数設定用リスト
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER,
-            TYPE_USE })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
     @interface List {

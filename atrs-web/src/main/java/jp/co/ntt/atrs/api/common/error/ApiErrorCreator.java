@@ -47,10 +47,10 @@ public class ApiErrorCreator {
      * @param args
      * @return エラー情報
      */
-    public ApiError createApiError(WebRequest request, String errorCode,
-            String defaultErrorMessage, Object... args) {
-        String localizedMessage = messageSource.getMessage(errorCode, args,
-                defaultErrorMessage, request.getLocale());
+    public ApiError createApiError(WebRequest request, String errorCode, String defaultErrorMessage,
+            Object... args) {
+        String localizedMessage =
+                messageSource.getMessage(errorCode, args, defaultErrorMessage, request.getLocale());
 
         return new ApiError(errorCode, localizedMessage);
     }
@@ -63,20 +63,16 @@ public class ApiErrorCreator {
      * @param defaultErrorMessage デフォルトエラーメッセージ
      * @return エラー情報
      */
-    public ApiError createBindingResultApiError(WebRequest request,
-            String errorCode, BindingResult bindingResult,
-            String defaultErrorMessage) {
-        ApiError apiError = createApiError(request, errorCode,
-                defaultErrorMessage);
+    public ApiError createBindingResultApiError(WebRequest request, String errorCode,
+            BindingResult bindingResult, String defaultErrorMessage) {
+        ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
 
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            apiError.addDetail(createApiError(request, fieldError, fieldError
-                    .getField()));
+            apiError.addDetail(createApiError(request, fieldError, fieldError.getField()));
         }
 
         for (ObjectError objectError : bindingResult.getGlobalErrors()) {
-            apiError.addDetail(createApiError(request, objectError, objectError
-                    .getObjectName()));
+            apiError.addDetail(createApiError(request, objectError, objectError.getObjectName()));
         }
 
         return apiError;
@@ -91,11 +87,9 @@ public class ApiErrorCreator {
      */
     private ApiError createApiError(WebRequest request,
             DefaultMessageSourceResolvable messageResolvable, String target) {
-        String localizedMessage = messageSource.getMessage(messageResolvable,
-                request.getLocale());
+        String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
 
-        return new ApiError(messageResolvable
-                .getCode(), localizedMessage, target);
+        return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 
     /**
@@ -106,9 +100,8 @@ public class ApiErrorCreator {
      * @param defaultErrorMessage デフォルトエラーメッセージ
      * @return エラー情報
      */
-    public ApiError createResultMessageApiError(WebRequest request,
-            String rootErrorCode, ResultMessages resultMessages,
-            String defaultErrorMessage) {
+    public ApiError createResultMessageApiError(WebRequest request, String rootErrorCode,
+            ResultMessages resultMessages, String defaultErrorMessage) {
         ApiError apiError;
         if (resultMessages.getList().size() == 1) {
             ResultMessage resultMessage = resultMessages.iterator().next();
@@ -119,15 +112,12 @@ public class ApiErrorCreator {
                 errorCode = rootErrorCode;
             }
 
-            apiError = createApiError(request, errorCode, errorText,
-                    resultMessage.getArgs());
+            apiError = createApiError(request, errorCode, errorText, resultMessage.getArgs());
         } else {
-            apiError = createApiError(request, rootErrorCode,
-                    defaultErrorMessage);
+            apiError = createApiError(request, rootErrorCode, defaultErrorMessage);
             for (ResultMessage resultMessage : resultMessages.getList()) {
-                apiError.addDetail(createApiError(request, resultMessage
-                        .getCode(), resultMessage.getText(), resultMessage
-                                .getArgs()));
+                apiError.addDetail(createApiError(request, resultMessage.getCode(),
+                        resultMessage.getText(), resultMessage.getArgs()));
             }
         }
 

@@ -57,8 +57,7 @@ public class TicketSearchValidator implements Validator {
         TicketSearchForm form = (TicketSearchForm) target;
 
         // 出発空港と到着空港が同じでないかチェック
-        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors(
-                "arrAirportCd")) {
+        if (!errors.hasFieldErrors("depAirportCd") && !errors.hasFieldErrors("arrAirportCd")) {
             String depAirport = form.getDepAirportCd();
             String arrAirport = form.getArrAirportCd();
             if (depAirport.equals(arrAirport)) {
@@ -71,12 +70,10 @@ public class TicketSearchValidator implements Validator {
 
             // 復路搭乗日必須チェック
             ValidationUtils.rejectIfEmpty(errors, "homewardDate", "NotNull",
-                    new Object[] {
-                            new DefaultMessageSourceResolvable("homewardDate") });
+                    new Object[] {new DefaultMessageSourceResolvable("homewardDate")});
 
             // 復路搭乗日が往路搭乗日以降かチェック
-            if (!errors.hasFieldErrors("outwardDate") && !errors.hasFieldErrors(
-                    "homewardDate")) {
+            if (!errors.hasFieldErrors("outwardDate") && !errors.hasFieldErrors("homewardDate")) {
 
                 DateTime outwardDate = new DateTime(form.getOutwardDate());
                 DateTime homewardDate = new DateTime(form.getHomewardDate());

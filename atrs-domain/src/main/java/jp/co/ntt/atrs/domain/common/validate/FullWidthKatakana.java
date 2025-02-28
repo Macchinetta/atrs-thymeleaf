@@ -39,7 +39,7 @@ import jp.co.ntt.atrs.domain.common.validate.FullWidthKatakana.List;
  * 全角カタカナチェックアノテーション
  * @author NTT 電電太郎
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
@@ -57,8 +57,7 @@ public @interface FullWidthKatakana {
     /**
      * 複数設定用リスト
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER,
-            TYPE_USE })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
     @interface List {

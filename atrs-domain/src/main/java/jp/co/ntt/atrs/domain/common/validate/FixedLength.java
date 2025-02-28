@@ -40,7 +40,7 @@ import jp.co.ntt.atrs.domain.common.validate.FixedLength.List;
  * 指定サイズチェックアノテーション
  * @author NTT 電電太郎
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
@@ -56,16 +56,14 @@ public @interface FixedLength {
 
     Class<? extends Payload>[] payload() default {};
 
-    @OverridesAttribute.List({
-            @OverridesAttribute(constraint = Size.class, name = "min"),
-            @OverridesAttribute(constraint = Size.class, name = "max") })
+    @OverridesAttribute.List({@OverridesAttribute(constraint = Size.class, name = "min"),
+            @OverridesAttribute(constraint = Size.class, name = "max")})
     int value();
 
     /**
      * 複数設定用リスト
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER,
-            TYPE_USE })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
     @interface List {

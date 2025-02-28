@@ -43,8 +43,7 @@ public class MembershipSharedServiceImpl implements MembershipSharedService {
     @Transactional(readOnly = true)
     public boolean isMember(String membershipNumber) {
 
-        Assert.hasText(membershipNumber,
-                "membershipNumber must have some text.");
+        Assert.hasText(membershipNumber, "membershipNumber must have some text.");
 
         // 該当する会員情報が存在するか判定
         return (memberRepository.findOne(membershipNumber) != null);

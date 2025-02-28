@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.api.ticket;
 
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -51,26 +51,26 @@ public class ReservationFlightValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         TicketReserveResource resource = (TicketReserveResource) target;
-        List<SelectFlightResource> selectFlightResourceList = resource
-                .getSelectFlightResourceList();
+        List<SelectFlightResource> selectFlightResourceList =
+                resource.getSelectFlightResourceList();
 
         // フライト種別に応じてチェック
         if (!errors.hasFieldErrors("flightType")) {
             switch (resource.getFlightType()) {
-            case RT:
-                // 往復の場合のチェック
-                validateRoundTrip(selectFlightResourceList, errors);
-                break;
+                case RT:
+                    // 往復の場合のチェック
+                    validateRoundTrip(selectFlightResourceList, errors);
+                    break;
 
-            case OW:
-                // 片道の場合のチェック
-                validateOneWay(selectFlightResourceList, errors);
-                break;
+                case OW:
+                    // 片道の場合のチェック
+                    validateOneWay(selectFlightResourceList, errors);
+                    break;
 
-            default:
-                // 処理なし
+                default:
+                    // 処理なし
 
-                break;
+                    break;
             }
         }
     }
@@ -80,16 +80,15 @@ public class ReservationFlightValidator implements Validator {
      * @param selectFlightResourceList 予約フライト選択リソース
      * @param errors エラーメッセージを保持するクラス
      */
-    private void validateRoundTrip(
-            List<SelectFlightResource> selectFlightResourceList,
+    private void validateRoundTrip(List<SelectFlightResource> selectFlightResourceList,
             Errors errors) {
         // 選択フライト必須チェック
         if (CollectionUtils.isEmpty(selectFlightResourceList)) {
             // 往路、復路共に未入力の場合
-            errors.reject("NotNull.outwardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
-            errors.reject("NotNull.homewardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("homewardFlight") }, "");
+            errors.reject("NotNull.outwardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("outwardFlight")}, "");
+            errors.reject("NotNull.homewardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("homewardFlight")}, "");
         } else {
             // フライトが2つ選択されていることをチェック
             if (selectFlightResourceList.size() == 2) {
@@ -113,13 +112,12 @@ public class ReservationFlightValidator implements Validator {
      * @param selectFlightResourceList 予約フライト選択リソース
      * @param errors エラーメッセージを保持するクラス
      */
-    private void validateOneWay(
-            List<SelectFlightResource> selectFlightResourceList,
+    private void validateOneWay(List<SelectFlightResource> selectFlightResourceList,
             Errors errors) {
         // 選択フライト必須チェック
         if (CollectionUtils.isEmpty(selectFlightResourceList)) {
-            errors.reject("NotNull.outwardFlight", new Object[] {
-                    new DefaultMessageSourceResolvable("outwardFlight") }, "");
+            errors.reject("NotNull.outwardFlight",
+                    new Object[] {new DefaultMessageSourceResolvable("outwardFlight")}, "");
         } else {
             // フライトが1つ選択されていることをチェック
             if (selectFlightResourceList.size() == 1) {

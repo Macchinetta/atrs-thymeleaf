@@ -53,8 +53,8 @@ public class RouteProvider {
     public void load() {
         List<Route> routeList = routeRepository.findAll();
         for (Route route : routeList) {
-            String cacheKey = makeCacheKey(route.getDepartureAirport()
-                    .getCode(), route.getArrivalAirport().getCode());
+            String cacheKey = makeCacheKey(route.getDepartureAirport().getCode(),
+                    route.getArrivalAirport().getCode());
             routeMap.put(cacheKey, route);
         }
     }
@@ -65,13 +65,10 @@ public class RouteProvider {
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報。該当する区間情報が見つからない場合はnull。
      */
-    public Route getRouteByAirportCd(String departureAirportCd,
-            String arrivalAirportCd) {
+    public Route getRouteByAirportCd(String departureAirportCd, String arrivalAirportCd) {
 
-        Assert.hasText(departureAirportCd,
-                "departureAirportCd must have some text.");
-        Assert.hasText(arrivalAirportCd,
-                "arrivalAirportCd must have some text.");
+        Assert.hasText(departureAirportCd, "departureAirportCd must have some text.");
+        Assert.hasText(arrivalAirportCd, "arrivalAirportCd must have some text.");
 
         String searchKey = makeCacheKey(departureAirportCd, arrivalAirportCd);
         return routeMap.get(searchKey);
@@ -86,8 +83,7 @@ public class RouteProvider {
      * @param arrivalAirportCd 到着空港コード
      * @return 区間情報マップにキャッシュするためのキー値
      */
-    private String makeCacheKey(String departureAirportCd,
-            String arrivalAirportCd) {
+    private String makeCacheKey(String departureAirportCd, String arrivalAirportCd) {
         return departureAirportCd + "-" + arrivalAirportCd;
     }
 

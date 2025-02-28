@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:util="http://www.springframework.org/schema/util"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-  <bean id="jdbcTemplateForCodeList" class="org.springframework.jdbc.core.JdbcTemplate">
-    <property name="dataSource" ref="dataSource" />
-    <property name="fetchSize" value="${codelist.jdbc.fetchSize:1000}" />
-  </bean>
+    <bean id="jdbcTemplateForCodeList" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+        <property name="fetchSize" value="${codelist.jdbc.fetchSize:1000}" />
+    </bean>
 
-  <bean id="AbstractJdbcCodeList"
-    class="org.terasoluna.gfw.common.codelist.JdbcCodeList" abstract="true">
-    <property name="jdbcTemplate" ref="jdbcTemplateForCodeList" />
-  </bean>
+    <bean id="AbstractJdbcCodeList"
+        class="org.terasoluna.gfw.common.codelist.JdbcCodeList" abstract="true">
+        <property name="jdbcTemplate" ref="jdbcTemplateForCodeList" />
+    </bean>
 
-  <!-- 空港 -->
-  <bean id="CL_AIRPORT" class="jp.co.ntt.atrs.domain.common.codelist.AirportCodeList">
-    <property name="dataSource" ref="dataSource" />
-    <property name="querySql"
-      value="SELECT airport_cd,airport_name,display_order FROM airport order by display_order ASC" />
-    <property name="valueColumn" value="airport_cd" />
-    <property name="labelColumn" value="airport_name" />
-    <property name="orderColumn" value="display_order" />
-    <!-- 区切り行の表示順 -->
-    <property name="airportNopInsertOrder" value="100" />
-  </bean>
+    <!-- 空港 -->
+    <bean id="CL_AIRPORT" class="jp.co.ntt.atrs.domain.common.codelist.AirportCodeList">
+        <property name="dataSource" ref="dataSource" />
+        <property name="querySql"
+            value="SELECT airport_cd,airport_name,display_order FROM airport order by display_order ASC" />
+        <property name="valueColumn" value="airport_cd" />
+        <property name="labelColumn" value="airport_name" />
+        <property name="orderColumn" value="display_order" />
+        <!-- 区切り行の表示順 -->
+        <property name="airportNopInsertOrder" value="100" />
+    </bean>
 
-  <!-- 搭乗クラス -->
-  <bean id="CL_BOARDINGCLASS" parent="AbstractJdbcCodeList">
-    <property name="dataSource" ref="dataSource" />
-    <property name="querySql"
-      value="SELECT boarding_class_cd,boarding_class_name FROM boarding_class ORDER BY display_order ASC" />
-    <property name="valueColumn" value="boarding_class_cd" />
-    <property name="labelColumn" value="boarding_class_name" />
-  </bean>
+    <!-- 搭乗クラス -->
+    <bean id="CL_BOARDINGCLASS" parent="AbstractJdbcCodeList">
+        <property name="dataSource" ref="dataSource" />
+        <property name="querySql"
+            value="SELECT boarding_class_cd,boarding_class_name FROM boarding_class ORDER BY display_order ASC" />
+        <property name="valueColumn" value="boarding_class_cd" />
+        <property name="labelColumn" value="boarding_class_name" />
+    </bean>
 
-  <!-- 運賃種別 -->
-  <bean id="CL_FARETYPE" parent="AbstractJdbcCodeList">
-    <property name="dataSource" ref="dataSource" />
-    <property name="querySql"
-      value="SELECT fare_type_cd, fare_type_name FROM fare_type ORDER BY display_order ASC" />
-    <property name="valueColumn" value="fare_type_cd" />
-    <property name="labelColumn" value="fare_type_name" />
-  </bean>
+    <!-- 運賃種別 -->
+    <bean id="CL_FARETYPE" parent="AbstractJdbcCodeList">
+        <property name="dataSource" ref="dataSource" />
+        <property name="querySql"
+            value="SELECT fare_type_cd, fare_type_name FROM fare_type ORDER BY display_order ASC" />
+        <property name="valueColumn" value="fare_type_cd" />
+        <property name="labelColumn" value="fare_type_name" />
+    </bean>
 
-  <!-- クレジットカード有効期限年 -->
-  <bean id="CL_CREDITYEAR" class="org.terasoluna.gfw.common.codelist.NumberRangeCodeList">
-    <property name="from" value="0" />
-    <property name="to" value="99" />
-    <property name="valueFormat" value="%02d" />
-    <property name="labelFormat" value="%02d" />
-  </bean>
+    <!-- クレジットカード有効期限年 -->
+    <bean id="CL_CREDITYEAR" class="org.terasoluna.gfw.common.codelist.NumberRangeCodeList">
+        <property name="from" value="0" />
+        <property name="to" value="99" />
+        <property name="valueFormat" value="%02d" />
+        <property name="labelFormat" value="%02d" />
+    </bean>
 
-  <!-- クレジットカード有効期限月 -->
-  <bean id="CL_CREDITMONTH" class="org.terasoluna.gfw.common.codelist.NumberRangeCodeList">
-    <property name="from" value="1" />
-    <property name="to" value="12" />
-    <property name="valueFormat" value="%02d" />
-    <property name="labelFormat" value="%02d" />
-  </bean>
+    <!-- クレジットカード有効期限月 -->
+    <bean id="CL_CREDITMONTH" class="org.terasoluna.gfw.common.codelist.NumberRangeCodeList">
+        <property name="from" value="1" />
+        <property name="to" value="12" />
+        <property name="valueFormat" value="%02d" />
+        <property name="labelFormat" value="%02d" />
+    </bean>
 
-  <!-- 性別 -->
-  <bean id="CL_GENDER" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-    <property name="map">
-      <map>
-        <entry key="M" value="男性" />
-        <entry key="F" value="女性" />
-      </map>
-    </property>
-  </bean>
+    <!-- 性別 -->
+    <bean id="CL_GENDER" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+        <property name="map">
+            <map>
+                <entry key="M" value="男性" />
+                <entry key="F" value="女性" />
+            </map>
+        </property>
+    </bean>
 
-  <!-- クレジットカード種別 -->
-  <bean id="CL_CREDITTYPE" parent="AbstractJdbcCodeList">
-    <property name="querySql"
-      value="SELECT credit_type_cd, credit_firm FROM credit_type ORDER BY display_order ASC" />
-    <property name="valueColumn" value="credit_type_cd" />
-    <property name="labelColumn" value="credit_firm" />
-  </bean>
+    <!-- クレジットカード種別 -->
+    <bean id="CL_CREDITTYPE" parent="AbstractJdbcCodeList">
+        <property name="querySql"
+            value="SELECT credit_type_cd, credit_firm FROM credit_type ORDER BY display_order ASC" />
+        <property name="valueColumn" value="credit_type_cd" />
+        <property name="labelColumn" value="credit_firm" />
+    </bean>
 
-  <!-- フライト種別 -->
-  <bean id="CL_FLIGHTTYPE" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-    <property name="map">
-      <map>
-        <entry key="RT" value="往復" />
-        <entry key="OW" value="片道" />
-      </map>
-    </property>
-  </bean>
+    <!-- フライト種別 -->
+    <bean id="CL_FLIGHTTYPE" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+        <property name="map">
+            <map>
+                <entry key="RT" value="往復" />
+                <entry key="OW" value="片道" />
+            </map>
+        </property>
+    </bean>
 
 </beans>

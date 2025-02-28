@@ -98,15 +98,12 @@ public class MemberUpdateController {
 
         // 会員情報から会員情報変更フォームを生成し、設定
         Member member = memberUpdateService.findMember(membershipNumber);
-        MemberUpdateForm memberUpdateForm = memberHelper.toMemberUpdateForm(
-                member);
+        MemberUpdateForm memberUpdateForm = memberHelper.toMemberUpdateForm(member);
         model.addAttribute(memberUpdateForm);
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper
-                .getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper
-                .getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
 
         return "C2/memberUpdateForm";
     }
@@ -125,9 +122,8 @@ public class MemberUpdateController {
      * @return View論理名
      */
     @RequestMapping(method = RequestMethod.POST)
-    public String update(@Validated MemberUpdateForm memberUpdateForm,
-            BindingResult result, Model model,
-            RedirectAttributes redirectAttributes, Principal principal) {
+    public String update(@Validated MemberUpdateForm memberUpdateForm, BindingResult result,
+            Model model, RedirectAttributes redirectAttributes, Principal principal) {
 
         if (result.hasErrors()) {
             // 検証エラーがある場合は画面再表示
@@ -139,8 +135,8 @@ public class MemberUpdateController {
 
         // 入力パスワードが登録情報と一致しているかチェック(未入力の場合はチェックされない)
         try {
-            memberUpdateService.checkMemberPassword(memberUpdateForm
-                    .getCurrentPassword(), membershipNumber);
+            memberUpdateService.checkMemberPassword(memberUpdateForm.getCurrentPassword(),
+                    membershipNumber);
         } catch (BusinessException e) {
 
             // パスワード不一致の場合、メッセージ設定後に画面再表示
@@ -156,15 +152,12 @@ public class MemberUpdateController {
 
         // 更新した会員情報をログインユーザ情報に設定
         Authentication authentication = (Authentication) principal;
-        AtrsUserDetails userDetails = (AtrsUserDetails) authentication
-                .getPrincipal();
-        Member loginMember = memberUpdateService.findMemberForLogin(
-                membershipNumber);
+        AtrsUserDetails userDetails = (AtrsUserDetails) authentication.getPrincipal();
+        Member loginMember = memberUpdateService.findMemberForLogin(membershipNumber);
         userDetails.setMember(loginMember);
 
         // 更新完了メッセージ設定
-        ResultMessages messages = ResultMessages.success().add(
-                MessageKeys.I_AR_C2_2001.key());
+        ResultMessages messages = ResultMessages.success().add(MessageKeys.I_AR_C2_2001.key());
         redirectAttributes.addFlashAttribute(messages);
 
         // リダイレクトで会員情報変更画面を表示
@@ -194,10 +187,8 @@ public class MemberUpdateController {
     public String updateRedo(MemberUpdateForm memberUpdateForm, Model model) {
 
         // カレンダー表示制御のため、生年月日入力可能日付を設定
-        model.addAttribute("dateOfBirthMinDate", memberHelper
-                .getDateOfBirthMinDate());
-        model.addAttribute("dateOfBirthMaxDate", memberHelper
-                .getDateOfBirthMaxDate());
+        model.addAttribute("dateOfBirthMinDate", memberHelper.getDateOfBirthMinDate());
+        model.addAttribute("dateOfBirthMaxDate", memberHelper.getDateOfBirthMaxDate());
 
         return "C2/memberUpdateForm";
     }

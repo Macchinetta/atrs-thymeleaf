@@ -1,45 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="contextPath" th:content="${#request.getContextPath()}" />
-    <meta name="reserveIntervalTime" th:content="${flightSearchOutputDto.reserveIntervalTime}" />
-    <meta name="isInitialSearchUnnecessary" th:content="${isInitialSearchUnnecessary}" />
-    <meta name="_csrf_parameter" th:content="${_csrf.parameterName}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <title>空席照会 | Airline Ticket Reservation System</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="contextPath" th:content="${#request.getContextPath()}" />
+        <meta name="reserveIntervalTime" th:content="${flightSearchOutputDto.reserveIntervalTime}" />
+        <meta name="isInitialSearchUnnecessary" th:content="${isInitialSearchUnnecessary}" />
+        <meta name="_csrf_parameter" th:content="${_csrf.parameterName}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <title>空席照会 | Airline Ticket Reservation System</title>
 
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.bootstrap.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.bootstrap.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.default.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.default.css}">
-    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.bootstrap.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.bootstrap.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/jquery.tablesorter/css/theme.default.css" th:href="@{/resources/vendor/jquery.tablesorter/css/theme.default.css}" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
+    </head>
+    <body>
+        <header th:replace="~{A0/header :: header}"></header>
 
-  </head>
-  <body>
-
-    <header th:replace="~{A0/header :: header}"></header>
-
-    <div class="container">
-
-      <div class="row">
-
-        <section class="col-md-12">
-          <h2 id="screen-title">空席照会</h2>
-          <div class="alert alert-info">
-            <ul>
-              <li>
-                <span th:text="${#dates.format(flightSearchOutputDto.beginningPeriod,'MM月dd日')}">11月04日</span>
-                &nbsp;-&nbsp;
-                <span th:text="${#dates.format(flightSearchOutputDto.endingPeriod,'MM月dd日')}">02月02日</span>の空席照会ができます。
-              </li>
-              <li>フライトは片道便か往復便が予約でき、6席まで予約できます。</li>
-            </ul>
-          </div>
-          <!--/*/
+        <div class="container">
+            <div class="row">
+                <section class="col-md-12">
+                    <h2 id="screen-title">空席照会</h2>
+                    <div class="alert alert-info">
+                        <ul>
+                            <li>
+                                <span th:text="${#dates.format(flightSearchOutputDto.beginningPeriod,'MM月dd日')}">11月04日</span>
+                                &nbsp;-&nbsp;
+                                <span th:text="${#dates.format(flightSearchOutputDto.endingPeriod,'MM月dd日')}">02月02日</span>の空席照会ができます。
+                            </li>
+                            <li>フライトは片道便か往復便が予約でき、6席まで予約できます。</li>
+                        </ul>
+                    </div>
+                    <!--/*/
           <div th:if="${#fields.hasErrors('${ticketSearchForm.*}')}">
             <div class="alert alert-danger">
               <span th:errors="${ticketSearchForm.*}"></span>
@@ -54,420 +50,644 @@
             <li th:each="message : ${resultMessages}" th:text="${#messages.msgWithParams(message.code, message.args)}"></li>
           </ul>
           /*/-->
-        </section>
-
-      </div>
-
-      <div class="row">
-
-        <section class="col-md-4">
-          <div th:replace="~{B1/flightSearchForm :: flightSearchForm}"></div>
-        </section>
-
-        <section class="col-md-8">
-          <form id="flights-select-form" th:class="hidden"
-            action="../B2/reserveForm.html"
-            th:action="@{/ticket/search?select}" method="post"
-            th:object="${reservationFlightForm}">
-
-            <!-- 選択フライト情報 -->
-
-            <div th:if="${reservationFlightForm} == null">
-              <div th:each="status : ${#numbers.sequence(1,2)}">
-                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].depDate'"/>
-                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].boardingClassCd'" />
-                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].fareTypeCd'" />
-                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].flightName'" />
-              </div>
-            </div>
-            <div th:if="${reservationFlightForm} != null and ${#arrays.length(reservationFlightForm.selectFlightFormList)} == 2">
-              <input type="hidden" th:field="*{selectFlightFormList[0].depDate}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].boardingClassCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].fareTypeCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].flightName}" />
-              <input type="hidden" th:field="*{selectFlightFormList[1].depDate}" />
-              <input type="hidden" th:field="*{selectFlightFormList[1].boardingClassCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[1].fareTypeCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[1].flightName}" />
-            </div>
-            <div th:if="${reservationFlightForm} != null and ${#arrays.length(reservationFlightForm.selectFlightFormList)} == 1">
-              <input type="hidden" th:field="*{selectFlightFormList[0].depDate}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].boardingClassCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].fareTypeCd}" />
-              <input type="hidden" th:field="*{selectFlightFormList[0].flightName}" />
-              <input type="hidden" th:name="'selectFlightFormList[1].depDate'"/>
-              <input type="hidden" th:name="'selectFlightFormList[1].boardingClassCd'" />
-              <input type="hidden" th:name="'selectFlightFormList[1].fareTypeCd'" />
-              <input type="hidden" th:name="'selectFlightFormList[1].flightName'" />
+                </section>
             </div>
 
-            <section id="outward-flights" style="display: none">
-              <h2 id="outward-flights-selection">往路便の選択</h2>
-              <ul class="pager pager-top text-left">
-                <li id="outward-prev-date-button"><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-                <li><span id="outward-flight-date" class="pager-current-date"></span></li>
-                <li id="outward-next-date-button"><a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              </ul>
-              <ul id="outward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>
-              <table id="outward-flights-table" class="flights-table">
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-              </table>
-              <ul id="outward-flights-pager" class="pager pager-bottom text-right">
-                <li id="outward-prev-10-button" class="prev"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a></li>
-                <li><span class="pagedisplay"></span></li>
-                <li id="outward-next-10-button" class="next"><a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              </ul>
-            </section>
+            <div class="row">
+                <section class="col-md-4">
+                    <div th:replace="~{B1/flightSearchForm :: flightSearchForm}"></div>
+                </section>
 
-            <section id="homeward-flights" style="display: none">
-              <h2>復路便の選択</h2>
-              <ul class="pager pager-top text-left">
-                <li id="homeward-prev-date-button"><a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-                <li><span id="homeward-flight-date" class="pager-current-date"></span></li>
-                <li><a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              </ul>
-              <ul id="homeward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>
-              <table id="homeward-flights-table" class="flights-table">
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-              </table>
-              <ul id="homeward-flights-pager" class="pager pager-bottom text-right">
-                <li class="prev"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a></li>
-                <li><span class="pagedisplay"></span></li>
-                <li class="next"><a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              </ul>
-            </section>
+                <section class="col-md-8">
+                    <form id="flights-select-form" th:class="hidden" action="../B2/reserveForm.html" th:action="@{/ticket/search?select}" method="post" th:object="${reservationFlightForm}">
+                        <!-- 選択フライト情報 -->
 
-          <!--/*-->
-          <section id="outward-flights">
-            <h2>往路便の選択</h2>
-            <ul class="pager pager-top text-left">
-              <li class="disabled"><a class="prev-date-button" href="#"><span
-                  class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-              <li><span class="pager-current-date">2017/11/05</span></li>
-              <li class="disabled"><a class="next-date-button" href="#">翌日 <span
-                  class="glyphicon glyphicon-chevron-right"></span></a></li>
-            </ul>
-            <ul class="alert alert-danger hidden list-unstyled" id="outward-flights-messages"></ul>
-            <table class="flights-table tablesorter table table-bordered tablesorter-bootstrap"
-              id="outward-flights-table" role="grid"
-              aria-describedby="outward-flights-table_pager_info">
-              <thead>
-                <tr class="tablesorter-headerRow" role="row">
-                  <th tabindex="0" class="tablesorter-header bootstrap-header" role="columnheader"
-                    aria-disabled="false" aria-controls="outward-flights-table"
-                    style="width: 64px; -ms-user-select: none;" scope="col" data-column="0"
-                    unselectable="on"><div class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        便名 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="tablesorter-header bootstrap-header" role="columnheader"
-                    aria-disabled="false" aria-controls="outward-flights-table"
-                    style="width: 88px; -ms-user-select: none;" scope="col" data-column="1"
-                    unselectable="on"><div class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        出発 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="tablesorter-header bootstrap-header" role="columnheader"
-                    aria-disabled="false" aria-controls="outward-flights-table"
-                    style="width: 88px; -ms-user-select: none;" scope="col" data-column="2"
-                    unselectable="on"><div class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        到着 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="3" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        片道運賃 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="4" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        予約割1 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="5" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        予約割7 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="6" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        早期割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="7" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        レディース割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                  <th tabindex="0" class="fare-header tablesorter-header bootstrap-header"
-                    role="columnheader" aria-disabled="false" aria-controls="outward-flights-table"
-                    style="-ms-user-select: none;" scope="col" data-column="8" unselectable="on"><div
-                      class="tablesorter-wrapper"
-                      style="width: 100%; height: 100%; position: relative;">
-                      <div class="tablesorter-header-inner">
-                        グループ割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i>
-                      </div>
-                    </div></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="bg-primary">NTT001</th>
-                  <th class="bg-primary">09:00<br>東京(羽田)
-                  </th>
-                  <th class="bg-primary">10:00<br>大阪(伊丹)
-                  </th>
-                  <td><label class="parsley-error" style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="OW" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">28,900</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="RD1" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">26,000</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="RD7" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">23,100</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="ED" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="LD" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> <span class="label label-warning">残り4席</span>
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:00" data-dep-time="09:00"
-                      data-dep-date="2017/11/05" data-fare-type-cd="GD" data-flight-name="NTT001"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> <span class="label label-warning">残り4席</span>
-                  </label></td>
-                </tr>
-                <tr>
-                  <th class="bg-primary">NTT031</th>
-                  <th class="bg-primary">09:45<br>東京(羽田)
-                  </th>
-                  <th class="bg-primary">10:45<br>大阪(伊丹)
-                  </th>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="OW" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">28,900</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="RD1" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">26,000</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="RD7" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">23,100</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="ED" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> &nbsp;
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="LD" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> <span class="label label-warning">残り5席</span>
-                  </label></td>
-                  <td><label style="cursor: pointer;"> <input
-                      name="outward-flight-select" type="radio" data-parsley-required="true"
-                      data-parsley-multiple="outward-flight-select" data-parsley-id="5294"
-                      data-boarding-class-cd="N" data-arr-time="10:45" data-dep-time="09:45"
-                      data-dep-date="2017/11/05" data-fare-type-cd="GD" data-flight-name="NTT031"
-                      data-parsley-required-message="往路のフライトを選択してください。"><br> \<span
-                      class="fare">20,200</span><br> <span class="label label-default">満席</span>
-                  </label></td>
-                </tr>
-              </tbody>
-            </table>
-            <ul class="pager pager-bottom text-right tablesorter-pager" id="outward-flights-pager">
-              <li tabindex="0" class="prev disabled" aria-disabled="true"><a href="#"><span
-                  class="glyphicon glyphicon-chevron-left"></span> 前の10件</a></li>
-              <li><span class="pagedisplay" id="outward-flights-table_pager_info">1 ~
-                  10件 (全10件中)</span></li>
-              <li tabindex="0" class="next disabled" aria-disabled="true"><a href="#">次の10件 <span
-                  class="glyphicon glyphicon-chevron-right"></span></a></li>
-            </ul>
-          </section>
-          <section id="homeward-flights">
-            <h2>復路便の選択</h2>
-            <ul class="pager pager-top text-left">
-              <li class="disabled"><a class="prev-date-button" href="#"><span
-                  class="glyphicon glyphicon-chevron-left"></span> 前日</a></li>
-              <li><span class="pager-current-date">2017/11/07</span></li>
-              <li class="disabled"><a class="next-date-button" href="#">翌日 <span
-                  class="glyphicon glyphicon-chevron-right"></span></a></li>
-            </ul>
-            <ul class="alert alert-danger list-unstyled" id="homeward-flights-messages">
-              <li>ご指定の区間は運行しておりません。運行区間をご確認ください。</li>
-            </ul>
-          </section>
-          <!--*/-->
+                        <div th:if="${reservationFlightForm} == null">
+                            <div th:each="status : ${#numbers.sequence(1,2)}">
+                                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].depDate'" />
+                                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].boardingClassCd'" />
+                                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].fareTypeCd'" />
+                                <input type="hidden" th:name="'selectFlightFormList[' + ${statusStat.index} + '].flightName'" />
+                            </div>
+                        </div>
+                        <div th:if="${reservationFlightForm} != null and ${#arrays.length(reservationFlightForm.selectFlightFormList)} == 2">
+                            <input type="hidden" th:field="*{selectFlightFormList[0].depDate}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].boardingClassCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].fareTypeCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].flightName}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[1].depDate}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[1].boardingClassCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[1].fareTypeCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[1].flightName}" />
+                        </div>
+                        <div th:if="${reservationFlightForm} != null and ${#arrays.length(reservationFlightForm.selectFlightFormList)} == 1">
+                            <input type="hidden" th:field="*{selectFlightFormList[0].depDate}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].boardingClassCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].fareTypeCd}" />
+                            <input type="hidden" th:field="*{selectFlightFormList[0].flightName}" />
+                            <input type="hidden" th:name="'selectFlightFormList[1].depDate'" />
+                            <input type="hidden" th:name="'selectFlightFormList[1].boardingClassCd'" />
+                            <input type="hidden" th:name="'selectFlightFormList[1].fareTypeCd'" />
+                            <input type="hidden" th:name="'selectFlightFormList[1].flightName'" />
+                        </div>
 
-            <!--/*/
+                        <section id="outward-flights" style="display: none">
+                            <h2 id="outward-flights-selection">往路便の選択</h2>
+                            <ul class="pager pager-top text-left">
+                                <li id="outward-prev-date-button">
+                                    <a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a>
+                                </li>
+                                <li><span id="outward-flight-date" class="pager-current-date"></span></li>
+                                <li id="outward-next-date-button">
+                                    <a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                            <ul id="outward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>
+                            <table id="outward-flights-table" class="flights-table">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                            <ul id="outward-flights-pager" class="pager pager-bottom text-right">
+                                <li id="outward-prev-10-button" class="prev">
+                                    <a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a>
+                                </li>
+                                <li><span class="pagedisplay"></span></li>
+                                <li id="outward-next-10-button" class="next">
+                                    <a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section id="homeward-flights" style="display: none">
+                            <h2>復路便の選択</h2>
+                            <ul class="pager pager-top text-left">
+                                <li id="homeward-prev-date-button">
+                                    <a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a>
+                                </li>
+                                <li><span id="homeward-flight-date" class="pager-current-date"></span></li>
+                                <li>
+                                    <a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                            <ul id="homeward-flights-messages" class="alert alert-danger hidden list-unstyled"></ul>
+                            <table id="homeward-flights-table" class="flights-table">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                            <ul id="homeward-flights-pager" class="pager pager-bottom text-right">
+                                <li class="prev">
+                                    <a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a>
+                                </li>
+                                <li><span class="pagedisplay"></span></li>
+                                <li class="next">
+                                    <a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <!--/*-->
+                        <section id="outward-flights">
+                            <h2>往路便の選択</h2>
+                            <ul class="pager pager-top text-left">
+                                <li class="disabled">
+                                    <a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a>
+                                </li>
+                                <li><span class="pager-current-date">2017/11/05</span></li>
+                                <li class="disabled">
+                                    <a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                            <ul class="alert alert-danger hidden list-unstyled" id="outward-flights-messages"></ul>
+                            <table
+                                class="flights-table tablesorter table table-bordered tablesorter-bootstrap"
+                                id="outward-flights-table"
+                                role="grid"
+                                aria-describedby="outward-flights-table_pager_info"
+                            >
+                                <thead>
+                                    <tr class="tablesorter-headerRow" role="row">
+                                        <th
+                                            tabindex="0"
+                                            class="tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="width: 64px; -ms-user-select: none"
+                                            scope="col"
+                                            data-column="0"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">便名 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="width: 88px; -ms-user-select: none"
+                                            scope="col"
+                                            data-column="1"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">出発 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="width: 88px; -ms-user-select: none"
+                                            scope="col"
+                                            data-column="2"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">到着 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="3"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">片道運賃 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="4"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">予約割1 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="5"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">予約割7 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="6"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">早期割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="7"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">レディース割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            tabindex="0"
+                                            class="fare-header tablesorter-header bootstrap-header"
+                                            role="columnheader"
+                                            aria-disabled="false"
+                                            aria-controls="outward-flights-table"
+                                            style="-ms-user-select: none"
+                                            scope="col"
+                                            data-column="8"
+                                            unselectable="on"
+                                        >
+                                            <div class="tablesorter-wrapper" style="width: 100%; height: 100%; position: relative">
+                                                <div class="tablesorter-header-inner">グループ割 <i class="tablesorter-icon icon-white bootstrap-icon-unsorted"></i></div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="bg-primary">NTT001</th>
+                                        <th class="bg-primary">09:00<br />東京(羽田)</th>
+                                        <th class="bg-primary">10:00<br />大阪(伊丹)</th>
+                                        <td>
+                                            <label class="parsley-error" style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="OW"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">28,900</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="RD1"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">26,000</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="RD7"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">23,100</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="ED"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="LD"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                <span class="label label-warning">残り4席</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:00"
+                                                    data-dep-time="09:00"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="GD"
+                                                    data-flight-name="NTT001"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                <span class="label label-warning">残り4席</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-primary">NTT031</th>
+                                        <th class="bg-primary">09:45<br />東京(羽田)</th>
+                                        <th class="bg-primary">10:45<br />大阪(伊丹)</th>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="OW"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">28,900</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="RD1"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">26,000</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="RD7"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">23,100</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="ED"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="LD"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                <span class="label label-warning">残り5席</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label style="cursor: pointer">
+                                                <input
+                                                    name="outward-flight-select"
+                                                    type="radio"
+                                                    data-parsley-required="true"
+                                                    data-parsley-multiple="outward-flight-select"
+                                                    data-parsley-id="5294"
+                                                    data-boarding-class-cd="N"
+                                                    data-arr-time="10:45"
+                                                    data-dep-time="09:45"
+                                                    data-dep-date="2017/11/05"
+                                                    data-fare-type-cd="GD"
+                                                    data-flight-name="NTT031"
+                                                    data-parsley-required-message="往路のフライトを選択してください。"
+                                                /><br />
+                                                \<span class="fare">20,200</span><br />
+                                                <span class="label label-default">満席</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pager pager-bottom text-right tablesorter-pager" id="outward-flights-pager">
+                                <li tabindex="0" class="prev disabled" aria-disabled="true">
+                                    <a href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前の10件</a>
+                                </li>
+                                <li><span class="pagedisplay" id="outward-flights-table_pager_info">1 ~ 10件 (全10件中)</span></li>
+                                <li tabindex="0" class="next disabled" aria-disabled="true">
+                                    <a href="#">次の10件 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section id="homeward-flights">
+                            <h2>復路便の選択</h2>
+                            <ul class="pager pager-top text-left">
+                                <li class="disabled">
+                                    <a class="prev-date-button" href="#"><span class="glyphicon glyphicon-chevron-left"></span> 前日</a>
+                                </li>
+                                <li><span class="pager-current-date">2017/11/07</span></li>
+                                <li class="disabled">
+                                    <a class="next-date-button" href="#">翌日 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </li>
+                            </ul>
+                            <ul class="alert alert-danger list-unstyled" id="homeward-flights-messages">
+                                <li>ご指定の区間は運行しておりません。運行区間をご確認ください。</li>
+                            </ul>
+                        </section>
+                        <!--*/-->
+
+                        <!--/*/
             <ul id="flights-select-form-messages" class="messages alert alert-danger list-unstyled"></ul>
             /*/-->
 
-            <div class="text-center">
-              <input type="submit" id="reserve-flights-button" class="btn btn-primary btn-lg" value="選択フライトを予約">
+                        <div class="text-center">
+                            <input type="submit" id="reserve-flights-button" class="btn btn-primary btn-lg" value="選択フライトを予約" />
+                        </div>
+                    </form>
+
+                    <script type="text/template" id="flights-table-template">
+                        <![CDATA[<@
+                          var fareTypes = [];
+                          var flightClassNameDict = {};
+                          for (var i = 0, len = data.length; i < len; i++) {
+                            for (var prop in data[i].fareTypes) {
+                              if (_.indexOf(fareTypes, prop) === -1)
+                                fareTypes.push(prop);
+                                flightClassNameDict[prop] = data[i].fareTypes[prop].fareTypeName;
+                            }
+                          }
+                          var fareTypeWidth = ($table.width() - 64 - 88 - 88) / fareTypes.length;
+                        @>]]>
+                        <thead>
+                          <tr>
+                            <th style="width: 64px">便名</th>
+                            <th style="width: 88px">出発</th>
+                            <th style="width: 88px">到着</th>
+                            <![CDATA[<@ for (var i = 0, len = fareTypes.length; i < len; i++) { @>]]>
+                            <th class="fare-header" style="width: <@- fareTypeWidth @>/px"><@- flightClassNameDict[fareTypes[i]] @></th>
+                            <![CDATA[<@ } @>]]>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <![CDATA[<@ for (var i = 0, len = data.length; i < len; i++) { @>]]>
+                          <tr>
+                            <th class="bg-primary"><@- data[i].flightName @></th>
+                            <th class="bg-primary"><@- data[i].depTime @><br><@- data[i].depAirportName @></th>
+                            <th class="bg-primary"><@- data[i].arrTime @><br><@- data[i].arrAirportName @></th>
+                            <![CDATA[<@ for (var j = 0, jlen = fareTypes.length; j < jlen; j++) {
+                              var flightClass = data[i].fareTypes[fareTypes[j]]; @>]]>
+                              <td>
+                                <![CDATA[<@ if (flightClass) { @>]]>
+                                <label <@= flightClass.vacantNum > 0 ? 'style="cursor: pointer"' : '' @>>
+                                  <input type="radio" name="<@- direction @>-flight-select"
+                                         data-parsley-required="true" data-parsley-required-message="<@= direction === 'outward' ? '往路のフライトを選択してください。' : '復路のフライトを選択してください。' @>"
+                                         data-flight-name="<@- data[i].flightName @>"
+                                         data-fare-type-cd="<@- fareTypes[j] @>"
+                                         data-dep-date="<@- data[i].depDate @>"
+                                         data-dep-time="<@- data[i].depTime @>"
+                                         data-arr-time="<@- data[i].arrTime @>"
+                                         data-boarding-class-cd="<@- data[i].boardingClassCd @>"
+                                         <@= flightClass.vacantNum > 0 ? '' : 'disabled="disabled"' @>><br>
+                                  &yen;<span class="fare"><@- flightClass.fare @></span><br>
+                                  <@= flightClass.vacantNum > 10 ? '&nbsp;' : flightClass.vacantNum > 0 ? '<span class="label label-warning">残り' + flightClass.vacantNum + '席</span>' : '<span class="label label-default">満席</span>' || '-' @>
+                                </label>
+                                <![CDATA[<@ } else {@>]]>
+                                -
+                                <![CDATA[<@ } @>]]>
+                              </td>
+                            <![CDATA[<@ } @>]]>
+                            </tr>
+                          <![CDATA[<@ } @>]]>
+                        </tbody>
+                    </script>
+
+                    <div th:replace="~{B2/reserveSelectForm :: reserveSelectForm}"></div>
+                </section>
             </div>
-          </form>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
 
+        <footer th:replace="~{A0/footer :: footer}"></footer>
 
-           <script type="text/template" id="flights-table-template">
-            <![CDATA[<@
-              var fareTypes = [];
-              var flightClassNameDict = {};
-              for (var i = 0, len = data.length; i < len; i++) {
-                for (var prop in data[i].fareTypes) {
-                  if (_.indexOf(fareTypes, prop) === -1)
-                    fareTypes.push(prop);
-                    flightClassNameDict[prop] = data[i].fareTypes[prop].fareTypeName;
-                }
-              }
-              var fareTypeWidth = ($table.width() - 64 - 88 - 88) / fareTypes.length;
-            @>]]>
-            <thead>
-              <tr>
-                <th style="width: 64px">便名</th>
-                <th style="width: 88px">出発</th>
-                <th style="width: 88px">到着</th>
-                <![CDATA[<@ for (var i = 0, len = fareTypes.length; i < len; i++) { @>]]>
-                <th class="fare-header" style="width: <@- fareTypeWidth @>/px"><@- flightClassNameDict[fareTypes[i]] @></th>
-                <![CDATA[<@ } @>]]>
-              </tr>
-            </thead>
-            <tbody>
-              <![CDATA[<@ for (var i = 0, len = data.length; i < len; i++) { @>]]>
-              <tr>
-                <th class="bg-primary"><@- data[i].flightName @></th>
-                <th class="bg-primary"><@- data[i].depTime @><br><@- data[i].depAirportName @></th>
-                <th class="bg-primary"><@- data[i].arrTime @><br><@- data[i].arrAirportName @></th>
-                <![CDATA[<@ for (var j = 0, jlen = fareTypes.length; j < jlen; j++) {
-                  var flightClass = data[i].fareTypes[fareTypes[j]]; @>]]>
-                  <td>
-                    <![CDATA[<@ if (flightClass) { @>]]>
-                    <label <@= flightClass.vacantNum > 0 ? 'style="cursor: pointer"' : '' @>>
-                      <input type="radio" name="<@- direction @>-flight-select"
-                             data-parsley-required="true" data-parsley-required-message="<@= direction === 'outward' ? '往路のフライトを選択してください。' : '復路のフライトを選択してください。' @>"
-                             data-flight-name="<@- data[i].flightName @>"
-                             data-fare-type-cd="<@- fareTypes[j] @>"
-                             data-dep-date="<@- data[i].depDate @>"
-                             data-dep-time="<@- data[i].depTime @>"
-                             data-arr-time="<@- data[i].arrTime @>"
-                             data-boarding-class-cd="<@- data[i].boardingClassCd @>"
-                             <@= flightClass.vacantNum > 0 ? '' : 'disabled="disabled"' @>><br>
-                      &yen;<span class="fare"><@- flightClass.fare @></span><br>
-                      <@= flightClass.vacantNum > 10 ? '&nbsp;' : flightClass.vacantNum > 0 ? '<span class="label label-warning">残り' + flightClass.vacantNum + '席</span>' : '<span class="label label-default">満席</span>' || '-' @>
-                    </label>
-                    <![CDATA[<@ } else {@>]]>
-                    -
-                    <![CDATA[<@ } @>]]>
-                  </td>
-                <![CDATA[<@ } @>]]>
-                </tr>
-              <![CDATA[<@ } @>]]>
-            </tbody>
-          </script>
+        <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+        <script
+            src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js"
+            th:src="@{/resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js}"
+        ></script>
+        <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js}"></script>
+        <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js}"></script>
+        <script
+            src="../../../resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js"
+            th:src="@{/resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js}"
+        ></script>
+        <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
+        <script src="../../../resources/vendor/moment/min/moment.min.js" th:src="@{/resources/vendor/moment/min/moment.min.js}"></script>
+        <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
 
-          <div th:replace="~{B2/reserveSelectForm :: reserveSelectForm}"></div>
-
-        </section>
-
-      </div><!-- /row -->
-
-    </div><!-- /container -->
-
-    <footer th:replace="~{A0/footer :: footer}"></footer>
-
-    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
-    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-    <script src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js}"></script>
-    <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.min.js}"></script>
-    <script src="../../../resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js" th:src="@{/resources/vendor/jquery.tablesorter/js/jquery.tablesorter.widgets.min.js}"></script>
-    <script src="../../../resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js" th:src="@{/resources/vendor/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.js}"></script>
-    <script src="../../../resources/vendor/lodash/lodash.compat.min.js" th:src="@{/resources/vendor/lodash/lodash.min.js}"></script>
-    <script src="../../../resources/vendor/moment/min/moment.min.js" th:src="@{/resources/vendor/moment/min/moment.min.js}"></script>
-    <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
-
-    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
-    <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
-    <script src="../../../resources/js/parsley-validator-date.js" th:src="@{/resources/js/parsley-validator-date.js}"></script>
-    <script src="../../../resources/js/parsley-validator-dateafterto.js" th:src="@{/resources/js/parsley-validator-dateafterto.js}"></script>
-    <script src="../../../resources/js/parsley-validator-notequalto.js" th:src="@{/resources/js/parsley-validator-notequalto.js}"></script>
-    <!--/*-->静的表示を行う際レイアウト崩れが発生するためsrcの記載は行わない<!--*/-->
-    <script th:src="@{/resources/js/flight-search.js}"></script>
-  </body>
+        <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+        <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
+        <script src="../../../resources/js/parsley-validator-date.js" th:src="@{/resources/js/parsley-validator-date.js}"></script>
+        <script src="../../../resources/js/parsley-validator-dateafterto.js" th:src="@{/resources/js/parsley-validator-dateafterto.js}"></script>
+        <script src="../../../resources/js/parsley-validator-notequalto.js" th:src="@{/resources/js/parsley-validator-notequalto.js}"></script>
+        <!--/*-->静的表示を行う際レイアウト崩れが発生するためsrcの記載は行わない<!--*/-->
+        <script th:src="@{/resources/js/flight-search.js}"></script>
+    </body>
 </html>

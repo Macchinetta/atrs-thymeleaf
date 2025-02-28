@@ -1,190 +1,195 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>jp.co.ntt.atrs</groupId>
-    <artifactId>atrs</artifactId>
-    <version>1.8.3.RELEASE</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
-  <artifactId>atrs-web-thymeleaf</artifactId>
-  <name>${project.artifactId}</name>
-  <packaging>war</packaging>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jp.co.ntt.atrs</groupId>
+        <artifactId>atrs</artifactId>
+        <version>1.8.4.RELEASE</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>atrs-web-thymeleaf</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>war</packaging>
+    <scm>
+        <connection>scm:git:git://github.com/Macchinetta/atrs-thymeleaf.git</connection>
+        <developerConnection>scm:git:ssh://github.com/Macchinetta/atrs-thymeleaf.git</developerConnection>
+        <url>https://github.com/Macchinetta/atrs-thymeleaf</url>
+    </scm>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <webResources>
-            <webResource>
-              <directory>${project.root.basedir}/atrs-web/src/main/webapp/resources</directory>
-              <targetPath>resources</targetPath>
-            </webResource>
-            <webResource>
-              <directory>${project.root.basedir}/atrs-web/src/main/webapp/WEB-INF/views</directory>
-              <targetPath>WEB-INF/views</targetPath>
-              <exclude>**/*.jsp</exclude>
-            </webResource>
-          </webResources>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add-sources</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.root.basedir}/atrs-web/src/main/java</source>
-              </sources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-resources</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${project.root.basedir}/atrs-web/src/main/resources</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.cargo</groupId>
-        <artifactId>cargo-maven3-plugin</artifactId>
-        <configuration>
-          <deployables>
-            <deployable>
-              <location>${project.basedir}/target/atrs.war</location>
-              <type>war</type>
-              <properties>
-                <context>atrs</context>
-              </properties>
-            </deployable>
-          </deployables>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <webResource>
+                            <directory>${project.root.basedir}/atrs-web/src/main/webapp/resources</directory>
+                            <targetPath>resources</targetPath>
+                        </webResource>
+                        <webResource>
+                            <directory>${project.root.basedir}/atrs-web/src/main/webapp/WEB-INF/views</directory>
+                            <targetPath>WEB-INF/views</targetPath>
+                            <exclude>**/*.jsp</exclude>
+                        </webResource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.root.basedir}/atrs-web/src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.root.basedir}/atrs-web/src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <configuration>
+                    <deployables>
+                        <deployable>
+                            <location>${project.basedir}/target/atrs.war</location>
+                            <type>war</type>
+                            <properties>
+                                <context>atrs</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <dependencies>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>atrs-env</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-client</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-broker</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>jakarta.jms</groupId>
+                    <artifactId>jakarta.jms-api</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>warpack</id>
+            <dependencies>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- == Begin ATRS == -->
         <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>atrs-env</artifactId>
-          <version>${project.version}</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>atrs-domain</artifactId>
+        </dependency>
+        <!-- == End ATRS == -->
+
+        <!-- == Begin TERASOLUNA == -->
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-web-dependencies</artifactId>
+            <type>pom</type>
         </dependency>
         <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-          <scope>runtime</scope>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-security-web-dependencies</artifactId>
+            <type>pom</type>
+        </dependency>
+        <!-- == End TERASOLUNA == -->
+
+        <!-- == Begin Thymeleaf == -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.apache.activemq</groupId>
-          <artifactId>activemq-client</artifactId>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.apache.activemq</groupId>
-          <artifactId>activemq-broker</artifactId>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
         <dependency>
-          <groupId>jakarta.jms</groupId>
-          <artifactId>jakarta.jms-api</artifactId>
-          <scope>runtime</scope>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
         </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>warpack</id>
-      <dependencies>
-      </dependencies>
-    </profile>
-  </profiles>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- == End Thymeleaf == -->
 
-  <dependencies>
-    <!-- == Begin ATRS == -->
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>atrs-domain</artifactId>
-    </dependency>
-    <!-- == End ATRS == -->
+        <!-- == Begin ActiveMQ == -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- == End ActiveMQ == -->
 
-    <!-- == Begin TERASOLUNA == -->
-    <dependency>
-      <groupId>org.terasoluna.gfw</groupId>
-      <artifactId>terasoluna-gfw-web-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.terasoluna.gfw</groupId>
-      <artifactId>terasoluna-gfw-security-web-dependencies</artifactId>
-      <type>pom</type>
-    </dependency>
-    <!-- == End TERASOLUNA == -->
-
-    <!-- == Begin Thymeleaf == -->
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-java8time</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- == End Thymeleaf == -->
-
-    <!-- == Begin ActiveMQ == -->
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-client</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- == End ActiveMQ == -->
-
-    <!-- == Begin Unit Test == -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <!-- == End Unit Test == -->
-  </dependencies>
-  <properties>
-    <project.root.basedir>${project.parent.basedir}</project.root.basedir>
-  </properties>
+        <!-- == Begin Unit Test == -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- == End Unit Test == -->
+    </dependencies>
+    <properties>
+        <project.root.basedir>${project.parent.basedir}</project.root.basedir>
+    </properties>
 </project>

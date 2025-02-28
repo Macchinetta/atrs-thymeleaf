@@ -39,8 +39,8 @@ public class AtrsUserDetails implements UserDetails {
     /**
      * デフォルト権限設定。
      */
-    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES = Collections
-            .singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    private static final List<? extends GrantedAuthority> DEFAULT_AUTHORITIES =
+            Collections.singletonList(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     /**
      * カード会員情報。

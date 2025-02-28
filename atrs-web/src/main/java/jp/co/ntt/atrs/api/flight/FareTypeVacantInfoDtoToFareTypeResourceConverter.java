@@ -30,9 +30,8 @@ import jp.co.ntt.atrs.domain.service.b1.FareTypeVacantInfoDto;
  * @author NTT 電電太郎
  */
 public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
-                                                              DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
-                                                              implements
-                                                              MapperAware {
+        DozerConverter<LinkedHashMap<String, FareTypeVacantInfoDto>, LinkedHashMap<String, FareTypeResource>>
+        implements MapperAware {
 
     /**
      * Beanマッパー。
@@ -43,8 +42,7 @@ public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
      * コンバート対象の2つのクラスを設定するコンストラクタ
      */
     public FareTypeVacantInfoDtoToFareTypeResourceConverter() {
-        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil.autoCast(
-                LinkedHashMap.class));
+        super(CastUtil.autoCast(LinkedHashMap.class), CastUtil.autoCast(LinkedHashMap.class));
     }
 
     /**
@@ -57,10 +55,8 @@ public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
     public LinkedHashMap<String, FareTypeResource> convertTo(
             LinkedHashMap<String, FareTypeVacantInfoDto> fareTypeMap,
             LinkedHashMap<String, FareTypeResource> fareTypeResourceMap) {
-        for (Map.Entry<String, FareTypeVacantInfoDto> entry : fareTypeMap
-                .entrySet()) {
-            FareTypeResource p = beanMapper.map(entry.getValue(),
-                    FareTypeResource.class);
+        for (Map.Entry<String, FareTypeVacantInfoDto> entry : fareTypeMap.entrySet()) {
+            FareTypeResource p = beanMapper.map(entry.getValue(), FareTypeResource.class);
             fareTypeResourceMap.put(entry.getKey(), p);
         }
 
@@ -77,10 +73,8 @@ public class FareTypeVacantInfoDtoToFareTypeResourceConverter extends
     public LinkedHashMap<String, FareTypeVacantInfoDto> convertFrom(
             LinkedHashMap<String, FareTypeResource> fareTypeResourceMap,
             LinkedHashMap<String, FareTypeVacantInfoDto> fareTypeMap) {
-        for (Map.Entry<String, FareTypeResource> entry : fareTypeResourceMap
-                .entrySet()) {
-            FareTypeVacantInfoDto p = beanMapper.map(entry.getValue(),
-                    FareTypeVacantInfoDto.class);
+        for (Map.Entry<String, FareTypeResource> entry : fareTypeResourceMap.entrySet()) {
+            FareTypeVacantInfoDto p = beanMapper.map(entry.getValue(), FareTypeVacantInfoDto.class);
             fareTypeMap.put(entry.getKey(), p);
         }
         return fareTypeMap;

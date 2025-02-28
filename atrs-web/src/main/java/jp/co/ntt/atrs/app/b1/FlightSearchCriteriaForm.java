@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.app.b1;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -48,14 +48,14 @@ public class FlightSearchCriteriaForm implements Serializable {
     /**
      * 出発空港コード。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_AIRPORT")
     private String depAirportCd;
 
     /**
      * 到着空港コード。
      */
-    @NotNull
+    @NotEmpty
     @ExistInCodeList(codeListId = "CL_AIRPORT")
     private String arrAirportCd;
 
@@ -157,8 +157,7 @@ public class FlightSearchCriteriaForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

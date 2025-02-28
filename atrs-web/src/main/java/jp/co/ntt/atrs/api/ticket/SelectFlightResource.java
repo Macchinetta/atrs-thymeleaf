@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.api.ticket;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -46,7 +46,7 @@ public class SelectFlightResource implements Serializable {
     /**
      * 便名。
      */
-    @NotNull
+    @NotEmpty
     private String flightName;
 
     /**

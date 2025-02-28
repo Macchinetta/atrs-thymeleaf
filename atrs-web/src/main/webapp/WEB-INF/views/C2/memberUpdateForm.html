@@ -1,325 +1,443 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>会員情報変更 | Airline Ticket Reservation System</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>会員情報変更 | Airline Ticket Reservation System</title>
 
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}">
-    <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}">
-    <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}">
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/datepicker3.css" th:href="@{/resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
+    </head>
+    <body>
+        <header th:replace="~{A0/header :: header}"></header>
 
-  </head>
-  <body>
-
-    <header th:replace="~{A0/header :: header}"></header>
-
-    <div class="container">
-
-      <div class="row">
-
-        <section class="col-md-offset-2 col-md-8">
-
-        <div th:if="${#fields.hasErrors('${memberUpdateForm}')}">
-          <div class="alert alert-danger">
-            <span id="null.errors" th:errors="*{memberUpdateForm}">入力された現在のパスワードが一致しません。正しいパスワードを入力してください。</span>
-          </div>
-        </div>
-        <!--/*/
+        <div class="container">
+            <div class="row">
+                <section class="col-md-offset-2 col-md-8">
+                    <div th:if="${#fields.hasErrors('${memberUpdateForm}')}">
+                        <div class="alert alert-danger">
+                            <span id="null.errors" th:errors="*{memberUpdateForm}">入力された現在のパスワードが一致しません。正しいパスワードを入力してください。</span>
+                        </div>
+                    </div>
+                    <!--/*/
         <ul th:if="${resultMessages} != null" class="alert list-unstyled" th:classappend="|alert-${resultMessages.type}|">
           <li th:each="message : ${resultMessages}"
             th:text="${#messages.msgWithParams(message.code, message.args)}"></li>
         </ul>
         /*/-->
-        <!--/*-->
-        <ul class="alert list-unstyled alert-success">
-          <li>会員情報を更新しました。</li>
-        </ul>
-        <!--*/-->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-              会員情報変更
+                    <!--/*-->
+                    <ul class="alert list-unstyled alert-success">
+                        <li>会員情報を更新しました。</li>
+                    </ul>
+                    <!--*/-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">会員情報変更</div>
+
+                        <div class="panel-body">
+                            <form id="membership-form" class="form-horizontal" action="memberUpdateForm.html" th:action="@{/member/update}" method="post" th:object="${memberUpdateForm}">
+                                <div class="form-group">
+                                    <label for="kanjiFamilyName" class="col-md-4 control-label">氏名</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group inline-half">
+                                            <label for="kanjiFamilyName" class="input-group-addon">姓</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{kanjiFamilyName}"
+                                                class="form-control"
+                                                maxlength="10"
+                                                data-parsley-maxlength="10"
+                                                data-parsley-maxlength-message="姓は %s 文字以下で入力してください。"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="姓は入力必須項目です。"
+                                                value="電電"
+                                            />
+                                        </div>
+                                        <div class="input-group inline-half">
+                                            <label for="kanjiGivenName" class="input-group-addon">名</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{kanjiGivenName}"
+                                                class="form-control"
+                                                maxlength="10"
+                                                data-parsley-maxlength="10"
+                                                data-parsley-maxlength-message="名は %s 文字以下で入力してください。"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="名は入力必須項目です。"
+                                                value="太郎"
+                                            />
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <span id="kanjiFamilyName.errors" th:errors="*{kanjiFamilyName}" class="invalid"></span>
+                                        <span id="kanjiGivenName.errors" th:errors="*{kanjiGivenName}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="kanaFamilyName" class="col-md-4 control-label">氏名(カタカナ)</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group inline-half">
+                                            <label for="kanaFamilyName" class="input-group-addon">セイ</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{kanaFamilyName}"
+                                                class="form-control"
+                                                maxlength="10"
+                                                data-parsley-maxlength="10"
+                                                data-parsley-maxlength-message="セイは %s 文字以下で入力してください。"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="セイは入力必須項目です。"
+                                                value="デンデン"
+                                            />
+                                        </div>
+                                        <div class="input-group inline-half">
+                                            <label for="kanaGivenName" class="input-group-addon">メイ</label>
+                                            <input
+                                                type="text"
+                                                th:field="*{kanaGivenName}"
+                                                class="form-control"
+                                                maxlength="10"
+                                                data-parsley-maxlength="10"
+                                                data-parsley-maxlength-message="メイは %s 文字以下で入力してください。"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="メイは入力必須項目です。"
+                                                value="タロウ"
+                                            />
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <span id="kanaFamilyName.errors" th:errors="*{kanaFamilyName}" class="invalid"></span>
+                                        <span id="kanaGivenName.errors" th:errors="*{kanaGivenName}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender" class="col-md-4 control-label">性別</label>
+                                    <div class="col-md-8 form-inline">
+                                        <label th:each="item : ${CL_GENDER}" class="radio-inline">
+                                            <input type="radio" name="gender" th:field="*{gender}" th:value="${item.key}" data-parsley-required="true" checked="checked" />
+                                            <span th:text="${CL_GENDER[item.key]}">男性</span>
+                                        </label>
+                                        <!--/*-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="gender" data-parsley-required="true" />
+                                            <span>女性</span>
+                                        </label>
+                                        <!--*/-->
+                                        <div class="clearfix"></div>
+                                        <span id="gender.errors" th:errors="*{gender}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dateOfBirth" class="col-md-4 control-label">生年月日</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            type="text"
+                                            th:field="*{dateOfBirth}"
+                                            class="form-control"
+                                            th:attr="data-date-start-date=${dateOfBirthMinDate}, data-date-end-date=${dateOfBirthMaxDate}"
+                                            data-provide="datepicker"
+                                            data-date-format="yyyy/mm/dd"
+                                            data-date-autoclose="true"
+                                            data-date-start-date="yyyy/mm/dd"
+                                            data-date-end-date="yyyy/mm/dd"
+                                            data-date-language="ja"
+                                            data-parsley-required="true"
+                                            data-parsley-date="true"
+                                            value="1980/01/01"
+                                        />
+                                        <span id="dateOfBirth.errors" th:errors="*{dateOfBirth}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tel1" class="col-md-4 control-label">電話番号</label>
+                                    <div class="col-md-8 form-inline">
+                                        <input
+                                            type="text"
+                                            th:field="*{tel1}"
+                                            class="form-control form-control-separated"
+                                            style="width: 5.5em"
+                                            maxlength="5"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号1は入力必須項目です。"
+                                            data-parsley-length="[2, 5]"
+                                            data-parsley-length-message="番号1は %s 文字以上 %s 文字以下で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号1は数値で入力してください。"
+                                            value="111"
+                                        />
+                                        -
+                                        <input
+                                            type="text"
+                                            th:field="*{tel2}"
+                                            class="form-control form-control-separated"
+                                            style="width: 4.5em"
+                                            maxlength="4"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号2は入力必須項目です。"
+                                            data-parsley-length="[1, 4]"
+                                            data-parsley-length-message="番号2は %s 文字以上 %s 文字以下で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号2は数値で入力してください。"
+                                            value="111"
+                                        />
+                                        -
+                                        <input
+                                            type="text"
+                                            th:field="*{tel3}"
+                                            class="form-control form-control-separated"
+                                            style="width: 4.5em"
+                                            maxlength="4"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="番号3は入力必須項目です。"
+                                            data-parsley-length="[4, 4]"
+                                            data-parsley-length-message="番号3は %s 文字で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="番号3は数値で入力してください。"
+                                            value="1111"
+                                        />
+                                        <div class="clearfix"></div>
+                                        <span id="tel1.errors" th:errors="*{tel1}" class="invalid"></span>
+                                        <span id="tel2.errors" th:errors="*{tel2}" class="invalid"></span>
+                                        <span id="tel3.errors" th:errors="*{tel3}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="zipCode1" class="col-md-4 control-label">郵便番号</label>
+                                    <div class="col-md-8 form-inline">
+                                        <input
+                                            type="text"
+                                            class="form-control form-control-separated"
+                                            th:field="*{zipCode1}"
+                                            style="width: 3.5em"
+                                            maxlength="3"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="郵便番号1は入力必須項目です。"
+                                            data-parsley-length="[3, 3]"
+                                            data-parsley-length-message="郵便番号1は %s 文字で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="郵便番号1は数値で入力してください。"
+                                            value="111"
+                                        />
+                                        -
+                                        <input
+                                            type="text"
+                                            class="form-control form-control-separated"
+                                            th:field="*{zipCode2}"
+                                            style="width: 4.5em"
+                                            maxlength="4"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="郵便番号2は入力必須項目です。"
+                                            data-parsley-length="[4, 4]"
+                                            data-parsley-length-message="郵便番号2は %s 文字で入力してください。"
+                                            data-parsley-type="integer"
+                                            data-parsley-type-message="郵便番号2は数値で入力してください。"
+                                            value="1111"
+                                        />
+                                        <div class="clearfix"></div>
+                                        <span id="zipCode1.errors" th:errors="*{zipCode1}" class="invalid"></span>
+                                        <span id="zipCode2.errors" th:errors="*{zipCode2}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address" class="col-md-4 control-label">住所</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            type="text"
+                                            th:field="*{address}"
+                                            class="form-control"
+                                            maxlength="60"
+                                            data-parsley-maxlength="60"
+                                            data-parsley-required="true"
+                                            value="東京都港区港南X-X-X"
+                                        />
+                                        <span id="address.errors" th:errors="*{address}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mail" class="col-md-4 control-label">Eメール</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            id="mail"
+                                            type="text"
+                                            th:field="*{mail}"
+                                            class="form-control"
+                                            maxlength="256"
+                                            data-parsley-maxlength="256"
+                                            data-parsley-required="true"
+                                            data-parsley-type="email"
+                                            value="xxxxx@ntt.co.jp"
+                                        />
+                                        <span id="mail.errors" th:errors="*{mail}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reEnterMail" class="col-md-4 control-label">Eメール再入力</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            type="text"
+                                            th:field="*{reEnterMail}"
+                                            class="form-control"
+                                            maxlength="256"
+                                            data-parsley-maxlength="256"
+                                            data-parsley-required="true"
+                                            data-parsley-type="email"
+                                            data-parsley-equalto="#mail"
+                                            data-parsley-equalto-message="Eメールアドレスが一致しません。"
+                                        />
+                                        <span id="reEnterMail.errors" th:errors="*{reEnterMail}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="creditTypeCd" class="col-md-4 control-label">クレジットカード会社</label>
+                                    <div class="col-md-8">
+                                        <label th:each="item : ${CL_CREDITTYPE}" class="radio-inline">
+                                            <input type="radio" name="creditTypeCd" th:field="*{creditTypeCd}" th:value="${item.key}" data-parsley-required="true" checked="checked" />
+                                            <span th:text="${CL_CREDITTYPE[item.key]}">VISA</span>
+                                        </label>
+                                        <!--/*-->
+                                        <label class="radio-inline">
+                                            <input type="radio" name="creditTypeCd" data-parsley-required="true" />
+                                            <span>MASTER</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="creditTypeCd" data-parsley-required="true" />
+                                            <span>JCB</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="creditTypeCd" data-parsley-required="true" />
+                                            <span>DNS</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="creditTypeCd" data-parsley-required="true" />
+                                            <span>American Express</span>
+                                        </label>
+                                        <!--*/-->
+                                        <div class="clearfix"></div>
+                                        <span id="creditTypeCd.errors" th:errors="*{creditTypeCd}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="creditNo" class="col-md-4 control-label">クレジットカード番号</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            type="text"
+                                            th:field="*{creditNo}"
+                                            class="form-control"
+                                            maxlength="16"
+                                            data-parsley-required="true"
+                                            data-parsley-type="integer"
+                                            data-parsley-length="[16, 16]"
+                                            data-parsley-length-message="%s 文字で入力してください。"
+                                            value="1111111111111111"
+                                        />
+                                        <span id="creditNo.errors" th:errors="*{creditNo}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="creditMonth" class="col-md-4 control-label">クレジットカード有効期限</label>
+                                    <div class="col-md-8 form-inline">
+                                        <select
+                                            th:field="*{creditMonth}"
+                                            class="form-control"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="クレジットカード有効期限(月)は入力必須項目です。"
+                                        >
+                                            <option value="" label="月" />
+                                            <!--/*-->
+                                            <option value="01" label="01" selected />
+                                            <!--*/-->
+                                            <option th:each="var : ${CL_CREDITMONTH}" th:value="${var.key}" th:text="${var.value}" />
+                                        </select>
+                                        <select
+                                            th:field="*{creditYear}"
+                                            class="form-control"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="クレジットカード有効期限(年)は入力必須項目です。"
+                                        >
+                                            <option value="" label="年" />
+                                            <!--/*-->
+                                            <option value="01" label="01" selected />
+                                            <!--*/-->
+                                            <option th:each="var : ${CL_CREDITYEAR}" th:value="${var.key}" th:text="${var.value}" />
+                                        </select>
+                                        <span id="creditMonth.errors" th:errors="*{creditMonth}" class="invalid"></span>
+                                        <span id="creditYear.errors" th:errors="*{creditYear}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="currentPassword" class="col-md-4 control-label">現在のパスワード</label>
+                                    <div class="col-md-8">
+                                        <input type="password" th:field="*{currentPassword}" class="form-control" maxlength="20" data-parsley-length="[8, 20]" />
+                                        <span id="currentPassword.errors" th:errors="*{currentPassword}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" class="col-md-4 control-label">パスワード</label>
+                                    <div class="col-md-8">
+                                        <input id="password" type="password" th:field="*{password}" class="form-control" maxlength="20" data-parsley-length="[8, 20]" />
+                                        <span id="password.errors" th:errors="*{password}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reEnterPassword" class="col-md-4 control-label">パスワード再入力</label>
+                                    <div class="col-md-8">
+                                        <input
+                                            type="password"
+                                            th:field="*{reEnterPassword}"
+                                            class="form-control"
+                                            maxlength="20"
+                                            data-parsley-length="[8, 20]"
+                                            data-parsley-equalto="#password"
+                                            data-parsley-equalto-message="パスワードが一致しません。"
+                                        />
+                                        <span id="reEnterPassword.errors" th:errors="*{reEnterPassword}" class="invalid"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-8">
+                                        <input id="update" type="submit" class="btn btn-success btn-size-default" value="更新" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /panel-body -->
+                    </div>
+                    <!-- /panel -->
+                </section>
             </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
 
-            <div class="panel-body">
-              <form id="membership-form" class="form-horizontal"
-                action="memberUpdateForm.html"
-                th:action="@{/member/update}" method="post"
-                th:object="${memberUpdateForm}">
-                <div class="form-group">
-                  <label for="kanjiFamilyName" class="col-md-4 control-label">氏名</label>
-                  <div class="col-md-8">
-                    <div class="input-group inline-half">
-                      <label for="kanjiFamilyName" class="input-group-addon">姓</label>
-                      <input type="text" th:field="*{kanjiFamilyName}" class="form-control" maxlength="10"
-                        data-parsley-maxlength="10" data-parsley-maxlength-message="姓は %s 文字以下で入力してください。"
-                        data-parsley-required="true" data-parsley-required-message="姓は入力必須項目です。" value="電電"/>
-                    </div>
-                    <div class="input-group inline-half">
-                      <label for="kanjiGivenName" class="input-group-addon">名</label>
-                      <input type="text" th:field="*{kanjiGivenName}" class="form-control" maxlength="10"
-                        data-parsley-maxlength="10" data-parsley-maxlength-message="名は %s 文字以下で入力してください。"
-                        data-parsley-required="true" data-parsley-required-message="名は入力必須項目です。" value="太郎"/>
-                    </div>
-                    <div class="clearfix"></div>
-                    <span id="kanjiFamilyName.errors" th:errors="*{kanjiFamilyName}" class="invalid"></span>
-                    <span id="kanjiGivenName.errors" th:errors="*{kanjiGivenName}" class="invalid"></span>
-                  </div>
-                </div>
+        <footer th:replace="~{A0/footer :: footer}"></footer>
 
-                <div class="form-group">
-                  <label for="kanaFamilyName" class="col-md-4 control-label">氏名(カタカナ)</label>
-                  <div class="col-md-8">
-                    <div class="input-group inline-half">
-                      <label for="kanaFamilyName" class="input-group-addon">セイ</label>
-                      <input type="text" th:field="*{kanaFamilyName}" class="form-control" maxlength="10"
-                        data-parsley-maxlength="10" data-parsley-maxlength-message="セイは %s 文字以下で入力してください。"
-                        data-parsley-required="true" data-parsley-required-message="セイは入力必須項目です。" value="デンデン"/>
-                    </div>
-                    <div class="input-group inline-half">
-                      <label for="kanaGivenName" class="input-group-addon">メイ</label>
-                      <input type="text" th:field="*{kanaGivenName}" class="form-control" maxlength="10"
-                        data-parsley-maxlength="10" data-parsley-maxlength-message="メイは %s 文字以下で入力してください。"
-                        data-parsley-required="true" data-parsley-required-message="メイは入力必須項目です。" value="タロウ"/>
-                    </div>
-                    <div class="clearfix"></div>
-                    <span id="kanaFamilyName.errors" th:errors="*{kanaFamilyName}" class="invalid"></span>
-                    <span id="kanaGivenName.errors" th:errors="*{kanaGivenName}" class="invalid"></span>
-                  </div>
-                </div>
+        <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+        <script
+            src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js"
+            th:src="@{/resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js}"
+        ></script>
+        <script src="../../../resources/vendor/moment/min/moment.min.js" th:src="@{/resources/vendor/moment/min/moment.min.js}"></script>
+        <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
 
-                <div class="form-group">
-                  <label for="gender" class="col-md-4 control-label">性別</label>
-                  <div class="col-md-8 form-inline">
-                    <label th:each="item : ${CL_GENDER}" class="radio-inline">
-                      <input type="radio" name="gender" th:field="*{gender}" th:value="${item.key}"
-                        data-parsley-required="true" checked="checked"/> <span th:text="${CL_GENDER[item.key]}">男性</span>
-                    </label>
-                    <!--/*-->
-                    <label class="radio-inline">
-                      <input type="radio" name="gender" data-parsley-required="true"/>
-                      <span>女性</span>
-                    </label>
-                    <!--*/-->
-                    <div class="clearfix"></div>
-                    <span id="gender.errors" th:errors="*{gender}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="dateOfBirth" class="col-md-4 control-label">生年月日</label>
-                  <div class="col-md-8">
-                    <input type="text" th:field="*{dateOfBirth}" class="form-control"
-                      th:attr="data-date-start-date=${dateOfBirthMinDate}, data-date-end-date=${dateOfBirthMaxDate}"
-                      data-provide="datepicker"
-                      data-date-format="yyyy/mm/dd"
-                      data-date-autoclose="true"
-                      data-date-start-date="yyyy/mm/dd"
-                      data-date-end-date="yyyy/mm/dd"
-                      data-date-language="ja"
-                      data-parsley-required="true"
-                      data-parsley-date="true"
-                      value="1980/01/01"/>
-                    <span id="dateOfBirth.errors" th:errors="*{dateOfBirth}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="tel1" class="col-md-4 control-label">電話番号</label>
-                  <div class="col-md-8 form-inline">
-                    <input type="text" th:field="*{tel1}" class="form-control form-control-separated" style="width: 5.5em" maxlength="5"
-                      data-parsley-required="true" data-parsley-required-message="番号1は入力必須項目です。"
-                      data-parsley-length="[2, 5]" data-parsley-length-message="番号1は %s 文字以上 %s 文字以下で入力してください。"
-                      data-parsley-type="integer" data-parsley-type-message="番号1は数値で入力してください。" value="111"/> -
-                    <input type="text" th:field="*{tel2}" class="form-control form-control-separated" style="width: 4.5em" maxlength="4"
-                      data-parsley-required="true" data-parsley-required-message="番号2は入力必須項目です。"
-                      data-parsley-length="[1, 4]" data-parsley-length-message="番号2は %s 文字以上 %s 文字以下で入力してください。"
-                      data-parsley-type="integer" data-parsley-type-message="番号2は数値で入力してください。" value="111"/> -
-                    <input type="text" th:field="*{tel3}" class="form-control form-control-separated" style="width: 4.5em" maxlength="4"
-                      data-parsley-required="true" data-parsley-required-message="番号3は入力必須項目です。"
-                      data-parsley-length="[4, 4]" data-parsley-length-message="番号3は %s 文字で入力してください。"
-                      data-parsley-type="integer" data-parsley-type-message="番号3は数値で入力してください。" value="1111"/>
-                    <div class="clearfix"></div>
-                    <span id="tel1.errors" th:errors="*{tel1}" class="invalid"></span>
-                    <span id="tel2.errors" th:errors="*{tel2}" class="invalid"></span>
-                    <span id="tel3.errors" th:errors="*{tel3}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="zipCode1" class="col-md-4 control-label">郵便番号</label>
-                  <div class="col-md-8 form-inline">
-                    <input type="text" class="form-control form-control-separated" th:field="*{zipCode1}" style="width: 3.5em" maxlength="3"
-                      data-parsley-required="true" data-parsley-required-message="郵便番号1は入力必須項目です。"
-                      data-parsley-length="[3, 3]" data-parsley-length-message="郵便番号1は %s 文字で入力してください。"
-                      data-parsley-type="integer" data-parsley-type-message="郵便番号1は数値で入力してください。" value="111"/> -
-                    <input type="text" class="form-control form-control-separated" th:field="*{zipCode2}" style="width: 4.5em" maxlength="4"
-                      data-parsley-required="true" data-parsley-required-message="郵便番号2は入力必須項目です。"
-                      data-parsley-length="[4, 4]" data-parsley-length-message="郵便番号2は %s 文字で入力してください。"
-                      data-parsley-type="integer" data-parsley-type-message="郵便番号2は数値で入力してください。" value="1111"/>
-                    <div class="clearfix"></div>
-                    <span id="zipCode1.errors" th:errors="*{zipCode1}" class="invalid"></span>
-                    <span id="zipCode2.errors" th:errors="*{zipCode2}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="address" class="col-md-4 control-label">住所</label>
-                  <div class="col-md-8">
-                    <input type="text" th:field="*{address}" class="form-control" maxlength="60"
-                      data-parsley-maxlength="60"
-                      data-parsley-required="true"
-                      value="東京都港区港南X-X-X"/>
-                    <span id="address.errors" th:errors="*{address}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="mail" class="col-md-4 control-label">Eメール</label>
-                  <div class="col-md-8">
-                    <input id="mail" type="text" th:field="*{mail}" class="form-control" maxlength="256"
-                      data-parsley-maxlength="256"
-                      data-parsley-required="true"
-                      data-parsley-type="email"
-                      value="xxxxx@ntt.co.jp"/>
-                    <span id="mail.errors" th:errors="*{mail}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="reEnterMail" class="col-md-4 control-label">Eメール再入力</label>
-                  <div class="col-md-8">
-                    <input type="text" th:field="*{reEnterMail}" class="form-control" maxlength="256"
-                      data-parsley-maxlength="256"
-                      data-parsley-required="true"
-                      data-parsley-type="email"
-                      data-parsley-equalto="#mail" data-parsley-equalto-message="Eメールアドレスが一致しません。"/>
-                    <span id="reEnterMail.errors" th:errors="*{reEnterMail}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="creditTypeCd" class="col-md-4 control-label">クレジットカード会社</label>
-                  <div class="col-md-8">
-                    <label th:each="item : ${CL_CREDITTYPE}" class="radio-inline">
-                      <input type="radio" name="creditTypeCd" th:field="*{creditTypeCd}" th:value="${item.key}"
-                        data-parsley-required="true" checked="checked"/> <span th:text="${CL_CREDITTYPE[item.key]}">VISA</span>
-                    </label>
-                    <!--/*-->
-                    <label class="radio-inline">
-                      <input type="radio" name="creditTypeCd" data-parsley-required="true"/>
-                      <span>MASTER</span>
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="creditTypeCd" data-parsley-required="true"/>
-                      <span>JCB</span>
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="creditTypeCd" data-parsley-required="true"/>
-                      <span>DNS</span>
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="creditTypeCd" data-parsley-required="true"/>
-                      <span>American Express</span>
-                    </label>
-                    <!--*/-->
-                    <div class="clearfix"></div>
-                    <span id="creditTypeCd.errors" th:errors="*{creditTypeCd}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="creditNo" class="col-md-4 control-label">クレジットカード番号</label>
-                  <div class="col-md-8">
-                    <input type="text" th:field="*{creditNo}" class="form-control" maxlength="16"
-                      data-parsley-required="true"
-                      data-parsley-type="integer"
-                      data-parsley-length="[16, 16]" data-parsley-length-message="%s 文字で入力してください。"
-                      value="1111111111111111"/>
-                    <span id="creditNo.errors" th:errors="*{creditNo}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="creditMonth" class="col-md-4 control-label">クレジットカード有効期限</label>
-                  <div class="col-md-8 form-inline">
-                    <select th:field="*{creditMonth}" class="form-control"
-                      data-parsley-required="true" data-parsley-required-message="クレジットカード有効期限(月)は入力必須項目です。">
-                      <option value="" label="月" />
-                      <!--/*-->
-                      <option value="01" label="01" selected/>
-                      <!--*/-->
-                      <option th:each="var : ${CL_CREDITMONTH}" th:value="${var.key}" th:text="${var.value}"/>
-                    </select>
-                    <select th:field="*{creditYear}" class="form-control"
-                      data-parsley-required="true" data-parsley-required-message="クレジットカード有効期限(年)は入力必須項目です。">
-                      <option value="" label="年" />
-                      <!--/*-->
-                      <option value="01" label="01" selected/>
-                      <!--*/-->
-                      <option th:each="var : ${CL_CREDITYEAR}" th:value="${var.key}" th:text="${var.value}"/>
-                    </select>
-                    <span id="creditMonth.errors" th:errors="*{creditMonth}" class="invalid"></span>
-                    <span id="creditYear.errors" th:errors="*{creditYear}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="currentPassword" class="col-md-4 control-label">現在のパスワード</label>
-                  <div class="col-md-8">
-                    <input type="password" th:field="*{currentPassword}" class="form-control" maxlength="20"
-                      data-parsley-length="[8, 20]"/>
-                    <span id="currentPassword.errors" th:errors="*{currentPassword}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="password" class="col-md-4 control-label">パスワード</label>
-                  <div class="col-md-8">
-                    <input id="password" type="password" th:field="*{password}" class="form-control" maxlength="20"
-                      data-parsley-length="[8, 20]"/>
-                    <span id="password.errors" th:errors="*{password}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="reEnterPassword" class="col-md-4 control-label">パスワード再入力</label>
-                  <div class="col-md-8">
-                    <input type="password" th:field="*{reEnterPassword}" class="form-control" maxlength="20"
-                      data-parsley-length="[8, 20]"
-                      data-parsley-equalto="#password" data-parsley-equalto-message="パスワードが一致しません。"/>
-                    <span id="reEnterPassword.errors" th:errors="*{reEnterPassword}" class="invalid"></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-md-offset-4 col-md-8">
-                    <input id="update" type="submit" class="btn btn-success btn-size-default" value="更新">
-                  </div>
-                </div>
-              </form>
-            </div><!-- /panel-body -->
-          </div><!-- /panel -->
-
-        </section>
-
-      </div><!-- /row -->
-
-    </div><!-- /container -->
-
-    <footer th:replace="~{A0/footer :: footer}"></footer>
-
-    <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
-    <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-    <script src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js" th:src="@{/resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js}"></script>
-    <script src="../../../resources/vendor/moment/min/moment.min.js" th:src="@{/resources/vendor/moment/min/moment.min.js}"></script>
-    <script src="../../../resources/vendor/parsleyjs/parsley.min.js" th:src="@{/resources/vendor/parsleyjs/parsley.min.js}"></script>
-
-    <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
-    <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
-    <script src="../../../resources/js/parsley-validator-date.js" th:src="@{/resources/js/parsley-validator-date.js}"></script>
-    <script src="../../../resources/js/member-update-form.js" th:src="@{/resources/js/member-update-form.js}"></script>
-  </body>
+        <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+        <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
+        <script src="../../../resources/js/parsley-validator-date.js" th:src="@{/resources/js/parsley-validator-date.js}"></script>
+        <script src="../../../resources/js/member-update-form.js" th:src="@{/resources/js/member-update-form.js}"></script>
+    </body>
 </html>

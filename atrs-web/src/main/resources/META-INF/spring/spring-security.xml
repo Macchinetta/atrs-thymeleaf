@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:sec="http://www.springframework.org/schema/security"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd
-    http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd
+                        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-  <!-- REST API設定 -->
-  <sec:http pattern="/api/v1/**" create-session="stateless" once-per-request="false">
-    <sec:http-basic/>
-    <sec:csrf disabled="true"/>
-  </sec:http>
+    <!-- REST API設定 -->
+    <sec:http pattern="/api/v1/**" create-session="stateless" once-per-request="false">
+        <sec:http-basic />
+        <sec:csrf disabled="true" />
+    </sec:http>
 
-  <!-- ログイン認証の設定 -->
-  <sec:http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint">
-    <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
-    <sec:custom-filter position="FORM_LOGIN_FILTER" ref="atrsUsernamePasswordAuthenticationFilter" />
-    <sec:logout
-      logout-url="/auth/dologout"
-      invalidate-session="true"
-      delete-cookies="JSESSIONID"
-      success-handler-ref="logoutSuccessHandler" />
-    <sec:intercept-url pattern="/member/update" access="hasRole('MEMBER')" />
-    <sec:intercept-url pattern="/HistoryReport/**" access="hasRole('MEMBER')" />
-    <sec:session-management />
-    <sec:access-denied-handler ref="accessDeniedHandler"/>
-  </sec:http>
+    <!-- ログイン認証の設定 -->
+    <sec:http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint">
+        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
+        <sec:custom-filter position="FORM_LOGIN_FILTER" ref="atrsUsernamePasswordAuthenticationFilter" />
+        <sec:logout
+            logout-url="/auth/dologout"
+            invalidate-session="true"
+            delete-cookies="JSESSIONID"
+            success-handler-ref="logoutSuccessHandler" />
+        <sec:intercept-url pattern="/member/update" access="hasRole('MEMBER')" />
+        <sec:intercept-url pattern="/HistoryReport/**" access="hasRole('MEMBER')" />
+        <sec:session-management />
+        <sec:access-denied-handler ref="accessDeniedHandler" />
+    </sec:http>
 
-  <!-- ログイン入力チェックフィルター -->
-  <bean id="atrsUsernamePasswordAuthenticationFilter" class="jp.co.ntt.atrs.app.common.security.AtrsUsernamePasswordAuthenticationFilter">
-    <property name="authenticationManager" ref="authenticationManager" />
-    <property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
-    <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
-    <property name="requiresAuthenticationRequestMatcher">
-      <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
-        <constructor-arg index="0" value="/auth/dologin" />
-        <constructor-arg index="1" value="POST" />
-      </bean>
-    </property>
-    <property name="usernameParameter" value="membershipNumber" />
-    <property name="passwordParameter" value="password" />
-  </bean>
+    <!-- ログイン入力チェックフィルター -->
+    <bean id="atrsUsernamePasswordAuthenticationFilter" class="jp.co.ntt.atrs.app.common.security.AtrsUsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager" />
+        <property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
+        <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
+        <property name="requiresAuthenticationRequestMatcher">
+            <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                <constructor-arg index="0" value="/auth/dologin" />
+                <constructor-arg index="1" value="POST" />
+            </bean>
+        </property>
+        <property name="usernameParameter" value="membershipNumber" />
+        <property name="passwordParameter" value="password" />
+    </bean>
 
-  <!-- 認証成功した場合画面遷移Handler -->
-  <bean id="authenticationSuccessHandler" class="jp.co.ntt.atrs.app.common.security.AtrsAuthenticationSuccessHandler">
-    <property name="targetUrlParameter" value="redirectTo" />
-    <property name="alwaysUseDefaultTargetUrl" value="false" />
-  </bean>
+    <!-- 認証成功した場合画面遷移Handler -->
+    <bean id="authenticationSuccessHandler" class="jp.co.ntt.atrs.app.common.security.AtrsAuthenticationSuccessHandler">
+        <property name="targetUrlParameter" value="redirectTo" />
+        <property name="alwaysUseDefaultTargetUrl" value="false" />
+    </bean>
 
-  <!-- 認証失敗した場合画面遷移Handler -->
-  <bean id="authenticationFailureHandler" class="jp.co.ntt.atrs.app.common.security.AtrsAuthenticationFailureHandler">
-    <property name="defaultFailureUrl" value="/auth/login?error" />
-    <property name="useForward" value="true" />
-  </bean>
+    <!-- 認証失敗した場合画面遷移Handler -->
+    <bean id="authenticationFailureHandler" class="jp.co.ntt.atrs.app.common.security.AtrsAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/auth/login?error" />
+        <property name="useForward" value="true" />
+    </bean>
 
-  <!-- ログイン画面設定 -->
-  <bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-    <constructor-arg value="/auth/login" />
-    <property name="useForward" value="true" />
-  </bean>
+    <!-- ログイン画面設定 -->
+    <bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg value="/auth/login" />
+        <property name="useForward" value="true" />
+    </bean>
 
-  <!-- 認証マネージャ -->
-  <sec:authentication-manager alias="authenticationManager">
-    <sec:authentication-provider user-service-ref="atrsUserService" />
-  </sec:authentication-manager>
+    <!-- 認証マネージャ -->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider user-service-ref="atrsUserService" />
+    </sec:authentication-manager>
 
-  <!-- ユーザー情報管理サービス -->
-  <bean id="atrsUserService" class="jp.co.ntt.atrs.domain.service.a1.AtrsUserDetailsService" />
+    <!-- ユーザー情報管理サービス -->
+    <bean id="atrsUserService" class="jp.co.ntt.atrs.domain.service.a1.AtrsUserDetailsService" />
 
-  <!-- ログアウト成功Handler -->
-  <bean id="logoutSuccessHandler" class="jp.co.ntt.atrs.app.common.security.AtrsLogoutSuccessHandler">
-    <property name="defaultTargetUrl" value="/" />
-  </bean>
+    <!-- ログアウト成功Handler -->
+    <bean id="logoutSuccessHandler" class="jp.co.ntt.atrs.app.common.security.AtrsLogoutSuccessHandler">
+        <property name="defaultTargetUrl" value="/" />
+    </bean>
 
-  <bean id="accessDeniedHandler"
-    class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
-    <constructor-arg index="0">
-      <map>
-        <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
-          <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
-            <property name="errorPage" value="/common/error/csrf-error" />
-          </bean>
-        </entry>
-      </map>
-    </constructor-arg>
-    <constructor-arg index="1">
-      <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
-    </constructor-arg>
-  </bean>
+    <bean id="accessDeniedHandler"
+        class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+        <constructor-arg index="0">
+            <map>
+                <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+                    <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+                        <property name="errorPage" value="/common/error/csrf-error" />
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
+        </constructor-arg>
+    </bean>
 
-  <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter">
-    <property name="removeValue" value="true" />
-  </bean>
+    <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter">
+        <property name="removeValue" value="true" />
+    </bean>
 
 </beans>

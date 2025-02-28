@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.app.b0;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -51,7 +51,7 @@ public class SelectFlightForm implements Serializable {
     /**
      * 便名。
      */
-    @NotNull
+    @NotEmpty
     private String flightName;
 
     /**
@@ -135,7 +135,6 @@ public class SelectFlightForm implements Serializable {
      */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this,
-                ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

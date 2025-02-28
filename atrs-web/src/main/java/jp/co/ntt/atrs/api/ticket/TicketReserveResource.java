@@ -370,8 +370,7 @@ public class TicketReserveResource implements Serializable {
      * 選択フライトリソースリストを設定する。
      * @param selectedflightResource 選択フライトリソースリスト
      */
-    public void setSelectFlightResourceList(
-            List<SelectFlightResource> selectFlightResourceList) {
+    public void setSelectFlightResourceList(List<SelectFlightResource> selectFlightResourceList) {
         this.selectFlightResourceList = selectFlightResourceList;
     }
 
@@ -387,8 +386,7 @@ public class TicketReserveResource implements Serializable {
      * 搭乗者リソースリストを設定する。
      * @param passengerResource 搭乗者リソースリスト
      */
-    public void setPassengerResourceList(
-            List<PassengerResource> passengerResourceList) {
+    public void setPassengerResourceList(List<PassengerResource> passengerResourceList) {
         this.passengerResourceList = passengerResourceList;
     }
 }
