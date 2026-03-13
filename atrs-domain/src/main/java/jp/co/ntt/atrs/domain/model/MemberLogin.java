@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -45,7 +45,7 @@ public class MemberLogin implements Serializable {
     /**
      * ログイン時刻。
      */
-    private Date loginDateTime;
+    private LocalDate loginDateTime;
 
     /**
      * ログインフラグ。
@@ -88,7 +88,7 @@ public class MemberLogin implements Serializable {
      * ログイン時刻 を取得する。
      * @return ログイン時刻
      */
-    public Date getLoginDateTime() {
+    public LocalDate getLoginDateTime() {
         return loginDateTime;
     }
 
@@ -96,7 +96,7 @@ public class MemberLogin implements Serializable {
      * ログイン時刻 を設定する。
      * @param loginDateTime ログイン時刻
      */
-    public void setLoginDateTime(Date loginDateTime) {
+    public void setLoginDateTime(LocalDate loginDateTime) {
         this.loginDateTime = loginDateTime;
     }
 

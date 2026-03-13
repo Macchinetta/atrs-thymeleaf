@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="../../../resources/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-        <link rel="stylesheet" href="../../../resources/css/style.css" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker3.css}" />
+        <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
     </head>
     <body>
         <div th:fragment="flightSearchForm" class="panel panel-default">
@@ -59,8 +59,8 @@
                     </div>
 
                     <div
-                        th:with="flightSearchStartDate=${#dates.format(flightSearchOutputDto.beginningPeriod, 'yyyy/MM/dd')},
-          flightSearchEndDate=${#dates.format(flightSearchOutputDto.endingPeriod, 'yyyy/MM/dd')}"
+                        th:with="flightSearchStartDate=${#temporals.format(flightSearchOutputDto.beginningPeriod, 'yyyy/MM/dd')},
+          flightSearchEndDate=${#temporals.format(flightSearchOutputDto.endingPeriod, 'yyyy/MM/dd')}"
                     >
                         <div id="date-for-outward" class="form-group">
                             <label for="outwardDate" class="col-md-4 control-label">往路搭乗日</label>
@@ -139,18 +139,18 @@
                 </form>
             </div>
         </div>
-        <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
-        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../../../resources/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-        <script src="../../../resources/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js"></script>
-        <script src="../../../resources/vendor/moment/min/moment.min.js"></script>
-        <script src="../../../resources/vendor/parsleyjs/parsley.min.js"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+        <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js}"></script>
+        <script th:src="@{/webjars/moment/min/moment.min.js}"></script>
+        <script th:src="@{/webjars/parsleyjs/parsley.min.js}"></script>
 
-        <script src="../../../resources/js/atrs.js"></script>
-        <script src="../../../resources/js/parsley-config.js"></script>
-        <script src="../../../resources/js/parsley-validator-date.js"></script>
-        <script src="../../../resources/js/parsley-validator-dateafterto.js"></script>
-        <script src="../../../resources/js/parsley-validator-notequalto.js"></script>
-        <script src="../../../resources/js/top.js"></script>
+        <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
+        <script src="../../../resources/js/parsley-config.js" th:src="@{/resources/js/parsley-config.js}"></script>
+        <script src="../../../resources/js/parsley-validator-date.js" th:src="@{/resources/js/parsley-validator-date.js}"></script>
+        <script src="../../../resources/js/parsley-validator-dateafterto.js" th:src="@{/resources/js/parsley-validator-dateafterto.js}"></script>
+        <script src="../../../resources/js/parsley-validator-notequalto.js" th:src="@{/resources/js/parsley-validator-notequalto.js}"></script>
+        <script src="../../../resources/js/top.js" th:src="@{/resources/js/top.js}"></script>
     </body>
 </html>

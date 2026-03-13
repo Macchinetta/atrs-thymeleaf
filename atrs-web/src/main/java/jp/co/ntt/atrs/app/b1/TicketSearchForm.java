@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.app.b1;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -64,13 +64,13 @@ public class TicketSearchForm implements Serializable {
      */
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date outwardDate;
+    private LocalDate outwardDate;
 
     /**
      * 復路搭乗日。
      */
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date homewardDate;
+    private LocalDate homewardDate;
 
     /**
      * 搭乗クラスコード。
@@ -130,7 +130,7 @@ public class TicketSearchForm implements Serializable {
      * 往路搭乗日を取得する。
      * @return 往路搭乗日
      */
-    public Date getOutwardDate() {
+    public LocalDate getOutwardDate() {
         return outwardDate;
     }
 
@@ -138,7 +138,7 @@ public class TicketSearchForm implements Serializable {
      * 往路搭乗日を設定する。
      * @param outwardDate 往路搭乗日
      */
-    public void setOutwardDate(Date outwardDate) {
+    public void setOutwardDate(LocalDate outwardDate) {
         this.outwardDate = outwardDate;
     }
 
@@ -146,7 +146,7 @@ public class TicketSearchForm implements Serializable {
      * 復路搭乗日を取得する。
      * @return 復路搭乗日
      */
-    public Date getHomewardDate() {
+    public LocalDate getHomewardDate() {
         return homewardDate;
     }
 
@@ -154,7 +154,7 @@ public class TicketSearchForm implements Serializable {
      * 復路搭乗日を設定する。
      * @param homewardDate 復路搭乗日
      */
-    public void setHomewardDate(Date homewardDate) {
+    public void setHomewardDate(LocalDate homewardDate) {
         this.homewardDate = homewardDate;
     }
 

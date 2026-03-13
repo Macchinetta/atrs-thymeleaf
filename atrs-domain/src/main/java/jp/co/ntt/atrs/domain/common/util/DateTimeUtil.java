@@ -21,7 +21,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * 日時に関するユーティリティクラス。
@@ -48,40 +47,30 @@ public class DateTimeUtil {
     }
 
     /**
-     * Dateへ変換する。
+     * LocalDateへ変換する。
      * @param localDateTime LocalDateTimeオブジェクト
-     * @return Dateオブジェクト
+     * @return LocalDateオブジェクト
      */
-    public static Date toDate(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.toInstant(ZoneOffset.ofHours(9)));
-    }
-
-    /**
-     * Dateへ変換する。
-     * @param localDate LocalDateオブジェクト
-     * @return Dateオブジェクト
-     */
-    public static Date toDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    public static LocalDate toLocalDate(LocalDateTime localDateTime) {
+        return localDateTime.toLocalDate();
     }
 
     /**
      * LocalDateTimeへ変換する。
-     * @param date 日付オブジェクト
+     * @param localDate LocalDateオブジェクト
      * @return 引数で指定された時刻を保持するLocalDateTimeオブジェクト
      */
-    public static LocalDateTime toLocalDateTime(Date date) {
-        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    public static LocalDateTime toLocalDateTime(LocalDate localDate) {
+        return localDate.atStartOfDay();
     }
 
     /**
      * LocalDateTimeへ変換する。
-     * @param date 日付オブジェクト
+     * @param localDate LocalDateオブジェクト
      * @param timeString 時刻文字列(HHmm)
      * @return 引数で指定された日付および時刻を保持するLocalDateTimeオブジェクト
      */
-    public static LocalDateTime toLocalDateTime(Date date, String timeString) {
-        LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    public static LocalDateTime toLocalDateTime(LocalDate localDate, String timeString) {
         LocalTime localTime = DateTimeUtil.toLocalTime(timeString);
         return localDate.atTime(localTime);
     }
@@ -96,42 +85,12 @@ public class DateTimeUtil {
     }
 
     /**
-     * LocalDateへ変換する。
-     * @param date 日付オブジェクト
-     * @return 引数で指定された時刻を保持するLocalDateオブジェクト
-     */
-    public static LocalDate toLocalDate(Date date) {
-        return LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
-    }
-
-    /**
-     * LocalTimeへ変換する。
-     * @param date 日付オブジェクト
-     * @return 引数で指定された時刻を保持するLocalTimeオブジェクト
-     */
-    public static LocalTime toLocalTime(Date date) {
-        return LocalTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-    }
-
-    /**
      * LocalTimeへ変換する。
      * @param timeString 時刻文字列(HHmm)
      * @return 引数で指定された時刻を保持するLocalTimeオブジェクト
      */
     public static LocalTime toLocalTime(String timeString) {
         return LocalTime.from(TIME_FORMATTER.parse(timeString));
-    }
-
-    /**
-     * 整形日付文字列(yyyy/MM/dd)へ変換する。
-     * @param date 日付オブジェクト
-     * @return 日付文字列(yyyy/MM/dd)
-     */
-    public static String toFormatDateString(Date date) {
-        if (date == null) {
-            return "";
-        }
-        return DATE_FORMATTER.format(toLocalDate(date));
     }
 
     /**

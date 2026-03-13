@@ -77,8 +77,8 @@ public class TicketSearchValidator implements Validator {
             // 復路搭乗日が往路搭乗日以降かチェック
             if (!errors.hasFieldErrors("outwardDate") && !errors.hasFieldErrors("homewardDate")) {
 
-                LocalDate outwardDate = DateTimeUtil.toLocalDate(form.getOutwardDate());
-                LocalDate homewardDate = DateTimeUtil.toLocalDate(form.getHomewardDate());
+                LocalDate outwardDate = form.getOutwardDate();
+                LocalDate homewardDate = form.getHomewardDate();
                 if (homewardDate.isBefore(outwardDate)) {
                     errors.reject(TicketSearchErrorCode.E_AR_B1_5002.code());
                 }

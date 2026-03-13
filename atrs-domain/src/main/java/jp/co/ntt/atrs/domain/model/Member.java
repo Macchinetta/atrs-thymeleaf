@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -60,7 +60,7 @@ public class Member implements Serializable {
     /**
      * 生年月日。
      */
-    private Date birthday;
+    private LocalDate birthday;
 
     /**
      * 性別。
@@ -191,7 +191,7 @@ public class Member implements Serializable {
      * 生年月日を取得する。
      * @return 生年月日
      */
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
@@ -199,7 +199,7 @@ public class Member implements Serializable {
      * 生年月日を設定する。
      * @param birthday 生年月日
      */
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

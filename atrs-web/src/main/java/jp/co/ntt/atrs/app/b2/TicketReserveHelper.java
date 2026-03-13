@@ -15,10 +15,10 @@
  */
 package jp.co.ntt.atrs.app.b2;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,7 +137,7 @@ public class TicketReserveHelper {
         ticketReserveService.validateReservation(reservation);
 
         // 予約情報登録
-        reservation.setReserveDate(Date.from(dateFactory.tick().instant()));
+        reservation.setReserveDate(LocalDate.now(dateFactory.tick()));
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
         TicketReserveDto ticketReserveDto = ticketReserveService.registerReservation(reservation);
 
@@ -272,7 +272,7 @@ public class TicketReserveHelper {
      * @param birthday 生年月日
      * @return 年齢
      */
-    private Integer calculateAge(Date birthday) {
+    private Integer calculateAge(LocalDate birthday) {
 
         LocalDateTime today = LocalDateTime.now(dateFactory.tick());
         LocalDateTime birthdayDateTime = DateTimeUtil.toLocalDateTime(birthday);

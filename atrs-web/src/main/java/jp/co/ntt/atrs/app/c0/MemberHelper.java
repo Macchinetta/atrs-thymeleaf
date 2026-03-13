@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.app.c0;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -126,7 +126,7 @@ public class MemberHelper {
      * @return 会員登録可能な最大生年月日
      */
     public String getDateOfBirthMaxDate() {
-        return DateTimeUtil.toFormatDateString(Date.from(dateFactory.tick().instant()));
+        return DateTimeUtil.toFormatDateString(LocalDate.now(dateFactory.tick()));
     }
 
 }

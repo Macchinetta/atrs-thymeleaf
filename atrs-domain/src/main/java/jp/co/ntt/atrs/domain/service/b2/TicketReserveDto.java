@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.service.b2;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -40,14 +40,14 @@ public class TicketReserveDto implements Serializable {
     /**
      * 支払期限。
      */
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     /**
      * コンストラクタ。
      * @param reserveNo 予約番号
      * @param paymentDate 支払期限
      */
-    public TicketReserveDto(String reserveNo, Date paymentDate) {
+    public TicketReserveDto(String reserveNo, LocalDate paymentDate) {
         this.reserveNo = reserveNo;
         this.paymentDate = paymentDate;
     }
@@ -64,7 +64,7 @@ public class TicketReserveDto implements Serializable {
      * 支払期限を取得する。
      * @return 支払期限
      */
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
@@ -80,7 +80,7 @@ public class TicketReserveDto implements Serializable {
      * 支払期限を設定する。
      * @param paymentDate 支払期限
      */
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 

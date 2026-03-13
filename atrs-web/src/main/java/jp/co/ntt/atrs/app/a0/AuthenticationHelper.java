@@ -28,7 +28,7 @@ public class AuthenticationHelper {
 
     /**
      * 認証済みのユーザか確認する。
-     * @param principal 認証情報を保持するオブジェクト
+     * @param userDetails 認証情報を保持するオブジェクト
      * @return 認証済みのユーザの場合は<code>true</code>を返却。
      */
     public boolean isAuthenticatedPrincipal(AtrsUserDetails userDetails) {

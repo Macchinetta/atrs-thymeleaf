@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.app.b1;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,6 @@ import org.terasoluna.gfw.common.time.ClockFactory;
 
 import jakarta.inject.Inject;
 import jp.co.ntt.atrs.app.common.exception.BadRequestException;
-import jp.co.ntt.atrs.domain.common.util.DateTimeUtil;
 import jp.co.ntt.atrs.domain.model.BoardingClassCd;
 import jp.co.ntt.atrs.domain.model.Flight;
 import jp.co.ntt.atrs.domain.model.FlightType;
@@ -91,8 +90,8 @@ public class TicketSearchHelper {
         ticketSearchForm.setFlightType(defaultFlightType);
         ticketSearchForm.setDepAirportCd(defaultDepAirportCd);
         ticketSearchForm.setArrAirportCd(defaultArrAirportCd);
-        ticketSearchForm.setOutwardDate(Date.from(dateFactory.tick().instant()));
-        ticketSearchForm.setHomewardDate(Date.from(dateFactory.tick().instant()));
+        ticketSearchForm.setOutwardDate(LocalDate.now(dateFactory.tick()));
+        ticketSearchForm.setHomewardDate(LocalDate.now(dateFactory.tick()));
         ticketSearchForm.setBoardingClassCd(defaultBoardingClassCd);
 
         return ticketSearchForm;
@@ -105,8 +104,8 @@ public class TicketSearchHelper {
     public FlightSearchOutputDto createFlightSearchOutputDto() {
 
         FlightSearchOutputDto outputDto = new FlightSearchOutputDto();
-        outputDto.setBeginningPeriod(Date.from(dateFactory.tick().instant()));
-        outputDto.setEndingPeriod(DateTimeUtil.toDate(ticketSharedService.getSearchLimitDate()));
+        outputDto.setBeginningPeriod(LocalDate.now(dateFactory.tick()));
+        outputDto.setEndingPeriod(ticketSharedService.getSearchLimitDate());
         outputDto.setReserveIntervalTime(reserveIntervalTime);
 
         return outputDto;

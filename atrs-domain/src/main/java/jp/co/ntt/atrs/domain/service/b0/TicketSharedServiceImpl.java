@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.domain.service.b0;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -249,15 +248,14 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public void validateDepatureDate(Date departureDate) throws BusinessException {
+    public void validateDepatureDate(LocalDate departureDate) throws BusinessException {
         Assert.notNull(departureDate, "departureDate must not null.");
 
-        LocalDate departureLocalDate = DateTimeUtil.toLocalDate(departureDate);
         LocalDate sysDate = LocalDate.now(dateFactory.tick());
         LocalDate limitDate = getSearchLimitDate();
 
         // 指定された搭乗日が本日から照会可能限界日迄の間にあるかチェック
-        if (departureLocalDate.isBefore(sysDate) || departureLocalDate.isAfter(limitDate)) {
+        if (departureDate.isBefore(sysDate) || departureDate.isAfter(limitDate)) {
             throw new AtrsBusinessException(TicketSearchErrorCode.E_AR_B1_2001);
         }
     }
@@ -266,19 +264,17 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAvailableFareType(FareType fareType, Date depDate) {
+    public boolean isAvailableFareType(FareType fareType, LocalDate depDate) {
         Assert.notNull(fareType, "fareType must not null.");
         Assert.notNull(depDate, "depDate must not null.");
 
-        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
-
         // 予約開始日付
         LocalDate rsrvAvailableStartDate =
-                depLocalDate.minusDays(fareType.getRsrvAvailableStartDayNum());
+                depDate.minusDays(fareType.getRsrvAvailableStartDayNum());
 
         // 予約終了日付
         LocalDate rsrvAvailableEndDate =
-                depLocalDate.minusDays(fareType.getRsrvAvailableEndDayNum());
+                depDate.minusDays(fareType.getRsrvAvailableEndDayNum());
 
         // 現在日付
         LocalDate sysDate = LocalDate.now(dateFactory.tick());
@@ -292,7 +288,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      */
     @Override
     public int calculateBasicFare(int basicFareOfRoute, BoardingClassCd boardingClassCd,
-            Date depDate) {
+            LocalDate depDate) {
         Assert.isTrue(basicFareOfRoute >= 0, "basicFareOfRoute must be 0 or higher.");
         Assert.notNull(boardingClassCd, "boardingClassCd must not null.");
         Assert.notNull(depDate, "depDate must not null.");
@@ -316,7 +312,7 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * @param departureDate 搭乗日
      * @return 搭乗日の料金積算比率
      */
-    private int getMultiplicationRatio(Date departureDate) {
+    private int getMultiplicationRatio(LocalDate departureDate) {
 
         // 該当するピーク時期情報を取得
         PeakTime peakTime = peakTimeProvider.getPeakTime(departureDate);

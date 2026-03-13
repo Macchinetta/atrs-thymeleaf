@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.app.c0;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 会員情報フォームインタフェース。 共通入力値チェック、共通Bean変換処理で使用するメソッドを定義する。
@@ -29,7 +29,7 @@ public interface IMemberForm {
      * 生年月日を取得する。
      * @return 生年月日
      */
-    Date getDateOfBirth();
+    LocalDate getDateOfBirth();
 
     /**
      * 電話番号1を取得する。

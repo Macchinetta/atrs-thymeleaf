@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -40,12 +40,12 @@ public class PeakTime implements Serializable {
     /**
      * ピーク時期開始日。
      */
-    private Date peakStartDate;
+    private LocalDate peakStartDate;
 
     /**
      * ピーク時期終了日。
      */
-    private Date peakEndDate;
+    private LocalDate peakEndDate;
 
     /**
      * 積算比率。
@@ -72,7 +72,7 @@ public class PeakTime implements Serializable {
      * ピーク時期開始日を取得する。
      * @return ピーク時期開始日
      */
-    public Date getPeakStartDate() {
+    public LocalDate getPeakStartDate() {
         return peakStartDate;
     }
 
@@ -80,7 +80,7 @@ public class PeakTime implements Serializable {
      * ピーク時期開始日を設定する。
      * @param peakStartDate ピーク時期開始日
      */
-    public void setPeakStartDate(Date peakStartDate) {
+    public void setPeakStartDate(LocalDate peakStartDate) {
         this.peakStartDate = peakStartDate;
     }
 
@@ -88,7 +88,7 @@ public class PeakTime implements Serializable {
      * ピーク時期終了日を取得する。
      * @return ピーク時期終了日
      */
-    public Date getPeakEndDate() {
+    public LocalDate getPeakEndDate() {
         return peakEndDate;
     }
 
@@ -96,7 +96,7 @@ public class PeakTime implements Serializable {
      * ピーク時期終了日を設定する。
      * @param peakEndDate ピーク時期終了日
      */
-    public void setPeakEndDate(Date peakEndDate) {
+    public void setPeakEndDate(LocalDate peakEndDate) {
         this.peakEndDate = peakEndDate;
     }
 

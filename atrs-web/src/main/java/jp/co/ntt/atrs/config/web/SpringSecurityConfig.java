@@ -67,8 +67,8 @@ public class SpringSecurityConfig {
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers(
-                antMatcher("/resources/**"));
+        return web -> web.ignoring().requestMatchers(antMatcher("/resources/**"),
+                antMatcher("/webjars/**"));
     }
 
     /**
@@ -81,43 +81,39 @@ public class SpringSecurityConfig {
     @Order(1)
     public SecurityFilterChain restFilterChain(HttpSecurity http) throws Exception {
         http.securityMatcher(antMatcher("/api/v1/**"));
-        http.sessionManagement(session -> session.sessionCreationPolicy(
-                SessionCreationPolicy.STATELESS));
+        http.sessionManagement(
+                session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
-        http.authorizeHttpRequests(authz -> authz.requestMatchers(
-                antMatcher("/**")).permitAll());
+        http.authorizeHttpRequests(authz -> authz.requestMatchers(antMatcher("/**")).permitAll());
         return http.build();
     }
 
     /**
      * ログイン認証の設定. Configure {@link SecurityFilterChain} bean.
      * @param http Builder class for setting up authentication and authorization
-     * @param atrsUsernamePasswordAuthenticationFilter Bean defined by #atrsUsernamePasswordAuthenticationFilter
+     * @param atrsUsernamePasswordAuthenticationFilter Bean defined by
+     *        #atrsUsernamePasswordAuthenticationFilter
      * @return Bean of configured {@link SecurityFilterChain}
      * @throws Exception Exception that occurs when setting HttpSecurity
      */
     @Bean
     @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http,
-            AtrsUsernamePasswordAuthenticationFilter atrsUsernamePasswordAuthenticationFilter) throws Exception {
-        http.addFilterAfter(userIdMDCPutFilter(),
-                AnonymousAuthenticationFilter.class);
+            AtrsUsernamePasswordAuthenticationFilter atrsUsernamePasswordAuthenticationFilter)
+            throws Exception {
+        http.addFilterAfter(userIdMDCPutFilter(), AnonymousAuthenticationFilter.class);
         http.addFilterAt(atrsUsernamePasswordAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class);
-        http.logout(logout -> logout
-                .logoutUrl("/auth/dologout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler()));
-        http.authorizeHttpRequests(authz -> authz
-                .requestMatchers(antMatcher("/member/update")).hasRole("MEMBER")
-                .requestMatchers(antMatcher("/HistoryReport/**")).hasRole("MEMBER")
-                .requestMatchers(antMatcher("/**")).permitAll());
+        http.logout(logout -> logout.logoutUrl("/auth/dologout").invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID").logoutSuccessHandler(logoutSuccessHandler()));
+        http.authorizeHttpRequests(authz -> authz.requestMatchers(antMatcher("/member/update"))
+                .hasRole("MEMBER").requestMatchers(antMatcher("/HistoryReport/**"))
+                .hasRole("MEMBER").requestMatchers(antMatcher("/**")).permitAll());
         http.sessionManagement(Customizer.withDefaults());
-        http.exceptionHandling(exceptionHandling -> exceptionHandling
-                .accessDeniedHandler(accessDeniedHandler())
-                .authenticationEntryPoint(loginUrlAuthenticationEntryPoint()));
+        http.exceptionHandling(
+                exceptionHandling -> exceptionHandling.accessDeniedHandler(accessDeniedHandler())
+                        .authenticationEntryPoint(loginUrlAuthenticationEntryPoint()));
         return http.build();
     }
 
@@ -129,16 +125,15 @@ public class SpringSecurityConfig {
     @Bean("atrsUsernamePasswordAuthenticationFilter")
     public AtrsUsernamePasswordAuthenticationFilter atrsUsernamePasswordAuthenticationFilter(
             AuthenticationManager authenticationManager) {
-        AtrsUsernamePasswordAuthenticationFilter bean = new AtrsUsernamePasswordAuthenticationFilter();
+        AtrsUsernamePasswordAuthenticationFilter bean =
+                new AtrsUsernamePasswordAuthenticationFilter();
         bean.setAuthenticationManager(authenticationManager);
         bean.setAuthenticationFailureHandler(authenticationFailureHandler());
         bean.setAuthenticationSuccessHandler(authenticationSuccessHandler());
-        bean.setRequiresAuthenticationRequestMatcher(
-                antMatcher(HttpMethod.POST,"/auth/dologin"));
+        bean.setRequiresAuthenticationRequestMatcher(antMatcher(HttpMethod.POST, "/auth/dologin"));
         bean.setUsernameParameter("membershipNumber");
         bean.setPasswordParameter("password");
-        bean.setSecurityContextRepository(
-                httpSessionSecurityContextRepository());
+        bean.setSecurityContextRepository(httpSessionSecurityContextRepository());
         return bean;
     }
 
@@ -192,8 +187,7 @@ public class SpringSecurityConfig {
      * @return Bean of configured {@link AuthenticationManager}
      */
     @Bean("authenticationManager")
-    public AuthenticationManager authenticationManager(
-            AuthenticationProvider authProvider) {
+    public AuthenticationManager authenticationManager(AuthenticationProvider authProvider) {
         return new ProviderManager(authProvider);
     }
 
@@ -204,11 +198,9 @@ public class SpringSecurityConfig {
      * @return Bean of configured {@link DaoAuthenticationProvider}
      */
     @Bean
-    public AuthenticationProvider authProvider(
-            UserDetailsService atrsUserService,
+    public AuthenticationProvider authProvider(UserDetailsService atrsUserService,
             @Qualifier("passwordEncoder") PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(atrsUserService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(atrsUserService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
@@ -239,13 +231,13 @@ public class SpringSecurityConfig {
      */
     @Bean("accessDeniedHandler")
     public AccessDeniedHandler accessDeniedHandler() {
-        LinkedHashMap<Class<? extends AccessDeniedException>, AccessDeniedHandler> errorHandlers = new LinkedHashMap<>();
+        LinkedHashMap<Class<? extends AccessDeniedException>, AccessDeniedHandler> errorHandlers =
+                new LinkedHashMap<>();
 
         // Invalid CSRF authenticator error handler
         AccessDeniedHandlerImpl invalidCsrfTokenErrorHandler = new AccessDeniedHandlerImpl();
         invalidCsrfTokenErrorHandler.setErrorPage("/common/error/csrf-error");
-        errorHandlers.put(InvalidCsrfTokenException.class,
-                invalidCsrfTokenErrorHandler);
+        errorHandlers.put(InvalidCsrfTokenException.class, invalidCsrfTokenErrorHandler);
 
         // Default error handler
         AccessDeniedHandlerImpl defaultErrorHandler = new AccessDeniedHandlerImpl();

@@ -16,8 +16,8 @@
 package jp.co.ntt.atrs.domain.repository.reservation;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 予約履歴DTO
@@ -31,6 +31,12 @@ public class ReservationHistoryDto implements Serializable {
     private static final long serialVersionUID = 1870559379510676908L;
 
     /**
+     * 日付フォーマッタ。
+     */
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
+            .ofPattern("yyyy/MM/dd");
+
+    /**
      * 予約番号。
      */
     private String reserveNo;
@@ -38,7 +44,7 @@ public class ReservationHistoryDto implements Serializable {
     /**
      * 予約日付。
      */
-    private Date reserveDate;
+    private LocalDate reserveDate;
 
     /**
      * 合計金額。
@@ -58,7 +64,7 @@ public class ReservationHistoryDto implements Serializable {
     /**
      * 搭乗日。
      */
-    private Date departureDate;
+    private LocalDate departureDate;
 
     /**
      * 予約番号を取得する。
@@ -80,15 +86,15 @@ public class ReservationHistoryDto implements Serializable {
      * 予約日付を取得する。
      * @return 予約日付
      */
-    public Date getReserveDate() {
+    public LocalDate getReserveDate() {
         return reserveDate;
     }
 
     /**
      * 予約日付を設定する。
-     * @param reserveNo 予約日付
+     * @param reserveDate 予約日付
      */
-    public void setReserveDate(Date reserveDate) {
+    public void setReserveDate(LocalDate reserveDate) {
         this.reserveDate = reserveDate;
     }
 
@@ -102,7 +108,7 @@ public class ReservationHistoryDto implements Serializable {
 
     /**
      * 合計金額を設定する。
-     * @param reserveNo 合計金額
+     * @param totalFare 合計金額
      */
     public void setTotalFare(Integer totalFare) {
         this.totalFare = totalFare;
@@ -118,7 +124,7 @@ public class ReservationHistoryDto implements Serializable {
 
     /**
      * 予約フライト番号を設定する。
-     * @param reserveNo 予約フライト番号
+     * @param reserveFlightNo 予約フライト番号
      */
     public void setReserveFlightNo(Integer reserveFlightNo) {
         this.reserveFlightNo = reserveFlightNo;
@@ -134,7 +140,7 @@ public class ReservationHistoryDto implements Serializable {
 
     /**
      * 便名を設定する。
-     * @param reserveNo 便名
+     * @param flightName 便名
      */
     public void setFlightName(String flightName) {
         this.flightName = flightName;
@@ -144,15 +150,15 @@ public class ReservationHistoryDto implements Serializable {
      * 搭乗日を取得する。
      * @return 搭乗日
      */
-    public Date getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
     /**
      * 搭乗日を設定する。
-     * @param reserveNo 搭乗日
+     * @param departureDate 搭乗日
      */
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -161,10 +167,9 @@ public class ReservationHistoryDto implements Serializable {
      * @return csv出力用文字列
      */
     public String toCsvLineString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"", reserveNo,
-                dateFormat.format(reserveDate), totalFare, dateFormat.format(departureDate),
-                reserveFlightNo, flightName);
+                reserveDate.format(DATE_FORMATTER), totalFare,
+                departureDate.format(DATE_FORMATTER), reserveFlightNo, flightName);
     }
 
 }

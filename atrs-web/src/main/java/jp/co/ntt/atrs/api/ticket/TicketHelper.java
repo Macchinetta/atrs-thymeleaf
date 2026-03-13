@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.api.ticket;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -122,7 +122,7 @@ public class TicketHelper {
         ticketReserveService.validateReservation(reservation);
 
         // 予約情報登録
-        reservation.setReserveDate(Date.from(dateFactory.tick().instant()));
+        reservation.setReserveDate(LocalDate.now(dateFactory.tick()));
         reservation.setTotalFare(calculateTotalFare(flightList, reservation));
         TicketReserveDto ticketReserveDto = ticketReserveService.registerReservation(reservation);
 

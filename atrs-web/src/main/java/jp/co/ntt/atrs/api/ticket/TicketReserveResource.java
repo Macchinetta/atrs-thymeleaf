@@ -16,8 +16,8 @@
 package jp.co.ntt.atrs.api.ticket;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.validation.Valid;
@@ -52,7 +52,7 @@ public class TicketReserveResource implements Serializable {
     /**
      * 支払期限。
      */
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     /**
      * 予約チケットの合計金額。
@@ -169,7 +169,7 @@ public class TicketReserveResource implements Serializable {
      * 支払期限を取得する。
      * @return 支払期限
      */
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
@@ -177,7 +177,7 @@ public class TicketReserveResource implements Serializable {
      * 支払期限を設定する。
      * @param paymentDate 支払期限
      */
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -367,7 +367,7 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 選択フライトリソースリストを設定する。
-     * @param selectedflightResource 選択フライトリソースリスト
+     * @param selectFlightResourceList 選択フライトリソースリスト
      */
     public void setSelectFlightResourceList(List<SelectFlightResource> selectFlightResourceList) {
         this.selectFlightResourceList = selectFlightResourceList;
@@ -383,7 +383,7 @@ public class TicketReserveResource implements Serializable {
 
     /**
      * 搭乗者リソースリストを設定する。
-     * @param passengerResource 搭乗者リソースリスト
+     * @param passengerResourceList 搭乗者リソースリスト
      */
     public void setPassengerResourceList(List<PassengerResource> passengerResourceList) {
         this.passengerResourceList = passengerResourceList;

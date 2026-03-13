@@ -17,7 +17,6 @@ package jp.co.ntt.atrs.domain.common.masterdata;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -60,13 +59,12 @@ public class PeakTimeProvider {
      * @param depDate 搭乗日
      * @return ピーク時期情報。該当するピーク時期情報が存在しない場合null。
      */
-    public PeakTime getPeakTime(Date depDate) {
-        Assert.notNull(depDate, "depDate must not null.");
-        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
+    public PeakTime getPeakTime(LocalDate depLocalDate) {
+        Assert.notNull(depLocalDate, "depLocalDate must not null.");
 
         for (PeakTime peakTime : peakTimeList) {
-            LocalDate peakStartDate = DateTimeUtil.toLocalDate(peakTime.getPeakStartDate());
-            LocalDate peakEndDate = DateTimeUtil.toLocalDate(peakTime.getPeakEndDate());
+            LocalDate peakStartDate = peakTime.getPeakStartDate();
+            LocalDate peakEndDate = peakTime.getPeakEndDate();
 
             // 搭乗日が該当するピーク時期積算比率を返却
             if (!(depLocalDate.isBefore(peakStartDate) || depLocalDate.isAfter(peakEndDate))) {

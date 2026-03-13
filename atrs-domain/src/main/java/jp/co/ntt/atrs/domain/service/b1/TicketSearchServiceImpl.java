@@ -19,7 +19,6 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +108,7 @@ public class TicketSearchServiceImpl implements TicketSearchService {
         // 引数チェック
         Assert.notNull(searchCriteria, "searchCriteria must not null.");
 
-        Date depDate = searchCriteria.getDepDate();
+        LocalDate depDate = searchCriteria.getDepDate();
         BoardingClassCd boardingClassCd = searchCriteria.getBoardingClassCd();
         String depAirportCd = searchCriteria.getDepartureAirportCd();
         String arrAirportCd = searchCriteria.getArrivalAirportCd();
@@ -132,9 +131,7 @@ public class TicketSearchServiceImpl implements TicketSearchService {
 
         // システム日付が搭乗日から何日前かを計算
         LocalDate sysLocalDate = LocalDate.now(dateFactory.tick());
-        LocalDate depLocalDate = DateTimeUtil.toLocalDate(depDate);
-        long beforeDayNum =
-                Duration.between(sysLocalDate.atTime(0, 0), depLocalDate.atTime(0, 0)).toDays();
+        long beforeDayNum = Duration.between(sysLocalDate.atTime(0, 0), depDate.atTime(0, 0)).toDays();
 
         // フライト種別に応じて運賃種別コードを空席照会条件Dtoに設定
         List<FareTypeCd> fareTypeList = FareTypeUtil.getFareTypeCdList(flightType);

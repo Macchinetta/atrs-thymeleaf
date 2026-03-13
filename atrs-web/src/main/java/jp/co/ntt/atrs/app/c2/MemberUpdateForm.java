@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.app.c2;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.terasoluna.gfw.common.codelist.ExistInCodeList;
@@ -89,7 +89,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
      */
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     /**
      * 電話番号1。
@@ -293,7 +293,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
      * @return 生年月日
      */
     @Override
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -301,7 +301,7 @@ public class MemberUpdateForm implements IMemberForm, Serializable {
      * 生年月日を設定する。
      * @param dateOfBirth 生年月日
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

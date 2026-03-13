@@ -79,6 +79,12 @@ public class ReservationHistoryReportServiceImpl implements ReservationHistoryRe
                     "Reservation Flight No", "Reservation Flight Name");
 
     /**
+     * 日付フォーマッタ
+     */
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
+            .ofPattern("yyyyMMddHHmmss");
+
+    /**
      * JmsMessagingTemplate
      */
     @Inject
@@ -107,11 +113,6 @@ public class ReservationHistoryReportServiceImpl implements ReservationHistoryRe
      */
     @Inject
     ClockFactory dateFactory;
-
-    /**
-     * フォーマッタ()
-     */
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
     /**
      * {@inheritDoc}
@@ -258,7 +259,7 @@ public class ReservationHistoryReportServiceImpl implements ReservationHistoryRe
      */
     private String generateReportFileName(String membershipNumber) {
         LocalDateTime dateTime = LocalDateTime.now(this.dateFactory.tick());
-        return REPORT_NAME_PREFIX + membershipNumber + "_" + formatter.format(dateTime) + ".csv";
+        return REPORT_NAME_PREFIX + membershipNumber + "_" + DATE_FORMATTER.format(dateTime) + ".csv";
     }
 
     /**

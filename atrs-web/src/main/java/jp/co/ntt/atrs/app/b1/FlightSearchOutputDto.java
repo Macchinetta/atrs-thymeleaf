@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.app.b1;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -35,12 +35,12 @@ public class FlightSearchOutputDto implements Serializable {
     /**
      * 空席照会可能時期(始)。
      */
-    private Date beginningPeriod;
+    private LocalDate beginningPeriod;
 
     /**
      * 空席照会可能時期(終)。
      */
-    private Date endingPeriod;
+    private LocalDate endingPeriod;
 
     /**
      * 復路予約可能時間間隔(分)。
@@ -51,7 +51,7 @@ public class FlightSearchOutputDto implements Serializable {
      * 空席照会可能時期(始)を取得する。
      * @return 空席照会可能時期(始)
      */
-    public Date getBeginningPeriod() {
+    public LocalDate getBeginningPeriod() {
         return beginningPeriod;
     }
 
@@ -59,7 +59,7 @@ public class FlightSearchOutputDto implements Serializable {
      * 空席照会可能時期(始)を設定する。
      * @param beginningPeriod 空席照会可能時期(始)
      */
-    public void setBeginningPeriod(Date beginningPeriod) {
+    public void setBeginningPeriod(LocalDate beginningPeriod) {
         this.beginningPeriod = beginningPeriod;
     }
 
@@ -67,7 +67,7 @@ public class FlightSearchOutputDto implements Serializable {
      * 空席照会可能時期(終)を取得する。
      * @return 空席照会可能時期(終)
      */
-    public Date getEndingPeriod() {
+    public LocalDate getEndingPeriod() {
         return endingPeriod;
     }
 
@@ -75,7 +75,7 @@ public class FlightSearchOutputDto implements Serializable {
      * 空席照会可能時期(終)を設定する。
      * @param endingPeriod 空席照会可能時期(終)
      */
-    public void setEndingPeriod(Date endingPeriod) {
+    public void setEndingPeriod(LocalDate endingPeriod) {
         this.endingPeriod = endingPeriod;
     }
 

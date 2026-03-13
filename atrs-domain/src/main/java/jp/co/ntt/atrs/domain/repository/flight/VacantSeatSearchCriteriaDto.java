@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.repository.flight;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -44,8 +44,8 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * 搭乗日。
-     **/
-    private Date depDate;
+     */
+    private LocalDate depDate;
 
     /**
      * 区間情報。
@@ -64,15 +64,14 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
 
     /**
      * コンストラクタ。
-     * @param depDate 出発日
+     * @param depDate 搭乗日
      * @param route 区間情報
      * @param boardingClass 搭乗クラス
      * @param beforeDayNum 搭乗日前日数
      * @param fareTypeList 運賃種別コードリスト
      */
-    public VacantSeatSearchCriteriaDto(Date depDate, Route route, BoardingClassCd boardingClass,
+    public VacantSeatSearchCriteriaDto(LocalDate depDate, Route route, BoardingClassCd boardingClass,
             Long beforeDayNum, List<FareTypeCd> fareTypeList) {
-
         this.depDate = depDate;
         this.route = route;
         this.boardingClass = boardingClass;
@@ -89,10 +88,10 @@ public class VacantSeatSearchCriteriaDto implements Serializable {
     }
 
     /**
-     * 出発日を取得する。
-     * @return 出発日
+     * 搭乗日を取得する。
+     * @return 搭乗日
      */
-    public Date getDepDate() {
+    public LocalDate getDepDate() {
         return depDate;
     }
 

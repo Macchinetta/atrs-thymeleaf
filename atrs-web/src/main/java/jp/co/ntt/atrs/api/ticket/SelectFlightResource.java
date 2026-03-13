@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.api.ticket;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,7 +41,7 @@ public class SelectFlightResource implements Serializable {
      */
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date depDate;
+    private LocalDate depDate;
 
     /**
      * 便名。
@@ -65,7 +65,7 @@ public class SelectFlightResource implements Serializable {
      * 搭乗日を取得する。
      * @return 搭乗日
      */
-    public Date getDepDate() {
+    public LocalDate getDepDate() {
         return depDate;
     }
 
@@ -73,7 +73,7 @@ public class SelectFlightResource implements Serializable {
      * 搭乗日を設定する。
      * @param depDate 搭乗日
      */
-    public void setDepDate(Date depDate) {
+    public void setDepDate(LocalDate depDate) {
         this.depDate = depDate;
     }
 

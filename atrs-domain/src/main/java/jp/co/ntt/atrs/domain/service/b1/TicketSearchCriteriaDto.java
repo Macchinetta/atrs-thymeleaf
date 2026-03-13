@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.service.b1;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -53,7 +53,7 @@ public class TicketSearchCriteriaDto implements Serializable {
     /**
      * 搭乗日。
      */
-    private Date depDate;
+    private LocalDate depDate;
 
     /**
      * 搭乗クラスコード。
@@ -112,7 +112,7 @@ public class TicketSearchCriteriaDto implements Serializable {
      * 搭乗日を取得する。
      * @return 搭乗日
      */
-    public Date getDepDate() {
+    public LocalDate getDepDate() {
         return depDate;
     }
 
@@ -120,7 +120,7 @@ public class TicketSearchCriteriaDto implements Serializable {
      * 搭乗日を設定する。
      * @param depDate 搭乗日
      */
-    public void setDepDate(Date depDate) {
+    public void setDepDate(LocalDate depDate) {
         this.depDate = depDate;
     }
 

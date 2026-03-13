@@ -5,8 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>予約エラー | Airline Ticket Reservation System</title>
 
-        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
-        <link rel="stylesheet" href="../../../resources/vendor/bootstrap/css/bootstrap-theme.min.css" th:href="@{/resources/vendor/bootstrap/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" />
         <link rel="stylesheet" href="../../../resources/css/style.css" th:href="@{/resources/css/style.css}" />
     </head>
     <body>
@@ -49,7 +49,7 @@
                             <tbody>
                                 <tr th:each="flight : ${selectFlightDtoList}">
                                     <td th:text="${flight.lineType.name}">往路</td>
-                                    <td th:text="${#dates.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
+                                    <td th:text="${#temporals.format(flight.departureDate,'MM月dd日(E)')}">07月01日(火)</td>
                                     <td th:text="${flight.flightName}">NTT001</td>
                                     <td th:text="${#strings.substring(flight.departureTime, 0, 2)} + ':' + ${#strings.substring(flight.departureTime, 2, 4)}">09：00</td>
                                     <td th:text="${#strings.substring(flight.arrivalTime, 0, 2)} + ':' + ${#strings.substring(flight.arrivalTime, 2, 4)}">10：00</td>
@@ -89,9 +89,9 @@
 
         <footer th:replace="~{A0/footer :: footer}"></footer>
 
-        <script src="../../../resources/vendor/jquery/jquery.min.js" th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
-        <script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
-
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        
         <script src="../../../resources/js/atrs.js" th:src="@{/resources/js/atrs.js}"></script>
     </body>
 </html>

@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.api.flight;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -64,7 +64,7 @@ public class FlightSearchQuery implements Serializable {
      */
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date depDate;
+    private LocalDate depDate;
 
     /**
      * 搭乗クラスコード。
@@ -124,7 +124,7 @@ public class FlightSearchQuery implements Serializable {
      * 搭乗日を取得する。
      * @return 搭乗日
      */
-    public Date getDepDate() {
+    public LocalDate getDepDate() {
         return depDate;
     }
 
@@ -132,7 +132,7 @@ public class FlightSearchQuery implements Serializable {
      * 搭乗日を設定する。
      * @param depDate 搭乗日
      */
-    public void setDepDate(Date depDate) {
+    public void setDepDate(LocalDate depDate) {
         this.depDate = depDate;
     }
 

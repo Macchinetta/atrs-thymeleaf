@@ -86,7 +86,7 @@ public class MemberValidator implements Validator {
         if (!errors.hasFieldErrors("dateOfBirth")) {
             LocalDate dateOfBirthMin = DateTimeUtil.toLocalDate(dateOfBirthMinDate);
             LocalDate dateOfBirthMax = LocalDate.now(dateFactory.tick());
-            LocalDate dateOfBirth = DateTimeUtil.toLocalDate(form.getDateOfBirth());
+            LocalDate dateOfBirth = form.getDateOfBirth();
 
             if (dateOfBirth.isBefore(dateOfBirthMin) || dateOfBirth.isAfter(dateOfBirthMax)) {
                 // 生年月日の入力許容範囲(1900年1月1日から現在まで)でなければエラー

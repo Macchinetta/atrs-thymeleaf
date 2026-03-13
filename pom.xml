@@ -13,10 +13,10 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.10.0.RELEASE</version>
+        <version>5.10.1.RELEASE</version>
         <relativePath />
     </parent>
-    <version>1.11.0.RELEASE</version>
+    <version>1.11.1.RELEASE</version>
     <name>AIRLINE TICKET RESERVATION SYSTEM Parent POM</name>
     <description>AIRLINE TICKET RESERVATION SYSTEM Parent POM</description>
     <licenses>
@@ -26,19 +26,6 @@
             <distribution>manual</distribution>
         </license>
     </licenses>
-    <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <developers>
         <developer>
             <name>Macchinetta</name>
@@ -76,7 +63,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${org.apache.maven.plugins.maven-failsafe-plugin.version}</version>
                     <executions>
                         <execution>
                             <goals>
@@ -88,17 +74,14 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>${org.codehaus.mojo.build-helper-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>${org.apache.maven.plugins.maven-war-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.cargo</groupId>
@@ -168,17 +151,58 @@
             </dependency>
             <!-- == End Database == -->
 
+            <!-- == Begin Webjars == -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${bootstrap.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap-datepicker</artifactId>
+                <version>${bootstrap.datepicker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>${jquery.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>tablesorter</artifactId>
+                <version>${tablesorter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.npm</groupId>
+                <artifactId>moment</artifactId>
+                <version>${moment.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>parsleyjs</artifactId>
+                <version>${parsleyjs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>lodash</artifactId>
+                <version>${lodash.version}</version>
+            </dependency>
+            <!-- == End Webjars == -->
+
         </dependencies>
     </dependencyManagement>
 
     <properties>
-        <!-- == Maven Plugin Versions == -->
-        <org.apache.maven.plugins.maven-war-plugin.version>3.4.0</org.apache.maven.plugins.maven-war-plugin.version>
-        <org.codehaus.mojo.build-helper-maven-plugin.version>3.6.0</org.codehaus.mojo.build-helper-maven-plugin.version>
-        <org.apache.maven.plugins.maven-failsafe-plugin.version>3.5.2</org.apache.maven.plugins.maven-failsafe-plugin.version>
-        <org.apache.maven.plugins.maven-surefire-plugin.version>3.5.2</org.apache.maven.plugins.maven-surefire-plugin.version>
         <!-- == Dependency Versions == -->
-        <postgresql.version>42.7.4</postgresql.version>
+        <!-- Used with initdb -->
+        <postgresql.version>42.7.9</postgresql.version>
+        <bootstrap.version>3.2.0</bootstrap.version>
+        <bootstrap.datepicker.version>1.8.0</bootstrap.datepicker.version>
+        <jquery.version>1.11.1</jquery.version>
+        <tablesorter.version>2.30.3</tablesorter.version>
+        <moment.version>2.22.2</moment.version>
+        <parsleyjs.version>2.8.1</parsleyjs.version>
+        <lodash.version>4.17.15</lodash.version>
         <!-- == Project Properties == -->
         <project.root.basedir>${project.basedir}</project.root.basedir>
         <encoding>UTF-8</encoding>

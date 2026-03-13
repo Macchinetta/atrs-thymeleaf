@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.service.a1;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +67,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
 
         // ログインフラグ、ログイン日時を更新
         MemberLogin memberLogin = member.getMemberLogin();
-        memberLogin.setLoginDateTime(Date.from(dateFactory.tick().instant()));
+        memberLogin.setLoginDateTime(LocalDate.now(dateFactory.tick()));
         memberLogin.setLoginFlg(true);
         int updateCount = memberRepository.updateToLoginStatus(member);
         if (updateCount != 1) {

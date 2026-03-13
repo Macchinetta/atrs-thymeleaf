@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.repository.flight;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -48,7 +48,7 @@ public interface FlightRepository {
      * @param fareType 運賃種別
      * @return 指定したフライトのフライト情報
      */
-    Flight findOneForUpdate(@Param("departureDate") Date departureDate,
+    Flight findOneForUpdate(@Param("departureDate") LocalDate departureDate,
             @Param("flightName") String flightName,
             @Param("boardingClass") BoardingClass boardingClass,
             @Param("fareType") FareType fareType);
@@ -74,7 +74,7 @@ public interface FlightRepository {
      * @param fareType 運賃種別
      * @return 存在する場合は true、 存在しない場合はfalse
      */
-    boolean exists(@Param("departureDate") Date departureDate,
+    boolean exists(@Param("departureDate") LocalDate departureDate,
             @Param("flightName") String flightName,
             @Param("boardingClass") BoardingClass boardingClass,
             @Param("fareType") FareType fareType);

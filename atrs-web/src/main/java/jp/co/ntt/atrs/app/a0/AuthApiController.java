@@ -42,7 +42,7 @@ public class AuthApiController {
 
     /**
      * ログイン状態を取得する。
-     * @param principal ログイン情報を保持するオブジェクト
+     * @param userDetails ログイン情報を保持するオブジェクト
      * @return OKステータス:ログイン中、NOT_FOUNDステータス:未ログイン
      */
     @RequestMapping(value = "status", method = RequestMethod.GET)

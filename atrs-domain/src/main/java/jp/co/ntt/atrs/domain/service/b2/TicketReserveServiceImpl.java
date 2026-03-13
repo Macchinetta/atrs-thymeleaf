@@ -15,7 +15,7 @@
  */
 package jp.co.ntt.atrs.domain.service.b2;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -363,7 +363,7 @@ public class TicketReserveServiceImpl implements TicketReserveService {
         }
 
         // 往路搭乗日を支払期限とする
-        Date paymentDate = reserveFlightList.get(0).getFlight().getDepartureDate();
+        LocalDate paymentDate = reserveFlightList.get(0).getFlight().getDepartureDate();
 
         return new TicketReserveDto(reserveNo, paymentDate);
 

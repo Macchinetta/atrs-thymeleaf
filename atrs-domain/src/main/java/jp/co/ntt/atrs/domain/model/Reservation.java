@@ -17,7 +17,7 @@ package jp.co.ntt.atrs.domain.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -42,7 +42,7 @@ public class Reservation implements Serializable {
     /**
      * 予約日付。
      */
-    private Date reserveDate;
+    private LocalDate reserveDate;
 
     /**
      * 合計金額。
@@ -109,7 +109,7 @@ public class Reservation implements Serializable {
      * 予約日付を取得する。
      * @return 予約日付
      */
-    public Date getReserveDate() {
+    public LocalDate getReserveDate() {
         return reserveDate;
     }
 
@@ -117,7 +117,7 @@ public class Reservation implements Serializable {
      * 予約日付を設定する。
      * @param reserveDate 予約日付
      */
-    public void setReserveDate(Date reserveDate) {
+    public void setReserveDate(LocalDate reserveDate) {
         this.reserveDate = reserveDate;
     }
 

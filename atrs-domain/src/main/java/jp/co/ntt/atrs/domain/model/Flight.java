@@ -16,7 +16,7 @@
 package jp.co.ntt.atrs.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -40,7 +40,7 @@ public class Flight implements Serializable {
     /**
      * 搭乗日。
      */
-    private Date departureDate;
+    private LocalDate departureDate;
 
     /**
      * 空席数。
@@ -77,7 +77,7 @@ public class Flight implements Serializable {
      * 搭乗日を取得する。
      * @return 搭乗日
      */
-    public Date getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
@@ -85,7 +85,7 @@ public class Flight implements Serializable {
      * 搭乗日を設定する。
      * @param departureDate 搭乗日
      */
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 

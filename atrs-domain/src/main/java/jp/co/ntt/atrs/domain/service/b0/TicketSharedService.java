@@ -16,7 +16,6 @@
 package jp.co.ntt.atrs.domain.service.b0;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import org.terasoluna.gfw.common.exception.BusinessException;
@@ -51,7 +50,7 @@ public interface TicketSharedService {
      * @param departureDate 搭乗日
      * @throws BusinessException 業務例外
      */
-    void validateDepatureDate(Date departureDate) throws BusinessException;
+    void validateDepatureDate(LocalDate departureDate) throws BusinessException;
 
     /**
      * 搭乗日が運賃種別の予約可能時期に含まれるかをチェックする。
@@ -62,7 +61,7 @@ public interface TicketSharedService {
      * @param depDate 搭乗日
      * @return 予約可能の場合trueを返却、予約不可の場合はfalseを返却
      */
-    boolean isAvailableFareType(FareType fareType, Date depDate);
+    boolean isAvailableFareType(FareType fareType, LocalDate depDate);
 
     /**
      * 基本運賃を計算する。
@@ -71,7 +70,7 @@ public interface TicketSharedService {
      * @param depDate 搭乗日
      * @return 基本運賃
      */
-    int calculateBasicFare(int basicFareOfRoute, BoardingClassCd boardingClassCd, Date depDate);
+    int calculateBasicFare(int basicFareOfRoute, BoardingClassCd boardingClassCd, LocalDate depDate);
 
     /**
      * 運賃を計算する。
